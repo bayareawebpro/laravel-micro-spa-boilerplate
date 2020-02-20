@@ -1,0 +1,50 @@
+nav.tabs{
+    @apply flex ml-auto content-center;
+}
+.tabs-title{
+    @apply flex flex-grow mx-1 mr-auto self-center text-sm content-center;
+}
+.tab-link{
+    @apply flex flex-shrink ml-1 self-center;
+}
+nav.tabs i.fa{
+    @apply self-center mr-1;
+}
+.card.tabs-vertical {
+    @apply flex flex-row;
+}
+.card.tabs-vertical .card-header {
+    @apply flex-shrink p-3 leading-loose content-start;
+}
+.card.tabs-vertical .card-content  {
+    @apply border-0 flex-grow;
+    @apply p-4;
+}
+.card.tabs-vertical nav.tabs{
+    @apply block;
+}
+.card.tabs-vertical nav.tabs .tabs-title{
+    @apply mx-2 text-center;
+}
+.card.tabs-vertical nav.tabs .tab-link{
+    @apply w-full m-0;
+}
+.card.tabs-vertical nav.tabs .tab-link .btn{
+    @apply w-full text-left my-1;
+}
+
+/**
+.btn.tabs-link{
+    @apply cursor-pointer flex py-2 px-3 rounded mx-1;
+    @apply  bg-transparent text-gray-400 text-sm;
+    transition: all 120ms ease-in-out;
+}
+.btn.tabs-link:hover{
+    @apply text-blue-400;
+}
+.btn.tabs-link[disabled]{
+    @apply text-blue-400 bg-gray-1000;
+}
+ */
+
+

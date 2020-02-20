@@ -1,0 +1,22 @@
+.sidebar {
+    @apply bg-gray-900 flex flex-col max-h-full;
+    width: 180px !important;
+    min-width: 180px !important;
+}
+.sidebar-header{
+    @apply text-gray-700 font-bold uppercase text-xs w-full text-left;
+}
+.sidebar-header:hover{
+    @apply text-blue-500;
+}
+.sidebar-link{
+    @apply text-gray-500 text-sm block py-1 cursor-pointer;
+}
+.sidebar-link:hover{
+    @apply bg-gray-900 text-blue-500 py-1;
+}
+.sidebar-link.router-link-active,
+.sidebar-link.router-link-exact-active{
+    @apply font-bold text-blue-400;
+}
+

@@ -1,0 +1,30 @@
+.alert{
+    @apply flex items-center leading-none px-4 py-3 rounded;
+    @apply shadow bg-white text-sm border-l-4 border-gray-500 text-gray-200 bg-gray-800;
+}
+.alert h6{
+    @apply
+    text-yellow-200
+    font-bold
+}
+.alert svg{
+    @apply text-gray-600 w-3 h-3
+}
+.alert svg:hover{
+    @apply text-gray-100
+}
+.alert.info:before{
+    @apply text-blue-200 border-l-4 border-blue-500
+}
+.alert.info{
+    @apply text-blue-200 border-l-4 border-blue-500
+}
+.alert.warn{
+    @apply text-yellow-200 border-l-4 border-yellow-500;
+}
+.alert.error{
+    @apply text-red-400 border-l-4 border-red-500
+}
+.alert.success{
+    @apply text-green-400 border-l-4 border-green-500
+}

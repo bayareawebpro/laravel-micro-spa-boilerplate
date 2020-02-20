@@ -1,0 +1,24 @@
+.card{
+    @apply block relative overflow-hidden w-full mx-auto;
+    @apply bg-gray-900 rounded shadow-lg text-white;
+    transition: all 120ms linear;
+}
+.card-header{
+    @apply font-semibold text-blue-200 text-lg
+}
+.card-header,
+.card-content,
+.card-actions{
+    @apply p-4 block border-gray-800
+}
+.card-content,
+.card-actions{
+    @apply border-t border-gray-800
+}
+
+
+.card.dense .card-header,
+.card.dense .card-content,
+.card.dense .card-actions{
+    @apply p-3
+}

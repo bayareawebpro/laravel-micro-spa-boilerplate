@@ -1,0 +1,33 @@
+[v-cloak] {
+    @apply hidden
+}
+html, body {
+    @apply h-full min-h-full overflow-x-hidden !important;
+    @apply bg-gray-1000 text-white antialiased leading-normal !important;
+}
+#wrapper {
+    @apply h-full min-h-full flex flex-col flex;
+}
+#header {
+    @apply flex flex-shrink bg-gray-900 p-3 w-full z-50 text-xs shadow-lg border-gray-800 border-b;
+}
+#content {
+    @apply flex flex-grow flex-row;
+}
+#main {
+    @apply flex-grow;
+}
+#footer {
+    @apply shadow-xl bg-gray-900 p-2 w-full z-50 text-xs border-gray-800 border-t;
+}
+.layout{
+    @apply relative flex flex-col flex-wrap p-2;
+}
+.layout-centered{
+    @apply layout justify-center content-center;
+}
+@media only screen and (max-width: 768px) {
+    #main {
+        @apply  w-full min-w-full !important;
+    }
+}
