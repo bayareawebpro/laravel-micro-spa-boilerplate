@@ -4,11 +4,42 @@ require('laravel-mix-purgecss');
 require('laravel-micro.js/src/mix');
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
 
+/**
+ * Styles & Assets
+ */
 mix.tailwind('./tailwind.config.js')
-mix.js('resources/js/app.js', 'public/js')
 mix.sass('resources/css/icons.sass', 'public/css')
 mix.postCss('resources/css/app.pcss', 'public/css')
 mix.copy('node_modules/@fortawesome/fontawesome-free/webfonts', 'public/webfonts')
+
+
+/**
+ * Javascript
+ */
+mix.js('resources/js/app.js', 'public/js')
+mix.babelConfig({
+    plugins: [
+        '@babel/plugin-syntax-dynamic-import',
+    ],
+})
+mix.webpackConfig({
+    devtool: 'cheap-source-map',
+    output: {chunkFilename: 'js/[name].js'},
+    resolve: {
+        alias: {
+            '@controllers': path.resolve(__dirname, 'resources/js/Controllers'),
+            '@components': path.resolve(__dirname, 'resources/js/Components'),
+            '@middleware': path.resolve(__dirname, 'resources/js/Middleware'),
+            '@listeners': path.resolve(__dirname, 'resources/js/Listeners'),
+            '@views': path.resolve(__dirname, 'resources/js/Views'),
+        }
+    },
+})
+
+/**
+ * LaravelMicro.js
+ * @docs https://bayareawebpro.github.io/laravel-micro.js/#/
+ */
 mix.micro([
     "App",
     "Kernel",
@@ -34,38 +65,19 @@ mix.micro([
     "UnAuthorized",
     "Response",
 ])
-mix.babelConfig({
-    plugins: [
-        '@babel/plugin-syntax-dynamic-import',
-    ],
-})
-mix.webpackConfig({
-    devtool: 'cheap-source-map',
-    output: {chunkFilename: 'js/[name].js'},
-    resolve: {
-        alias: {
-            '@controllers': path.resolve(__dirname, 'resources/js/controllers'),
-            '@components': path.resolve(__dirname, 'resources/js/components'),
-            '@middleware': path.resolve(__dirname, 'resources/js/middleware'),
-            '@listeners': path.resolve(__dirname, 'resources/js/listeners'),
-            '@events': path.resolve(__dirname, 'resources/js/events'),
-            '@views': path.resolve(__dirname, 'resources/js/views'),
-        }
-    },
-})
-// mix.options({
-//     hmrOptions: {
-//         host: 'laravel-boilerplate.test',
-//         port: 8000,
-//     },
+// mix.browserSync({
+//     proxy: 'http://laravel-micro-spa.test',
+//     open: true,
+//     notify: false,
+//     files: [
+//         'resources/css/**/*',
+//     ],
 // })
-mix.browserSync({
-    proxy: 'http://laravel-boilerplate.test',
-    open: true,
-    notify: false,
-    files: [
-        'resources/css/**/*',
-    ],
+mix.options({
+    hmrOptions: {
+        host: 'laravel-micro-spa.test',
+        port: 8000,
+    },
 })
 if (mix.inProduction()) {
     mix.purgeCss()

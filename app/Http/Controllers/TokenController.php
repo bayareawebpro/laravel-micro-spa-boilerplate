@@ -25,9 +25,9 @@ class TokenController extends Controller
      */
     public function index(Request $request)
     {
-        $query = $request->user()->isRole('admin')
-            ? ApiToken::query()
-            : $request->user()->tokens()->getQuery();
+        $query = !$request->user()->isRole('admin')
+            ? $request->user()->tokens()->getQuery()
+            : ApiToken::query();
 
         return SearchableResource::make($query->with('tokenable'))->tap(new TokenSearchable);
     }
@@ -41,8 +41,8 @@ class TokenController extends Controller
         return response([
             'abilities' => config('airlock.abilities',['*']),
             'entity' => [
-                'name' => '',
                 'abilities' => [],
+                'name' => '',
             ]
         ]);
     }

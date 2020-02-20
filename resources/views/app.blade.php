@@ -19,6 +19,6 @@
 <body>
     <div id="app"></div>
     <noscript>:(</noscript>
-    <script>window.__APP_STATE__ = {!! $config->toJson() !!};</script>
+    <script>window.__APP_STATE__ = {!! $appState->toJson() !!};</script>
 </body>
 </html>

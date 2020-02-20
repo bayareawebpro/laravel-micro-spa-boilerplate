@@ -29,4 +29,11 @@ class TokenSearch extends AbstractQuery implements ConditionalQuery, Validatable
                 )
             );
     }
+
+    public function getRules(): array
+    {
+        return [
+            $this->field => 'sometimes|string|max:255'
+        ];
+    }
 }

@@ -17,8 +17,6 @@ App.loadProviders()
 App.bootProviders()
 
 App.make('VueRoot').$mount("#app")
-
-
 /**
  * Add Global Event Listeners
  * @type {*}

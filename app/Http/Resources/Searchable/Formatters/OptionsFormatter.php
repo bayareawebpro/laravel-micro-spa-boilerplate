@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Http\Resources\Searchable;
+namespace App\Http\Resources\Searchable\Formatters;
 
 use BayAreaWebPro\SearchableResource\Contracts\FormatsOptions;
 use Illuminate\Support\Collection;

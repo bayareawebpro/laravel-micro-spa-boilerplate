@@ -21,7 +21,6 @@ export default class Application extends LaravelMicro {
             .context(require.context('./services', true, /\.*ServiceProvider.js$/))
             .each((name, abstract) =>this.register(abstract))
     }
-
     /**
      * Dispatch Route Request through Middleware Stack.
      *

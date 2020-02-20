@@ -1,11 +1,11 @@
 <?php
-
 namespace App\Providers;
 
 use App\Composers\AppComposer;
-use App\Http\Resources\Searchable\OptionsFormatter;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+
+use App\Http\Resources\Searchable\Formatters\OptionsFormatter;
 use BayAreaWebPro\SearchableResource\SearchableBuilder;
 
 class AppServiceProvider extends ServiceProvider

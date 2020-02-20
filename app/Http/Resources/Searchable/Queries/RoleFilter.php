@@ -23,7 +23,7 @@ class RoleFilter extends AbstractQuery implements ConditionalQuery, ValidatableQ
     /**
      * Provides Options
      */
-    public function options(): array
+    public function getOptions(): array
     {
         return [
             $this->field => $this->values()
@@ -31,15 +31,22 @@ class RoleFilter extends AbstractQuery implements ConditionalQuery, ValidatableQ
     }
 
     /**
+     * Conditional Query
+     * @return bool
+     */
+    public function getApplies(): bool
+    {
+        return $this->request->filled($this->field);
+    }
+
+    /**
      * Validatable Query
      */
-    public function rules(): array
+    public function getRules(): array
     {
         return [
-            [
-                $this->field => [
-                    'sometimes', 'nullable', 'string', Rule::in($this->values())
-                ]
+            $this->field => [
+                'sometimes', 'nullable', 'string', Rule::in($this->values())
             ],
         ];
     }

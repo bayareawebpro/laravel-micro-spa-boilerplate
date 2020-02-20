@@ -10,6 +10,10 @@ export default class HttpService {
             this.onResponse.bind(this),
             this.onError.bind(this)
         )
+        this.$client.interceptors.request.use(
+            this.onRequest.bind(this),
+            this.onError.bind(this)
+        )
     }
 
     /**
@@ -19,6 +23,18 @@ export default class HttpService {
      */
     useProgressBar(loadProgressBar){
         loadProgressBar(this.$client)
+    }
+
+    /**
+     * Response Handler
+     * @param request {AxiosRequestConfig}
+     * @return {AxiosRequestConfig}
+     */
+    onRequest(request) {
+        if (['get'].includes(request.method)) {
+            console.log(request.params)
+        }
+        return request
     }
 
     /**
@@ -84,8 +100,6 @@ export default class HttpService {
         return Promise.reject(error)
     }
 
-
-
     /**
      * @param config {AxiosRequestConfig}
      */
@@ -142,11 +156,10 @@ export default class HttpService {
 
     /**
      * @param url {String}
-     * @param data {Object}
      * @param config {AxiosRequestConfig}
      * @return {Promise<*>}
      */
-    async delete(url, data, config) {
-        return await this.$client.delete(url, data, config)
+    async delete(url, config) {
+        return await this.$client.delete(url, config)
     }
 }

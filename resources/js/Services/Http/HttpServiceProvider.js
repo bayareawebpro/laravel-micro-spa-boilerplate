@@ -16,9 +16,7 @@ export default class HttpServiceProvider extends ServiceProvider{
      */
     async boot() {
         const exported = await import(/*webpackChunkName:"http-progress"*/ './HttpProgress')
-        this.app
-            .make('Http')
-            .useProgressBar(exported.default)
+        this.app.make('Http').useProgressBar(exported.default)
     }
 
     /**

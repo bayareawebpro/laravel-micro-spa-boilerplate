@@ -25,7 +25,7 @@ class TokenAbility extends AbstractQuery implements ConditionalQuery, Validatabl
     /**
      * Get unique list of AirLock token abilities from all tokens created.
      */
-    protected function values(): array
+    protected function getValues(): array
     {
         return ApiToken::allAbilities()->toArray();
     }
@@ -33,23 +33,21 @@ class TokenAbility extends AbstractQuery implements ConditionalQuery, Validatabl
     /**
      * Provides Options
      */
-    public function options(): array
+    public function getOptions(): array
     {
         return [
-            $this->field => $this->values()
+            $this->field => $this->getValues()
         ];
     }
 
     /**
      * Validatable Query
      */
-    public function rules(): array
+    public function getRules(): array
     {
         return [
-            [
-                $this->field => [
-                    'sometimes', 'nullable', 'string', Rule::in($this->values())
-                ]
+            $this->field => [
+                'sometimes', 'nullable', 'string', Rule::in($this->getValues())
             ],
         ];
     }

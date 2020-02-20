@@ -19,10 +19,10 @@ class NameQuery extends AbstractQuery implements ConditionalQuery, ValidatableQu
         $builder->where($this->getAttribute(), 'like', "%{$this->getValue()}%");
     }
 
-    public function rules(): array
+    public function getRules(): array
     {
         return [
-            [$this->field => 'sometimes|string|max:255'],
+            $this->field => 'sometimes|string|max:255',
         ];
     }
 }

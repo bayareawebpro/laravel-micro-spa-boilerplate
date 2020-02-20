@@ -13,15 +13,10 @@ class EmailQuery extends AbstractQuery implements ConditionalQuery, ValidatableQ
     protected string $field = 'email';
     protected string $attribute = 'email';
 
-    public function applies(): bool
-    {
-        return parent::applies();
-    }
-
-    public function rules(): array
+    public function getRules(): array
     {
         return [
-            [$this->field => 'sometimes|string|email|max:255'],
+            $this->field => 'sometimes|string|email|max:255',
         ];
     }
 }
