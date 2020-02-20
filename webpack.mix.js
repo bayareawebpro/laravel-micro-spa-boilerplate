@@ -2,6 +2,7 @@ const mix = require('laravel-mix');
 require('laravel-mix-tailwind');
 require('laravel-mix-purgecss');
 require('laravel-micro.js/src/mix');
+const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
 
 mix.tailwind('./tailwind.config.js')
 mix.js('resources/js/app.js', 'public/js')
@@ -69,7 +70,6 @@ mix.browserSync({
 if (mix.inProduction()) {
     mix.purgeCss()
     mix.version()
-    const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
     mix.webpackConfig({
         plugins: [
             new BundleAnalyzerPlugin({
