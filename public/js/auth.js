@@ -191,175 +191,182 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "layout p-4" }, [
-    _vm.entity
-      ? _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-header" }, [
-            _vm._v("\n            Account Settings\n        ")
-          ]),
-          _vm._v(" "),
-          _c(
-            "form",
-            {
-              ref: "form",
-              on: {
-                submit: function($event) {
-                  $event.preventDefault()
+  return _c(
+    "div",
+    { staticClass: "layout layout-centered w-full md:w-3/5 mx-auto p-4" },
+    [
+      _vm.entity
+        ? _c("div", { staticClass: "card" }, [
+            _c("div", { staticClass: "card-header" }, [
+              _vm._v("\n            Account Settings\n        ")
+            ]),
+            _vm._v(" "),
+            _c(
+              "form",
+              {
+                ref: "form",
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                  }
                 }
-              }
-            },
-            [
-              _c("div", { staticClass: "card-content" }, [
-                _c("div", { staticClass: "grid" }, [
-                  _c(
-                    "div",
-                    { staticClass: "grid-item w-full md:w-1/2" },
-                    [
-                      _c("v-form-control", {
-                        attrs: {
-                          type: "text",
-                          label: "Name",
-                          name: "name",
-                          invalid: _vm.$errors.has("name"),
-                          help: _vm.$errors.first("name", "Enter your name.")
-                        },
-                        on: {
-                          change: function($event) {
-                            return _vm.$errors.forget("name")
-                          }
-                        },
-                        model: {
-                          value: _vm.entity.name,
-                          callback: function($$v) {
-                            _vm.$set(_vm.entity, "name", $$v)
+              },
+              [
+                _c("div", { staticClass: "card-content" }, [
+                  _c("div", { staticClass: "grid" }, [
+                    _c(
+                      "div",
+                      { staticClass: "grid-item w-full md:w-1/2" },
+                      [
+                        _c("v-input", {
+                          attrs: {
+                            type: "text",
+                            label: "Name",
+                            name: "name",
+                            invalid: _vm.$errors.has("name"),
+                            help: _vm.$errors.first("name", "Enter your name.")
                           },
-                          expression: "entity.name"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "grid-item w-full md:w-1/2" },
-                    [
-                      _c("v-form-control", {
-                        attrs: {
-                          type: "text",
-                          name: "email",
-                          label: "Email Address",
-                          invalid: _vm.$errors.has("email"),
-                          help: _vm.$errors.first("email", "Enter your email.")
-                        },
-                        on: {
-                          change: function($event) {
-                            return _vm.$errors.forget("email")
-                          }
-                        },
-                        model: {
-                          value: _vm.entity.email,
-                          callback: function($$v) {
-                            _vm.$set(_vm.entity, "email", $$v)
+                          on: {
+                            change: function($event) {
+                              return _vm.$errors.forget("name")
+                            }
                           },
-                          expression: "entity.email"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "grid-item w-full md:w-1/2" },
-                    [
-                      _c("v-form-control", {
-                        attrs: {
-                          type: "password",
-                          label: "Password",
-                          name: "password",
-                          invalid: _vm.$errors.has("password"),
-                          help: _vm.$errors.first(
-                            "password",
-                            "Enter your secure password."
-                          )
-                        },
-                        on: {
-                          change: function($event) {
-                            return _vm.$errors.forget("password")
+                          model: {
+                            value: _vm.entity.name,
+                            callback: function($$v) {
+                              _vm.$set(_vm.entity, "name", $$v)
+                            },
+                            expression: "entity.name"
                           }
-                        },
-                        model: {
-                          value: _vm.entity.password,
-                          callback: function($$v) {
-                            _vm.$set(_vm.entity, "password", $$v)
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "grid-item w-full md:w-1/2" },
+                      [
+                        _c("v-input", {
+                          attrs: {
+                            type: "text",
+                            name: "email",
+                            label: "Email Address",
+                            invalid: _vm.$errors.has("email"),
+                            help: _vm.$errors.first(
+                              "email",
+                              "Enter your email."
+                            )
                           },
-                          expression: "entity.password"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "grid-item w-full md:w-1/2" },
-                    [
-                      _c("v-form-control", {
-                        attrs: {
-                          type: "password",
-                          label: "Password Confirmation",
-                          name: "password_confirmation",
-                          invalid: _vm.$errors.has("password_confirmation"),
-                          help: _vm.$errors.first(
-                            "password_confirmation",
-                            "Confirm your secure password."
-                          )
-                        },
-                        on: {
-                          change: function($event) {
-                            return _vm.$errors.forget("password_confirmation")
+                          on: {
+                            change: function($event) {
+                              return _vm.$errors.forget("email")
+                            }
+                          },
+                          model: {
+                            value: _vm.entity.email,
+                            callback: function($$v) {
+                              _vm.$set(_vm.entity, "email", $$v)
+                            },
+                            expression: "entity.email"
                           }
-                        },
-                        model: {
-                          value: _vm.entity.password_confirmation,
-                          callback: function($$v) {
-                            _vm.$set(_vm.entity, "password_confirmation", $$v)
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "grid-item w-full md:w-1/2" },
+                      [
+                        _c("v-input", {
+                          attrs: {
+                            type: "password",
+                            label: "Password",
+                            name: "password",
+                            invalid: _vm.$errors.has("password"),
+                            help: _vm.$errors.first(
+                              "password",
+                              "Enter your secure password."
+                            )
                           },
-                          expression: "entity.password_confirmation"
+                          on: {
+                            change: function($event) {
+                              return _vm.$errors.forget("password")
+                            }
+                          },
+                          model: {
+                            value: _vm.entity.password,
+                            callback: function($$v) {
+                              _vm.$set(_vm.entity, "password", $$v)
+                            },
+                            expression: "entity.password"
+                          }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "grid-item w-full md:w-1/2" },
+                      [
+                        _c("v-input", {
+                          attrs: {
+                            type: "password",
+                            label: "Password Confirmation",
+                            name: "password_confirmation",
+                            invalid: _vm.$errors.has("password_confirmation"),
+                            help: _vm.$errors.first(
+                              "password_confirmation",
+                              "Confirm your secure password."
+                            )
+                          },
+                          on: {
+                            change: function($event) {
+                              return _vm.$errors.forget("password_confirmation")
+                            }
+                          },
+                          model: {
+                            value: _vm.entity.password_confirmation,
+                            callback: function($$v) {
+                              _vm.$set(_vm.entity, "password_confirmation", $$v)
+                            },
+                            expression: "entity.password_confirmation"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "card-actions" },
+                  [
+                    _c(
+                      "v-action",
+                      {
+                        staticClass: "btn-lg btn-blue",
+                        attrs: { dusk: "submit" },
+                        on: {
+                          click: function($event) {
+                            return _vm.update(_vm.entity)
+                          }
                         }
-                      })
-                    ],
-                    1
-                  )
-                ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "card-actions" },
-                [
-                  _c(
-                    "v-action",
-                    {
-                      staticClass: "btn-lg btn-blue",
-                      attrs: { dusk: "submit" },
-                      on: {
-                        click: function($event) {
-                          return _vm.update(_vm.entity)
-                        }
-                      }
-                    },
-                    [_vm._v("\n                    Update\n                ")]
-                  )
-                ],
-                1
-              )
-            ]
-          )
-        ])
-      : _vm._e()
-  ])
+                      },
+                      [_vm._v("\n                    Update\n                ")]
+                    )
+                  ],
+                  1
+                )
+              ]
+            )
+          ])
+        : _vm._e()
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -424,7 +431,7 @@ var render = function() {
                     "div",
                     { staticClass: "grid-item w-full md:w-1/2" },
                     [
-                      _c("v-form-control", {
+                      _c("v-input", {
                         attrs: {
                           type: "text",
                           name: "email",
@@ -453,7 +460,7 @@ var render = function() {
                     "div",
                     { staticClass: "grid-item w-full md:w-1/2" },
                     [
-                      _c("v-form-control", {
+                      _c("v-input", {
                         attrs: {
                           name: "password",
                           type: "password",
@@ -482,9 +489,8 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _c("v-form-control", {
+                _c("v-input-switch", {
                   attrs: {
-                    type: "switch",
                     dusk: "remember_me",
                     name: "remember_me",
                     label: "Remember Me.",

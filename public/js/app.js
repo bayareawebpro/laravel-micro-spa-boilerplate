@@ -2511,6 +2511,16 @@ __webpack_require__.r(__webpack_exports__);
   "extends": _Input__WEBPACK_IMPORTED_MODULE_0__["default"],
   props: {
     multiple: _Props_Multiple__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  methods: {
+    onChange: function onChange() {
+      var _this = this;
+
+      this.$emit('input', this.state);
+      this.$nextTick(function () {
+        return _this.$emit('change', _this.state);
+      });
+    }
   }
 });
 
@@ -2709,7 +2719,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   name: "Resource",
   props: {
     value: {
-      required: true
+      "default": function _default() {
+        return {
+          pagination: {},
+          options: {},
+          query: {},
+          data: []
+        };
+      }
     },
     searchable: {
       required: true
@@ -2728,30 +2745,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this = this;
 
       var merge = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+      var route = {
+        query: _objectSpread({}, this.$route.query)
+      };
 
-      if (this.$router) {
-        if (merge) {
-          this.$router.push({
-            query: _objectSpread({}, this.$route.query, {}, newQuery)
-          }, function () {
-            return _this.$emit('updated');
-          }, function () {
-            return _this.$emit('failed');
-          });
-        } else {
-          this.$router.push({
-            query: _objectSpread({}, newQuery)
-          }, function () {
-            return _this.$emit('updated');
-          }, function () {
-            return _this.$emit('failed');
-          });
-        }
-      } else {
-        this.$emit('change', {
-          query: _objectSpread({}, this.$route.query, {}, newQuery)
-        });
+      if (merge) {
+        route.query = _objectSpread({}, route.query, {}, newQuery);
       }
+
+      this.$router.push(route, function () {
+        return _this.$emit('updated');
+      }, function (e) {
+        return _this.$emit('failed', e);
+      });
     },
     prevPage: function prevPage() {
       if (this.value.pagination && this.pagination.isFirstPage) return;
@@ -7417,7 +7423,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "control", class: { icon: _vm.icon } }, [
+  return _c("div", { staticClass: "element", class: { icon: _vm.icon } }, [
     _vm.label
       ? _c("label", { staticClass: "label", attrs: { for: _vm.name } }, [
           _vm._v("\n        " + _vm._s(_vm.label) + "\n    ")
@@ -7548,40 +7554,133 @@ var render = function() {
       }
     },
     [
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.state,
-            expression: "state"
-          }
-        ],
-        ref: "input",
-        staticClass: "input",
-        class: { invalid: _vm.invalid, disabled: _vm.disabled, icon: _vm.icon },
-        attrs: {
-          type: "text",
-          name: _vm.name,
-          disabled: _vm.disabled,
-          required: _vm.required,
-          placeholder: _vm.placeholder
-        },
-        domProps: { value: _vm.state },
-        on: {
-          input: [
-            function($event) {
-              if ($event.target.composing) {
-                return
+      _vm.type === "checkbox"
+        ? _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.state,
+                expression: "state"
               }
-              _vm.state = $event.target.value
+            ],
+            ref: "input",
+            staticClass: "input",
+            class: {
+              invalid: _vm.invalid,
+              disabled: _vm.disabled,
+              icon: _vm.icon
             },
-            function($event) {
-              return _vm.$emit("input", _vm.state)
+            attrs: {
+              type: "text",
+              name: _vm.name,
+              disabled: _vm.disabled,
+              required: _vm.required,
+              placeholder: _vm.placeholder,
+              type: "checkbox"
+            },
+            domProps: {
+              checked: Array.isArray(_vm.state)
+                ? _vm._i(_vm.state, null) > -1
+                : _vm.state
+            },
+            on: {
+              input: function($event) {
+                return _vm.$emit("input", _vm.state)
+              },
+              change: function($event) {
+                var $$a = _vm.state,
+                  $$el = $event.target,
+                  $$c = $$el.checked ? true : false
+                if (Array.isArray($$a)) {
+                  var $$v = null,
+                    $$i = _vm._i($$a, $$v)
+                  if ($$el.checked) {
+                    $$i < 0 && (_vm.state = $$a.concat([$$v]))
+                  } else {
+                    $$i > -1 &&
+                      (_vm.state = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+                  }
+                } else {
+                  _vm.state = $$c
+                }
+              }
             }
-          ]
-        }
-      })
+          })
+        : _vm.type === "radio"
+        ? _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.state,
+                expression: "state"
+              }
+            ],
+            ref: "input",
+            staticClass: "input",
+            class: {
+              invalid: _vm.invalid,
+              disabled: _vm.disabled,
+              icon: _vm.icon
+            },
+            attrs: {
+              type: "text",
+              name: _vm.name,
+              disabled: _vm.disabled,
+              required: _vm.required,
+              placeholder: _vm.placeholder,
+              type: "radio"
+            },
+            domProps: { checked: _vm._q(_vm.state, null) },
+            on: {
+              input: function($event) {
+                return _vm.$emit("input", _vm.state)
+              },
+              change: function($event) {
+                _vm.state = null
+              }
+            }
+          })
+        : _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.state,
+                expression: "state"
+              }
+            ],
+            ref: "input",
+            staticClass: "input",
+            class: {
+              invalid: _vm.invalid,
+              disabled: _vm.disabled,
+              icon: _vm.icon
+            },
+            attrs: {
+              type: "text",
+              name: _vm.name,
+              disabled: _vm.disabled,
+              required: _vm.required,
+              placeholder: _vm.placeholder,
+              type: _vm.type
+            },
+            domProps: { value: _vm.state },
+            on: {
+              input: [
+                function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.state = $event.target.value
+                },
+                function($event) {
+                  return _vm.$emit("input", _vm.state)
+                }
+              ]
+            }
+          })
     ]
   )
 }
@@ -7800,9 +7899,7 @@ var render = function() {
                   ? $$selectedVal
                   : $$selectedVal[0]
               },
-              function($event) {
-                return _vm.$emit("input", _vm.state)
-              }
+              _vm.onChange
             ]
           }
         },
@@ -8237,18 +8334,14 @@ var render = function() {
           ),
           _vm._v(" "),
           _c("div", { staticClass: "flex-grow mr-3" }, [
-            _c("div", { staticClass: "element relative" }, [
+            _c("div", { staticClass: "element icon relative" }, [
               _c(
                 "label",
                 {
                   staticClass: "hidden",
                   attrs: { for: "search", "aria-hidden": "true" }
                 },
-                [
-                  _vm._v(
-                    "\n                        Search\n                    "
-                  )
-                ]
+                [_vm._v("\n                    Search\n                ")]
               ),
               _vm._v(" "),
               _c("input", {
@@ -8260,7 +8353,7 @@ var render = function() {
                     expression: "value.query.search"
                   }
                 ],
-                staticClass: "input search",
+                staticClass: "input search icon",
                 attrs: {
                   dusk: "search",
                   id: "search",
@@ -8318,7 +8411,7 @@ var render = function() {
               "div",
               { staticClass: "grid-item w-1/2 sm:w-auto" },
               [
-                _c("v-form-control", {
+                _c("v-input-select", {
                   staticClass: "input-sm",
                   attrs: { type: "select", name: prop, options: options },
                   on: {
@@ -8365,7 +8458,7 @@ var render = function() {
                         },
                         [
                           _c("i", { staticClass: "fa fa-chevron-left" }),
-                          _vm._v(" Prev\n                    ")
+                          _vm._v(" Prev\n                ")
                         ]
                       )
                     ],
@@ -8386,7 +8479,7 @@ var render = function() {
                           on: { click: _vm.nextPage }
                         },
                         [
-                          _vm._v("\n                        Next "),
+                          _vm._v("\n                    Next "),
                           _c("i", { staticClass: "fa fa-chevron-right" })
                         ]
                       )
@@ -8402,11 +8495,11 @@ var render = function() {
                             "grid-item text-xs text-gray-500 hidden sm:block"
                         },
                         [
-                          _vm._v("\n                    Page "),
+                          _vm._v("\n                Page "),
                           _c("strong", [
                             _vm._v(_vm._s(_vm.pagination.current_page))
                           ]),
-                          _vm._v("\n                    of "),
+                          _vm._v("\n                of "),
                           _c("strong", [
                             _vm._v(_vm._s(_vm.pagination.last_page))
                           ])
@@ -8423,7 +8516,7 @@ var render = function() {
                         },
                         [
                           _c("strong", [_vm._v(_vm._s(_vm.pagination.total))]),
-                          _vm._v(" Total Entities\n                ")
+                          _vm._v(" Total Entities\n            ")
                         ]
                       )
                     : _vm._e()
@@ -8432,7 +8525,7 @@ var render = function() {
               2
             )
           : _c("div", { staticClass: "alert info" }, [
-              _vm._v("\n            No Results.\n        ")
+              _vm._v("\n        No Results.\n    ")
             ])
       ])
     : _vm._e()
