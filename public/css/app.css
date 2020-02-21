@@ -487,17 +487,41 @@ select.input{
 input[type=search].input {
   border-radius: 9999px;
   width: 100%;
+}
+
+/**
+ * Input Icon
+ */
+
+.control.icon input {
   text-indent: 1.3em;
 }
 
-input[type=search].input + i{
+.control.icon input + i{
   position: absolute;
   top: 10px; left: 10px;
+}
+
+.control.icon select:not([multiple]) {
+  text-indent: 0.8em;
+}
+
+.control.icon select:not([multiple]) + i{
+  position: absolute;
+  top: 10px; left: 20px;
+}
+
+.control.icon select[multiple] + i{
+  display: none;
 }
 
 /**
  * Switch Input
  */
+
+.control.icon .switch input + i{
+  display: none;
+}
 
 .switch {
   display: flex;
@@ -505,19 +529,20 @@ input[type=search].input + i{
   flex-wrap: wrap;
   margin: 0;
   padding: 0;
-  cursor: pointer;
 }
 
 .switch .label{
   margin-left: 0.75rem;
   display: inline-flex;
   align-self: center;
+  font-weight: 400;
 }
 
 .switch-well{
   position: relative;
   width: 4rem;
   height: 2rem;
+  cursor: pointer;
 }
 
 .switch-well input {
@@ -532,7 +557,9 @@ input[type=search].input + i{
   right: 0;
   bottom: 0;
   left: 0;
-  min-width: 65px !important;
+  border-width: 1px;
+  border-color: #4a5568;
+  min-width: 70px !important;
   transition: .4s;
 }
 
@@ -543,28 +570,33 @@ input[type=search].input + i{
   height: 1.5rem;
   background-color: #718096;
   transition: .4s;
-  bottom: 4px;
-  left: 4px;
   content: "";
+  bottom: 3px;
+  left: 4px;
 }
 
 .slider:focus{
   outline: 0;
   box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+  border-width: 1px;
   border-color: #4299e1;
 }
 
-input:checked + .slider {
+.switch input:checked + .slider {
   background-color: #4299e1;
+  border-color: #2b6cb0;
 }
 
-input:checked + .slider:before {
-  transform: translateX(32px);
+.switch input:checked + .slider:before {
+  transform: translateX(36px);
   background-color: #bee3f8;
 }
 
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+.switch input:disabled + .slider {
+  background-color: #1a202c !important;
+  border-color: #4a5568 !important;
+  cursor: not-allowed !important;
+  box-shadow: none;
 }
 
 /**

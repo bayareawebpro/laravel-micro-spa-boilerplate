@@ -69,7 +69,16 @@ __webpack_require__.r(__webpack_exports__);
   name: "Forms",
   data: function data() {
     return {
-      form: {}
+      form: {
+        "switch": false,
+        "number": "8",
+        "email": "you@somewhere.com",
+        "text": "John Laravel",
+        "invalid": "This is invalid.",
+        "select_many": [1, 2, 3],
+        "select": 2,
+        "textarea": "asdadsa"
+      }
     };
   } // beforeCreate() {
   //     this.$bind.mapGetters('AbstractController', {
@@ -555,7 +564,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "layout relative px-6" }, [
     _c("h1", [_vm._v("Forms")]),
-    _vm._v(" "),
+    _vm._v("\n    " + _vm._s(_vm.form) + "\n    "),
     _c(
       "form",
       [
@@ -580,9 +589,18 @@ var render = function() {
             [
               _c("v-input", {
                 attrs: {
+                  icon: "fa-warning",
                   label: "Invalid",
                   help: "I am invalid.",
+                  value: "This is text.",
                   invalid: true
+                },
+                model: {
+                  value: _vm.form.invalid,
+                  callback: function($$v) {
+                    _vm.$set(_vm.form, "invalid", $$v)
+                  },
+                  expression: "form.invalid"
                 }
               })
             ],
@@ -595,9 +613,11 @@ var render = function() {
             [
               _c("v-input", {
                 attrs: {
+                  icon: "fa-edit",
                   type: "text",
                   label: "Disabled",
                   help: "I am disabled.",
+                  value: "This is text.",
                   disabled: true
                 }
               })
@@ -617,10 +637,10 @@ var render = function() {
             [
               _c("v-input", {
                 attrs: {
+                  icon: "fa-edit",
                   type: "text",
                   label: "Text",
-                  help: "Enter some text.",
-                  value: "This is text."
+                  help: "Enter some text."
                 },
                 model: {
                   value: _vm.form.text,
@@ -640,10 +660,10 @@ var render = function() {
             [
               _c("v-input", {
                 attrs: {
+                  icon: "fa-send",
                   type: "email",
                   label: "Email",
                   help: "Enter your email.",
-                  value: "you@somewhere.net",
                   required: true
                 },
                 model: {
@@ -664,7 +684,7 @@ var render = function() {
             [
               _c("v-input-number", {
                 attrs: {
-                  type: "number",
+                  icon: "fa-calculator",
                   label: "Number",
                   help: "Enter the amount.",
                   options: { min: 0, max: 10, step: 2 }
@@ -683,18 +703,66 @@ var render = function() {
           _vm._v(" "),
           _c(
             "div",
+            { staticClass: "grid-item w-full md:w-1/2 py-4" },
+            [
+              _c(
+                "v-input-switch",
+                {
+                  attrs: { label: "Switch", help: "Toggle state." },
+                  model: {
+                    value: _vm.form.switch,
+                    callback: function($$v) {
+                      _vm.$set(_vm.form, "switch", $$v)
+                    },
+                    expression: "form.switch"
+                  }
+                },
+                [_vm._v("This is a switch.")]
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "grid-item w-full md:w-1/2 py-4" },
+            [
+              _c(
+                "v-input-switch",
+                {
+                  attrs: {
+                    disabled: true,
+                    label: "Switch Disabled",
+                    help: "Toggle state."
+                  },
+                  model: {
+                    value: _vm.form.switch,
+                    callback: function($$v) {
+                      _vm.$set(_vm.form, "switch", $$v)
+                    },
+                    expression: "form.switch"
+                  }
+                },
+                [_vm._v("This is a switch.")]
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
             { staticClass: "grid-item w-full md:w-1/2" },
             [
               _c("v-input-select", {
                 attrs: {
-                  type: "select",
                   label: "Select",
-                  value: 1,
+                  icon: "fa-edit",
                   help: "Select state.",
                   options: [
-                    { value: "1", label: "Option1" },
-                    { value: "2", label: "Option2" },
-                    { value: "3", label: "Option3" }
+                    { value: null, label: "All" },
+                    { value: 1, label: "Option1" },
+                    { value: 2, label: "Option2" },
+                    { value: 3, label: "Option3" }
                   ]
                 },
                 model: {
@@ -713,41 +781,25 @@ var render = function() {
             "div",
             { staticClass: "grid-item w-full md:w-1/2" },
             [
-              _c("v-input-switch", {
+              _c("v-input-select", {
                 attrs: {
-                  type: "switch",
-                  label: "Switch",
-                  help: "Toggle state."
+                  icon: "fa-edit",
+                  label: "Select Many",
+                  help: "Select state.",
+                  multiple: true,
+                  options: [
+                    { value: null, label: "All" },
+                    { value: 1, label: "Option1" },
+                    { value: 2, label: "Option2" },
+                    { value: 3, label: "Option3" }
+                  ]
                 },
                 model: {
-                  value: _vm.form.switch,
+                  value: _vm.form.select_many,
                   callback: function($$v) {
-                    _vm.$set(_vm.form, "switch", $$v)
+                    _vm.$set(_vm.form, "select_many", $$v)
                   },
-                  expression: "form.switch"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "grid-item w-full md:w-1/2" },
-            [
-              _c("v-input-textarea", {
-                attrs: {
-                  type: "textarea",
-                  label: "Textarea",
-                  help: "Enter multiple lines.",
-                  value: "This is text."
-                },
-                model: {
-                  value: _vm.form.textarea,
-                  callback: function($$v) {
-                    _vm.$set(_vm.form, "textarea", $$v)
-                  },
-                  expression: "form.textarea"
+                  expression: "form.select_many"
                 }
               })
             ],
@@ -755,9 +807,23 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
+        _c("v-input-textarea", {
+          attrs: {
+            label: "Textarea",
+            help: "Enter multiple lines.",
+            value: "This is text."
+          },
+          model: {
+            value: _vm.form.textarea,
+            callback: function($$v) {
+              _vm.$set(_vm.form, "textarea", $$v)
+            },
+            expression: "form.textarea"
+          }
+        }),
+        _vm._v(" "),
         _c("v-input-file", {
           attrs: {
-            type: "file",
             label: "File",
             help: "Choose a file.",
             placeholder: "Select",
