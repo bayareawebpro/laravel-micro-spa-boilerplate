@@ -35,52 +35,73 @@ select.input{
  */
 input[type=search].input {
     @apply rounded-full w-full;
+}
+
+
+/**
+ * Input Icon
+ */
+.control.icon input {
     text-indent: 1.3em;
 }
-input[type=search].input + i{
+.control.icon input + i{
     @apply absolute;
     top: 10px; left: 10px;
+}
+.control.icon select:not([multiple]) {
+    text-indent: 0.8em;
+}
+.control.icon select:not([multiple]) + i{
+    @apply absolute;
+    top: 10px; left: 20px;
+}
+.control.icon select[multiple] + i{
+    @apply hidden;
 }
 
 /**
  * Switch Input
  */
+.control.icon .switch input + i{
+    @apply hidden;
+}
 .switch {
-    @apply flex flex-row flex-wrap m-0 p-0 cursor-pointer;
+    @apply flex flex-row flex-wrap m-0 p-0;
 }
 .switch .label{
-    @apply ml-3 inline-flex self-center;
+    @apply ml-3 inline-flex self-center font-normal;
 }
 .switch-well{
-    @apply relative w-16 h-8;
+    @apply relative w-16 h-8 cursor-pointer ;
 }
 .switch-well input {
     @apply hidden;
 }
 .switch-well .slider {
-    @apply absolute rounded-full bg-gray-800 inset-0;
-    min-width: 65px !important;
+    @apply absolute rounded-full bg-gray-800 inset-0 border border-gray-700;
+    min-width: 70px !important;
     transition: .4s;
 }
 .switch-well .slider:before {
     @apply absolute rounded-full w-6 h-6 bg-gray-600;
     transition: .4s;
-    bottom: 4px;
-    left: 4px;
     content: "";
+    bottom: 3px;
+    left: 4px;
 }
 .slider:focus{
-    @apply outline-none shadow-outline border-blue-500;
+    @apply outline-none shadow-outline border border-blue-500;
 }
-input:checked + .slider {
-    @apply bg-blue-500;
+.switch input:checked + .slider {
+    @apply bg-blue-500 border-blue-700;
 }
-input:checked + .slider:before {
-    transform: translateX(32px);
+.switch input:checked + .slider:before {
+    transform: translateX(36px);
     @apply bg-blue-200;
 }
-input:focus + .slider {
-    box-shadow: 0 0 1px #2196F3;
+.switch input:disabled + .slider {
+    @apply bg-gray-900 border-gray-700 cursor-not-allowed !important;
+    box-shadow: none;
 }
 
 /**

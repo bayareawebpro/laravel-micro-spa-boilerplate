@@ -31,9 +31,7 @@ export default class HttpService {
      * @return {AxiosRequestConfig}
      */
     onRequest(request) {
-        if (['get'].includes(request.method)) {
-            console.log(request.params)
-        }
+        //console.log(request)
         return request
     }
 

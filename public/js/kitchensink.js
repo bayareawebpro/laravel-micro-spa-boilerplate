@@ -578,9 +578,8 @@ var render = function() {
             "div",
             { staticClass: "grid-item w-full md:w-1/2" },
             [
-              _c("v-form-control", {
+              _c("v-input", {
                 attrs: {
-                  type: "text",
                   label: "Invalid",
                   help: "I am invalid.",
                   invalid: true
@@ -594,7 +593,7 @@ var render = function() {
             "div",
             { staticClass: "grid-item w-full md:w-1/2" },
             [
-              _c("v-form-control", {
+              _c("v-input", {
                 attrs: {
                   type: "text",
                   label: "Disabled",
@@ -616,7 +615,7 @@ var render = function() {
             "div",
             { staticClass: "grid-item w-full md:w-1/3" },
             [
-              _c("v-form-control", {
+              _c("v-input", {
                 attrs: {
                   type: "text",
                   label: "Text",
@@ -639,7 +638,7 @@ var render = function() {
             "div",
             { staticClass: "grid-item w-full md:w-1/3" },
             [
-              _c("v-form-control", {
+              _c("v-input", {
                 attrs: {
                   type: "email",
                   label: "Email",
@@ -663,7 +662,7 @@ var render = function() {
             "div",
             { staticClass: "grid-item w-full md:w-1/3" },
             [
-              _c("v-form-control", {
+              _c("v-input-number", {
                 attrs: {
                   type: "number",
                   label: "Number",
@@ -686,7 +685,7 @@ var render = function() {
             "div",
             { staticClass: "grid-item w-full md:w-1/2" },
             [
-              _c("v-form-control", {
+              _c("v-input-select", {
                 attrs: {
                   type: "select",
                   label: "Select",
@@ -714,7 +713,7 @@ var render = function() {
             "div",
             { staticClass: "grid-item w-full md:w-1/2" },
             [
-              _c("v-form-control", {
+              _c("v-input-switch", {
                 attrs: {
                   type: "switch",
                   label: "Switch",
@@ -736,7 +735,7 @@ var render = function() {
             "div",
             { staticClass: "grid-item w-full md:w-1/2" },
             [
-              _c("v-form-control", {
+              _c("v-input-textarea", {
                 attrs: {
                   type: "textarea",
                   label: "Textarea",
@@ -756,7 +755,7 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _c("v-form-control", {
+        _c("v-input-file", {
           attrs: {
             type: "file",
             label: "File",

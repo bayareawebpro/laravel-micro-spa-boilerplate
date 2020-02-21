@@ -21,9 +21,9 @@ export default class Application extends LaravelMicro {
             .context(require.context('./services', true, /\.*ServiceProvider.js$/))
             .each((name, abstract) =>this.register(abstract))
     }
+
     /**
      * Dispatch Route Request through Middleware Stack.
-     *
      * Vue Router will not fire callbacks again if a redirect has occurred,
      * so we should sync the request again after calling next.
      * @return void
@@ -42,7 +42,7 @@ export default class Application extends LaravelMicro {
     }
 
     /**
-     * Dispatch Route Request in Reverse Order through Middleware Stack via Terminate.
+     * Dispatch Request through the Stack via Terminate in Reverse Order.
      * Once Vue Router has successfully entered the requested route, these last callbacks will be fired.
      * @return void
      */
