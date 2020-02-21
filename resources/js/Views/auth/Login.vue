@@ -34,7 +34,7 @@
                     <v-form-message v-model="$errors.message" dusk="alert"/>
                     <div class="grid">
                         <div class="grid-item w-full md:w-1/2">
-                            <v-form-control
+                            <v-input
                                 type="text"
                                 name="email"
                                 label="Email Address"
@@ -42,10 +42,10 @@
                                 @change="$errors.forget('email')"
                                 :invalid="$errors.has('email')"
                                 :help="$errors.first('email', 'Enter your email.')">
-                            </v-form-control>
+                            </v-input>
                         </div>
                         <div class="grid-item w-full md:w-1/2">
-                            <v-form-control
+                            <v-input
                                 name="password"
                                 type="password"
                                 label="Password"
@@ -53,19 +53,18 @@
                                 @change="$errors.forget('password')"
                                 :invalid="$errors.has('password')"
                                 :help="$errors.first('password', 'Enter your secure password.')">
-                            </v-form-control>
+                            </v-input>
                         </div>
                     </div>
-                    <v-form-control
+                    <v-input-switch
                         v-model="user.remember_me"
-                        type="switch"
                         dusk="remember_me"
                         name="remember_me"
                         label="Remember Me."
                         @change="$errors.forget('remember_me')"
                         :invalid="$errors.has('remember_me')"
                         :help="$errors.first('remember_me', 'Remember Me.')">
-                    </v-form-control>
+                    </v-input-switch>
                 </div>
                 <div class="card-actions">
                     <v-action

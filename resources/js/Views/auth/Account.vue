@@ -18,7 +18,7 @@
     }
 </script>
 <template>
-    <div class="layout p-4">
+    <div class="layout layout-centered w-full md:w-3/5 mx-auto p-4">
         <div class="card" v-if="entity">
             <div class="card-header">
                 Account Settings
@@ -27,7 +27,7 @@
                 <div class="card-content">
                     <div class="grid">
                         <div class="grid-item w-full md:w-1/2">
-                            <v-form-control
+                            <v-input
                                 type="text"
                                 label="Name"
                                 name="name"
@@ -35,10 +35,10 @@
                                 @change="$errors.forget('name')"
                                 :invalid="$errors.has('name')"
                                 :help="$errors.first('name', 'Enter your name.')">
-                            </v-form-control>
+                            </v-input>
                         </div>
                         <div class="grid-item w-full md:w-1/2">
-                            <v-form-control
+                            <v-input
                                 type="text"
                                 name="email"
                                 label="Email Address"
@@ -46,10 +46,10 @@
                                 @change="$errors.forget('email')"
                                 :invalid="$errors.has('email')"
                                 :help="$errors.first('email', 'Enter your email.')">
-                            </v-form-control>
+                            </v-input>
                         </div>
                         <div class="grid-item w-full md:w-1/2">
-                            <v-form-control
+                            <v-input
                                 type="password"
                                 label="Password"
                                 name="password"
@@ -57,10 +57,10 @@
                                 @change="$errors.forget('password')"
                                 :invalid="$errors.has('password')"
                                 :help="$errors.first('password', 'Enter your secure password.')">
-                            </v-form-control>
+                            </v-input>
                         </div>
                         <div class="grid-item w-full md:w-1/2">
-                            <v-form-control
+                            <v-input
                                 type="password"
                                 label="Password Confirmation"
                                 name="password_confirmation"
@@ -68,7 +68,7 @@
                                 @change="$errors.forget('password_confirmation')"
                                 :invalid="$errors.has('password_confirmation')"
                                 :help="$errors.first('password_confirmation', 'Confirm your secure password.')">
-                            </v-form-control>
+                            </v-input>
                         </div>
                     </div>
                 </div>

@@ -4,7 +4,13 @@
     export default {
         name: "InputSelect",
         extends: Input,
-        props:{multiple}
+        props:{multiple},
+        methods:{
+            onChange(){
+                this.$emit('input', this.state)
+                this.$nextTick(()=>this.$emit('change', this.state))
+            }
+        }
     }
 </script>
 <template>
@@ -21,7 +27,7 @@
             :disabled="disabled"
             :required="required"
             :multiple="multiple"
-            @change="$emit('input', state)"
+            @change="onChange"
             :class="{invalid, disabled}">
             <option v-for="option in options" :value="option.value">
                 {{ option.label }}

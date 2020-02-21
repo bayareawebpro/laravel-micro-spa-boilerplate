@@ -53,6 +53,7 @@
                 type="text"
                 class="input"
                 :name="name"
+                :type="type"
                 v-model="state"
                 :disabled="disabled"
                 :required="required"

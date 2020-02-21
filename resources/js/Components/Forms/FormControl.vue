@@ -14,7 +14,7 @@
     }
 </script>
 <template>
-    <div class="control" :class="{icon: icon}">
+    <div class="element" :class="{icon: icon}">
         <label v-if="label" :for="name" class="label">
             {{ label }}
         </label>
