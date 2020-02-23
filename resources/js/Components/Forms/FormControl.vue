@@ -3,6 +3,7 @@
     import label from './Props/Label'
     import help from './Props/Help'
     import icon from './Props/Icon'
+    import name from './Props/Name'
     export default {
         name: "FormControl",
         props: {
@@ -10,6 +11,7 @@
             label,
             help,
             icon,
+            name,
         }
     }
 </script>

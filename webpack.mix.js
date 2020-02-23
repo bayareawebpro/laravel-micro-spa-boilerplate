@@ -1,5 +1,4 @@
 const mix = require('laravel-mix');
-require('laravel-mix-tailwind');
 require('laravel-mix-purgecss');
 require('laravel-micro.js/src/mix');
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
@@ -7,11 +6,12 @@ const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
 /**
  * Styles & Assets
  */
-mix.tailwind('./tailwind.config.js')
-mix.sass('resources/css/icons.sass', 'public/css')
-mix.postCss('resources/css/app.pcss', 'public/css')
-mix.copy('node_modules/@fortawesome/fontawesome-free/webfonts', 'public/webfonts')
 
+mix.copy('node_modules/@fortawesome/fontawesome-free/webfonts', 'public/webfonts')
+mix.sass('resources/css/icons.sass', 'public/css')
+mix.postCss('resources/css/app.pcss', 'public/css', [
+    require('tailwindcss'),
+])
 
 /**
  * Javascript
@@ -76,7 +76,7 @@ mix.micro([
 mix.options({
     hmrOptions: {
         host: 'laravel-micro-spa.test',
-        port: 8000,
+        port: 8080,
     },
 })
 if (mix.inProduction()) {

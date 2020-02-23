@@ -1,4 +1,4 @@
-import Axios, {AxiosRequestConfig, AxiosResponse} from 'axios'
+import Axios from 'axios'
 export default class HttpService {
 
     constructor(Events) {
@@ -19,26 +19,26 @@ export default class HttpService {
     /**
      * Use a progress bar package.
      * @param loadProgressBar {Function}
-     * @return {*}
+     * @return {HttpService}
      */
     useProgressBar(loadProgressBar){
         loadProgressBar(this.$client)
+        return this
     }
 
     /**
      * Response Handler
-     * @param request {AxiosRequestConfig}
-     * @return {AxiosRequestConfig}
+     * @param request {Object}
+     * @return {Promise<*>}
      */
     onRequest(request) {
-        //console.log(request)
-        return request
+        return Promise.resolve(request)
     }
 
     /**
      * Response Handler
      * @param response
-     * @return {Promise<unknown>}
+     * @return {Promise<*>}
      */
     onResponse(response) {
         const {data} = response
@@ -53,45 +53,32 @@ export default class HttpService {
     /**
      * Error Handler
      * @param error {Error}
-     * @return {Promise<unknown>}
+     * @return {Promise<*>}
      */
     onError(error) {
         if (!error.hasOwnProperty('response')) {
-            this.$events.$emit('toast:error', {
-                title: error.message || 'Network Error'
-            })
+            this.$events.$emit('error:network', error);
             return Promise.reject(error)
         }
         if (error.response.data) {
             switch (error.response.status) {
                 case 401:
-                    this.$events.$emit('error:401');
-                    this.$events.$emit('toast:warn', {
-                        title: error.response.data.message || 'UnAuthorized.'
-                    })
+                    this.$events.$emit('error:401', error.response);
+                    break;
+                case 403:
+                    this.$events.$emit('error:403', error.response);
                     break;
                 case 404:
-                    this.$events.$emit('error:404');
-                    this.$events.$emit('toast:error', {
-                        title: error.response.data.message || 'Not Found.'
-                    })
+                    this.$events.$emit('error:404', error.response);
                     break;
                 case 419:
-                    this.$events.$emit('error:419');
-                    this.$events.$emit('toast:error', {
-                        title: error.response.data.message || 'Session Expired.'
-                    })
+                    this.$events.$emit('error:419', error.response);
                     break;
                 case 422:
-                    this.$events.$emit('error:422');
-                    this.$events.$emit('toast:warn', {
-                        title: error.response.data.message || 'Invalid.'
-                    })
+                    this.$events.$emit('error:422', error.response);
                     break;
                 default:
-                    this.$events.$emit('toast:error', {
-                        title: error.response.data.message || 'Error.'
-                    })
+                    this.$events.$emit('error:500', error.response)
                     break;
             }
         }
@@ -99,15 +86,15 @@ export default class HttpService {
     }
 
     /**
-     * @param config {AxiosRequestConfig}
+     * @param config {Object}
      */
     getUri(config) {
         return this.$client.getUri(config)
     }
 
     /**
-     * @param config {AxiosRequestConfig}
-     * @return {Promise<*|AxiosResponse<T>>}
+     * @param config {Object}
+     * @return {Promise<*>}
      */
     async request(config) {
         return await this.$client.request(config)
@@ -115,7 +102,7 @@ export default class HttpService {
 
     /**
      * @param url {String}
-     * @param config {AxiosRequestConfig}
+     * @param config {Object}
      * @return {Promise<*>}
      */
     async get(url, config) {
@@ -125,7 +112,7 @@ export default class HttpService {
     /**
      * @param url {String}
      * @param data {Object}
-     * @param config {AxiosRequestConfig}
+     * @param config {Object}
      * @return {Promise<*>}
      */
     async post(url, data, config) {
@@ -135,7 +122,7 @@ export default class HttpService {
     /**
      * @param url {String}
      * @param data {Object}
-     * @param config {AxiosRequestConfig}
+     * @param config {Object}
      * @return {Promise<*>}
      */
     async put(url, data, config) {
@@ -145,7 +132,7 @@ export default class HttpService {
     /**
      * @param url {String}
      * @param data {Object}
-     * @param config {AxiosRequestConfig}
+     * @param config {Object}
      * @return {Promise<*>}
      */
     async patch(url, data, config) {
@@ -154,7 +141,7 @@ export default class HttpService {
 
     /**
      * @param url {String}
-     * @param config {AxiosRequestConfig}
+     * @param config {Object}
      * @return {Promise<*>}
      */
     async delete(url, config) {

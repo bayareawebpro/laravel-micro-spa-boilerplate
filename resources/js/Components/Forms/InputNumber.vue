@@ -8,6 +8,7 @@ export default {
 <template>
     <v-form-control
         :icon="icon"
+        :name="name"
         :help="help"
         :label="label"
         :invalid="invalid">

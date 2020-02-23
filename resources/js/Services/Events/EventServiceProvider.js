@@ -9,7 +9,6 @@ export default class EventServiceProvider extends ServiceProvider{
      */
     constructor(app) {
         super(app);
-        this.deferred = false
     }
 
     /**
@@ -17,30 +16,20 @@ export default class EventServiceProvider extends ServiceProvider{
      * @return void
      */
     register() {
-        this.app.bind('Events',() => new Vue)
-    }
-
-    /**
-     * Boot any application services
-     * @return void
-     */
-    boot() {
-
-        // Make the event bus.
-        const Events = this.app.make('Events')
+        const Bus = new Vue;
+        this.app.bind('Events',() => Bus)
+        this.app.setInstance('Events',Bus)
 
         // Load all listeners...
-        this.app
-            .make('AutoLoader')
+        this.app.make('AutoLoader')
             .context(require.context('@listeners', true, /\.js$/))
             .each((alias, abstract)=>{
-
                 // Bind listeners as factory constructors (false)
                 this.app.bind(alias, abstract,false)
 
-                // Listen for events using the class name or event name.
+                // Make the event bus & Listen for events using the class name or event name.
                 // Try to handle the payload or call the failed method.
-                Events.$on((alias || abstract.event), (payload)=>{
+                Bus.$on((abstract.event || alias), (payload)=>{
                     try{
                         if(this.app.isBound(alias)){
                             const listener = this.app.make(alias)
@@ -54,7 +43,15 @@ export default class EventServiceProvider extends ServiceProvider{
                         this.app.handleError(e)
                     }
                 })
-            })
+        })
+    }
+
+    /**
+     * Boot any application services
+     * @return void
+     */
+    boot() {
+
     }
 
     /**

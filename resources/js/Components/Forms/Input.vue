@@ -1,5 +1,6 @@
 <script>
     import placeholder from './Props/Placeholder'
+    import autocomplete from "./Props/AutoComplete"
     import required from "./Props/Required"
     import disabled from './Props/Disabled'
     import invalid from './Props/Invalid'
@@ -24,6 +25,7 @@
             }
         },
         props: {
+            autocomplete,
             placeholder,
             disabled,
             required,
@@ -45,6 +47,7 @@
 <template>
     <v-form-control
         :icon="icon"
+        :name="name"
         :help="help"
         :label="label"
         :invalid="invalid">
@@ -58,6 +61,7 @@
                 :disabled="disabled"
                 :required="required"
                 :placeholder="placeholder"
+                :autocomplete="autocomplete"
                 :class="{invalid, disabled,icon: icon}"
                 @input="$emit('input', state)"
             >

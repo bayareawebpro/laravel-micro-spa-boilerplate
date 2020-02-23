@@ -11,7 +11,7 @@ export default {
             const {data} = await this.$http.get(`/api/${this.resourceKey}`, {params})
             return await this.$state.set('resource', data)
         } catch (error) {
-            return this.handleError(error) //Return to caller.
+            return Promise.reject(this.handleError(error)) //Return to caller.
         }
     },
 
@@ -27,7 +27,7 @@ export default {
             const {data} = await this.$http.get(`/api/${this.resourceKey}/create`, {params})
             await this.$state.update(data)
         } catch (error) {
-            return this.handleError(error) //Return to caller.
+            return Promise.reject(this.handleError(error)) //Return to caller.
         }
     },
 
@@ -44,7 +44,7 @@ export default {
             const {data} = await this.$http.get(`/api/${this.resourceKey}/${id}`, {params})
             await this.$state.update(data)
         } catch (error) {
-            return this.handleError(error) //Return to caller.
+            return Promise.reject(this.handleError(error)) //Return to caller.
         }
     },
 
@@ -63,7 +63,7 @@ export default {
                 .update(data)
                 .forget('editing')
         } catch (error) {
-            return this.handleError(error) //Return to caller.
+            return Promise.reject(this.handleError(error)) //Return to caller.
         }
     },
 

@@ -50,12 +50,14 @@ export default class AbstractController {
     /**
      * Handle Error Response
      * @param error {Error}
-     * @return {Promise<any>}
+     * @return {Error}
      */
     handleError(error) {
-        if(error.hasOwnProperty('response') && error.response.hasOwnProperty('data')){
+        if(
+            error.hasOwnProperty('response') &&
+            error.response.hasOwnProperty('data')){
             this.$errors.sync(error.response.data)
         }
-        return Promise.reject(error)
+        return error
     }
 }

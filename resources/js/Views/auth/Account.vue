@@ -31,6 +31,7 @@
                                 type="text"
                                 label="Name"
                                 name="name"
+                                autocomplete="name"
                                 v-model="entity.name"
                                 @change="$errors.forget('name')"
                                 :invalid="$errors.has('name')"
@@ -43,6 +44,7 @@
                                 name="email"
                                 label="Email Address"
                                 v-model="entity.email"
+                                autocomplete="email"
                                 @change="$errors.forget('email')"
                                 :invalid="$errors.has('email')"
                                 :help="$errors.first('email', 'Enter your email.')">
@@ -54,6 +56,7 @@
                                 label="Password"
                                 name="password"
                                 v-model="entity.password"
+                                autocomplete="new-password"
                                 @change="$errors.forget('password')"
                                 :invalid="$errors.has('password')"
                                 :help="$errors.first('password', 'Enter your secure password.')">
@@ -64,6 +67,7 @@
                                 type="password"
                                 label="Password Confirmation"
                                 name="password_confirmation"
+                                autocomplete="new-password"
                                 v-model="entity.password_confirmation"
                                 @change="$errors.forget('password_confirmation')"
                                 :invalid="$errors.has('password_confirmation')"

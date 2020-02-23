@@ -3,12 +3,12 @@
         name: "VueRoot",
         beforeCreate() {
             this.$bind.mapGetters('Menus', {
-                dev: 'dev',
-                left: 'left',
-                right: 'right',
-                users: 'users',
-                tokens: 'tokens',
                 kitchensink: 'kitchensink',
+                tokens: 'tokens',
+                users: 'users',
+                dev: 'dev',
+                right: 'right',
+                left: 'left',
             })
             this.$bind.mapActions('Auth', {
                 logout: 'logout',
@@ -138,19 +138,19 @@
                             <template v-slot:title>KITCHEN SINK</template>
                             <template v-slot:default>
                                 <router-link class="sidebar-link" :to="{ name: 'kitchensink.tabs' }" exact>
-                                    <i class="fa fa-tachometer-alt w-3 mr-1"/> Tabs
+                                    <i class="fa fa-window-restore w-3 mr-1"/> Tabs
                                 </router-link>
                                 <router-link class="sidebar-link" :to="{ name: 'kitchensink.cards' }" exact>
-                                    <i class="fa fa-address-card-o w-3 mr-1"/> Cards
+                                    <i class="fa fa-address-card w-3 mr-1"/> Cards
                                 </router-link>
                                 <router-link class="sidebar-link" :to="{ name: 'kitchensink.actions' }" exact>
-                                    <i class="fa fa-tachometer-alt w-3 mr-1"/> Actions
+                                    <i class="fa fa-arrow-circle-right w-3 mr-1"/> Actions
                                 </router-link>
                                 <router-link class="sidebar-link" :to="{ name: 'kitchensink.typography' }" exact>
-                                    <i class="fa fa-tachometer-alt w-3 mr-1"/> Text
+                                    <i class="fa fa-font w-3 mr-1"/> Text
                                 </router-link>
                                 <router-link class="sidebar-link" :to="{ name: 'kitchensink.forms' }" exact>
-                                    <i class="fa fa-tachometer-alt w-3 mr-1"/> Forms
+                                    <i class="fa fa-edit w-3 mr-1"/> Forms
                                 </router-link>
                                 <router-link class="sidebar-link" :to="{ name: 'kitchensink.modals' }" exact>
                                     <i class="fa fa-window-maximize w-3 mr-1"/> Modals

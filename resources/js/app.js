@@ -16,21 +16,8 @@ App.register(AppServiceProvider)
 App.loadProviders()
 App.bootProviders()
 
-App.make('VueRoot').$mount("#app")
-/**
- * Add Global Event Listeners
- * @type {*}
- */
-// App.make('Events')
-//     .$on('error:401', () => {
-//         App.make('Router').push({name: 'auth.login'})
-//     })
-//     .$on('auth:logout', () => {
-//         if (App.isResolved('Auth')) {
-//             App.make('Auth').initState()
-//         }
-//     })
-
+App.make('VueRoot')
+    .$mount("#app")
 /**
  * Share Application with window.
  * @example window.$app().make(...)
