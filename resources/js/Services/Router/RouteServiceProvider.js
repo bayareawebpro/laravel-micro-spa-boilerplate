@@ -1,12 +1,10 @@
-import {ServiceProvider} from 'laravel-micro.js'
-import Request from '../Router/Request'
-import Routes from "../../Routes"
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Routes from "../../routes"
+import Request from './Request'
 import Router from './Router'
 import Route from './Route'
-
-import VueRouter from 'vue-router'
-import Vue from 'vue'
-
+import {ServiceProvider} from 'laravel-micro.js'
 export default class RouteServiceProvider extends ServiceProvider {
 
     /**
@@ -31,7 +29,6 @@ export default class RouteServiceProvider extends ServiceProvider {
      * @return void
      */
     registerBindings() {
-
         /**
          * Vue Router
          */
@@ -82,6 +79,7 @@ export default class RouteServiceProvider extends ServiceProvider {
      */
     get provides() {
         return [
+            'Route',
             'Router',
             'Request',
             'Response',

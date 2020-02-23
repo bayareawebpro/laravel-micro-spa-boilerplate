@@ -13,6 +13,7 @@
     import icon from './Props/Icon'
     import focus from "./Methods/Focus"
     import select from "./Methods/Select"
+    import clipboard from "./Methods/Clipboard"
     export default {
         name: "Input",
         data: ()=>({state: null}),
@@ -39,6 +40,7 @@
             icon,
         },
         methods: {
+            ...clipboard,
             ...select,
             ...focus,
         }
@@ -53,7 +55,6 @@
         :invalid="invalid">
             <input
                 ref="input"
-                type="text"
                 class="input"
                 :name="name"
                 :type="type"
@@ -64,6 +65,7 @@
                 :autocomplete="autocomplete"
                 :class="{invalid, disabled,icon: icon}"
                 @input="$emit('input', state)"
+                @change="$emit('change', state)"
             >
     </v-form-control>
 </template>

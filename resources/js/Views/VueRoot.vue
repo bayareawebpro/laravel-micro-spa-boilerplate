@@ -155,6 +155,9 @@
                                 <router-link class="sidebar-link" :to="{ name: 'kitchensink.modals' }" exact>
                                     <i class="fa fa-window-maximize w-3 mr-1"/> Modals
                                 </router-link>
+                                <router-link class="sidebar-link" :to="{ name: 'kitchensink.charts' }" exact>
+                                    <i class="fa fa-chart-line w-3 mr-1"/> Charts
+                                </router-link>
                             </template>
                         </v-collapse>
                     </div>

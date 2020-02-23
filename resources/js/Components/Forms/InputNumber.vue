@@ -14,17 +14,20 @@ export default {
         :invalid="invalid">
         <input
             ref="input"
-            type="number"
             class="input"
-            :class="{invalid}"
-            :disabled="disabled"
-            :required="required"
+            :name="name"
+            type="number"
             :min="options.min || 0"
             :max="options.max || 9999"
             :step="options.step || 1"
+            v-model="state"
+            :disabled="disabled"
+            :required="required"
             :placeholder="placeholder"
-            @input="$emit('input', $event.target.value)"
-            @change="$emit('change', $event.target.value)"
+            :autocomplete="autocomplete"
+            :class="{invalid, disabled,icon: icon}"
+            @input="$emit('input', state)"
+            @change="$emit('change', state)"
         />
     </v-form-control>
 </template>

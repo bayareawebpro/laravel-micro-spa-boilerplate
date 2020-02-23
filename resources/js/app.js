@@ -15,9 +15,9 @@ App.errorHandler(ErrorHandler)
 App.register(AppServiceProvider)
 App.loadProviders()
 App.bootProviders()
-
 App.make('VueRoot')
     .$mount("#app")
+
 /**
  * Share Application with window.
  * @example window.$app().make(...)

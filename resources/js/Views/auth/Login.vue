@@ -14,7 +14,7 @@
             })
             this.$bind.mapActions('Auth', {
                 isLoading: 'isLoading',
-                submit: 'login',
+                login: 'login',
             })
         },
         beforeDestroy() {
@@ -39,7 +39,8 @@
                                 name="email"
                                 label="Email Address"
                                 v-model="user.email"
-                                @change="$errors.forget('email')"
+                                :required="true"
+                                @input="$errors.forget('email')"
                                 :invalid="$errors.has('email')"
                                 :help="$errors.first('email', 'Enter your email.')">
                             </v-input>
@@ -50,18 +51,18 @@
                                 type="password"
                                 label="Password"
                                 v-model="user.password"
-                                @change="$errors.forget('password')"
+                                @input="$errors.forget('password')"
                                 :invalid="$errors.has('password')"
                                 :help="$errors.first('password', 'Enter your secure password.')">
                             </v-input>
                         </div>
                     </div>
                     <v-input-switch
-                        v-model="user.remember_me"
                         dusk="remember_me"
                         name="remember_me"
                         label="Remember Me."
-                        @change="$errors.forget('remember_me')"
+                        v-model="user.remember_me"
+                        @input="$errors.forget('remember_me')"
                         :invalid="$errors.has('remember_me')"
                         :help="$errors.first('remember_me', 'Remember Me.')">
                     </v-input-switch>
@@ -69,7 +70,8 @@
                 <div class="card-actions">
                     <v-action
                         dusk="submit"
-                        @click="submit(user)"
+                        type="submit"
+                        @click="login(user)"
                         :loading="isLoading('login')"
                         class="btn-blue btn-lg">
                         Login

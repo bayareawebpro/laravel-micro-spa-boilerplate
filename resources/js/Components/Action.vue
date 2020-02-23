@@ -14,6 +14,10 @@
                 type: [Boolean],
                 default: ()=>false,
             },
+            type: {
+                type: [String],
+                default: ()=>'button',
+            },
         },
         methods:{
             onClick(e){
@@ -32,6 +36,7 @@
         ref="button"
         @click.prevent="onClick"
         class="btn overflow-hidden"
+        :type="type"
         :class="{disabled, loading}"
         :disabled="disabled">
         <transition name="fadeInRight" mode="out-in" :duration="60">

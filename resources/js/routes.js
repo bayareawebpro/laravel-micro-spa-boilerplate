@@ -1,5 +1,4 @@
 import Route from "./services/Router/Route"
-
 export default [
     /**
      * Dashboard
@@ -128,6 +127,10 @@ export default [
     Route
         .to('kitchensink.modals','/kitchensink/modals')
         .view(()=>import(/*webpackChunkName:"kitchensink"*/ "@views/kitchensink/Modals"))
+        .middleware('auth'),
+    Route
+        .to('kitchensink.charts','/kitchensink/charts')
+        .view(()=>import(/*webpackChunkName:"kitchensink"*/ "@views/kitchensink/Charts"))
         .middleware('auth'),
 
     /**

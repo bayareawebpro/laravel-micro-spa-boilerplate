@@ -36,7 +36,7 @@
                 <div class="card-content">
                     <div class="grid">
                         <div class="grid-item flex-grow">
-                            <v-form-control
+                            <v-input
                                 type="text"
                                 label="Name"
                                 name="name"
@@ -44,7 +44,7 @@
                                 @change="$errors.forget('name')"
                                 :invalid="$errors.has('name')"
                                 :help="$errors.first('name', 'Enter your name.')">
-                            </v-form-control>
+                            </v-input>
                         </div>
                         <div class="grid-item flex-shrink pb-3">
                             <v-action
@@ -65,7 +65,7 @@
 
                     <div class="grid"  v-for="(ability, index) in entity.abilities">
                         <div class="grid-item flex-grow">
-                            <v-form-control
+                            <v-input
                                 type="text"
                                 label="Ability"
                                 name="ability"
@@ -73,7 +73,7 @@
                                 @change="$errors.forget(`abilities.${index}`)"
                                 :invalid="$errors.has(`abilities.${index}`)"
                                 :help="$errors.first(`abilities.${index}`, 'Enter ability name.')">
-                            </v-form-control>
+                            </v-input>
                         </div>
                         <div class="grid-item flex-shrink pb-3">
                             <v-action
@@ -112,7 +112,7 @@
             </template>
             <template v-slot:content>
                 <p>This token will not be shown again, please copy it for your records.</p>
-                <v-form-control
+                <v-input
                     ref="token"
                     type="text"
                     :value="entity.token"

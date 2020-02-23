@@ -35,13 +35,15 @@
     <div class="layout p-4 text-white">
         <div class="card w-full text-sm mb-4">
             <div class="card-header flex">
-                Framework Logs
-                <v-action @click="flush" class="btn-sm ml-auto">
-                    Flush
-                </v-action>
-                <v-action @click="debugging = !debugging" class="btn-sm ml-auto">
-                    {{ debugging ? 'Disable' : 'Enable'}}
-                </v-action>
+                <div class="mr-auto">Framework Logs</div>
+                <div>
+                    <v-action @click="flush" class="btn-sm mr-1">
+                        Flush
+                    </v-action>
+                    <v-action @click="debugging = !debugging" class="btn-sm">
+                        {{ debugging ? 'Disable' : 'Enable'}}
+                    </v-action>
+                </div>
             </div>
             <div class="card-content">
                 <v-console-output v-model="entries" :height="400"/>
