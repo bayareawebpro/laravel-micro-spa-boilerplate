@@ -40,7 +40,7 @@
                                 label="Email Address"
                                 v-model="user.email"
                                 :required="true"
-                                @input="$errors.forget('email')"
+                                @change="$errors.forget('email')"
                                 :invalid="$errors.has('email')"
                                 :help="$errors.first('email', 'Enter your email.')">
                             </v-input>
@@ -51,7 +51,7 @@
                                 type="password"
                                 label="Password"
                                 v-model="user.password"
-                                @input="$errors.forget('password')"
+                                @change="$errors.forget('password')"
                                 :invalid="$errors.has('password')"
                                 :help="$errors.first('password', 'Enter your secure password.')">
                             </v-input>
@@ -62,7 +62,7 @@
                         name="remember_me"
                         label="Remember Me."
                         v-model="user.remember_me"
-                        @input="$errors.forget('remember_me')"
+                        @change="$errors.forget('remember_me')"
                         :invalid="$errors.has('remember_me')"
                         :help="$errors.first('remember_me', 'Remember Me.')">
                     </v-input-switch>

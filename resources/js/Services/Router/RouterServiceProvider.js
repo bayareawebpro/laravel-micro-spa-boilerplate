@@ -1,11 +1,13 @@
+"use strict";
+import Routes from '../../routes'
+import Request from './Request'
+import Route from './Route'
+
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Routes from "../../routes"
-import Request from './Request'
-import Router from './Router'
-import Route from './Route'
+import scrollBehavior from './scrollBehavior'
 import {ServiceProvider} from 'laravel-micro.js'
-export default class RouteServiceProvider extends ServiceProvider {
+export default class RouterServiceProvider extends ServiceProvider {
 
     /**
      * Register any application services
@@ -29,40 +31,29 @@ export default class RouteServiceProvider extends ServiceProvider {
      * @return void
      */
     registerBindings() {
-        /**
-         * Vue Router
-         */
+
+        this.app.bind('Route', ()=>Route)
+
+        this.app.bind('Request', (Vue)=>{
+            return Vue.observable(this.app.build(Request))
+        })
+
         this.app.bind('Router', ()=>{
             const router = new VueRouter({
-                ...Router, routes: Routes
+                mode: 'history',
+                routes: Routes,
+                scrollBehavior,
             })
             router.beforeEach(this.app.dispatch.bind(this.app))
             router.afterEach(this.app.terminate.bind(this.app))
             return router
         })
 
-        /**
-         * Route Middleware
-         */
-        this.app.bind('Middleware', () => {
-            return this.app
-                .make('AutoLoader')
-                .context(require.context('@middleware', true, /\.js$/))
-                .toObjectEntries()
-        })
-
-        /**
-         * Route / Link Builder
-         */
-        Route.setErrorHandler((e)=>console.warn(e))
-        this.app.bind('Route', ()=>Route)
-
-        /**
-         * Route Builder
-         */
-        this.app.bind('Request', (Vue)=>{
-            return Vue.observable(this.app.build(Request))
-        })
+        this.app.bind('Middleware', () => this.app
+            .make('AutoLoader')
+            .context(require.context('@middleware', true, /\.js$/))
+            .toObjectEntries()
+        )
     }
 
     /**
@@ -82,7 +73,6 @@ export default class RouteServiceProvider extends ServiceProvider {
             'Route',
             'Router',
             'Request',
-            'Response',
             'Middleware',
         ]
     }

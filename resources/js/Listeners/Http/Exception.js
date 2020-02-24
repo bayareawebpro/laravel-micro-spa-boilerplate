@@ -21,18 +21,14 @@ export default class Exception {
      * @param payload {Object}
      */
     handle(payload) {
-        console.info('Exception@handle', {payload})
+        this.app.make('Events').$emit('toast:error', {
+            title: 'Exception.'
+        })
 
-        //this.$events.$emit('toast:error', {
-        //    title: error.response.data.message || 'Error.'
-        //})
-    }
+        console.log(payload)
 
-    /**
-     * Event Failed
-     * @param error {Error}
-     */
-    failed(error) {
-        console.error('Exception@failed',error)
+        this.app.make('Router').push(
+            this.app.make('Route').link('error').withParams(payload)
+        )
     }
 }

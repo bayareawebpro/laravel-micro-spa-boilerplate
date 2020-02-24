@@ -20,13 +20,7 @@ export default class Bind {
                     return instance[method](request.all())
                 }))
             }catch (error) {
-                if(request.routeIs(request.get('from.name')) && error.response && error.response.status === 422){
-                    return next(request.redirect(false))
-                }else{
-                    return next(request.redirect(
-                        this.app.make('Route').link('error').withParams(error.response || {status: 500})
-                    ))
-                }
+                return next(request.redirect(false))
             }
         }
         return next(request)

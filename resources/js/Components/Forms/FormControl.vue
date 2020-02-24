@@ -10,19 +10,17 @@
             invalid,
             label,
             help,
-            icon,
             name,
         }
     }
 </script>
 <template>
-    <div class="element" :class="{icon: icon}">
+    <div class="element">
         <label v-if="label" :for="name" class="label">
             {{ label }}
         </label>
         <div class="relative">
             <slot></slot>
-            <i v-if="icon" class="fa" :class="icon"/>
         </div>
         <p v-if="help" class="help" :class="{invalid: invalid}">
             {{ help }}

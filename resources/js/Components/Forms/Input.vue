@@ -48,7 +48,6 @@
 </script>
 <template>
     <v-form-control
-        :icon="icon"
         :name="name"
         :help="help"
         :label="label"
@@ -67,5 +66,6 @@
                 @input="$emit('input', state)"
                 @change="$emit('change', state)"
             >
+            <i v-if="icon" class="fa" :class="icon"/>
     </v-form-control>
 </template>

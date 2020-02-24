@@ -27,8 +27,16 @@ export default class AbstractController {
      */
     initState() {
         console.log(`Store::Init ${this.$app.getName(this)}`)
-        this.$state = Vue.observable(new Repository(this.schema))
-        this.$errors = Vue.observable(new Validator)
+        if(this.$state){
+            this.$state.sync(this.schema)
+        }else{
+            this.$state = Vue.observable(new Repository(this.schema))
+        }
+        if(this.$errors){
+            this.$errors.clear()
+        }else{
+            this.$errors = Vue.observable(new Validator)
+        }
     }
 
     /**

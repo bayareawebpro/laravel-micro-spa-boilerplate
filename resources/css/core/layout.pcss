@@ -1,33 +1,62 @@
 [v-cloak] {
     @apply hidden
 }
+/**
+wrapper
+    header
+    content
+        aside
+        main
+    footer
+ */
 html, body {
-    @apply h-full min-h-full overflow-x-hidden !important;
-    @apply bg-gray-1000 text-white antialiased leading-normal !important;
+    @apply h-full min-h-full overflow-x-hidden;
+    @apply bg-gray-1000 text-white antialiased leading-normal;
 }
 #wrapper {
-    @apply h-full min-h-full flex flex-col flex;
+    @apply bg-black h-full;
 }
+
 #header {
-    @apply flex flex-shrink bg-gray-900 p-3 w-full z-50 text-xs shadow-lg border-gray-800 border-b;
-}
-#content {
-    @apply flex flex-grow flex-row;
-}
-#main {
-    @apply flex-grow;
+   /**
+    @apply flex flex-row flex-shrink;
+    @apply bg-gray-900 shadow-lg border-gray-800 border-b;
+    @apply p-3 w-full;
+    */
 }
 #footer {
-    @apply shadow-xl bg-gray-900 p-2 w-full z-50 text-xs border-gray-800 border-t;
+    /**
+
+    @apply flex flex-col flex-shrink p-2;
+    @apply text-xs text-center text-gray-700;
+     */
+}
+
+#content {
+    /**
+
+    @apply flex flex-row flex-grow;
+     */
+}
+#main {
+    /**
+
+    @apply flex flex-col flex-grow;
+     */
+}
+aside.sidebar {
+    /**
+    @apply flex flex-col flex-shrink bg-gray-900;
+     */
 }
 .layout{
-    @apply relative flex flex-col flex-wrap p-2;
+    @apply relative p-6 !important;
 }
 .layout-centered{
     @apply layout justify-center content-center;
 }
 @media only screen and (max-width: 768px) {
     #main {
-        @apply  w-full min-w-full !important;
+        @apply w-full min-w-full !important;
     }
 }

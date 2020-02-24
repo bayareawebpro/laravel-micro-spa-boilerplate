@@ -1,5 +1,14 @@
-import Route from "./services/Router/Route"
+"use strict";
+
+import Route from "./Services/Router/VueRoute"
+
 export default [
+    Route
+        .to('errors.test','/errors-test/:status(\\d+)')
+        .view(()=>import(/*webpackChunkName:"test"*/ "@views/errors/Test"))
+        .uses('ErrorTest@get')
+        .middleware('auth'),
+
     /**
      * Dashboard
      */
@@ -139,7 +148,6 @@ export default [
     Route
         .to('error', '/error/:status(\\d+)')
         .view(()=>import(/*webpackChunkName:"base"*/ "@views/errors/Error"))
-        .middleware('guest')
         .withParams({status: '404'}),
     Route
         .to('_fallback','*')

@@ -21,17 +21,8 @@ export default class Invalid {
      * @param payload {Object}
      */
     handle(payload) {
-        console.info('Invalid@handle', {payload})
         this.app.make('Events').$emit('toast:warn', {
             title: payload.data.message || 'Invalid.'
         })
-    }
-
-    /**
-     * Event Failed
-     * @param error {Error}
-     */
-    failed(error) {
-        console.error('Invalid@failed',{error})
     }
 }

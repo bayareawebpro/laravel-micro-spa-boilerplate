@@ -21,9 +21,6 @@ class TokenSearch extends AbstractQuery implements ConditionalQuery, Validatable
             ->where(fn(Builder $builder) => $builder
                 ->where('name', 'like', "%$value%")
                 ->orWhere('abilities', 'like', "%$value%")
-                ->orWhere('created_at', 'like', "%$value%")
-                ->orWhere('updated_at', 'like', "%$value%")
-                ->orWhere('updated_at', 'like', "%$value%")
                 ->orWhereHasMorph('tokenable', [User::class],
                     fn(Builder $builder) => $builder->where('name', 'like', "%$value%")
                 )

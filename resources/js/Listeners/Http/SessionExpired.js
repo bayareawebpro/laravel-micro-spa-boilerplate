@@ -22,17 +22,12 @@ export default class SessionExpired {
      * @param payload {Object}
      */
     handle(payload) {
-        console.info('UnAuthenticated@handle', {payload})
-        // this.$events.$emit('toast:error', {
-        //     title: error.response.data.message || 'Session Expired.'
-        // })
-    }
-
-    /**
-     * Event Failed
-     * @param error {Error}
-     */
-    failed(error) {
-        console.error('UnAuthenticated@failed',error)
+        this.app.make('Events').$emit('toast:error', {
+            title: 'SessionExpired.'
+        })
+        this.app.make('Auth').initState()
+        this.app.make('Router').push(
+            this.app.make('Route').link('auth.login')
+        )
     }
 }

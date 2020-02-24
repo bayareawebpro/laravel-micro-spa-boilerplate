@@ -15,7 +15,6 @@
 </script>
 <template>
     <v-form-control
-        :icon="icon"
         :name="name"
         :help="help"
         :label="label"
@@ -25,10 +24,10 @@
             class="input"
             :name="name"
             v-model="state"
+            @change="onChange"
             :disabled="disabled"
             :required="required"
             :multiple="multiple"
-            @change="onChange"
             :class="{invalid, disabled}">
             <option v-for="option in options" :value="option.value">
                 {{ option.label }}

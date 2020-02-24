@@ -29,5 +29,6 @@ export default {
             @input="$emit('input', state)"
             @change="$emit('change', state)"
         />
+        <i v-if="icon" class="fa" :class="icon"/>
     </v-form-control>
 </template>

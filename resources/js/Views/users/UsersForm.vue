@@ -10,6 +10,7 @@
                 entity: 'entity',
             })
             this.$bind.mapActions('UserResource', {
+                isLoading: 'isLoading',
                 update: 'update',
                 store: 'store',
             })
@@ -89,6 +90,7 @@
                         v-if="entity.id"
                         dusk="action-update"
                         class="btn-lg btn-blue"
+                        :loading="isLoading('users.update')"
                         @click="update(entity)">
                         Update
                     </v-action>
@@ -96,6 +98,7 @@
                         v-else
                         dusk="action-save"
                         class="btn-lg btn-blue"
+                        :loading="isLoading('users.store')"
                         @click="store(entity)">
                         Save
                     </v-action>

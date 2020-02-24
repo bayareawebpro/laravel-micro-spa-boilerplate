@@ -9,7 +9,7 @@ export default class Request extends Repository {
      */
     constructor(App) {
         super();
-        this.$app = App
+        this.app = App
         this.callback = null
     }
 
@@ -18,8 +18,8 @@ export default class Request extends Repository {
      * @returns {*}
      */
     user() {
-        if (this.$app.isBound('userResolver')) {
-            return this.$app.make('userResolver')
+        if (this.app.isBound('userResolver')) {
+            return this.app.make('userResolver')
         }
     }
 
@@ -81,8 +81,8 @@ export default class Request extends Repository {
      * @return {Array}
      */
     getMiddleware() {
-        if (this.$app.isBound('Middleware')) {
-            return this.$app
+        if (this.app.isBound('Middleware')) {
+            return this.app
                 .make('Middleware')
                 .filter(([alias, abstract]) => this.hasMiddleware(alias.toLowerCase()))
                 .map(([alias, abstract]) => abstract)
@@ -127,7 +127,7 @@ export default class Request extends Repository {
      * @returns {this}
      */
     navigate(route, onDone = () => null, onFail = () => null) {
-        this.$app.make('Router').push(route, onDone, onFail)
+        this.app.make('Router').push(route, onDone, onFail)
         return this
     }
 
@@ -139,7 +139,7 @@ export default class Request extends Repository {
      * @returns {this}
      */
     replace(route, onDone = () => null, onFail = () => null) {
-        this.$app.make('Router').push(route, onDone, onFail)
+        this.app.make('Router').push(route, onDone, onFail)
         return this
     }
 
@@ -168,4 +168,4 @@ export default class Request extends Repository {
         return this
     }
 }
-PreventsReactivity(Request,'$app');
+PreventsReactivity(Request,'app');

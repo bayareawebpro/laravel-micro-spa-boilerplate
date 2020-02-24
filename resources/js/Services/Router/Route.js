@@ -1,104 +1,63 @@
-import RouteLink from './RouteLink'
-export default class Route extends RouteLink{
+export default class Route {
 
     /**
-     * Route Constructor
+     * RouteLink Constructor
      * @param name {String}
-     * @param path {String}
      */
-    constructor(name = null, path = null) {
-        super(name)
-        this.path = path
-        this.meta = {
-            middleware: [],
-            bindings: []
-        }
+    constructor(name = null) {
+        this.name = name
+        this.hash = undefined
+        this.params = {}
+        this.query = {}
+        this.props = {}
     }
 
     /**
-     * Make new Route instance.
+     * Make new instance.
      * @param name {String}
-     * @param path {String}
      * @return {Route}
      */
-    static to(name = null,path = null) {
-        return new Route(name,path)
-    }
-
-    /**
-     * Make new RouteLink instance.
-     * @param name {String}
-     * @return {RouteLink}
-     */
     static link(name = null) {
-        return RouteLink.link(name)
+        return new Route(name)
     }
 
     /**
-     * @param handler {Function}
+     * Add parameters object
+     * @param params {Object}
+     * @return this
      */
-    static setErrorHandler(handler){
-        Route.errorHandler = handler
-    }
-
-    /**
-     * Component Resolver
-     * @return {Function}|{Object}|null
-     */
-    get component() {
-        if (typeof this.comp === 'function') {
-            return async () => await this.comp().catch(Route.errorHandler || ((e)=>console.error(e)))
-        }
-        return this.comp
-    }
-
-    /**
-     * With meta data.
-     * @param key {String}
-     * return this
-     */
-    withMeta(key){
-        this.meta[key] = value
+    withParams(params) {
+        this.params = params
         return this
     }
 
     /**
-     * @param method {String}
+     * Add query object
+     * @param query {Object}
      * @return this
      */
-    uses(method) {
-        this.meta.bindings.push(method)
-        if (!this.meta.middleware.includes('bind')) {
-            this.middleware('bind')
-        }
+    withQuery(query) {
+        this.query = query
         return this
     }
 
     /**
-     * @param aliases [String]|{String}
+     * Add props object
+     * @param props {Object}
      * @return this
      */
-    middleware(aliases) {
-        aliases = Array.isArray(aliases) || Object.values(arguments)
-        this.meta.middleware = this.meta.middleware.concat(aliases)
+    withProps(props) {
+        this.props = props
         return this
     }
 
     /**
-     * @param comp {Function}
+     * Add hash string
+     * @param hash {String}
      * @return this
      */
-    view(comp) {
-        this.comp = comp
-        return this
-    }
-
-    /**
-     * @param route {Route|RouteLink}
-     * @return this
-     */
-    redirectTo(route) {
-        this.redirect = route
+    withHash(hash) {
+        this.hash = `#${hash}`
         return this
     }
 }

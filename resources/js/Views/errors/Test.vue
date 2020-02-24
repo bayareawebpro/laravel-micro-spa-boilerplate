@@ -1,6 +1,6 @@
 <script>
     export default {
-        name: "Dashboard",
+        name: "Test",
         data: ()=>({
 
         }),
@@ -8,14 +8,13 @@
 </script>
 <template>
     <div class="layout p-4">
-        <h1 class="page-title">Dashboard</h1>
-        <p class="page-lead">Overview</p>
         <div class="card">
             <div class="card-header bg-gray-800">
                 Card
             </div>
             <div class="card-content bg-gray-900">
                 <br><router-link class="btn" :to="{name: 'errors.test', params: {status: 401}}">401 UnAuthenticated</router-link>
+                <br><router-link class="btn" :to="{name: 'errors.test', params: {status: 403}}">403 UnAuthorized</router-link>
                 <br><router-link class="btn" :to="{name: 'errors.test', params: {status: 403}}">403 UnAuthorized</router-link>
                 <br><router-link class="btn" :to="{name: 'errors.test', params: {status: 404}}">404 Not Found</router-link>
                 <br><router-link class="btn" :to="{name: 'errors.test', params: {status: 419}}">419 Session Expired</router-link>

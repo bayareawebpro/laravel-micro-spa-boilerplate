@@ -17,15 +17,31 @@ export default class EventServiceProvider extends ServiceProvider{
      * @return void
      */
     register() {
-        this.app.bind('Events',(Vue) => new Vue)
+        const Events = new Vue
+        this.app.bind('Events',() => Events)
+        this.app.setInstance('Events',Events)
     }
 
     /**
      * Boot any application services
+     * Bind listeners as factory constructors
      * @return void
      */
     boot() {
-
+        const Events = this.app.getInstance('Events')
+        this.app
+            .make('AutoLoader')
+            .context(require.context('@listeners', true, /\.js$/))
+            .each((alias, abstract)=>{
+                this.app.bind(alias, abstract,false)
+                Events.$on((abstract.event || alias), (payload)=>{
+                    try{
+                        this.app.make(alias).handle(payload)
+                    }catch (e) {
+                        this.app.handleError(e)
+                    }
+                })
+            })
     }
 
     /**
@@ -34,15 +50,6 @@ export default class EventServiceProvider extends ServiceProvider{
      */
     get provides() {
         return [
-            'Authenticated',
-            'Exception',
-            'Invalid',
-            'NoConnection',
-            'NotFound',
-            'SessionExpired',
-            'UnAuthenticated',
-            'UnAuthorized',
-            'UnAuthenticated',
             'Events',
         ]
     }

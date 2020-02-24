@@ -1,12 +1,23 @@
+/**
+ * Form
+ */
 form {
     @apply flex-none;
 }
 form .element{
     @apply relative block mb-5;
 }
+
+/**
+ * Form Label
+ */
 label {
     @apply block text-gray-500 text-sm font-bold mb-2;
 }
+
+/**
+ * Form Input
+ */
 .input {
     @apply shadow rounded-lg w-full py-2 px-3;
     @apply appearance-none leading-tight text-gray-200 bg-gray-800 border border-gray-700;
@@ -14,65 +25,60 @@ label {
     min-width: 60px;
 }
 .input:focus {
-    @apply outline-none shadow-outline border-blue-700;
+    @apply outline-none shadow-outline border-blue-600;
 }
-.element.input-sm .input{
+.input:disabled{
+    @apply bg-gray-1000 border-gray-800 text-gray-600;
+}
+.input-sm .input{
     @apply border border-gray-700 p-1 text-sm;
 }
 
 /**
- * Select Input
+ * Form Input Icons
  */
-select.input{
-    @apply border border-l-8 border-gray-700;
+.input.icon {
+    text-indent: 20px;
 }
-.element.input-sm select.input{
-    @apply border-l-8;
-}
-
-/**
- * Search Input
- */
-input[type=search].input {
-    @apply rounded-full w-full;
-}
-
-
-/**
- * Input Icon
- */
-.element.icon input {
-    text-indent: 1.3em;
-}
-.element.icon input + i{
+.input.icon + i{
     @apply absolute;
     top: 10px; left: 10px;
 }
-.element.icon select:not([multiple]) {
-    text-indent: 0.8em;
-}
-.element.icon select:not([multiple]) + i{
-    @apply absolute;
-    top: 10px; left: 20px;
-}
-.element.icon select[multiple] + i{
-    @apply hidden;
+
+/**
+ * Form Search Input
+ */
+.input[type=search] {
+    @apply rounded-full w-full;
 }
 
 /**
- * Switch Input
+ * Form Select Input
  */
-.element.icon .switch input + i{
-    @apply hidden;
+select.input {
+    @apply border-gray-700 border p-2 border-l-8 cursor-pointer;
 }
+select[multiple].input option{
+    @apply p-2 m-0 bg-gray-800 leading-loose;
+}
+select[multiple].input option:checked {
+    @apply border-blue-600;
+}
+select[multiple].input option:not(:checked) {
+    @apply bg-gray-800;
+}
+
+/**
+ * Form Switch Input
+ */
 .switch {
-    @apply flex flex-row flex-wrap m-0 p-0;
+    @apply flex flex-row flex-wrap m-0 p-0 cursor-pointer;
 }
 .switch .label{
-    @apply ml-3 inline-flex self-center font-normal;
+    @apply ml-3 inline-flex self-center font-normal cursor-pointer;
 }
 .switch-well{
-    @apply relative w-16 h-8 cursor-pointer ;
+    @apply relative w-16 h-8;
 }
 .switch-well input {
     @apply hidden;

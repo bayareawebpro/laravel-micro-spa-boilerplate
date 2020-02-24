@@ -20,15 +20,14 @@ export default class Auth extends AbstractController {
 
     /**
      * Authorize the Current Request
-     * @return {Promise<any>}
+     * @return {Promise}
      */
     async authorize() {
         try {
             await this.$state.put('loading', 'login')
-            await this.$http.get('/api/account/show').then(({data}) =>{
-                this.$state.update(data)
-                this.$state.forget('loading')
-            })
+            const {data} = await this.$http.get('/api/account/show')
+            await this.$state.forget('loading')
+            await this.$state.update(data)
         } catch (error) {
             await this.$state.forget('loading')
             return Promise.reject(this.handleError(error))
@@ -47,6 +46,7 @@ export default class Auth extends AbstractController {
                 const {data} = await this.$http.post('/login', form)
                 this.$state.update(data)
                 this.$router.push({name: 'dashboard'})
+                this.$events.$emit('auth:success')
             })
         } catch (error) {
             await this.$state.forget('loading')
@@ -86,8 +86,8 @@ export default class Auth extends AbstractController {
                 await this.$http.post('/logout').then(()=>{
                     this.$state.set('entity', null)
                     this.$state.forget('loading')
-                    this.$events.$emit('auth:logout')
                     this.$router.push({name: 'auth.login'})
+                    this.$events.$emit('auth:logout')
                 })
             })
         } catch (error) {

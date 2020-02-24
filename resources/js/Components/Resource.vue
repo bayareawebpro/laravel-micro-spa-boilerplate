@@ -49,20 +49,22 @@
                 <slot name="title">Resource</slot>
             </div>
             <div class="flex-grow mr-3">
-                <div class="element icon relative">
+                <div class="element">
                     <label for="search" class="hidden" aria-hidden="true">
                         Search
                     </label>
-                    <input
-                        dusk="search"
-                        id="search"
-                        type="search"
-                        name="search"
-                        class="input search icon"
-                        v-model="value.query.search"
-                        placeholder="Search..."
-                        @keydown.enter="filter({search: value.query.search, page: 1})">
+                    <div class="relative">
+                        <input
+                            dusk="search"
+                            id="search"
+                            type="search"
+                            name="search"
+                            class="input icon"
+                            v-model="value.query.search"
+                            placeholder="Search..."
+                            @keydown.enter="filter({search: value.query.search, page: 1})">
                         <i class="fa fa-search"></i>
+                    </div>
                 </div>
             </div>
             <div class="flex-shrink self-center">

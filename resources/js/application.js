@@ -8,7 +8,6 @@ export default class Application extends LaravelMicro {
      */
     constructor() {
         super();
-        this.setInstance('AutoLoader', AutoLoader)
     }
 
     /**
@@ -16,40 +15,9 @@ export default class Application extends LaravelMicro {
      * @return void
      */
     loadProviders() {
-        AutoLoader
-            .context(require.context('./services', true, /\.*ServiceProvider.js$/))
+        this.make('AutoLoader')
+            .context(require.context('./Services', true, /\.*ServiceProvider.js$/))
             .each((name, abstract) =>this.register(abstract))
-    }
-
-    /**
-     * Dispatch Route Request through Middleware Stack.
-     * @return void
-     */
-    loadListeners() {
-        // Load all listeners...
-        AutoLoader
-            .context(require.context('@listeners', true, /\.js$/))
-            .each((alias, abstract)=>{
-                // Bind listeners as factory constructors (false)
-                this.bind(alias, abstract,false)
-
-                // Make the event bus & Listen for events using the class name or event name.
-                // Try to handle the payload or call the failed method.
-                this.make('Events').$on((abstract.event || alias), (payload)=>{
-                    try{
-                        if(this.isBound(alias)){
-                            const listener = this.make(alias)
-                            try{
-                                listener.handle(payload)
-                            }catch (e) {
-                                listener.failed(e)
-                            }
-                        }
-                    }catch (e) {
-                        this.handleError(e)
-                    }
-                })
-            })
     }
 
     /**

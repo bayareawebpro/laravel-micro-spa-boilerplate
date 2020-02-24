@@ -16,13 +16,12 @@ export default class Auth {
      * @return {*}
      */
     async handle(request, next) {
-
         if (request.hasMiddleware('auth') && !request.user()){
             try {
                 await this.app.make('Auth').authorize()
             } catch (e) {
                 if(!request.routeIs('auth.login')){
-                    request.redirect(this.app.make('Route').link('auth.login'))
+                    return next(request.redirect(this.app.make('Route').link('auth.login')))
                 }
             }
         }

@@ -21,18 +21,8 @@ export default class UnAuthorized {
      * @param payload {Object}
      */
     handle(payload) {
-        console.info('UnAuthorized@handle', {payload})
-
-        // this.$events.$emit('toast:warn', {
-        //     title: error.response.data.message || 'UnAuthorized.'
-        // })
-    }
-
-    /**
-     * Event Failed
-     * @param error {Error}
-     */
-    failed(error) {
-        console.error('UnAuthorized@failed',error)
+        this.app.make('Events').$emit('toast:warn', {
+            title: 'UnAuthorized.'
+        })
     }
 }

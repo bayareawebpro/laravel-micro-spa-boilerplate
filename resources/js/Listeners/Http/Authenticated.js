@@ -13,7 +13,7 @@ export default class Authenticated {
      * @return {string}
      */
     static get event(){
-        return 'auth:success'
+        return 'auth:login'
     }
 
     /**
@@ -21,14 +21,8 @@ export default class Authenticated {
      * @param payload {Object}
      */
     handle(payload) {
-        console.info('Authenticated@handle', {payload})
-    }
-
-    /**
-     * Event Failed
-     * @param error {Error}
-     */
-    failed(error) {
-        console.error('Authenticated@failed',error)
+        this.app.make('Events').$emit('toast:success', {
+            title: 'Authenticated Successfully.'
+        })
     }
 }

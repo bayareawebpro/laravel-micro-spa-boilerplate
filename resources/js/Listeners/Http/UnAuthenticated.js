@@ -21,17 +21,10 @@ export default class UnAuthenticated {
      * @param payload {Object}
      */
     handle(payload) {
-        console.info('UnAuthenticated@handle', {payload})
-        // this.$events.$emit('toast:warn', {
-        //     title: error.response.data.message || 'UnAuthenticated.'
-        // })
-    }
-
-    /**
-     * Event Failed
-     * @param error {Error}
-     */
-    failed(error) {
-        console.error('UnAuthenticated@failed',error)
+        this.app.make('Auth').initState()
+        this.app.make('Menus').initState()
+        this.app.make('Events').$emit('toast:warn', {
+            title: 'UnAuthenticated'
+        })
     }
 }

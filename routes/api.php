@@ -13,9 +13,11 @@ Route::any('errors/401',fn()=>abort(401, 'UnAuthenticated'));
 Route::any('errors/403',fn()=>abort(403, 'UnAuthorized / Forbidden'));
 Route::any('errors/404',fn()=>abort(404, 'Not Found'));
 Route::any('errors/419',fn()=>abort(419, 'Session Expired'));
-Route::any('errors/422',fn()=> ValidationException::withMessages([
-    'field' => ['message1','message2']
-]));
+Route::any('errors/422',function(){
+    throw ValidationException::withMessages([
+        'field' => ['message1','message2']
+    ]);
+});
 
 Route::group(['middleware' => 'auth:airlock'], function(){
     Route::resource('users','UserController');

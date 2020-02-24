@@ -21,18 +21,12 @@ export default class NotFound {
      * @param payload {Object}
      */
     handle(payload) {
-        console.info('NotFound@handle', {payload})
+        this.app.make('Events').$emit('toast:error', {
+            title: 'NotFound.'
+        })
 
-        // this.$events.$emit('toast:error', {
-        //     title: error.response.data.message || 'Not Found.'
-        // })
-    }
-
-    /**
-     * Event Failed
-     * @param error {Error}
-     */
-    failed(error) {
-        console.error('NotFound@failed',error)
+        this.app.make('Router').push(
+            this.app.make('Route').link('error').withParams(payload)
+        )
     }
 }
