@@ -21,7 +21,7 @@
 </script>
 <template>
     <div class="layout-centered">
-        <div class="card w-full md:w-3/5">
+        <div class="card">
             <div class="card-header">
                 Register
             </div>

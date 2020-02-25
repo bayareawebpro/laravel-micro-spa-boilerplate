@@ -32,48 +32,48 @@
                     <v-form-message v-model="$errors.message"/>
                     <div class="grid">
                         <div class="grid-item w-full md:w-1/2">
-                            <v-form-control
+                            <v-input
                                 type="text"
                                 label="Name"
                                 name="name"
                                 v-model="entity.name"
                                 @change="$errors.forget('name')"
                                 :invalid="$errors.has('name')"
-                                :help="$errors.first('name', 'Enter your name.')">
-                            </v-form-control>
+                                :help="$errors.first('name', 'Enter your name.')"
+                            />
                         </div>
                         <div class="grid-item w-full md:w-1/2">
-                            <v-form-control
+                            <v-input
                                 type="text"
                                 name="email"
                                 label="Email Address"
                                 v-model="entity.email"
                                 @change="$errors.forget('email')"
                                 :invalid="$errors.has('email')"
-                                :help="$errors.first('email', 'Enter your email.')">
-                            </v-form-control>
+                                :help="$errors.first('email', 'Enter your email.')"
+                            />
                         </div>
                         <div class="grid-item w-full md:w-1/2">
-                            <v-form-control
+                            <v-input
                                 type="password"
                                 label="Password"
                                 name="password"
                                 v-model="entity.password"
                                 @change="$errors.forget('password')"
                                 :invalid="$errors.has('password')"
-                                :help="$errors.first('password', 'Enter your secure password.')">
-                            </v-form-control>
+                                :help="$errors.first('password', 'Enter your secure password.')"
+                            />
                         </div>
                         <div class="grid-item w-full md:w-1/2">
-                            <v-form-control
+                            <v-input
                                 type="password"
                                 label="Password Confirmation"
                                 name="password_confirmation"
                                 v-model="entity.password_confirmation"
                                 @change="$errors.forget('password_confirmation')"
                                 :invalid="$errors.has('password_confirmation')"
-                                :help="$errors.first('password_confirmation', 'Confirm your secure password.')">
-                            </v-form-control>
+                                :help="$errors.first('password_confirmation', 'Confirm your secure password.')"
+                            />
                         </div>
                     </div>
                 </div>

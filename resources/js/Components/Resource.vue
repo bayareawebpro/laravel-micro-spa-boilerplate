@@ -27,8 +27,8 @@
                     route.query = {...route.query, ...newQuery}
                 }
                 this.$router.push(route,
-                    () => this.$emit('updated'),
-                    (e) => this.$emit('failed',e)
+                    () => this.$emit('change'),
+                    (e) => this.$emit('error',e)
                 )
             },
             prevPage() {
@@ -44,7 +44,7 @@
 </script>
 <template>
     <div class="text-white" v-if="value">
-        <div class="flex mb-2">
+        <div class="flex">
             <div class="hidden sm:block flex-shrink self-center mr-3 text-blue-200">
                 <slot name="title">Resource</slot>
             </div>
@@ -78,7 +78,7 @@
             </div>
         </div>
         <div class="grid mt-2 mb-4">
-            <div v-for="(options, prop) in value.options" class="grid-item w-1/2 sm:w-auto">
+            <div v-for="(options, prop) in value.options" class="grid-item w-1/2 sm:w-auto mt-2">
                 <v-input-select
                     type="select"
                     class="input-sm"

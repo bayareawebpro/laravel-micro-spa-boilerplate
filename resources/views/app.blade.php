@@ -12,13 +12,12 @@
 {{--    <link rel="prefetch" href="{{ mix('js/dashboard.js') }}">--}}
 {{--    <link rel="prefetch" href="{{ mix('js/framework.js') }}">--}}
 {{--    <link rel="prefetch" href="{{ mix('js/http-progress.js') }}">--}}
-    <script src="{{ mix('js/app.js') }}" async></script>
+    <script src="{{ mix('js/app.js') }}" async defer></script>
     <link href="{{ mix('css/icons.css') }}" rel="stylesheet">
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app"></div>
     <noscript>:(</noscript>
-    <script>window.__APP_STATE__ = {!! $appState->toJson() !!};</script>
 </body>
 </html>

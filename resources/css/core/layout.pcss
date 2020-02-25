@@ -1,59 +1,51 @@
 [v-cloak] {
     @apply hidden
 }
-/**
-wrapper
-    header
-    content
-        aside
-        main
-    footer
- */
+html {
+    @apply h-full overflow-x-hidden;
+    @apply text-gray-200 antialiased leading-normal;
+    @apply bg-gray-1000;
+}
 html, body {
-    @apply h-full min-h-full overflow-x-hidden;
-    @apply bg-gray-1000 text-white antialiased leading-normal;
+    @apply h-full;
 }
 #wrapper {
-    @apply bg-black h-full;
-}
-
-#header {
-   /**
-    @apply flex flex-row flex-shrink;
-    @apply bg-gray-900 shadow-lg border-gray-800 border-b;
-    @apply p-3 w-full;
-    */
-}
-#footer {
-    /**
-
-    @apply flex flex-col flex-shrink p-2;
-    @apply text-xs text-center text-gray-700;
-     */
-}
-
-#content {
-    /**
-
-    @apply flex flex-row flex-grow;
-     */
-}
-#main {
-    /**
-
+    @apply min-h-full h-auto;
     @apply flex flex-col flex-grow;
-     */
+}
+#header {
+    @apply flex flex-row flex-shrink;
+    @apply bg-gray-900 shadow-xl;
+    @apply p-3 z-50;
+}
+#brand{
+    @apply block;
+}
+#pushMenuAction{
+    @apply flex px-2 mr-2 self-center;
+}
+#content {
+    @apply flex flex-row flex-grow;
 }
 aside.sidebar {
-    /**
-    @apply flex flex-col flex-shrink bg-gray-900;
-     */
+    @apply flex flex-col z-40;
+}
+#main {
+    @apply flex flex-col flex-grow;
+}
+#footer {
+    @apply flex flex-row flex-shrink p-2;
+    @apply bg-gray-900 shadow;
+    @apply p-3 z-50;
+}
+#footer p{
+    @apply text-xs text-center mx-auto text-gray-500;
 }
 .layout{
-    @apply relative p-6 !important;
+    @apply relative p-4 !important;
 }
 .layout-centered{
-    @apply layout justify-center content-center;
+    @apply layout justify-center content-center w-full max-w-4xl mx-auto p-4;
 }
 @media only screen and (max-width: 768px) {
     #main {

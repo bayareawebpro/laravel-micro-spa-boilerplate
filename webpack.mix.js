@@ -11,6 +11,7 @@ mix.copy('node_modules/@fortawesome/fontawesome-free/webfonts', 'public/webfonts
 mix.sass('resources/css/icons.sass', 'public/css')
 mix.postCss('resources/css/app.pcss', 'public/css', [
     require('tailwindcss'),
+    require('autoprefixer'),
 ])
 
 /**

@@ -23,26 +23,26 @@
 </script>
 <template>
     <div class="layout-centered">
-        <div class="card w-full md:w-3/5">
+        <div class="card">
             <div class="card-header">
                 Forgot Password
             </div>
             <form ref="form" @submit.prevent>
                 <div class="card-content">
                     <v-form-message v-model="$errors.message"/>
-                    <v-form-control
+                    <v-input
                         type="text"
                         name="email"
                         label="Email Address"
                         v-model="entity.email"
                         @change="$errors.forget('email')"
                         :invalid="$errors.has('email')"
-                        :help="$errors.first('email', 'Enter your email.')">
-                    </v-form-control>
+                        :help="$errors.first('email', 'Enter your email.')"
+                    />
                 </div>
                 <div class="card-actions">
                     <v-action @click="submit(entity)" class="btn-blue">
-                        Send Verification Link
+                        Send Reset Link
                     </v-action>
                 </div>
             </form>

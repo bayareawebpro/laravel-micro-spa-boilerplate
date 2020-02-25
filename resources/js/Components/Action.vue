@@ -1,6 +1,6 @@
 <script>
     export default {
-        name: "FormAction",
+        name: "Action",
         props: {
             loading: {
                 type: [Boolean, String, null],
@@ -34,11 +34,11 @@
 <template>
     <button
         ref="button"
+        :type="type"
+        :disabled="disabled"
         @click.prevent="onClick"
         class="btn overflow-hidden"
-        :type="type"
-        :class="{disabled, loading}"
-        :disabled="disabled">
+        :class="{disabled, loading}">
         <transition name="fadeInRight" mode="out-in" :duration="60">
             <v-loading v-if="loading"/>
             <div v-else>

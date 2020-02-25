@@ -23,8 +23,8 @@
     }
 </script>
 <template>
-    <div dusk="page-login" class="layout-centered">
-        <div class="card my-12 w-full md:w-3/5">
+    <div class="layout-centered">
+        <div class="card">
             <div class="card-header">
                 Login
             </div>

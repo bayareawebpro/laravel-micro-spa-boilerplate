@@ -1,14 +1,14 @@
 <script>
+    import Header from './Header'
     export default {
         name: "VueRoot",
+        components:{
+            'v-header':Header
+        },
         beforeCreate() {
             this.$bind.mapGetters('Menus', {
                 kitchensink: 'kitchensink',
-                tokens: 'tokens',
-                users: 'users',
-                dev: 'dev',
-                right: 'right',
-                left: 'left',
+                sidebar: 'sidebar',
             })
             this.$bind.mapActions('Auth', {
                 logout: 'logout',
@@ -28,53 +28,25 @@
         <v-toasts/>
         <v-header/>
         <section id="content">
-            <v-sidebar v-model="left.active">
+            <v-sidebar v-model="sidebar.active">
                 <router-link class="sidebar-link" :to="{ name: 'dashboard' }" exact>
                     <i class="fa fa-dashboard w-3 mr-1"/>&nbsp;Dashboard
                 </router-link>
                 <hr>
-                <v-collapse v-model="users.active">
-                    <template v-slot:title>USERS</template>
-                    <template v-slot:default>
-                        <router-link class="sidebar-link" :to="{ name: 'users.index' }" exact>
-                            <i class="fa fa-users w-3 mr-1"/>&nbsp;Browse
-                        </router-link>
-                        <router-link class="sidebar-link" :to="{ name: 'users.create' }" exact>
-                            <i class="fa fa-user-plus w-3 mr-1"/>&nbsp;Create
-                        </router-link>
-                    </template>
-                </v-collapse>
-                <hr>
-                <v-collapse v-model="tokens.active">
-                    <template v-slot:title>API TOKENS</template>
-                    <template v-slot:default>
-                        <router-link class="sidebar-link" :to="{ name: 'tokens.index' }" exact>
-                            <i class="fa fa-unlock w-3 mr-1"/>&nbsp;Index
-                        </router-link>
-                        <router-link class="sidebar-link" :to="{ name: 'tokens.create' }" exact>
-                            <i class="fa fa-key w-3 mr-1"/>&nbsp;Create
-                        </router-link>
-                    </template>
-                </v-collapse>
 
-                <hr>
-                <v-collapse v-model="dev.active">
-                    <template v-slot:title>FRAMEWORK</template>
-                    <template v-slot:default>
-                        <router-link class="sidebar-link" :to="{ name: 'framework.bindings' }" exact>
-                            <i class="fa fa-tachometer-alt w-3 mr-1"/>&nbsp;Bindings
-                        </router-link>
-                        <router-link class="sidebar-link" :to="{ name: 'framework.providers' }" exact>
-                            <i class="fa fa-project-diagram w-3 mr-1"/>&nbsp;Providers
-                        </router-link>
-                        <router-link class="sidebar-link" :to="{ name: 'framework.sharing' }" exact>
-                            <i class="fa fa-sticky-note w-3 mr-1"/>&nbsp;Sharing
-                        </router-link>
-                        <router-link class="sidebar-link" :to="{ name: 'framework.logs' }" exact>
-                            <i class="fa fa-server w-3 mr-1"/>&nbsp;Logs
-                        </router-link>
-                    </template>
-                </v-collapse>
+                <div v-for="(section, index) in sidebar.items">
+                    <hr v-if="index > 0">
+                    <v-collapse v-model="section.active">
+                        <template v-slot:title>{{ section.name }}</template>
+                        <template v-slot:default>
+                            <div v-for="link in section.items">
+                                <router-link tag="a" class="sidebar-link" tabindex="1" :to="link.to" exact>
+                                    <i class="fa w-3 mr-1" :class="link.icon"/> {{ link.name }}
+                                </router-link>
+                            </div>
+                        </template>
+                    </v-collapse>
+                </div>
 
                 <hr>
 
@@ -112,7 +84,7 @@
             </main>
         </section>
         <footer id="footer">
-            <div>© 2020 Dan Alvidrez - All Rights Reserved.</div>
+            <p>© 2020 Dan Alvidrez - All Rights Reserved.</p>
         </footer>
     </div>
 </template>

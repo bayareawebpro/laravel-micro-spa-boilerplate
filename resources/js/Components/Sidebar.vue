@@ -12,7 +12,7 @@
         watch:{
             $route:{
                 handler(){
-                    if(this.viewport.isSmall){
+                    if(this.viewport.isSmall || this.viewport.isMedium){
                         this.$emit('input', false)
                     }
                 }
@@ -22,7 +22,7 @@
 </script>
 <template>
     <transition name="fadeInLeft">
-        <aside v-if="value" class="sidebar" :class="classes">
+        <aside v-if="value" class="sidebar">
             <div class="sidebar-content">
                 <slot/>
             </div>

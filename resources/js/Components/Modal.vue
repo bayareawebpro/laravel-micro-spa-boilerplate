@@ -7,7 +7,7 @@
             },
             opacity: {
                 type: Number,
-                default: 0.75,
+                default: 0.5,
             },
             fullscreen: {
                 type: Boolean,
@@ -64,26 +64,30 @@
             v-if="value" @click.exact="toggle" :style="maskStyles"
             class="v-modal-mask fixed flex flex-col justify-center content-center z-auto">
             <div class="card inline-flex flex-col shadow-2xl sm:h-auto sm:w-auto my-0 mx-auto v-modal-window"
-                 :class="{fullscreen, 'max-w-3xl': !fullscreen}"
-                 @click.stop="">
-                <div class="card-header flex flex-row">
-                    <div class="flex flex-grow">
-                        <slot name="title"/>
-                    </div>
-                    <div class="flex-shrink">
-                        <button @click.prevent="toggle" class="btn-xs btn-rounded">
-                            <v-svg-close/>
-                        </button>
+                 :class="{fullscreen, 'max-w-3xl': !fullscreen}" @click.stop="">
+                <div class="flex-shrink">
+                    <div class="card-header flex flex-row">
+                        <div class="flex-grow">
+                            <slot name="title"/>
+                        </div>
+                        <div class="flex-shrink">
+                            <button @click.prevent="toggle" class="btn-xs btn-rounded">
+                                <v-svg-close/>
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <div v-if="hasSlot('content')" style="scroll-behavior: smooth"
-                     class="card-content flex-col flex-grow bg-gray-1000 h-full overflow-y-scroll relative">
-                    <div class="p-2">
+                <div  v-if="hasSlot('content')"
+                      class="flex-grow overflow-y-scroll bg-gray-1000"
+                      style="scroll-behavior: smooth">
+                    <div class="card-content">
                         <slot name="content"/>
                     </div>
                 </div>
-                <div v-if="hasSlot('actions')" class="card-actions flex flex-row flex-shrink">
-                    <slot name="actions"/>
+                <div v-if="hasSlot('actions')" class="flex-shrink">
+                    <div class="card-actions flex flex-row">
+                        <slot name="actions"/>
+                    </div>
                 </div>
             </div>
         </div>

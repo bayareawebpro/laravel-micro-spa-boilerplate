@@ -3,12 +3,8 @@
         name: "VueRoot",
         beforeCreate() {
             this.$bind.mapGetters('Menus', {
-                kitchensink: 'kitchensink',
-                tokens: 'tokens',
-                users: 'users',
-                dev: 'dev',
-                right: 'right',
-                left: 'left',
+                dropdown: 'dropdown',
+                sidebar: 'sidebar',
             })
             this.$bind.mapActions('Auth', {
                 logout: 'logout',
@@ -25,23 +21,21 @@
 </script>
 <template>
     <header id="header">
-        <button v-if="name" @click.prevent="left.active = !left.active" class="px-2 mr-2">
+        <button id="pushMenuAction" @click.prevent="sidebar.active = !sidebar.active">
             <i class="fa fa-bars text-blue-600 hover:text-blue-200"/>
         </button>
         <a id="brand" href="/">
             <span>LaravelMicro</span><span>.app</span>
         </a>
         <ul class="flex flex-grow justify-end">
-            <li class="ml-2 relative">
+            <li class="block relative self-center">
                 <button
-                    @click.prevent="right.active = !right.active"
-                    class="btn btn-sm font-thin rounded-full bg-gray-600">
+                    @click.prevent="dropdown.active = !dropdown.active"
+                    class="btn btn-sm inline-flex  font-thin rounded-full bg-gray-600">
                     <i class="fa fa-user-circle"/>
-                    <span class="hidden md:inline text-xs">
-                            Account
-                        </span>
+                    <span class="hidden md:inline text-xs">Account</span>
                 </button>
-                <v-drop-down v-model="right.active">
+                <v-drop-down v-model="dropdown.active">
                     <template v-slot:default>
                         <template v-if="name">
                             <router-link

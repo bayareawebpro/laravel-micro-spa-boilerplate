@@ -27,7 +27,7 @@
     }
 </script>
 <template>
-    <div class="layout p-4" v-if="entity">
+    <div class="layout layout-centered w-full lg:max-w-4xl mx-auto p-4" v-if="entity">
         <div class="card">
             <div class="card-header">
                 {{ entity.name || 'New User' }}

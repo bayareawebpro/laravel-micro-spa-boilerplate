@@ -1,8 +1,10 @@
 <script>
     import Input from "./Input"
+    import rows from "./Props/Rows"
     export default {
         name: "InputTextarea",
         extends: Input,
+        props:{rows},
     }
 </script>
 <template>
@@ -16,6 +18,7 @@
             ref="input"
             class="input"
             :name="name"
+            :rows="rows"
             @input="$emit('input', $event.target.value)"
             @change="$emit('change', $event.target.value)"
             :class="{invalid}"

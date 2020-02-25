@@ -28,6 +28,7 @@ export default class Auth extends AbstractController {
             const {data} = await this.$http.get('/api/account/show')
             await this.$state.forget('loading')
             await this.$state.update(data)
+            await this.$events.$emit('auth:login')
         } catch (error) {
             await this.$state.forget('loading')
             return Promise.reject(this.handleError(error))
@@ -44,9 +45,9 @@ export default class Auth extends AbstractController {
             await this.$state.put('loading', 'login')
             await this.$http.get('/airlock/csrf-cookie').then(async ()=>{
                 const {data} = await this.$http.post('/login', form)
-                this.$state.update(data)
-                this.$router.push({name: 'dashboard'})
-                this.$events.$emit('auth:success')
+                await this.$state.update(data)
+                await this.$router.push({name: 'dashboard'})
+                await this.$events.$emit('auth:login')
             })
         } catch (error) {
             await this.$state.forget('loading')

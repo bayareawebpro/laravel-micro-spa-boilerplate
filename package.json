@@ -31,5 +31,8 @@
         "vue-scrollto": "^2.17.1",
         "vue-template-compiler": "^2.6.11",
         "webpack-bundle-analyzer": "^3.6.0"
+    },
+    "dependencies": {
+        "autoprefixer": "^9.7.4"
     }
 }

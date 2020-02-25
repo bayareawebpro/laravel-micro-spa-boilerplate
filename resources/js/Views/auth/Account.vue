@@ -18,7 +18,7 @@
     }
 </script>
 <template>
-    <div class="layout layout-centered w-full md:w-3/5 mx-auto p-4">
+    <div class="layout-centered">
         <div class="card" v-if="entity">
             <div class="card-header">
                 Account Settings
