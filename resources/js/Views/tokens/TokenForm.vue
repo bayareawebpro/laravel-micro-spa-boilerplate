@@ -1,8 +1,4 @@
 <script>
-    /** @property $errors */
-    /** @property entity */
-    /** @method update */
-    /** @method store */
     export default {
         name: "TokenEdit",
         beforeCreate() {
@@ -89,14 +85,14 @@
                     <v-action
                         v-if="entity.id"
                         dusk="action-update"
-                        class="btn-lg btn-blue"
+                        class="btn-lg btn-green"
                         @click="update(entity)">
                         Update
                     </v-action>
                     <v-action
                         v-else
                         dusk="action-save"
-                        class="btn-lg btn-blue"
+                        class="btn-lg btn-green"
                         @click="store(entity, false)">
                         Save
                     </v-action>

@@ -10,7 +10,16 @@
                     data:[],
                 })
             },
-            searchable: {required: true},
+            searchable: {
+                type: Boolean,
+                required: false,
+                default: ()=>true
+            },
+            loading: {
+                type: Boolean,
+                required: false,
+                default: ()=>false
+            },
         },
         computed: {
             pagination(){
@@ -50,12 +59,12 @@
             </div>
             <div class="flex-grow mr-3">
                 <div class="element">
-                    <label for="search" class="hidden" aria-hidden="true">
+                    <label for="search" class="hidden" aria-labelledby="search">
                         Search
                     </label>
                     <div class="relative">
                         <input
-                            dusk="search"
+                            dusk="resource-search"
                             id="search"
                             type="search"
                             name="search"
@@ -73,6 +82,7 @@
                     :pagination="value.pagination"
                     :options="value.options"
                     :query="value.query"
+                    :loading="loading"
                     :filter="filter"
                 />
             </div>
@@ -84,6 +94,7 @@
                     class="input-sm"
                     :name="prop"
                     :options="options"
+                    :dusk="`filter-${prop}`"
                     v-model="value.query[prop]"
                     @change="filter({...value.query, page: 1})">
                 </v-input-select>
@@ -94,34 +105,34 @@
             <div class="grid mt-4">
                 <div class="grid-item pr-1">
                     <v-action
-                        dusk="prevPage"
+                        dusk="resource-prevPage"
                         @click="prevPage"
-                        :disabled="pagination.isFirstPage">
+                        :disabled="pagination.isFirstPage || loading">
                         <i class="fa fa-chevron-left"/> Prev
                     </v-action>
                 </div>
                 <div class="grid-item pl-1">
                     <v-action
-                        dusk="nextPage"
+                        dusk="resource-nextPage"
                         @click="nextPage"
-                        :disabled="pagination.isLastPage">
+                        :disabled="pagination.isLastPage || loading">
                         Next <i class="fa fa-chevron-right"/>
                     </v-action>
                 </div>
                 <div
                     v-if="pagination.current_page && pagination.last_page"
                     class="grid-item text-xs text-gray-500 hidden sm:block">
-                    Page <strong>{{ pagination.current_page }}</strong>
-                    of <strong>{{ pagination.last_page }}</strong>
+                    Page <strong dusk="resource-current_page">{{ pagination.current_page }}</strong>
+                    of <strong dusk="resource-last_page">{{ pagination.last_page }}</strong>
                 </div>
                 <div
                     v-if="pagination.total"
                     class="grid-item text-xs text-gray-500 hidden sm:block">
-                    <strong>{{ pagination.total }}</strong> Total Entities
+                    <strong dusk="resource-total">{{ pagination.total }}</strong> Total Entities
                 </div>
             </div>
         </div>
-        <div v-else class="alert info">
+        <div v-else class="alert info" dusk="resource-no-results">
             No Results.
         </div>
     </div>

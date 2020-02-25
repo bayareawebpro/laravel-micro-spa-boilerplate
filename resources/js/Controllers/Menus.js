@@ -1,5 +1,6 @@
-import AbstractController from "./AbstractController"
+"use strict";
 import VueRoute from "../Services/Router/VueRoute"
+import AbstractController from "./AbstractController"
 export default class Menus extends AbstractController {
     constructor(App) {
         super(App)

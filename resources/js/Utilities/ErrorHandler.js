@@ -1,3 +1,4 @@
+"use strict";
 export default class ErrorHandler{
     constructor(app) {
         this.$app = app

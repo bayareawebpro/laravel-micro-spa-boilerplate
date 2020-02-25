@@ -20,6 +20,19 @@
                 $request: '$request',
                 $errors: '$errors',
             })
+
+            this.$bind.mapState('Auth', {
+                Auth: (context)=>context.$state.all(),
+            })
+            this.$bind.mapState('Menus', {
+                Menus: (context)=>context.$state.all(),
+            })
+            this.$bind.mapState('TokenResource', {
+                TokenResource: (context)=>context.$state.all(),
+            })
+            this.$bind.mapState('UserResource', {
+                UserResource: (context)=>context.$state.all(),
+            })
         }
     }
 </script>
@@ -78,7 +91,7 @@
                 </v-collapse>
             </v-sidebar>
             <main id="main">
-                <transition name="fadeInLeft" mode="out-in">
+                <transition name="fake" mode="out-in">
                     <router-view :key="$route.name"/>
                 </transition>
             </main>

@@ -21,7 +21,14 @@ export default class Auth {
                 await this.app.make('Auth').authorize()
             } catch (e) {
                 if(!request.routeIs('auth.login')){
-                    return next(request.redirect(this.app.make('Route').link('auth.login')))
+                    return next(request.redirect(
+                        this.app
+                            .make('Route')
+                            .link('auth.login')
+                            .withQuery({
+                                redirect: request.get('to.fullPath')
+                            })
+                    ))
                 }
             }
         }

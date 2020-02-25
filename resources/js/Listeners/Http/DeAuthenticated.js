@@ -1,3 +1,4 @@
+"use strict";
 export default class DeAuthenticated {
 
     /**
@@ -21,6 +22,8 @@ export default class DeAuthenticated {
      * @param payload {Object}
      */
     handle(payload) {
+        this.app.make('Auth').initState()
+        this.app.make('Menus').initState()
         this.app.make('Events').$emit('toast:success', {
             title: 'DeAuthenticated.'
         })

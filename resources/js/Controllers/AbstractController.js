@@ -1,3 +1,4 @@
+"use strict";
 import Vue from "vue"
 import {Repository, Validator} from "laravel-micro.js"
 export default class AbstractController {

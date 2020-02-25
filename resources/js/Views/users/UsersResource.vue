@@ -3,6 +3,7 @@
         name: "UserResource",
         beforeCreate() {
             this.$bind.mapActions('UserResource', {
+                isLoading: 'isLoading',
                 destroy: 'destroy',
                 index: 'index',
             })
@@ -18,6 +19,7 @@
     <div class="layout p-4">
         <v-resource
             v-model="resource"
+            :loading="isLoading('users.index')"
             :searchable="true">
             <template v-slot:title>
                 <i class="fa fa-users"/> Users
@@ -30,36 +32,6 @@
                     <i class="fa fa-user-plus"/>
                     <span class="hidden sm:inline">Create</span>
                 </router-link>
-            </template>
-            <template v-slot:filters="{filter, query,pagination,options}">
-                <v-action
-                    @click="filter({page: 1, role: null})"
-                    :disabled="!query.role"
-                    class="btn btn-xs"
-                    dusk="filter-role-all">
-                    All
-                </v-action>
-                <v-action
-                    @click="filter({page: 1, role: 'admin'})"
-                    :disabled="query.role ==='admin'"
-                    class="btn btn-xs btn-green"
-                    dusk="filter-role-admin">
-                    Admins
-                </v-action>
-                <v-action
-                    @click="filter({page: 1, role: 'editor'})"
-                    :disabled="query.role ==='editor'"
-                    class="btn btn-xs btn-yellow"
-                    dusk="filter-role-admin">
-                    Editor
-                </v-action>
-                <v-action
-                    @click="filter({page: 1, role: 'guest'})"
-                    :disabled="query.role ==='guest'"
-                    class="btn btn-xs btn-red"
-                    dusk="filter-role-guest">
-                    Editor
-                </v-action>
             </template>
             <template v-slot:entries="{entries}">
                 <div v-for="entry in entries" dusk="entry" class="card mb-2">

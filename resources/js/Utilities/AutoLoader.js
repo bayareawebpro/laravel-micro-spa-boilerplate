@@ -1,4 +1,4 @@
-
+"use strict";
 /**
  * @docs https://webpack.js.org/guides/dependency-management/#require-context
  * @example Autoloader.components(require.context('./../../Components',true,/\.vue$/));

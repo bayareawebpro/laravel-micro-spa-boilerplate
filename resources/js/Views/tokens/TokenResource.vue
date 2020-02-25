@@ -43,7 +43,7 @@
                     dusk="entry"
                     class="card my-4 text-sm"
                     v-for="entry in entries">
-                    <div class="card-header bg-gray-800 flex">
+                    <div class="card-header p-2 flex">
                         <router-link
                             dusk="entry-show"
                             class="block"
@@ -58,37 +58,27 @@
                     </div>
                     <div class="card-content">
                         <div class="grid mb-4">
-                            <div class="grid-item w-full sm:w-1/3">
-                                <strong>Username</strong><br>
-                                <i class="fa fa-user-plus text-blue-500"/>
-                                {{ entry.tokenable.name }}
-                            </div>
-                            <div class="grid-item w-full sm:w-1/3">
+                            <div class="grid-item w-1/2 sm:w-1/3">
                                 <strong>Tokenable</strong><br>
                                 <i class="fa fa-cubes text-blue-500"/>
                                 {{ entry.tokenable_type }} ({{ entry.tokenable_id }})
                             </div>
-                            <div class="grid-item w-full sm:w-1/3">
+                            <div class="grid-item w-1/2  sm:w-1/3">
                                 <strong>Abilities</strong><br>
                                 <i class="fa fa-lock-open text-blue-500"/>
                                 {{ entry.abilities.join(',') }}
                             </div>
                         </div>
                         <div class="grid">
-                            <div class="grid-item w-full sm:w-1/3">
+                            <div class="grid-item w-1/2  sm:w-1/3">
                                 <strong>Last Used</strong><br>
                                 <i class="fa fa-clock text-blue-500"/>
                                 {{ entry.last_used_at || '-' }}
                             </div>
-                            <div class="grid-item w-full sm:w-1/3">
+                            <div class="grid-item w-1/2  sm:w-1/3">
                                 <strong>Created</strong><br>
                                 <i class="fa fa-clock text-blue-500"/>
                                 {{ entry.created_at }}
-                            </div>
-                            <div class="grid-item w-full sm:w-1/3">
-                                <strong>Updated</strong><br>
-                                <i class="fa fa-clock text-blue-500"/>
-                                {{ entry.updated_at }}
                             </div>
                         </div>
                     </div>

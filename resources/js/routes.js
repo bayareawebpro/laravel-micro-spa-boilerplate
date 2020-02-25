@@ -80,7 +80,7 @@ export default [
         .uses('TokenResource@create')
         .middleware('auth'),
     Route
-        .to('tokens.show','/users/:id(\\d+)')
+        .to('tokens.show','/tokens/:id(\\d+)')
         .view(()=>import(/*webpackChunkName:"tokens"*/ "@views/tokens/TokenShow"))
         .uses('TokenResource@show')
         .middleware('auth'),

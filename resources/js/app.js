@@ -1,3 +1,4 @@
+"use strict";
 /**
  * Laravel Micro Application Boilerplate
  * @author Dan Alvidrez mailto:dan@bayareawebpro.com

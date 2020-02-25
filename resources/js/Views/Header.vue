@@ -1,4 +1,6 @@
 <script>
+    /** @method logout */
+    /** @property dropdown */
     export default {
         name: "VueRoot",
         beforeCreate() {
@@ -31,9 +33,9 @@
             <li class="block relative self-center">
                 <button
                     @click.prevent="dropdown.active = !dropdown.active"
-                    class="btn btn-sm inline-flex  font-thin rounded-full bg-gray-600">
-                    <i class="fa fa-user-circle"/>
-                    <span class="hidden md:inline text-xs">Account</span>
+                    class="btn btn-sm inline-flex font-thin rounded-full bg-gray-600">
+                    <i class="fa fa-user-circle my-1 self-center"/>
+                    <span class="hidden md:inline text-xs ml-1 self-center">Account</span>
                 </button>
                 <v-drop-down v-model="dropdown.active">
                     <template v-slot:default>

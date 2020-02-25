@@ -52,7 +52,7 @@
                 <div class="card-header bg-gray-800">
                     <div><i class="fa fa-header"></i> ListGroup Card</div>
                 </div>
-                <div class="list-group">
+                <div class="list-group rounded-none">
                     <div class="list-group-item">
                         Item 1
                     </div>

@@ -1,3 +1,4 @@
+"use strict";
 import {_Mixin} from "laravel-micro.js"
 import Resource from "./Concerns/Resource"
 import AbstractController from "./AbstractController"

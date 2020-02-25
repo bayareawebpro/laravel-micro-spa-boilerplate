@@ -1,10 +1,11 @@
+"use strict";
 import AbstractController from "./AbstractController"
 export default class Auth extends AbstractController {
     constructor(App) {
         super(App)
     }
 
-    get schema(){
+    get schema() {
         return {
             entity: null,
         }
@@ -14,7 +15,7 @@ export default class Auth extends AbstractController {
      * Is the local state authorized?
      * @return {boolean}
      */
-    get user(){
+    get user() {
         return this.$state.get('entity')
     }
 
@@ -28,7 +29,6 @@ export default class Auth extends AbstractController {
             const {data} = await this.$http.get('/api/account/show')
             await this.$state.forget('loading')
             await this.$state.update(data)
-            await this.$events.$emit('auth:login')
         } catch (error) {
             await this.$state.forget('loading')
             return Promise.reject(this.handleError(error))
@@ -43,10 +43,10 @@ export default class Auth extends AbstractController {
         try {
             await this.$errors.clear()
             await this.$state.put('loading', 'login')
-            await this.$http.get('/airlock/csrf-cookie').then(async ()=>{
+            await this.$http.get('/airlock/csrf-cookie').then(async () => {
                 const {data} = await this.$http.post('/login', form)
                 await this.$state.update(data)
-                await this.$router.push({name: 'dashboard'})
+                await this.$router.push(this.$request.pull('to.query.redirect') || {name: 'dashboard'})
                 await this.$events.$emit('auth:login')
             })
         } catch (error) {
@@ -63,11 +63,11 @@ export default class Auth extends AbstractController {
         try {
             await this.$errors.clear()
             await this.$state.put('loading', 'login')
-            await this.$http.get('/airlock/csrf-cookie').then(async ()=>{
+            await this.$http.get('/airlock/csrf-cookie').then(async () => {
                 const {data} = await this.$http.post('/register', form)
                 await this.$state.update(data)
-                await this.$state.forget('loading')
                 await this.$router.push({name: 'auth.account'})
+                await this.$state.forget('loading')
             })
         } catch (error) {
             this.$state.forget('loading')
@@ -83,8 +83,8 @@ export default class Auth extends AbstractController {
         try {
             await this.$errors.clear()
             await this.$state.put('loading', 'logout')
-            await this.$http.get('/airlock/csrf-cookie').then(async ()=>{
-                await this.$http.post('/logout').then(()=>{
+            await this.$http.get('/airlock/csrf-cookie').then(async () => {
+                await this.$http.post('/logout').then(() => {
                     this.$state.set('entity', null)
                     this.$state.forget('loading')
                     this.$router.push({name: 'auth.login'})
