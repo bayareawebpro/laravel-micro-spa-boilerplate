@@ -81,6 +81,9 @@
                         <router-link class="sidebar-link" :to="{ name: 'kitchensink.forms' }" exact>
                             <i class="fa fa-edit w-3 mr-1"/> Forms
                         </router-link>
+                        <router-link class="sidebar-link" :to="{ name: 'kitchensink.files' }" exact>
+                            <i class="fa fa-edit w-3 mr-1"/> Files
+                        </router-link>
                         <router-link class="sidebar-link" :to="{ name: 'kitchensink.modals' }" exact>
                             <i class="fa fa-window-maximize w-3 mr-1"/> Modals
                         </router-link>
@@ -91,7 +94,7 @@
                 </v-collapse>
             </v-sidebar>
             <main id="main">
-                <transition name="fake" mode="out-in">
+                <transition name="fadeInRight" mode="out-in" :duration="90">
                     <router-view :key="$route.name"/>
                 </transition>
             </main>

@@ -27,7 +27,7 @@
             <i class="fa fa-bars text-blue-600 hover:text-blue-200"/>
         </button>
         <a id="brand" href="/">
-            <span>LaravelMicro</span><span>.app</span>
+            <span>Laravel</span><span>Micro</span>
         </a>
         <ul class="flex flex-grow justify-end">
             <li class="block relative self-center">

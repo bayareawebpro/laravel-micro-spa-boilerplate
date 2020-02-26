@@ -1,5 +1,5 @@
 "use strict";
-export default class DeAuthenticated {
+export default class Authenticated {
 
     /**
      * Authenticated Constructor
@@ -14,7 +14,7 @@ export default class DeAuthenticated {
      * @return {string}
      */
     static get event(){
-        return 'auth:logout'
+        return 'state:init'
     }
 
     /**
@@ -22,10 +22,9 @@ export default class DeAuthenticated {
      * @param payload {Object}
      */
     handle(payload) {
-        this.app.make('Events')
-            .$emit('state:init')
-            .$emit('toast:success', {
-                title: 'DeAuthenticated.'
-            })
+        this.app.make('Auth').initState()
+        this.app.make('Menus').initState()
+        this.app.make('TokenResource').initState()
+        this.app.make('UserResource').initState()
     }
 }

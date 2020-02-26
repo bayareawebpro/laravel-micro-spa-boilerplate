@@ -29,6 +29,20 @@ export default class Menus extends AbstractController {
                         ],
                     },
                     {
+                        name: 'Attachments',
+                        active: false,
+                        items:[
+                            {
+                                name: 'Browse', icon: 'fa-image',
+                                to: VueRoute.link('attachments.index'),
+                            },
+                            {
+                                name: 'Create', icon: 'fa-image',
+                                to: VueRoute.link('attachments.create'),
+                            }
+                        ],
+                    },
+                    {
                         name: 'API TOKENS',
                         active: false,
                         items:[

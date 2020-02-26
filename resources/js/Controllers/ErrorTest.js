@@ -18,6 +18,7 @@ export default class ErrorTest extends AbstractController {
             return Promise.reject(this.handleError(error)) //Return to caller.
         }
     }
+
 }
 
 

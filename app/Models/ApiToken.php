@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Validation\Rule;
 use Laravel\Airlock\PersonalAccessToken;
 
 use App\Models\Contracts\Validateable;

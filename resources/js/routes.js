@@ -91,6 +91,30 @@ export default [
         .middleware('auth'),
 
     /**
+     * Attachments Resource
+     */
+    Route
+        .to('attachments.index','/attachments')
+        .view(()=>import(/*webpackChunkName:"attachments"*/ "@views/attachments/AttachmentsResource"))
+        .uses('Attachments@index')
+        .middleware('auth'),
+    Route
+        .to('attachments.create','/attachments/create')
+        .view(()=>import(/*webpackChunkName:"attachments"*/ "@views/attachments/AttachmentForm"))
+        .uses('Attachments@create')
+        .middleware('auth'),
+    Route
+        .to('attachments.show','/attachments/:id(\\d+)')
+        .view(()=>import(/*webpackChunkName:"attachments"*/ "@views/attachments/AttachmentShow"))
+        .uses('Attachments@show')
+        .middleware('auth'),
+    Route
+        .to('attachments.edit','/attachments/:id(\\d+)/edit')
+        .view(()=>import(/*webpackChunkName:"attachments"*/ "@views/attachments/AttachmentForm"))
+        .uses('Attachments@edit')
+        .middleware('auth'),
+
+    /**
      * Framework / Developer
      */
     Route
@@ -132,6 +156,10 @@ export default [
     Route
         .to('kitchensink.forms','/kitchensink/forms')
         .view(()=>import(/*webpackChunkName:"kitchensink"*/ "@views/kitchensink/Forms"))
+        .middleware('auth'),
+    Route
+        .to('kitchensink.files','/kitchensink/files')
+        .view(()=>import(/*webpackChunkName:"kitchensink"*/ "@views/kitchensink/Files"))
         .middleware('auth'),
     Route
         .to('kitchensink.modals','/kitchensink/modals')

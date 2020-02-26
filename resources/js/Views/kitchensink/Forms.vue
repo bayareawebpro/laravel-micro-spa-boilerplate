@@ -2,9 +2,13 @@
     export default {
         name: "Forms",
         data: ()=>({
-            form:
-                { "switch": false, "number": "8", "email": "you@somewhere.com", "text": "John Laravel", "invalid": "This is invalid.", "select_many": [ 1, 2], "select": 2, "textarea": "asdadsa" }
+            form:{ "switch": false, "number": "8", "email": "you@somewhere.com", "text": "John Laravel", "invalid": "This is invalid.", "select_many": [ 1, 2], "select": 2, "textarea": "asdadsa" }
         }),
+        beforeCreate() {
+            this.$bind.mapActions('Storage', {
+                upload: 'upload',
+            })
+        }
     }
 </script>
 <template>
@@ -128,14 +132,6 @@
                 help="Enter multiple lines."
                 value="This is text."
                 v-model="form.textarea"
-            />
-
-            <v-input-file
-                label="File"
-                v-model="form.file"
-                help="Choose a file."
-                placeholder="Select"
-                :options="{accept: ['image/*']}"
             />
 
             <hr>

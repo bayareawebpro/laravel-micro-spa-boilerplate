@@ -125,6 +125,25 @@ export default class HttpService {
      * @param config {Object}
      * @return {Promise<*>}
      */
+    async upload(url, data, config = {}) {
+        const formData = new FormData;
+        Object.entries(data).forEach(([key, value])=>{
+            formData.append(key, value);
+        })
+        return await this.$client.post(url, formData, {
+            ...config,
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+    }
+
+    /**
+     * @param url {String}
+     * @param data {Object}
+     * @param config {Object}
+     * @return {Promise<*>}
+     */
     async put(url, data, config) {
         return await this.$client.put(url, data, config)
     }

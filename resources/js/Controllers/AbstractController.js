@@ -9,13 +9,20 @@ export default class AbstractController {
      */
     constructor(App) {
         this.$app = App
-        this.$request = this.$app.make('Request')
-        this.$router = this.$app.make('Router')
-        this.$events = this.$app.make('Events')
-        this.$http = this.$app.make('Http')
         this.initState()
     }
-
+    get $request(){
+        return this.$app.make('Request')
+    }
+    get $router(){
+        return this.$app.make('Router')
+    }
+    get $events(){
+        return this.$app.make('Events')
+    }
+    get $http(){
+        return this.$app.make('Http')
+    }
     get schema() {
         return {
             loading: false,
@@ -27,17 +34,9 @@ export default class AbstractController {
      * @return void
      */
     initState() {
-        console.log(`Store::Init ${this.$app.getName(this)}`)
-        if(this.$state){
-            this.$state.sync(this.schema)
-        }else{
-            this.$state = Vue.observable(new Repository(this.schema))
-        }
-        if(this.$errors){
-            this.$errors.clear()
-        }else{
-            this.$errors = Vue.observable(new Validator)
-        }
+        console.log(`State::Init ${this.$app.getName(this)}`)
+        this.$state = this.$state ? this.$state.sync(this.schema) : Vue.observable(new Repository(this.schema))
+        this.$errors = this.$errors ? this.$errors.setErrors() : Vue.observable(new Validator)
     }
 
     /**

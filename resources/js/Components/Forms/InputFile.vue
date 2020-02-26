@@ -5,7 +5,7 @@
         name: "InputFile",
         extends: Input,
         props:{
-            Options
+            Options,
         },
         computed:{
             fileTypes() {
@@ -13,53 +13,69 @@
             }
         },
         methods:{
-            readFile(file) {
-                const resolved = new Promise((resolve)=>{
-                    const result = {file: file, type: file.type, name: file.name, preview: null}
-                    if (file.type.match('image/*')) {
-                        const reader = new FileReader;
-                        reader.onload = (event) => {
-                            result.preview =event.target.result
-                            resolve(result)
-                        }
-                        reader.readAsDataURL(file)
-                    } else {
-                        resolve(result)
-                    }
-                })
-                resolved.then((result)=>this.field = result)
+            create(file) {
+                this.state = null
+                this.$app
+                    .make('Attachments')
+                    .upload({file})
+                    .then(({data})=>{
+                        this.state = data.file
+                        this.$emit('input', this.state)
+                        this.$emit('change', this.state)
+                    })
+            },
+            destroy(file) {
+                this.$app
+                    .make('Attachments')
+                    .destroy(file)
+                    .then(()=>{
+                        this.state = null
+                        this.$emit('input', this.state)
+                        this.$emit('change', this.state)
+                    })
             }
         }
     }
 </script>
 <template>
-    <div>
+    <v-form-control
+        :name="name"
+        :help="help"
+        :label="label"
+        :invalid="invalid">
         <transition name="fadeInRight" mode="out-in">
-            <div v-if="value">
-                <img
-                    v-if="value.preview"
-                    :src="value.preview"
-                    class="rounded border-gray-900 my-2 w-auto"
-                />
-                <p class="text-sm">{{ value.name }}</p>
+            <div v-if="state">
+                <div class="inline-block relative">
+                    <v-action @click="destroy(state)" class="btn-red absolute top-0 right-0 mr-2 mt-2">
+                        <v-svg-close />
+                    </v-action>
+                    <img
+                        v-if="state.url"
+                        :src="state.url"
+                        class="rounded shadow border-gray-900 w-auto"
+                    />
+                </div>
             </div>
         </transition>
         <slot :action="()=>$refs.input.click()">
-            <button type="button" class="btn btn-primary" @click.prevent="$refs.input.click()">
+            <button
+                type="button"
+                class="btn btn-primary"
+                @click.prevent="$refs.input.click()">
                 Select
             </button>
         </slot>
         <input
             ref="input"
-            :type="type"
+            type="file"
             :name="name"
             :class="{invalid}"
             :disabled="disabled"
             :required="required"
             :accept="fileTypes"
             class="input hidden"
-            @input="(e)=>readFile(e.target.files[0])"
+            @input="(e)=>create(e.target.files[0])"
             :placeholder="`${placeholder} ${fileTypes}`"
         />
-    </div>
+    </v-form-control>
 </template>

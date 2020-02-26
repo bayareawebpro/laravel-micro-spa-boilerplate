@@ -20,6 +20,7 @@ Route::any('errors/422',function(){
 });
 
 Route::group(['middleware' => 'auth:airlock'], function(){
+    Route::resource('attachments','AttachmentController');
     Route::resource('users','UserController');
     Route::resource('tokens','TokenController');
     Route::resource('account','AccountController', [
