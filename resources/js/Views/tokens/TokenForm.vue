@@ -3,6 +3,7 @@
         name: "TokenEdit",
         beforeCreate() {
             this.$bind.mapGetters('TokenResource', {
+                abilities: 'abilities',
                 entity: 'entity',
             })
             this.$bind.mapActions('TokenResource', {
@@ -61,15 +62,16 @@
 
                     <div class="grid"  v-for="(ability, index) in entity.abilities">
                         <div class="grid-item flex-grow">
-                            <v-input
+                            <v-input-select
                                 type="text"
                                 label="Ability"
                                 name="ability"
                                 v-model="entity.abilities[index]"
                                 @change="$errors.forget(`abilities.${index}`)"
                                 :invalid="$errors.has(`abilities.${index}`)"
-                                :help="$errors.first(`abilities.${index}`, 'Enter ability name.')">
-                            </v-input>
+                                :help="$errors.first(`abilities.${index}`, 'Enter ability name.')"
+                                :options="abilities"
+                            />
                         </div>
                         <div class="grid-item flex-shrink pb-3">
                             <v-action

@@ -3,6 +3,7 @@
         name: "AccountSettings",
         beforeCreate() {
             this.$bind.mapActions('Auth', {
+                isLoading: 'isLoading',
                 update: 'update',
             })
             this.$bind.mapState('Auth', {
@@ -80,6 +81,7 @@
                     <v-action
                         dusk="submit"
                         class="btn-lg btn-blue"
+                        :loading="isLoading('auth.update')"
                         @click="update(entity)">
                         Update
                     </v-action>

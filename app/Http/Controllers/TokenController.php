@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\ApiToken;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Collection;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\Access\AuthorizationException;
 
@@ -39,7 +41,10 @@ class TokenController extends Controller
     public function create(): Response
     {
         return response([
-            'abilities' => config('airlock.abilities',['*']),
+            'abilities' => Collection::make(config('airlock.abilities',['*']))->map(fn($ability)=>[
+                'label' => $ability,
+                'value' => $ability,
+            ]),
             'entity' => [
                 'abilities' => [],
                 'name' => '',
@@ -67,7 +72,10 @@ class TokenController extends Controller
     public function edit(ApiToken $token): Response
     {
         return response([
-            'abilities' => config('airlock.abilities',['*']),
+            'abilities' => Collection::make(config('airlock.abilities',['*']))->map(fn($ability)=>[
+                'label' => $ability,
+                'value' => $ability,
+            ]),
             'entity' => $token
         ]);
     }

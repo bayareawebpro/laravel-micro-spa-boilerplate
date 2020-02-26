@@ -6,7 +6,10 @@ export default class TokenResource extends AbstractController {
 
     constructor(App) {
         super(App)
-        this.resourceKey = 'tokens';
+    }
+
+    get resourceKey(){
+        return 'tokens'
     }
 
     /**

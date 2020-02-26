@@ -1,138 +1,197 @@
-.btn{
-    @apply text-white;
-    @apply rounded inline-block relative px-4 py-1;
-    @apply bg-gray-800 font-bold no-underline leading-normal;
+/**
+ * Base Styles
+ */
+.btn-base{
     transition: all ease-in-out 120ms;
+    @apply inline-block !important;
+    @apply font-bold no-underline leading-normal;
+    @apply rounded px-4 py-1;
+    @apply text-white;
 }
-.btn:focus{
-    @apply shadow-outline outline-none;
-}
-.btn:hover,
-.btn.router-link-active,
-.btn.router-link-exact-active{
-    @apply text-white no-underline !important;
-    @apply bg-gray-700;
-}
-.btn:hover *{
-    @apply no-underline text-white;
-    color: inherit
-}
-.btn[disabled],
-.btn.disabled{
-    @apply bg-transparent !important;
-}
-.btn[disabled],
-.btn.disabled,
-.btn.loading{
-    @apply cursor-not-allowed !important;
-}
-.btn[disabled],
-.btn.disabled,
-.btn[disabled] *,
-.btn.disabled *{
-    @apply text-gray-700 !important;
-}
-.btn[disabled]:hover *{
-    @apply text-gray-500;
-}
-
-.btn-xs{
-    @apply px-2 text-xs leading-snug
-}
-.btn-sm{
-    @apply px-3 text-sm leading-snug
-}
-.btn-lg{
-    @apply px-4 text-xl leading-normal
-}
-.btn-xl{
-    @apply px-5 text-xl leading-loose
-}
-.btn-block{
-    @apply w-full
-}
-.btn-search{
-    @apply btn-sm rounded-l-none rounded-r-full w-12
-}
-.btn i.fa{
-    @apply self-center !important;
+.btn-border{
+    @apply border-l-4;
 }
 
 /**
- * Transparent Style
+ * Sizes
  */
-.btn-transparent{
-    @apply bg-transparent text-gray-400;
-    @apply border-0;
+.btn-xs{
+    @apply px-2 text-xs leading-snug !important
 }
-.btn-transparent.router-link-active,
-.btn-transparent.router-link-exact-active{
-    @apply bg-gray-800 border-l-4 border-gray-700
+.btn-sm{
+    @apply px-3 text-sm leading-snug !important
+}
+.btn-lg{
+    @apply px-4 text-xl leading-normal !important
+}
+.btn-xl{
+    @apply px-5 text-xl leading-loose !important
+}
+.btn-block{
+    @apply w-full !important
+}
+.btn i.fa{
+    @apply self-center mr-1 !important;
+}
+/**
+ * Primary States
+ */
+.btn-active{
+    @apply no-underline !important;
+    @apply text-white !important;
+}
+.btn-disabled{
+    @apply bg-gray-800 !important;
+    @apply cursor-not-allowed !important;
+}
+/**
+ * Applied States
+ */
+.btn,
+.btn[disabled],
+.btn.disabled{
+    @apply btn-base;
+    @apply bg-gray-800;
+    @apply border-gray-600;
+}
+.btn:hover,
+.btn.active,
+.btn.loading,
+.btn.router-link-active,
+.btn.router-link-exact-active{
+    @apply btn-active;
+    @apply bg-gray-700;
+    @apply shadow-inner;
+}
+.btn.active,
+.btn.loading,
+.btn.router-link-active,
+.btn.router-link-exact-active,
+.btn[disabled],
+.btn.disabled{
+    @apply cursor-not-allowed !important;
+}
+.btn[disabled],
+.btn.disabled{
+    @apply btn-disabled;
+    @apply opacity-50;
 }
 
 /**
  * Green Style
  */
-.btn-green{
-    @apply text-gray-300 border-l-4 border-green-600
+.btn-green.active,
+.btn-green.loading,
+.btn-green.router-link-active,
+.btn-green.router-link-exact-active,
+.btn-green:hover:not([disabled]){
+    @apply bg-green-700;
 }
-.btn-green:hover{
-    @apply bg-green-600
-}
-.btn:focus{
-    @apply shadow-outline outline-none;
-}
-.btn-green[disabled]{
-    @apply bg-gray-900 border-green-800
-}
-
-.btn-blue{
-    @apply text-gray-300 border-l-4 border-blue-600
-}
-.btn-blue:hover{
-    @apply bg-blue-600
-}
-.btn-blue[disabled]{
-    @apply bg-gray-900 border-blue-800
+.btn-green,
+.btn-green[disabled],
+.btn-green.disabled{
+    @apply btn-border;
+    @apply border-green-600;
 }
 
-.btn-red{
-    @apply text-gray-300 border-l-4 border-red-600
+/**
+ * Purple Style
+ */
+.btn-purple.active,
+.btn-purple.loading,
+.btn-purple.router-link-active,
+.btn-purple.router-link-exact-active,
+.btn-purple:hover:not([disabled]){
+    @apply bg-purple-700;
 }
-.btn-red:hover{
-    @apply bg-red-600;
-}
-.btn-red[disabled]{
-    @apply bg-gray-900 border-red-800
-}
-
-.btn-purple{
-    @apply text-gray-300 border-l-4 border-purple-600
-}
-.btn-purple:hover{
-    @apply bg-purple-600;
-}
-.btn-purple[disabled]{
-    @apply bg-gray-900 border-purple-800
+.btn-purple,
+.btn-purple[disabled],
+.btn-purple.disabled{
+    @apply btn-border;
+    @apply border-purple-600;
 }
 
-.btn-indigo{
-    @apply text-gray-300 border-l-4 border-indigo-600
+/**
+ * Indigo Style
+ */
+.btn-indigo.active,
+.btn-indigo.loading,
+.btn-indigo.router-link-active,
+.btn-indigo.router-link-exact-active,
+.btn-indigo:hover:not([disabled]){
+    @apply bg-indigo-700;
 }
-.btn-indigo:hover{
-    @apply bg-indigo-600;
-}
-.btn-indigo[disabled]{
-    @apply bg-gray-900 border-indigo-800
+.btn-indigo,
+.btn-indigo[disabled],
+.btn-indigo.disabled{
+    @apply btn-border;
+    @apply border-indigo-600;
 }
 
+/**
+ * Blue Style
+ */
+.btn-blue.active,
+.btn-blue.loading,
+.btn-blue.router-link-active,
+.btn-blue.router-link-exact-active,
+.btn-blue:hover:not([disabled]){
+    @apply bg-blue-700;
+}
+.btn-blue,
+.btn-blue[disabled],
+.btn-blue.disabled{
+    @apply btn-border;
+    @apply border-blue-600;
+}
 
-.btn-yellow{
-    @apply text-gray-300 border-l-4 border-yellow-600
+/**
+ * Yellow Style
+ */
+.btn-yellow.active,
+.btn-yellow.loading,
+.btn-yellow.router-link-active,
+.btn-yellow.router-link-exact-active,
+.btn-yellow:hover:not([disabled]){
+    @apply bg-yellow-700;
 }
-.btn-yellow:hover{
-    @apply bg-yellow-600
+.btn-yellow,
+.btn-yellow[disabled],
+.btn-yellow.disabled{
+    @apply btn-border;
+    @apply border-yellow-600;
 }
-.btn-yellow[disabled]{
-    @apply bg-yellow-900 border-yellow-800
+
+/**
+ * Red Style
+ */
+.btn-red.active,
+.btn-red.loading,
+.btn-red.router-link-active,
+.btn-red.router-link-exact-active,
+.btn-red:hover:not([disabled]){
+    @apply bg-red-700;
+}
+.btn-red,
+.btn-red[disabled],
+.btn-red.disabled{
+    @apply btn-border;
+    @apply border-red-600;
+}
+
+/**
+ * Red Style
+ */
+.btn-gray.active,
+.btn-gray.loading,
+.btn-gray.router-link-active,
+.btn-gray.router-link-exact-active,
+.btn-gray:hover:not([disabled]){
+    @apply bg-gray-700;
+}
+.btn-gray,
+.btn-gray[disabled],
+.btn-gray.disabled{
+    @apply btn-border;
+    @apply border-gray-600;
 }

@@ -29,25 +29,5 @@
                 </router-link>
             </div>
         </div>
-        <v-modal v-model="modal" dusk="modal-destroy">
-            <template v-slot:title>
-                Dispatch Action
-            </template>
-            <template v-slot:content>
-                <p>Dispatch an action against the entity.</p>
-            </template>
-            <template v-slot:actions>
-                <v-action
-                    dusk="destroy-confirm"
-                    @click="modal = null" class="btn-green">
-                    <i class="fa fa-check-circle"/> DO IT
-                </v-action>
-                <v-action
-                    dusk="destroy-cancel"
-                    @click="modal = null" class="btn-red ml-auto">
-                    <i class="fa fa-close"/> NAH
-                </v-action>
-            </template>
-        </v-modal>
     </div>
 </template>

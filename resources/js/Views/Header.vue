@@ -33,8 +33,8 @@
             <li class="block relative self-center">
                 <button
                     @click.prevent="dropdown.active = !dropdown.active"
-                    class="btn btn-sm inline-flex font-thin rounded-full bg-gray-600">
-                    <i class="fa fa-user-circle my-1 self-center"/>
+                    class="btn btn-sm p-1 inline-block font-thin rounded-full text-center bg-gray-600">
+                    <i class="fa fa-user-circle mx-auto self-center w-2"></i>
                     <span class="hidden md:inline text-xs ml-1 self-center">Account</span>
                 </button>
                 <v-drop-down v-model="dropdown.active">

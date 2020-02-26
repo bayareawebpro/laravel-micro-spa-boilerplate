@@ -64,12 +64,12 @@
                     </label>
                     <div class="relative">
                         <input
-                            dusk="resource-search"
                             id="search"
                             type="search"
                             name="search"
                             class="input icon"
                             v-model="value.query.search"
+                            dusk="resource-search"
                             placeholder="Search..."
                             @keydown.enter="filter({search: value.query.search, page: 1})">
                         <i class="fa fa-search"></i>
@@ -94,7 +94,7 @@
                     class="input-sm"
                     :name="prop"
                     :options="options"
-                    :dusk="`filter-${prop}`"
+                    :dusk="`resource-filter-${prop}`"
                     v-model="value.query[prop]"
                     @change="filter({...value.query, page: 1})">
                 </v-input-select>
@@ -105,16 +105,18 @@
             <div class="grid mt-4">
                 <div class="grid-item pr-1">
                     <v-action
-                        dusk="resource-prevPage"
                         @click="prevPage"
+                        class="btn-gray"
+                        dusk="resource-prevPage"
                         :disabled="pagination.isFirstPage || loading">
                         <i class="fa fa-chevron-left"/> Prev
                     </v-action>
                 </div>
                 <div class="grid-item pl-1">
                     <v-action
-                        dusk="resource-nextPage"
                         @click="nextPage"
+                        class="btn-gray"
+                        dusk="resource-nextPage"
                         :disabled="pagination.isLastPage || loading">
                         Next <i class="fa fa-chevron-right"/>
                     </v-action>

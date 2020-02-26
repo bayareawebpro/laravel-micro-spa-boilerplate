@@ -1,9 +1,6 @@
 var staticCacheName = "pwa-v" + new Date().getTime();
 var filesToCache = [
-    '/auth/login',
-];
-var filesToExclude = [
-    "/worker.js",
+    '/',
 ];
 
 // in the service worker
@@ -21,13 +18,23 @@ self.addEventListener('message', (event) => {
 
 // Cache on install
 self.addEventListener("install", event => {
-    this.skipWaiting();
-    event.waitUntil(
-        caches.open(staticCacheName)
-            .then(cache => {
-                return cache.addAll(filesToCache);
-            })
-    )
+    this.skipWaiting().then(()=>{
+        event.waitUntil(
+            caches.open(staticCacheName)
+                .then(async cache => {
+                    await cache.addAll(filesToCache);
+                    await fetch('/mix-manifest.json')
+                        .then(response => response.json())
+                        .then(data => {
+                            cache.addAll(Object
+                                .entries(data)
+                                .filter(([url, entry])=>!(entry.endsWith('.map') || entry.endsWith('worker.js')))
+                                .map(([file, name])=>file)
+                            )
+                        })
+                })
+        )
+    });
 });
 
 // Clear cache on activate

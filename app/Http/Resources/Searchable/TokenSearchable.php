@@ -4,6 +4,7 @@ namespace App\Http\Resources\Searchable;
 
 use App\Http\Resources\Searchable\Queries\TokenAbility;
 use App\Http\Resources\Searchable\Queries\TokenSearch;
+use App\Models\User;
 use BayAreaWebPro\SearchableResource\SearchableBuilder;
 use BayAreaWebPro\SearchableResource\Contracts\InvokableBuilder;
 
@@ -27,7 +28,7 @@ class TokenSearchable implements InvokableBuilder
                 'created_at',
             ])
             ->sort('desc')
-            ->orderBy('name')
+            ->orderBy('created_at')
             ->paginate(4);
     }
 }

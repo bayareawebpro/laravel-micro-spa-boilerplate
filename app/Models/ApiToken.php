@@ -35,6 +35,15 @@ class ApiToken extends PersonalAccessToken implements Validateable
             ->values());
     }
 
+    public static function abilityOptions(): Collection
+    {
+        return Cache::remember('airlock:abilities', 120, fn()=>static::query()
+            ->pluck('abilities')
+            ->flatten(1)
+            ->unique()
+            ->values());
+    }
+
     public static function boot()
     {
         parent::boot();

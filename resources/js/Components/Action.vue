@@ -39,10 +39,12 @@
         @click.prevent="onClick"
         class="btn overflow-hidden"
         :class="{disabled, loading}">
-        <transition name="fadeInRight" mode="out-in" :duration="60">
-            <v-loading v-if="loading"/>
-            <div v-else>
-                <slot />
+        <transition name="fadeInRight" mode="out-in">
+            <div class="relative">
+                <v-loading v-if="loading"/>
+                <div v-else>
+                    <slot />
+                </div>
             </div>
         </transition>
     </button>

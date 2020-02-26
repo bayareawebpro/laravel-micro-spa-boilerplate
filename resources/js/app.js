@@ -39,12 +39,7 @@ if ('serviceWorker' in navigator) {
         .then( (registration) =>{
             if (registration.active) {
                 console.log('LaravelMicro: Worker registration successful with scope: ', registration.scope);
-                const serviceWorker = registration.active;
-                fetch('/mix-manifest.json')
-                    .then(response => response.json())
-                    .then(data => {
-                        serviceWorker.postMessage({command: 'cache', data});
-                    })
+
             }
         }, (err) =>{
             console.log('LaravelMicro: Worker registration failed: ', err);
