@@ -77,6 +77,9 @@ export default class HttpService {
                 case 422:
                     this.$events.$emit('error:422', error.response);
                     break;
+                case 503:
+                    this.$events.$emit('error:503', error.response);
+                    break;
                 default:
                     this.$events.$emit('error:500', error.response)
                     break;

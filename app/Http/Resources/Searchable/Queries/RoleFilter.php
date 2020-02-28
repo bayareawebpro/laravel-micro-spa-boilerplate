@@ -17,7 +17,7 @@ class RoleFilter extends AbstractQuery implements ConditionalQuery, ValidatableQ
      */
     protected function values(): array
     {
-        return User::allRoles()->toArray();
+        return User::allRoles()->pluck('value')->toArray();
     }
 
     /**

@@ -1,3 +1,10 @@
+/**
+ * Route Collection
+ * @type {VueRoute[]}
+ */
+const routeCollection = []
+export {routeCollection};
+
 import Route from './Route'
 export default class VueRoute extends Route{
 
@@ -13,6 +20,9 @@ export default class VueRoute extends Route{
             middleware: [],
             bindings: []
         }
+        if(name){
+            routeCollection.push(this)
+        }
     }
 
     /**
@@ -23,6 +33,16 @@ export default class VueRoute extends Route{
      */
     static to(name = null,path = null) {
         return new VueRoute(name,path)
+    }
+
+
+    /**
+     * Make new Route instance.
+     * @param path {String}
+     * @return {VueRoute}
+     */
+    static group(path = null) {
+        return new VueRoute(null,path)
     }
 
     /**
@@ -90,6 +110,15 @@ export default class VueRoute extends Route{
      */
     view(comp) {
         this.comp = comp
+        return this
+    }
+
+    /**
+     * @param group {VueRoute[]}
+     * @return this
+     */
+    group(group) {
+        this.children = group
         return this
     }
 

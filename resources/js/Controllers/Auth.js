@@ -1,6 +1,6 @@
 "use strict";
-import AbstractController from "./AbstractController"
-export default class Auth extends AbstractController {
+import Controller from "../Services/Store/Controller"
+export default class Auth extends Controller {
     constructor(App) {
         super(App)
     }

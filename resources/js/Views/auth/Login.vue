@@ -11,6 +11,7 @@
         beforeCreate() {
             this.$bind.mapState('Auth', {
                 $errors: '$errors',
+                $link: '$link',
             })
             this.$bind.mapActions('Auth', {
                 isLoading: 'isLoading',
@@ -23,7 +24,7 @@
     }
 </script>
 <template>
-    <div class="layout-centered">
+    <div class="layout-centered md:max-w-xl">
         <div class="card">
             <div class="card-header">
                 Login
@@ -33,7 +34,7 @@
                 <div class="card-content">
                     <v-form-message v-model="$errors.message" dusk="alert"/>
                     <div class="grid">
-                        <div class="grid-item w-full md:w-1/2">
+                        <div class="grid-item w-full">
                             <v-input
                                 type="text"
                                 name="email"
@@ -45,7 +46,7 @@
                                 :help="$errors.first('email', 'Enter your email.')">
                             </v-input>
                         </div>
-                        <div class="grid-item w-full md:w-1/2">
+                        <div class="grid-item w-full">
                             <v-input
                                 name="password"
                                 type="password"
@@ -67,15 +68,28 @@
                         :help="$errors.first('remember_me', 'Remember Me.')">
                     </v-input-switch>
                 </div>
-                <div class="card-actions">
+                <div class="card-actions flex">
                     <v-action
                         dusk="submit"
                         type="submit"
                         @click="login(user)"
                         :loading="isLoading('login')"
                         class="btn-blue btn-lg">
-                        Login
+                        <i class="fa fa-unlock"></i> Login
                     </v-action>
+                    <div class="flex-grow"></div>
+                    <router-link
+                        dusk="link-register"
+                        :to="$link('auth.forgot')"
+                        class="self-center text-sm mx-4">
+                        Reset Password
+                    </router-link>
+                    <router-link
+                        dusk="link-register"
+                        :to="$link('auth.register')"
+                        class="self-center text-sm">
+                        Register
+                    </router-link>
                 </div>
             </form>
         </div>

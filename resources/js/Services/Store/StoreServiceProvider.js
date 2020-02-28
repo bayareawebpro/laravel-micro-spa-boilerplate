@@ -12,8 +12,7 @@ export default class StoreServiceProvider extends ServiceProvider {
         this.app.bind('Repository', (Vue)=>Vue.observable(new Repository), false)
 
         this.app.bind('Config', (Repository)=>{
-            const {config} = window.__APP_STATE__
-            return Repository.make(config)
+            return Repository.make(window.__APP_STATE__)
         })
 
         this.app
@@ -35,8 +34,10 @@ export default class StoreServiceProvider extends ServiceProvider {
      */
     get provides() {
         return [
+            'userResolver',
             'TokenResource',
             'UserResource',
+            'Repository',
             'Config',
             'Auth',
         ]

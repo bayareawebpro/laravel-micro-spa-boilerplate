@@ -1,7 +1,7 @@
 "use strict";
 import VueRoute from "../Services/Router/VueRoute"
-import AbstractController from "./AbstractController"
-export default class Menus extends AbstractController {
+import Controller from "../Services/Store/Controller"
+export default class Menus extends Controller {
     constructor(App) {
         super(App)
     }
@@ -29,20 +29,6 @@ export default class Menus extends AbstractController {
                         ],
                     },
                     {
-                        name: 'Attachments',
-                        active: false,
-                        items:[
-                            {
-                                name: 'Browse', icon: 'fa-image',
-                                to: VueRoute.link('attachments.index'),
-                            },
-                            {
-                                name: 'Create', icon: 'fa-image',
-                                to: VueRoute.link('attachments.create'),
-                            }
-                        ],
-                    },
-                    {
                         name: 'API TOKENS',
                         active: false,
                         items:[
@@ -60,6 +46,10 @@ export default class Menus extends AbstractController {
                         name: 'Framework',
                         active: false,
                         items:[
+                            {
+                                name: 'Permissions', icon: 'fa-cubes',
+                                to: VueRoute.link('framework.permissions'),
+                            },
                             {
                                 name: 'Bindings', icon: 'fa-cubes',
                                 to: VueRoute.link('framework.bindings'),

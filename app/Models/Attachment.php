@@ -24,17 +24,22 @@ class Attachment extends Model implements Validateable
         'url',
     ];
 
+    public function attachable(){
+        return $this->morphTo('attachable');
+    }
+
     /**
      * Get the storage path attribute.
      * @return string|null
      */
     public function getPathAttribute()
     {
-        return collect([
-            "attachments",
-            $this->attributes['user_id'] ?? null,
-            $this->attributes['name'] ?? null,
-        ])->reject(fn($val)=>empty($val))->join('/');
+        if(isset($this->attributes['name'])){
+            return collect([
+                "attachments",
+                $this->attributes['name'],
+            ])->join('/');
+        }
     }
 
     /**
@@ -43,7 +48,9 @@ class Attachment extends Model implements Validateable
      */
     public function getUrlAttribute()
     {
-        return asset("storage/{$this->path}");
+        if(isset($this->attributes['name'])){
+            return asset("storage/{$this->path}");
+        }
     }
 
     /**
@@ -60,18 +67,13 @@ class Attachment extends Model implements Validateable
 
     /**
      * The validation rules for an entity.
-     * @param Attachment|null $model
      * @return array
      */
-    public static function validationRules(?Attachment $model = null): array
+    public static function validationRules(): array
     {
         return [
-            'name'                  => ['sometimes','required', 'string', 'max:255'],
-            'mime'                  => ['sometimes','required', 'string', 'max:255'],
-            'size'                  => ['sometimes','required', 'numeric'],
             'file' =>[
-                Rule::requiredIf(is_null($model)),
-                'mimes:png,jpg,jpeg,gif,bmp,webp', 'max:10000',
+                'mimes:txt,png,jpg,jpeg,gif,bmp,webp,mov,mp4,qt', 'max:500000',
             ]
         ];
     }

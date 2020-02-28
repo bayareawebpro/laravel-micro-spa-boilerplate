@@ -84,16 +84,53 @@
                             </v-input>
                         </div>
                     </div>
+<!--                    <v-input-file-->
+<!--                        label="Image"-->
+<!--                        v-model="entity.attachment"-->
+<!--                        help="Choose an image."-->
+<!--                        placeholder="Select Avatar"-->
+<!--                        @change="$errors.forget('attachment')"-->
+<!--                        :invalid="$errors.has('attachment')"-->
+<!--                        :options="{accept: ['image/*']}"-->
+<!--                    />-->
+
+
+                    <v-action @click="entity.attachments.push({})">Add</v-action>
+                    <div class="list-group">
+                        <div v-for="(attachment, index) in entity.attachments" class="list-group-item">
+                            <v-input-file
+                                label="Image"
+                                :auto-open="true"
+                                v-model="entity.attachments[index]"
+                                placeholder="Select File"
+                                :options="{accept: ['*']}"
+                                :help="$errors.first(`attachments.${index}.id`,'Choose an image.')"
+                                @change="$errors.forget(`attachments.${index}.id`)"
+                                :invalid="$errors.has(`attachments.${index}.id`)"
+                                @destroyed="entity.attachments.splice(index,1)"
+                            />
+                        </div>
+                    </div>
                 </div>
                 <div class="card-actions">
-                    <v-action
-                        v-if="entity.id"
-                        dusk="action-update"
-                        class="btn-lg btn-blue"
-                        :loading="isLoading('users.update')"
-                        @click="update(entity)">
-                        Update
-                    </v-action>
+                    <template
+                        v-if="entity.id">
+                        <v-action
+                            dusk="action-update"
+                            class="btn-lg btn-blue"
+                            :loading="isLoading('users.update')"
+                            @click="update(entity)">
+                            Update
+                        </v-action>
+
+                        <v-action
+                            dusk="action-update"
+                            class="btn-lg btn-blue"
+                            :loading="isLoading('users.update')"
+                            @click="update(entity, false)">
+                            Save
+                        </v-action>
+                    </template>
                     <v-action
                         v-else
                         dusk="action-save"

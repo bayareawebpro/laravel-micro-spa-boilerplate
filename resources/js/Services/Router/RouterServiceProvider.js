@@ -2,11 +2,13 @@
 import Routes from '../../routes'
 import Request from './Request'
 import Route from './Route'
-
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import scrollBehavior from './scrollBehavior'
 import {ServiceProvider} from 'laravel-micro.js'
+
+import {routeCollection} from './VueRoute'
+
 export default class RouterServiceProvider extends ServiceProvider {
 
     /**
@@ -31,8 +33,8 @@ export default class RouterServiceProvider extends ServiceProvider {
      * @return void
      */
     registerBindings() {
-
         this.app.bind('Route', ()=>Route)
+        this.app.setInstance('RouteCollection', routeCollection)
 
         this.app.bind('Request', (Vue)=>{
             return Vue.observable(this.app.build(Request))

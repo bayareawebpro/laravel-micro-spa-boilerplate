@@ -1,7 +1,7 @@
 "use strict";
 import Vue from "vue"
 import {Repository, Validator} from "laravel-micro.js"
-export default class AbstractController {
+export default class Controller {
 
     /**
      * Abstract Store / Controller
@@ -22,6 +22,9 @@ export default class AbstractController {
     }
     get $http(){
         return this.$app.make('Http')
+    }
+    get $link(){
+        return this.$app.make('Route').link
     }
     get schema() {
         return {

@@ -16,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        View::composer(['app'], AppComposer::class);
+        View::composer(['html'], AppComposer::class);
 
         $this->app->resolving(
             SearchableBuilder::class,

@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use App\Models\ApiToken;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Laravel\Airlock\Airlock;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -13,8 +16,9 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Models\User' => 'App\Policies\UserPolicy',
-        'App\Models\ApiToken' => 'App\Policies\ApiTokenPolicy',
+        \App\Models\User::class => \App\Policies\UserPolicy::class,
+        \App\Models\ApiToken::class => \App\Policies\ApiTokenPolicy::class,
+        \App\Models\Attachment::class => \App\Policies\AttachmentPolicy::class,
     ];
 
     /**

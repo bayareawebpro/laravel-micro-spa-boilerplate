@@ -2,6 +2,7 @@
 
 namespace App\Composers;
 
+use App\Services\AppPermissions;
 use Illuminate\Contracts\Config\Repository as Config;
 use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
@@ -21,8 +22,9 @@ class AppComposer
     public function compose(View $view)
     {
         $view->with('appState', Collection::make([
-            'user' => $this->request->user(),
             'config' => $this->config->get('spa'),
+            'permissions' => AppPermissions::all(),
         ]));
     }
+
 }

@@ -7,7 +7,6 @@ use Illuminate\Validation\ValidationException;
 | API Routes
 |--------------------------------------------------------------------------
 */
-
 Route::any('errors/500',fn()=>abort(500, 'Server Error'));
 Route::any('errors/401',fn()=>abort(401, 'UnAuthenticated'));
 Route::any('errors/403',fn()=>abort(403, 'UnAuthorized / Forbidden'));
@@ -20,10 +19,15 @@ Route::any('errors/422',function(){
 });
 
 Route::group(['middleware' => 'auth:airlock'], function(){
-    Route::resource('attachments','AttachmentController');
-    Route::resource('users','UserController');
-    Route::resource('tokens','TokenController');
+    Route::get('dashboard/{section?}', 'DashboardController@show');
+    Route::get('pages/{slug}', 'PageController@show');
+
     Route::resource('account','AccountController', [
         'only' => ['show', 'update','destroy']
     ]);
+    Route::resource('attachments','AttachmentController', [
+        'only' => ['store', 'destroy']
+    ]);
+    Route::resource('users','UserController');
+    Route::resource('tokens','TokenController');
 });

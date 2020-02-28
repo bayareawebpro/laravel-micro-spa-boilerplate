@@ -18,7 +18,7 @@ mix.postCss('resources/css/app.pcss', 'public/css', [
  * Javascript
  */
 mix.js('resources/js/app.js', 'public/js')
-mix.copy('resources/js/serviceworker.js', 'public/worker.js')
+mix.copy('resources/js/worker.js', 'public/worker.js')
 mix.copy('resources/js/manifest.json', 'public/manifest.json')
 mix.babelConfig({
     plugins: [

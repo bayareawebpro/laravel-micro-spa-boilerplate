@@ -1,9 +1,6 @@
 "use strict";
-import {_Mixin} from "laravel-micro.js"
-import Resource from "./Concerns/Resource"
-import AbstractController from "./AbstractController"
-
-export default class UserResource extends AbstractController {
+import Resource from "../Services/Store/Resource"
+export default class UserResource extends Resource {
     constructor(App) {
         super(App)
     }
@@ -27,7 +24,6 @@ export default class UserResource extends AbstractController {
         }
     }
 }
-_Mixin(UserResource, Resource)
 
 
 

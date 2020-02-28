@@ -1,4 +1,26 @@
-export default {
+"use strict";
+import Controller from "./Controller"
+export default class Resource extends Controller {
+
+    constructor(App) {
+        super(App)
+    }
+
+    get resourceKey(){
+        return 'test'
+    }
+
+    /**
+     * Default Schema
+     * @return {Object}
+     */
+    get schema() {
+        return {
+            resource: null,
+            entity: null,
+            loading: undefined,
+        }
+    }
 
     /**
      * Resource Index
@@ -17,7 +39,7 @@ export default {
             await this.$state.forget('loading')
             return Promise.reject(this.handleError(error)) //Return to caller.
         }
-    },
+    }
 
     /**
      * Create Entity
@@ -36,7 +58,7 @@ export default {
             await this.$state.forget('loading')
             return Promise.reject(this.handleError(error)) //Return to caller.
         }
-    },
+    }
 
     /**
      * Show Entity
@@ -56,7 +78,7 @@ export default {
             await this.$state.forget('loading')
             return Promise.reject(this.handleError(error)) //Return to caller.
         }
-    },
+    }
 
     /**
      * Edit Entity
@@ -77,7 +99,7 @@ export default {
             await this.$state.forget('loading')
             return Promise.reject(this.handleError(error)) //Return to caller.
         }
-    },
+    }
 
     /**
      * Save Entity Action
@@ -105,7 +127,7 @@ export default {
             await this.$state.forget('loading')
             this.handleError(error)
         }
-    },
+    }
 
     /**
      * Update Entity Action
@@ -125,16 +147,13 @@ export default {
             await this.$state.forget('loading')
 
             if (redirect) {
-                await this.$router.replace({
-                    name: `${this.resourceKey}.index`,
-                    query: {page: 1}
-                }, () => null, () => null)
+                await this.$router.go(-1, () => null, () => null)
             }
         } catch (error) {
             await this.$state.forget('loading')
             this.handleError(error)
         }
-    },
+    }
 
     /**
      * Destroy Entity Action

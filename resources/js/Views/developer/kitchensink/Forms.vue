@@ -2,13 +2,17 @@
     export default {
         name: "Forms",
         data: ()=>({
-            form:{ "switch": false, "number": "8", "email": "you@somewhere.com", "text": "John Laravel", "invalid": "This is invalid.", "select_many": [ 1, 2], "select": 2, "textarea": "asdadsa" }
+            form:{
+                switch: false,
+                number: "8",
+                email: "you@somewhere.com",
+                text: "John Laravel",
+                invalid: "This is invalid.",
+                textarea: "asdadsa",
+                select_many: [ 1, 2],
+                select: 2,
+            }
         }),
-        beforeCreate() {
-            this.$bind.mapActions('Storage', {
-                upload: 'upload',
-            })
-        }
     }
 </script>
 <template>

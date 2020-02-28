@@ -1,4 +1,5 @@
 import HttpService from "./HttpService"
+import WorkerService from "./WorkerService"
 import {ServiceProvider} from "laravel-micro.js"
 export default class HttpServiceProvider extends ServiceProvider{
 
@@ -8,6 +9,7 @@ export default class HttpServiceProvider extends ServiceProvider{
      */
     register() {
         this.app.bind('Http',HttpService)
+        this.app.bind('Worker',WorkerService)
     }
 
     /**
@@ -16,7 +18,7 @@ export default class HttpServiceProvider extends ServiceProvider{
      */
     async boot() {
         const exported = await import(/*webpackChunkName:"http-progress"*/ './HttpProgress')
-        this.app.make('Http').useProgressBar(exported.default)
+        await this.app.make('Http').useProgressBar(exported.default)
     }
 
     /**
@@ -25,7 +27,8 @@ export default class HttpServiceProvider extends ServiceProvider{
      */
     get provides() {
         return [
-            'Http'
+            'Http',
+            'Worker',
         ]
     }
 }

@@ -20,7 +20,7 @@
     }
 </script>
 <template>
-    <div class="layout-centered">
+    <div class="layout-centered md:max-w-xl">
         <div class="card">
             <div class="card-header">
                 Register

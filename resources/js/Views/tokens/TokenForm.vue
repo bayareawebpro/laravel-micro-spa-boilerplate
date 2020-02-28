@@ -54,7 +54,7 @@
                     </div>
 
                     <v-form-message
-                        class="alert alert-info"
+                        class="alert-warn"
                         :value="$errors.has(`abilities`)"
                         :dismissible="false">
                         {{ $errors.first(`abilities`) }}

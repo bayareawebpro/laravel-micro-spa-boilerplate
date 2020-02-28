@@ -24,25 +24,21 @@ App.bootProviders()
  */
 App.make('VueRoot')
     .$mount("#app")
+
 /**
  * Share Application with window.
  * @example window.$app().make(...)
  */
+App.share('App').withOthers(window)
 
-
-App.share('App').withOthers(window);
-
-// Initialize the service worker
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker
-        .register('/worker.js', {scope: '.'})
-        .then( (registration) =>{
-            if (registration.active) {
-                console.log('LaravelMicro: Worker registration successful with scope: ', registration.scope);
-
-            }
-        }, (err) =>{
-            console.log('LaravelMicro: Worker registration failed: ', err);
-        });
+/**
+ * Install Service Worker
+ */
+if(['production'].includes(process.env.MIX_APP_ENV)){
+    App.make('Worker').install()
 }
+
+
+console.log(process.env.MIX_APP_ENV)
+
 

@@ -37,6 +37,7 @@ class UserController extends Controller
     {
         return response([
             'entity' => tap(new User)->toArray(),
+            'roles'  => User::allRoles(),
         ]);
     }
 
@@ -47,11 +48,14 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(User::validationRules());
+        $data = $request->validate(User::validationRules());
+
+        if (isset($data['password'])) {
+            $data['password'] = Hash::make($data['password']);
+        }
+
         return response([
-            'entity' => User::query()->create(array_merge($request->except('password'), [
-                'password' => Hash::make($request->get('password')),
-            ])),
+            'entity' => User::query()->create($data),
         ]);
     }
 
@@ -76,6 +80,7 @@ class UserController extends Controller
     {
         return response([
             'entity' => $user,
+            'roles'  => User::allRoles(),
         ]);
     }
 
@@ -87,15 +92,17 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $request->validate(User::validationRules($user));
+        $data = $request->validate(User::validationRules($user));
 
-        $user->update(array_merge($request->except('password'), [
-            'password' => Hash::make($request->get('password')),
-        ]));
+        if (isset($data['password'])) {
+            $data['password'] = Hash::make($data['password']);
+        }
+
+        $user->update($data);
 
         return response([
             'message' => 'Entity Updated',
-            'entity'  => $user,
+            'entity'  => $user->refresh(),
         ]);
     }
 

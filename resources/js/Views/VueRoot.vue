@@ -94,7 +94,7 @@
                 </v-collapse>
             </v-sidebar>
             <main id="main">
-                <transition name="fadeInRight" mode="out-in" :duration="90">
+                <transition name="fadeInOut" mode="out-in" :duration="90">
                     <router-view :key="$route.name"/>
                 </transition>
             </main>

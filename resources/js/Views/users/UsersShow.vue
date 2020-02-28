@@ -22,6 +22,7 @@
                     <i class="fa fa-check-circle"/> Action
                 </v-action>
                 <router-link
+                    tag="button"
                     dusk="entry-show"
                     class="btn btn-yellow"
                     :to="{name: 'users.edit', params: {id: entity.id}}">

@@ -1,11 +1,13 @@
 import VueScrollTo from "vue-scrollto"
 
-export default (to, from, savedPosition) => {
+export default (to, from, last) => {
     return new Promise((resolve) => {
-        VueScrollTo.scrollTo("#header", 600, {
-            offset: savedPosition ? savedPosition.y : 0,
+        VueScrollTo.scrollTo("#header", 300, {
+            offset: last ? last.y : 0,
             container: 'body',
-            onDone: resolve
+            easing: "ease",
+            onDone: resolve,
+            force: false,
         })
     })
 }

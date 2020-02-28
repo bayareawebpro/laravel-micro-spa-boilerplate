@@ -14,6 +14,7 @@
             })
             this.$bind.mapState('Auth', {
                 $errors: '$errors',
+                $link: '$link',
             })
         },
         beforeDestroy() {
@@ -22,7 +23,7 @@
     }
 </script>
 <template>
-    <div class="layout-centered">
+    <div class="layout-centered md:max-w-xl">
         <div class="card">
             <div class="card-header">
                 Forgot Password
@@ -40,10 +41,17 @@
                         :help="$errors.first('email', 'Enter your email.')"
                     />
                 </div>
-                <div class="card-actions">
+                <div class="card-actions flex">
                     <v-action @click="submit(entity)" class="btn-blue">
                         Send Reset Link
                     </v-action>
+                    <div class="flex-grow"></div>
+                    <router-link
+                        dusk="link-register"
+                        :to="$link('auth.login')"
+                        class="self-center text-sm">
+                        Login
+                    </router-link>
                 </div>
             </form>
         </div>
