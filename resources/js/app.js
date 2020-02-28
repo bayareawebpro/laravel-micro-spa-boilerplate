@@ -13,9 +13,9 @@ import {AppServiceProvider} from "laravel-micro.js"
  * Boot Application
  */
 const App = new Application
-App.setInstance('AutoLoader', AutoLoader)
 App.errorHandler(ErrorHandler)
 App.register(AppServiceProvider)
+App.setInstance('AutoLoader', AutoLoader)
 App.loadProviders()
 App.bootProviders()
 
@@ -37,7 +37,6 @@ App.share('App').withOthers(window)
 if(['production'].includes(process.env.MIX_APP_ENV)){
     App.make('Worker').install()
 }
-
 
 console.log(process.env.MIX_APP_ENV)
 

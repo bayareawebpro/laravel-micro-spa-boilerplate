@@ -16,7 +16,7 @@
     }
 </script>
 <template>
-    <div class="layout p-4">
+    <div>
         <v-resource
             v-model="resource"
             :loading="isLoading('users.index')"

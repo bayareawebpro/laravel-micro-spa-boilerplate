@@ -5,7 +5,7 @@ import Route from "./Services/Router/VueRoute"
 export default [
     Route
         .to('home','/')
-        .view(()=>import(/*webpackChunkName:"dashboard"*/ "@views/dashboard/Dashboard"))
+        .view(()=>import(/*webpackChunkName:"home"*/ "@views/home/Home"))
         .middleware('auth'),
     Route
         .group('/dashboard')

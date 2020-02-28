@@ -20,6 +20,7 @@
         <h1>Forms</h1>
         <form>
             <hr>
+
             <h4 class="my-2">States</h4>
             <div class="grid">
                 <div class="grid-item w-full md:w-1/2">
@@ -100,7 +101,7 @@
                         v-model="form.switch"
                     >This is a switch.</v-input-switch>
                 </div>
-                <div class="grid-item w-full md:w-1/2">
+                <div class="grid-item w-full md:w-1/3">
                     <v-input-select
                         label="Select"
                         icon="fa-edit"
@@ -114,7 +115,7 @@
                         ]"
                     />
                 </div>
-                <div class="grid-item w-full md:w-1/2">
+                <div class="grid-item w-full md:w-1/3">
                     <v-input-select
                         icon="fa-edit"
                         label="Select Many"
@@ -128,6 +129,22 @@
                             {value: 3, label: 'Option3'},
                         ]"
                     />
+                </div>
+                <div class="grid-item w-full md:w-1/3">
+<!--                    <v-autocomplete-->
+<!--                        icon="fa-edit"-->
+<!--                        route="/api/users"-->
+<!--                        label="Select Many"-->
+<!--                        help="Select state."-->
+<!--                        v-model="form.select_many"-->
+<!--                        :multiple="true"-->
+<!--                        :options="[-->
+<!--                            {value: null, label: 'All'},-->
+<!--                            {value: 1, label: 'Option1'},-->
+<!--                            {value: 2, label: 'Option2'},-->
+<!--                            {value: 3, label: 'Option3'},-->
+<!--                        ]"-->
+<!--                    />-->
                 </div>
             </div>
 

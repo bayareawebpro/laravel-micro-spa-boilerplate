@@ -33,6 +33,7 @@
         "webpack-bundle-analyzer": "^3.6.0"
     },
     "dependencies": {
-        "autoprefixer": "^9.7.4"
+        "autoprefixer": "^9.7.4",
+        "vue-multiselect": "^2.1.6"
     }
 }

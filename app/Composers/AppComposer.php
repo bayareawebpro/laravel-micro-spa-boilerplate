@@ -2,6 +2,7 @@
 
 namespace App\Composers;
 
+use App\Models\User;
 use App\Services\AppPermissions;
 use Illuminate\Contracts\Config\Repository as Config;
 use Illuminate\Support\Collection;
@@ -24,6 +25,7 @@ class AppComposer
         $view->with('appState', Collection::make([
             'config' => $this->config->get('spa'),
             'permissions' => AppPermissions::all(),
+            'roles' => User::allRoles(),
         ]));
     }
 

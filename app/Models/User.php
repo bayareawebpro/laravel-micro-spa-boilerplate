@@ -22,7 +22,6 @@ class User extends Authenticatable implements Validateable
 
     protected $attributes = [
         'role' => 'guest',
-        'attachments' => [],
     ];
 
     protected $fillable = [
@@ -59,7 +58,7 @@ class User extends Authenticatable implements Validateable
 
     public function setAttachmentsAttribute($values)
     {
-        if(is_array($values)){
+        if(is_array($values) && !empty($values)){
             $this->attachment()->saveMany(
                 Attachment::whereIn('id', Arr::pluck($values, 'id'))->get()
             );
@@ -122,14 +121,17 @@ class User extends Authenticatable implements Validateable
             'name'                  => ['required', 'string', 'max:255'],
             'password'              => ['sometimes', 'nullable', 'string', 'min:8', 'confirmed'],
             'password_confirmation' => ['sometimes', 'nullable', 'string', 'min:8'],
+            'role'                  => ['sometimes', 'required', 'string', Rule::in(static::allRoles()->pluck('value'))],
+
             'attachment'            => ['sometimes', 'nullable', 'array'],
             'attachment.id'         => ['numeric', 'exists:attachments,id'],
 
             'attachments'            => ['sometimes', 'nullable', 'array'],
-            'attachments.*.id'         => ['numeric', 'exists:attachments,id'],
+            'attachments.*.id'       => ['numeric', 'exists:attachments,id'],
+
             'email'                 => [
                 'required', 'string', 'email', 'max:255',
-                Rule::unique('users')->ignore(optional($user)->id),
+                //Rule::unique('users')->ignore(optional($user)->id),
             ],
         ];
     }

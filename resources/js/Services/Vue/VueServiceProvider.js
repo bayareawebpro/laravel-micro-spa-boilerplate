@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import AutoBinder from './AutoBinder'
 import VueRoot from '@views/VueRoot'
 import VueScrollTo from 'vue-scrollto'
+import Multiselect from 'vue-multiselect'
 import {ServiceProvider} from 'laravel-micro.js'
 export default class VueServiceProvider extends ServiceProvider {
 
@@ -22,6 +23,8 @@ export default class VueServiceProvider extends ServiceProvider {
      */
     registerDependants() {
         Vue.use(VueRouter)
+        //require('vue-multiselect/dist/vue-multiselect.min.css')
+        //Vue.component('multiselect',Multiselect)
         Vue.use(AutoBinder, {
             app: this.app,
         })

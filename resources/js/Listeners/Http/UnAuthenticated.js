@@ -22,10 +22,22 @@ export default class UnAuthenticated {
      * @param payload {Object}
      */
     handle(payload) {
-        this.app.make('Auth').initState()
-        this.app.make('Menus').initState()
+
         this.app.make('Events').$emit('toast:warn', {
             title: 'UnAuthenticated'
         })
+
+        this.app.make('Auth').initState()
+
+        this.app.make('Menus').initState()
+
+        const Route = this.app.make('Route')
+        const Request = this.app.make('Request')
+
+        Request.navigate(
+            Route.link('auth.login').withQuery({
+                redirect: Request.get('to.fullPath')
+            })
+        )
     }
 }

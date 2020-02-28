@@ -6,6 +6,9 @@
         extends: Input,
         props:{multiple},
         methods:{
+            isSelected(value){
+                return (this.multiple && this.state.includes(value)) || this.state === value
+            },
             onChange(){
                 this.$emit('input', this.state)
                 this.$nextTick(()=>this.$emit('change', this.state))
@@ -29,7 +32,9 @@
             :required="required"
             :multiple="multiple"
             :class="{invalid, disabled}">
-            <option v-for="option in options" :value="option.value">
+            <option v-for="option in options"
+                    :value="option.value"
+                    :selected="isSelected(option.value)">
                 {{ option.label }}
             </option>
         </select>

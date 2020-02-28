@@ -93,7 +93,7 @@
             <template v-slot:content>
                 <p><strong>Username:</strong> {{ destroying.tokenable.name }}</p>
                 <p><strong>Tokenable:</strong> {{ destroying.tokenable_type }} ({{ destroying.tokenable_id }})</p>
-                <p><strong>Abilities:</strong> {{ destroying.abilities.join(',') }}</p>
+                <p><strong>Abilities:</strong> {{ destroying.abilities.join(', ') }}</p>
             </template>
             <template v-slot:actions>
                 <v-action

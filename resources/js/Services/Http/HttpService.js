@@ -118,7 +118,7 @@ export default class HttpService {
      * @param config {Object}
      * @return {Promise<*>}
      */
-    async post(url, data, config) {
+    async post(url, data, config = {}) {
         return await this.$client.post(url, data, config)
     }
 

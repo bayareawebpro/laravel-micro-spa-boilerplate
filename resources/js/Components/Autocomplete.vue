@@ -9,6 +9,7 @@
             autoload: {default: () => false},
             tabindex: {default: () => 1},
             value: {default: () => null},
+            options: {default: () => []},
         },
         data() {
             return {
@@ -17,7 +18,7 @@
                 isVisible: false,
                 searchTerm: '',
                 selected: null,
-                options: [],
+                state: [],
             }
         },
         watch: {
@@ -58,27 +59,27 @@
         },
         computed: {
             selectedIndex() {
-                return this.options.findIndex(this.isSelected)
+                return this.state.findIndex(this.isSelected)
             },
             selectionActive() {
                 return this.selected && this.searchTerm.includes(this.selected.label)
             },
             placeholderText() {
-                if (!this.selected && this.options.length) {
-                    return this.options[0].label
+                if (!this.selected && this.state.length) {
+                    return this.state[0].label
                 }
                 return this.placeholder
             },
             hasOptions() {
-                return this.options.length
+                return this.state.length
             },
             firstOption(){
-                return this.options[0] || null
+                return this.state[0] || null
             }
         },
         methods: {
             clear() {
-                this.options = []
+                this.state = []
                 this.selected = null
                 this.wasLoaded = false
                 this.isVisible = false
@@ -96,14 +97,6 @@
                 this.select(option)
                 this.isVisible = false
             },
-            selectSearchTerm(){
-                if(this.searchTerm){
-                    this.selectAndClose({
-                        label: this.searchTerm,
-                        value: this.searchTerm
-                    })
-                }
-            },
             scrollToSelected() {
                 this.$nextTick(() => {
                     if (this.hasOptions) {
@@ -119,20 +112,18 @@
                 if (this.selected) return
                 if(this.hasOptions){
                     this.select(this.firstOption)
-                }else{
-                    this.selectSearchTerm()
                 }
             },
             selectNext() {
                 if (!this.isVisible || !this.hasOptions) return
                 const index = this.selectedIndex
-                const item = this.options[index + 1]
+                const item = this.state[index + 1]
                 this.select(item)
             },
             selectPrev() {
                 if (!this.isVisible || !this.hasOptions) return
                 const index = this.selectedIndex
-                const item = this.options[index - 1]
+                const item = this.state[index - 1]
                 this.select(item)
             },
             isSelected(option) {
@@ -160,14 +151,15 @@
                 if (this.isLoading || !this.searchTerm.length) return
                 this.isLoading = true
                 this.selected = null
-                this.$http
+                this.$app
+                    .make('Http')
                     .get(this.route, {
                         params: Object.assign({}, this.params, {
                             keywords: this.searchTerm
                         })
                     })
                     .then(({data}) => {
-                        this.options = data
+                        this.state = data
                         this.isLoading = false
                     })
                     .catch((e) => {
@@ -231,25 +223,18 @@
         </div>
         <transition name="fade">
             <div style="position: relative" v-if="isVisible">
-                <div class="_dropdown-options" ref="scrollable">
-                    <div v-if="options.length">
+                <div class="_dropdown-state" ref="scrollable">
+                    <div v-if="state.length">
                         <div
                             ref="option"
-                            v-for="option in options"
+                            v-for="option in state"
                             :class="{selected: isSelected(option)}"
                             @click="selectAndClose(option)"
                             class="_dropdown-option">
                             {{ option.label }}
                         </div>
                     </div>
-                    <div
-                        v-else-if="searchTerm"
-                        @click="selectSearchTerm"
-                        class="_dropdown-option selected"
-                        ref="option">
-                        {{ searchTerm }}
-                    </div>
-                    <div v-else class="_dropdown-no-options">
+                    <div v-else class="_dropdown-no-state">
                         No results, type to search...
                     </div>
                 </div>
@@ -264,12 +249,12 @@
     .v-dropdown
         display: flex
         flex-direction: column
+        background-color: black
+        border-radius: $radius
 
         ._dropdown-input
             transition: all 200ms ease-in-out
             border: 1px solid #ccc
-            background-color: white
-            border-radius: $radius
             justify-content: center
             flex-direction: row
             align-items: center
@@ -308,7 +293,7 @@
             &:hover
                 color: #444
 
-        ._dropdown-options
+        ._dropdown-state
             z-index: 8 !important
             box-shadow: 0 -1px 8px $focusedBorder
             border: 1px solid $focusedBorder
@@ -317,7 +302,6 @@
             scroll-behavior: smooth
             overflow: scroll
             position: absolute
-            background: white
             max-height: 200px
             padding: 6px 0
             top: 0
@@ -330,14 +314,14 @@
             opacity: 0
 
         ._dropdown-option,
-        ._dropdown-no-options
+        ._dropdown-no-state
             display: block
             cursor: pointer
             padding: 6px 12px
             font-size: 15px
             line-height: 16px
 
-        ._dropdown-no-options
+        ._dropdown-no-state
             cursor: not-allowed
 
         ._dropdown-option:focus

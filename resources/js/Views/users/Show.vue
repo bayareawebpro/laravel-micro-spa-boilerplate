@@ -6,6 +6,9 @@
                 entity: 'entity',
                 modal: 'modal',
             })
+            this.$bind.mapState('UserResource', {
+                $link: '$link',
+            })
         },
     }
 </script>
@@ -13,9 +16,13 @@
     <div class="layout p-4" v-if="entity">
         <div class="card">
             <div class="card-header">
-                {{ entity.name }} | {{ entity.email }}
+                {{ entity.name }} <div class="badge badge-red">{{ entity.role }}</div>
             </div>
             <div class="card-content">
+                {{ entity.email }}
+                {{ entity.role }}
+            </div>
+            <div class="card-actions">
                 <v-action
                     dusk="modal-activate"
                     @click="modal = entity" class="btn-green">
@@ -25,7 +32,7 @@
                     tag="button"
                     dusk="entry-show"
                     class="btn btn-yellow"
-                    :to="{name: 'users.edit', params: {id: entity.id}}">
+                    :to="$link('users.edit').withParams({id: entity.id})">
                     <i class="fa fa-edit"/> Edit
                 </router-link>
             </div>

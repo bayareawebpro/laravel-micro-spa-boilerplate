@@ -8,6 +8,10 @@ export default [
      */
     Route
         .group('/developer')
+        .withProps({
+            title: 'Developer',
+            subtitle: 'Design Patterns',
+        })
         .view(()=>import(/*webpackChunkName:"dashboard"*/ "@views/developer/Layout"))
         .group([
             /**
@@ -37,6 +41,10 @@ export default [
             /**
              * KitchenSink
              */
+            Route
+                .to('kitchensink.badges','/developer/kitchensink/badges')
+                .view(()=>import(/*webpackChunkName:"kitchensink"*/ "@views/developer/kitchensink/Badges"))
+                .middleware('auth'),
             Route
                 .to('kitchensink.tabs','/developer/kitchensink/tabs')
                 .view(()=>import(/*webpackChunkName:"kitchensink"*/ "@views/developer/kitchensink/Tabs"))

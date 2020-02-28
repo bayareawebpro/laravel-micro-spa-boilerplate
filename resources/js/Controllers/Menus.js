@@ -12,7 +12,7 @@ export default class Menus extends Controller {
                 active: false
             },
             sidebar: {
-                active: false,
+                active: true,
                 items:[
                     {
                         name: 'Users',
@@ -65,6 +65,28 @@ export default class Menus extends Controller {
                             {
                                 name: 'Logs', icon: 'fa-server',
                                 to: VueRoute.link('framework.logs'),
+                            },
+                        ],
+                    },
+                    {
+                        name: 'KITCHEN SINK',
+                        active: false,
+                        items:[
+                            {
+                                name: 'Tabs', icon: 'fa-window-restore',
+                                to: VueRoute.link('kitchensink.tabs'),
+                            },
+                            {
+                                name: 'Badges', icon: 'fa-certificate',
+                                to: VueRoute.link('kitchensink.badges'),
+                            },
+                            {
+                                name: 'Cards', icon: 'fa-address-card',
+                                to: VueRoute.link('kitchensink.cards'),
+                            },
+                            {
+                                name: 'actions', icon: 'fa-address-card',
+                                to: VueRoute.link('kitchensink.actions'),
                             },
                         ],
                     }

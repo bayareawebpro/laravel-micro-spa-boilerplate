@@ -14,6 +14,14 @@ export default class UserResource extends Resource {
     }
 
     /**
+     * User Roles
+     * @return {Object}
+     */
+    get roles(){
+        return this.$config.get('roles', [])
+    }
+
+    /**
      * Default Schema
      * @return {Object}
      */

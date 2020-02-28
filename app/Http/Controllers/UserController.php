@@ -37,7 +37,6 @@ class UserController extends Controller
     {
         return response([
             'entity' => tap(new User)->toArray(),
-            'roles'  => User::allRoles(),
         ]);
     }
 
@@ -54,8 +53,17 @@ class UserController extends Controller
             $data['password'] = Hash::make($data['password']);
         }
 
+        $user = new User();
+        $user->fill($data);
+        $user->save();
+
+        if ($request->user()->isRole('admin') && isset($data['role'])) {
+            $user->grantRole($data['role']);
+        }
+
         return response([
-            'entity' => User::query()->create($data),
+            'message' => 'Entity Stored',
+            'entity'  => $user,
         ]);
     }
 
@@ -80,7 +88,6 @@ class UserController extends Controller
     {
         return response([
             'entity' => $user,
-            'roles'  => User::allRoles(),
         ]);
     }
 
@@ -99,6 +106,10 @@ class UserController extends Controller
         }
 
         $user->update($data);
+
+        if ($request->user()->isRole('admin') && isset($data['role'])) {
+            $user->grantRole($data['role']);
+        }
 
         return response([
             'message' => 'Entity Updated',

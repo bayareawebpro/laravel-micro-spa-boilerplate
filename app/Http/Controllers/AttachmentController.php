@@ -13,6 +13,7 @@ class AttachmentController extends Controller
         $this->authorizeResource(Attachment::class, 'attachment');
     }
 
+
     /**
      * Store Media
      * @param Request $request

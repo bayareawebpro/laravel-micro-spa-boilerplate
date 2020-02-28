@@ -4,7 +4,7 @@
     /** @method update */
     /** @method store */
     export default {
-        name: "UsersResource",
+        name: "UsersEdit",
         beforeCreate() {
             this.$bind.mapGetters('UserResource', {
                 entity: 'entity',
@@ -16,6 +16,8 @@
             })
             this.$bind.mapState('UserResource', {
                 $errors: '$errors',
+                $request: '$request',
+                roles: 'roles',
             })
         },
         created() {
@@ -84,16 +86,13 @@
                             </v-input>
                         </div>
                     </div>
-<!--                    <v-input-file-->
-<!--                        label="Image"-->
-<!--                        v-model="entity.attachment"-->
-<!--                        help="Choose an image."-->
-<!--                        placeholder="Select Avatar"-->
-<!--                        @change="$errors.forget('attachment')"-->
-<!--                        :invalid="$errors.has('attachment')"-->
-<!--                        :options="{accept: ['image/*']}"-->
-<!--                    />-->
-
+                    <v-input-select
+                        icon="fa-lock"
+                        label="Role "
+                        help="Select user role."
+                        v-model="entity.role"
+                        :options="roles"
+                    />
 
                     <v-action @click="entity.attachments.push({})">Add</v-action>
                     <div class="list-group">
@@ -111,6 +110,15 @@
                             />
                         </div>
                     </div>
+                    <!--                    <v-input-file-->
+                    <!--                        label="Image"-->
+                    <!--                        v-model="entity.attachment"-->
+                    <!--                        help="Choose an image."-->
+                    <!--                        placeholder="Select Avatar"-->
+                    <!--                        @change="$errors.forget('attachment')"-->
+                    <!--                        :invalid="$errors.has('attachment')"-->
+                    <!--                        :options="{accept: ['image/*']}"-->
+                    <!--                    />-->
                 </div>
                 <div class="card-actions">
                     <template
@@ -118,7 +126,7 @@
                         <v-action
                             dusk="action-update"
                             class="btn-lg btn-blue"
-                            :loading="isLoading('users.update')"
+                            :disabled="isLoading('users.update')"
                             @click="update(entity)">
                             Update
                         </v-action>
@@ -126,7 +134,7 @@
                         <v-action
                             dusk="action-update"
                             class="btn-lg btn-blue"
-                            :loading="isLoading('users.update')"
+                            :disabled="isLoading('users.update')"
                             @click="update(entity, false)">
                             Save
                         </v-action>
@@ -135,7 +143,7 @@
                         v-else
                         dusk="action-save"
                         class="btn-lg btn-blue"
-                        :loading="isLoading('users.store')"
+                        :disabled="isLoading('users.store')"
                         @click="store(entity)">
                         Save
                     </v-action>

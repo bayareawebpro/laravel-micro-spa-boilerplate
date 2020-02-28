@@ -33,10 +33,10 @@ class CreateConstraints extends Migration
      */
     public function down()
     {
-        Schema::disableForeignKeyConstraints();
+        //Schema::disableForeignKeyConstraints();
         Schema::table('attachments', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
         });
-        Schema::enableForeignKeyConstraints();
+        //Schema::enableForeignKeyConstraints();
     }
 }

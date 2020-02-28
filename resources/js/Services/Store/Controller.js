@@ -1,6 +1,14 @@
 "use strict";
 import Vue from "vue"
 import {Repository, Validator} from "laravel-micro.js"
+
+/**
+ * @alias $request
+ * @alias $router
+ * @alias $events
+ * @alias $http
+ * @alias $link
+ */
 export default class Controller {
 
     /**
@@ -11,21 +19,59 @@ export default class Controller {
         this.$app = App
         this.initState()
     }
+
+    /**
+     * Request Instance
+     * @return {Request}
+     */
     get $request(){
         return this.$app.make('Request')
     }
+
+    /**
+     * Config Instance
+     * @return {Config}
+     */
+    get $config(){
+        return this.$app.make('Config')
+    }
+
+    /**
+     * Router Instance
+     * @return {Router}
+     */
     get $router(){
         return this.$app.make('Router')
     }
+
+    /**
+     * Events Instance
+     * @return {Events}
+     */
     get $events(){
         return this.$app.make('Events')
     }
+
+    /**
+     * Http Instance
+     * @return {Http}
+     */
     get $http(){
         return this.$app.make('Http')
     }
+
+    /**
+     * Route Instance
+     * @return {Route}
+     */
     get $link(){
         return this.$app.make('Route').link
     }
+
+    /**
+     * Store Schema
+     * @return {Object}
+     */
     get schema() {
         return {
             loading: false,
@@ -37,7 +83,7 @@ export default class Controller {
      * @return void
      */
     initState() {
-        console.log(`State::Init ${this.$app.getName(this)}`)
+        console.log(`${this.$app.getName(this)}::initState`)
         this.$state = this.$state ? this.$state.sync(this.schema) : Vue.observable(new Repository(this.schema))
         this.$errors = this.$errors ? this.$errors.setErrors() : Vue.observable(new Validator)
     }

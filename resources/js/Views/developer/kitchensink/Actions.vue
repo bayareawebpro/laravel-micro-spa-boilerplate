@@ -9,11 +9,9 @@
     }
 </script>
 <template>
-    <div class="layout p-4">
+    <div>
 
         <h1 class="page-title">Actions</h1>
-
-        <hr>
 
         <v-action class="btn-green">
             <i class="fa fa-check-circle"></i>
@@ -81,5 +79,6 @@
             <v-action class="btn-block btn-blue btn-lg mb-2">LG</v-action>
             <v-action class="btn-block btn-yellow btn-xl mb-2">XL</v-action>
         </div>
+
     </div>
 </template>

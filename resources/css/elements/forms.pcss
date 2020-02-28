@@ -59,16 +59,15 @@ select.input {
     @apply border-gray-700 border border-l-8 cursor-pointer;
 }
 select[multiple].input{
-    @apply p-0;
+    @apply p-0 bg-black;
 }
 select[multiple].input option{
     @apply p-2 m-0 bg-gray-800 leading-loose;
 }
-select[multiple].input option:checked {
-    @apply border-blue-600;
-}
-select[multiple].input option:not(:checked) {
-    @apply bg-gray-800;
+select[multiple].input option[selected],
+select[multiple].input option[checked],
+select[multiple].input option:checked{
+    @apply bg-green-600 text-gray-900 !important;
 }
 
 /**
