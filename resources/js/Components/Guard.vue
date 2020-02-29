@@ -2,34 +2,22 @@
     export default {
         name: "Guard",
         props: {
-            allows:{
+            roles:{
                 type: Array,
                 required: true,
-            },
-            permissions:{
-                type: Object,
-                required: true,
+                default: ()=>[],
             },
         },
-        watch:{
-            isAllowed:{
-                immediate: true,
-                handler(isAllowed){
-                    if(!isAllowed){
-                        this.$emit('denied')
-                    }
-                }
-            }
-        },
-        computed:{
-            isAllowed(){
-                return this.allows.filter((permission)=>this.permissions[permission]).length > 0
-            }
+        beforeCreate() {
+            /** @property userRole */
+            this.$bind.mapGetters('Auth', {
+                userRole: 'user.role',
+            })
         }
     }
 </script>
 <template>
-    <div v-if="isAllowed">
+    <div v-if="roles.includes(userRole)">
         <slot/>
     </div>
 </template>

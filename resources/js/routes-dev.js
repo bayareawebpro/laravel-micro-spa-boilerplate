@@ -3,20 +3,14 @@
 import Route from "./Services/Router/VueRoute"
 
 export default [
-    /**
-     * Auth / Account
-     */
     Route
         .group('/developer')
+        .view(()=>import(/*webpackChunkName:"dashboard"*/ "@views/developer/Layout"))
         .withProps({
             title: 'Developer',
-            subtitle: 'Design Patterns',
+            subtitle: 'Application Status',
         })
-        .view(()=>import(/*webpackChunkName:"dashboard"*/ "@views/developer/Layout"))
         .group([
-            /**
-             * Framework / Developer
-             */
             Route
                 .to('framework.permissions','/developer/framework/permissions')
                 .view(()=>import(/*webpackChunkName:"framework"*/ "@views/developer/framework/Permissions"))
@@ -37,10 +31,16 @@ export default [
                 .to('framework.logs','/developer/framework/logs')
                 .view(()=>import(/*webpackChunkName:"framework"*/ "@views/developer/framework/Logs"))
                 .middleware('auth'),
+        ]),
 
-            /**
-             * KitchenSink
-             */
+        Route
+            .group('/developer/kitchensink')
+            .withProps({
+                title: 'Developer',
+                subtitle: 'Design Patterns',
+            })
+            .view(()=>import(/*webpackChunkName:"dashboard"*/ "@views/developer/Layout"))
+            .group([
             Route
                 .to('kitchensink.badges','/developer/kitchensink/badges')
                 .view(()=>import(/*webpackChunkName:"kitchensink"*/ "@views/developer/kitchensink/Badges"))
@@ -52,6 +52,10 @@ export default [
             Route
                 .to('kitchensink.cards','/developer/kitchensink/cards')
                 .view(()=>import(/*webpackChunkName:"kitchensink"*/ "@views/developer/kitchensink/Cards"))
+                .middleware('auth'),
+            Route
+                .to('kitchensink.collapse','/developer/kitchensink/collapse')
+                .view(()=>import(/*webpackChunkName:"kitchensink"*/ "@views/developer/kitchensink/Collapse"))
                 .middleware('auth'),
             Route
                 .to('kitchensink.actions','/developer/kitchensink/actions')
@@ -72,6 +76,10 @@ export default [
             Route
                 .to('kitchensink.modals','/developer/kitchensink/modals')
                 .view(()=>import(/*webpackChunkName:"kitchensink"*/ "@views/developer/kitchensink/Modals"))
+                .middleware('auth'),
+            Route
+                .to('kitchensink.charts','/developer/kitchensink/charts')
+                .view(()=>import(/*webpackChunkName:"kitchensink"*/ "@views/developer/kitchensink/Charts"))
                 .middleware('auth'),
             Route
                 .to('kitchensink.charts','/developer/kitchensink/charts')

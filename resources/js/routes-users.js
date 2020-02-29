@@ -2,13 +2,7 @@
 
 import Route from "./Services/Router/VueRoute"
 
-/**
- * User Resource
- */
 export default [
-    /**
-     * Auth / Account
-     */
     Route
         .group('/users')
         .withProps({

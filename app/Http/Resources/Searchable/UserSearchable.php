@@ -23,16 +23,5 @@ class UserSearchable implements InvokableBuilder
                 'email',
                 'role',
             ]);
-
-        $builder->when(request()->hasSession(), fn(SearchableBuilder $builder) => $builder->with([
-            'components' => [
-                'id'         => 'text',
-                'name'       => 'text',
-                'email'      => 'text',
-                'role'       => 'text',
-                'created_at' => 'text',
-                'updated_at' => 'text',
-            ],
-        ]));
     }
 }

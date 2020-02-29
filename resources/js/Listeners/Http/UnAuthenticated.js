@@ -23,13 +23,11 @@ export default class UnAuthenticated {
      */
     handle(payload) {
 
-        this.app.make('Events').$emit('toast:warn', {
-            title: 'UnAuthenticated'
-        })
-
-        this.app.make('Auth').initState()
-
-        this.app.make('Menus').initState()
+        this.app.make('Events')
+            .$emit('state:init')
+            .$emit('toast:warn', {
+                title: 'UnAuthenticated'
+            })
 
         const Route = this.app.make('Route')
         const Request = this.app.make('Request')

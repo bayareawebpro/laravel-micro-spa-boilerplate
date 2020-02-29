@@ -1,9 +1,3 @@
-/**
- * Route Collection
- * @type {VueRoute[]}
- */
-const routeCollection = []
-export {routeCollection};
 
 import Route from './Route'
 export default class VueRoute extends Route{
@@ -19,9 +13,6 @@ export default class VueRoute extends Route{
         this.meta = {
             middleware: [],
             bindings: []
-        }
-        if(name){
-            routeCollection.push(this)
         }
     }
 

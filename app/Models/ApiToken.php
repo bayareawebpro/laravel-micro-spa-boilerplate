@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\AppPermissions;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
@@ -22,7 +23,7 @@ class ApiToken extends PersonalAccessToken implements Validateable
         return [
             'name'        => 'required|string|max:255',
             'abilities'   => 'required|array|min:1',
-            'abilities.*' => ['string', Rule::in(config('airlock.abilities', ['*']))],
+            'abilities.*' => ['string', Rule::in(AppPermissions::all()->values()->flatten(1)->toArray())],
         ];
     }
 

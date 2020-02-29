@@ -16,11 +16,25 @@
     }
 </script>
 <template>
-    <div class="layout relative px-6">
+    <div>
         <h1>Forms</h1>
+        <hr>
+        <h4 class="my-2">Messages</h4>
+        <div class="grid">
+            <div class="grid-item w-full md:w-1/2">
+                <v-form-message value="Default..."/>
+            </div>
+            <div class="grid-item w-full md:w-1/2">
+                <v-form-message value="Warning..." type="warn"/>
+            </div>
+            <div class="grid-item w-full md:w-1/2">
+                <v-form-message value="Info..." type="info"/>
+            </div>
+            <div class="grid-item w-full md:w-1/2">
+                <v-form-message value="Error..." type="error"/>
+            </div>
+        </div>
         <form>
-            <hr>
-
             <h4 class="my-2">States</h4>
             <div class="grid">
                 <div class="grid-item w-full md:w-1/2">
@@ -155,22 +169,6 @@
                 v-model="form.textarea"
             />
 
-            <hr>
-            <h4 class="my-2">Messages</h4>
-            <div class="grid">
-                <div class="grid-item w-full md:w-1/2">
-                    <v-form-message value="Default..."/>
-                </div>
-                <div class="grid-item w-full md:w-1/2">
-                    <v-form-message value="Warning..." type="warn"/>
-                </div>
-                <div class="grid-item w-full md:w-1/2">
-                    <v-form-message value="Info..." type="info"/>
-                </div>
-                <div class="grid-item w-full md:w-1/2">
-                    <v-form-message value="Error..." type="error"/>
-                </div>
-            </div>
         </form>
     </div>
 </template>

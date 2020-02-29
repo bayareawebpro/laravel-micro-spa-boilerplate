@@ -21,13 +21,11 @@ export default class Auth {
                 await this.app.make('Auth').authorize()
             } catch (e) {
                 if(!request.routeIs('auth.login')){
+                    const route = this.app.make('Route')
                     return next(request.redirect(
-                        this.app
-                            .make('Route')
-                            .link('auth.login')
-                            .withQuery({
-                                redirect: request.get('to.fullPath')
-                            })
+                        route.link('auth.login').withQuery({
+                            redirect: request.get('to.fullPath')
+                        })
                     ))
                 }
             }

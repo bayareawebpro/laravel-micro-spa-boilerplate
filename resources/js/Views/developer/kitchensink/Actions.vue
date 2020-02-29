@@ -10,7 +10,6 @@
 </script>
 <template>
     <div>
-
         <h1 class="page-title">Actions</h1>
 
         <v-action class="btn-green">

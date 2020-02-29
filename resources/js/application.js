@@ -4,7 +4,7 @@ import AutoLoader from "./utilities/AutoLoader"
 export default class Application extends LaravelMicro {
 
     /**
-     * Application Constructor
+     * Application Constructor.
      * @return void
      */
     constructor() {
@@ -12,7 +12,7 @@ export default class Application extends LaravelMicro {
     }
 
     /**
-     * Dispatch Route Request through Middleware Stack.
+     * AutoLoad All Providers and Services.
      * @return void
      */
     loadProviders() {
@@ -23,8 +23,8 @@ export default class Application extends LaravelMicro {
 
     /**
      * Dispatch Route Request through Middleware Stack.
-     * Vue Router will not fire callbacks again if a redirect has occurred,
-     * so we should sync the request again after calling next.
+     * Vue Router will not fire callbacks again if a redirect
+     * has occurred, so we should sync the request again after calling next.
      * @return void
      */
     dispatch(to, from, next) {
@@ -42,7 +42,8 @@ export default class Application extends LaravelMicro {
 
     /**
      * Dispatch Request through the Stack via Terminate in Reverse Order.
-     * Once Vue Router has successfully entered the requested route, these last callbacks will be fired.
+     * Once Vue Router has successfully entered the requested route,
+     * these last callbacks will be fired.
      * @return void
      */
     terminate(to, from) {

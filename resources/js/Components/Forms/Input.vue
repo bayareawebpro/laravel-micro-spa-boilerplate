@@ -55,6 +55,7 @@
             <input
                 ref="input"
                 class="input"
+                :id="name"
                 :name="name"
                 :type="type"
                 v-model="state"

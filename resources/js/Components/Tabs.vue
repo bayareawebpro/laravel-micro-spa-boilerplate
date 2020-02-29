@@ -32,13 +32,13 @@
     <div class="card card-tabs" :class="{'tabs-vertical': vertical}">
         <div class="card-header bg-gray-800">
             <nav class="tabs">
-                <div v-if="$slots.title" class="tabs-title">
+                <div v-if="$slots.title" class="tabs-title hidden sm:inline-flex">
                     <slot name="title"></slot>
                 </div>
                 <div v-for="tab in tabs" class="tab-link">
                     <v-action
-                        class="btn-sm"
-                        :disabled="isActive(tab)"
+                        class="btn-sm btn-gray"
+                        :active="isActive(tab)"
                         @click.prevent="activate(tab)"
                         :class="{active: isActive(tab)}">
                         <slot :name="`${tab}_label`">

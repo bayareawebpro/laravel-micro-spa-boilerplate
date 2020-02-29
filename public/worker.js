@@ -1,7 +1,7 @@
 /**
  * Application Version
  */
-var appVersion = "app-version" + new Date().getTime();
+var appVersion = "app-version-" + new Date().getTime();
 
 /**
  * Command Handler
@@ -55,7 +55,7 @@ self.addEventListener('activate', event => {
         caches.keys().then(cacheNames => {
             return Promise.all(
                 cacheNames
-                    .filter(cacheName => (cacheName.startsWith("app-")))
+                    .filter(cacheName => (cacheName.startsWith("app-version-")))
                     .filter(cacheName => (cacheName !== appVersion))
                     .map(cacheName => caches.delete(cacheName))
             );

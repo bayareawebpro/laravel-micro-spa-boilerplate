@@ -1,37 +1,48 @@
 <script>
     export default {
         name: "Collapse",
-        props:{
+        props: {
             value: {default: false},
+            active: {default: true},
+            transition: {default: 'fadeInLeft'},
+            classes: {default: 'btn btn-block'},
         },
-        data(){
-            return {
-                state: this.value
+        computed: {
+            isActive() {
+                return this.value === this.active
             }
         },
-        watch:{
-            value:{
-                handler(newValue){
-                    this.activate(newValue)
+        methods: {
+            activate() {
+                if (this.isActive) {
+                    this.$emit('input', false)
+                } else {
+                    this.$emit('input', this.active)
                 }
-            }
-        },
-        methods:{
-            activate(value = !this.state) {
-                this.$emit('input', this.state = value)
             },
         }
     }
 </script>
 <template>
-    <div class="collapse">
-        <button type="button" @click.prevent="activate()" class="flex sidebar-header">
-            <slot name="title">asd</slot>
-            <span class="ml-auto">{{ state ? '-' : '+'}}</span>
-        </button>
-        <transition name="fadeInDown">
-            <div v-if="state" class="mt-2">
-               <slot name="default"></slot>
+    <div>
+        <div role="button"
+             @click.prevent="activate"
+             class="pointer-cursor" :class="classes">
+            <div class="flex flex-row">
+                <div class="flex-grow">
+                    <slot name="title" :activate="activate">Toggle</slot>
+                </div>
+                <div class="flex-shrink ml-auto">
+                    <i
+                        class="fa text-xs text-gray-500"
+                        :class="isActive ? 'fa-plus' : 'fa-minus'"
+                    />
+                </div>
+            </div>
+        </div>
+        <transition :name="transition" mode="out-in">
+            <div v-if="isActive">
+                <slot name="default"></slot>
             </div>
         </transition>
     </div>

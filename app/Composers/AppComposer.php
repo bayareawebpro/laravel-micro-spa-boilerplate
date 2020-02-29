@@ -3,8 +3,8 @@
 namespace App\Composers;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Config;
 use App\Services\AppPermissions;
-use Illuminate\Contracts\Config\Repository as Config;
 use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -12,21 +12,22 @@ use Illuminate\View\View;
 class AppComposer
 {
     protected Request $request;
-    protected Config $config;
 
-    public function __construct(Request $request, Config $config)
+    public function __construct(Request $request)
     {
         $this->request = $request;
-        $this->config = $config;
     }
 
     public function compose(View $view)
     {
         $view->with('appState', Collection::make([
-            'config' => $this->config->get('spa'),
+            'title'       => Config::get('app.name'),
+            'description' => Config::get('app.name'),
+
             'permissions' => AppPermissions::all(),
-            'roles' => User::allRoles(),
+            'environment' => config('app.env'),
+            'config'      => Config::get('spa'),
+            'roles'       => User::allRoles(),
         ]));
     }
-
 }

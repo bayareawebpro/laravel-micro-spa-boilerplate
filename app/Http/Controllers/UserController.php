@@ -36,7 +36,9 @@ class UserController extends Controller
     public function create()
     {
         return response([
-            'entity' => tap(new User)->toArray(),
+            'entity' => array_merge(with(new User)->toArray(), [
+                'attachments'=>[],
+            ]),
         ]);
     }
 
@@ -107,7 +109,7 @@ class UserController extends Controller
 
         $user->update($data);
 
-        if ($request->user()->isRole('admin') && isset($data['role'])) {
+        if (!$user->is($request->user()) && $request->user()->isRole('admin') && isset($data['role'])) {
             $user->grantRole($data['role']);
         }
 

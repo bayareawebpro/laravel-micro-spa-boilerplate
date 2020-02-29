@@ -35,6 +35,7 @@ class User extends Authenticatable implements Validateable
     protected $with = [
         //'attachment',
         'attachments',
+        'tokens',
     ];
 
     protected $casts = [

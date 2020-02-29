@@ -27,8 +27,8 @@ class TokenSearchable implements InvokableBuilder
                 'last_used_at',
                 'created_at',
             ])
-            ->sort('desc')
             ->orderBy('created_at')
-            ->paginate(4);
+            ->paginate(4)
+            ->sort('desc');
     }
 }

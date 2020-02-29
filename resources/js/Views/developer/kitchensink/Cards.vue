@@ -7,16 +7,16 @@
         methods:{
             load(val = true){
                 this.loading = val
-                setTimeout(()=>this.loading = false, 3000)
+                setTimeout(()=>this.loading = false, 1000)
             }
         },
         mounted(){
-            setTimeout(()=>this.loading = false, 3000)
+            this.load()
         }
     }
 </script>
 <template>
-    <div class="layout p-4">
+    <div>
         <div>
             <h1 class="page-title">Cards</h1>
             <hr>

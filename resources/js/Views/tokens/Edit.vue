@@ -13,6 +13,7 @@
             })
             this.$bind.mapState('TokenResource', {
                 $errors: '$errors',
+                grants: 'grants',
             })
         },
         created() {
@@ -24,7 +25,7 @@
     }
 </script>
 <template>
-    <div class="layout p-4" v-if="entity">
+    <div class="lg:max-w-4xl mx-auto" v-if="entity">
         <form ref="form" @submit.prevent>
             <div class="card">
                 <div class="card-header">
@@ -70,7 +71,7 @@
                                 @change="$errors.forget(`abilities.${index}`)"
                                 :invalid="$errors.has(`abilities.${index}`)"
                                 :help="$errors.first(`abilities.${index}`, 'Enter ability name.')"
-                                :options="abilities"
+                                :options="grants"
                             />
                         </div>
                         <div class="grid-item flex-shrink pb-3">

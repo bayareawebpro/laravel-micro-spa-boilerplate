@@ -25,19 +25,15 @@ App.bootProviders()
 App.make('VueRoot')
     .$mount("#app")
 
-/**
- * Share Application with window.
- * @example window.$app().make(...)
- */
-App.share('App').withOthers(window)
-
-/**
- * Install Service Worker
- */
 if(['production'].includes(process.env.MIX_APP_ENV)){
+    /**
+     * Install Service Worker
+     */
     App.make('Worker').install()
+}else{
+    /**
+     * Share Application with window.
+     * @example window.$app().make(...)
+     */
+    App.share('App').withOthers(window)
 }
-
-console.log(process.env.MIX_APP_ENV)
-
-

@@ -12,19 +12,14 @@
     }
 </script>
 <template>
-    <div class="layout p-4">
-        <div class="grid">
-            <div class="grid-item">
-                <button class="btn" @click="modal=true">Open</button>
-            </div>
-        </div>
+    <div>
+        <button class="btn" @click="modal=true">Open</button>
         <p>Event: @{{ status }}</p>
-
         <v-modal
             v-model="modal"
-            :fullscreen="modal==='fullscreen'"
             @opened="status='opened'"
-            @closed="status='closed'">
+            @closed="status='closed'"
+            :fullscreen="modal==='fullscreen'">
             <template v-slot:title>
                 <div>{{ modal==='fullscreen' ? 'Fullscreen': 'Responsive' }} Modal</div>
             </template>

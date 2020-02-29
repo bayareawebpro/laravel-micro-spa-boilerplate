@@ -22,7 +22,7 @@
     }
 </script>
 <template>
-    <div class="layout p-4">
+    <div>
         <v-resource
             v-model="resource"
             :searchable="true">

@@ -30,7 +30,7 @@
     }
 </script>
 <template>
-    <div class="layout p-4 text-white">
+    <div>
         <div class="card w-full text-sm mb-4">
             <div class="card-header flex">
                 Service Providers

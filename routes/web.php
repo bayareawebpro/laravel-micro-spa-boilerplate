@@ -9,5 +9,5 @@ Route::view('basic', 'app')
     ->name('spa');
 
 Route::view('{slug?}', 'app-spa')
-    ->where('slug', '(.*)')
+    ->where('slug', '^(?!api).*?$')
     ->name('app');

@@ -139,7 +139,7 @@ export default class Request extends Repository {
      * @returns {this}
      */
     replace(route, onDone = () => null, onFail = () => null) {
-        this.app.make('Router').push(route, onDone, onFail)
+        this.app.make('Router').replace(route, onDone, onFail)
         return this
     }
 

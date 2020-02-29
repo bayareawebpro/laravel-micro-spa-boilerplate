@@ -29,7 +29,7 @@
     }
 </script>
 <template>
-    <div class="layout layout-centered w-full lg:max-w-4xl mx-auto p-4" v-if="entity">
+    <div class="lg:max-w-4xl mx-auto" v-if="entity">
         <div class="card">
             <div class="card-header">
                 {{ entity.name || 'New User' }}
@@ -94,22 +94,22 @@
                         :options="roles"
                     />
 
-                    <v-action @click="entity.attachments.push({})">Add</v-action>
-                    <div class="list-group">
-                        <div v-for="(attachment, index) in entity.attachments" class="list-group-item">
-                            <v-input-file
-                                label="Image"
-                                :auto-open="true"
-                                v-model="entity.attachments[index]"
-                                placeholder="Select File"
-                                :options="{accept: ['*']}"
-                                :help="$errors.first(`attachments.${index}.id`,'Choose an image.')"
-                                @change="$errors.forget(`attachments.${index}.id`)"
-                                :invalid="$errors.has(`attachments.${index}.id`)"
-                                @destroyed="entity.attachments.splice(index,1)"
-                            />
-                        </div>
-                    </div>
+<!--                    <v-action @click="entity.attachments.push({})">Add</v-action>-->
+<!--                    <div class="list-group">-->
+<!--                        <div v-for="(attachment, index) in entity.attachments" class="list-group-item">-->
+<!--                            <v-input-file-->
+<!--                                label="Image"-->
+<!--                                :auto-open="true"-->
+<!--                                v-model="entity.attachments[index]"-->
+<!--                                placeholder="Select File"-->
+<!--                                :options="{accept: ['*']}"-->
+<!--                                :help="$errors.first(`attachments.${index}.id`,'Choose an image.')"-->
+<!--                                @change="$errors.forget(`attachments.${index}.id`)"-->
+<!--                                :invalid="$errors.has(`attachments.${index}.id`)"-->
+<!--                                @destroyed="entity.attachments.splice(index,1)"-->
+<!--                            />-->
+<!--                        </div>-->
+<!--                    </div>-->
                     <!--                    <v-input-file-->
                     <!--                        label="Image"-->
                     <!--                        v-model="entity.attachment"-->

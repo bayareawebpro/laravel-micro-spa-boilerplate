@@ -5,8 +5,7 @@ import Route from "./Services/Router/VueRoute"
 export default [
     Route
         .to('home','/')
-        .view(()=>import(/*webpackChunkName:"home"*/ "@views/home/Home"))
-        .middleware('auth'),
+        .view(()=>import(/*webpackChunkName:"home"*/ "@views/home/Home")),
     Route
         .group('/dashboard')
         .view(()=>import(/*webpackChunkName:"dashboard"*/ "@views/dashboard/Dashboard"))
@@ -17,9 +16,8 @@ export default [
                 .uses('Dashboard@show')
                 .middleware('auth'),
         ]),
-
-    ...require('./routes-users').default,
     ...require('./routes-tokens').default,
+    ...require('./routes-users').default,
     ...require('./routes-auth').default,
     ...require('./routes-dev').default,
     ...require('./routes-errors').default,

@@ -6,6 +6,10 @@ export default class Resource extends Controller {
         super(App)
     }
 
+    /**
+     * Resource URI Key
+     * @return {String}
+     */
     get resourceKey(){
         return 'test'
     }

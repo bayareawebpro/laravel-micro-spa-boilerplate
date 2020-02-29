@@ -1,6 +1,7 @@
 "use strict";
 import VueRoute from "../Services/Router/VueRoute"
 import Controller from "../Services/Store/Controller"
+
 export default class Menus extends Controller {
     constructor(App) {
         super(App)
@@ -12,7 +13,7 @@ export default class Menus extends Controller {
                 active: false
             },
             sidebar: {
-                active: true,
+                active: false,
                 items:[
                     {
                         name: 'Users',
@@ -85,15 +86,32 @@ export default class Menus extends Controller {
                                 to: VueRoute.link('kitchensink.cards'),
                             },
                             {
-                                name: 'actions', icon: 'fa-address-card',
+                                name: 'Actions', icon: 'fa-address-card',
                                 to: VueRoute.link('kitchensink.actions'),
+                            },
+                            {
+                                name: 'Collapse', icon: 'fa-plus',
+                                to: VueRoute.link('kitchensink.collapse'),
+                            },
+                            {
+                                name: 'Typography', icon: 'fa-font',
+                                to: VueRoute.link('kitchensink.typography'),
+                            },
+                            {
+                                name: 'Modals', icon: 'fa-window-maximize',
+                                to: VueRoute.link('kitchensink.modals'),
+                            },
+                            {
+                                name: 'Charts', icon: 'fa-bar-chart',
+                                to: VueRoute.link('kitchensink.charts'),
+                            },
+                            {
+                                name: 'Forms', icon: 'fa-keyboard',
+                                to: VueRoute.link('kitchensink.forms'),
                             },
                         ],
                     }
                 ],
-            },
-            kitchensink: {
-                active: false
             },
         }
     }

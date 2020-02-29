@@ -15,11 +15,10 @@ export default class Dashboard extends Controller {
         try{
             const {data} = await this.$http.get('/api/dashboard')
             this.$state.update(data)
-        }catch (e) {
-            return Promise.reject(e)
+        }catch (error) {
+            return Promise.reject(this.handleError(error)) //Return to caller.
         }
     }
-
 }
 
 

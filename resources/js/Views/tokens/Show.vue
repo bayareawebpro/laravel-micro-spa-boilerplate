@@ -1,4 +1,5 @@
 <script>
+    /** @method $link */
     /** @property $errors */
     /** @property entity */
     /** @method update */
@@ -11,6 +12,7 @@
             })
             this.$bind.mapState('TokenResource', {
                 $errors: '$errors',
+                $link: '$link',
             })
         },
         created() {
@@ -22,7 +24,7 @@
     }
 </script>
 <template>
-    <div class="layout p-4" v-if="entity">
+    <div class="lg:max-w-4xl mx-auto" v-if="entity">
         <form ref="form" @submit.prevent>
             <div class="card">
                 <div class="card-header">
@@ -36,13 +38,14 @@
                                 dusk="entry-user-show"
                                 class="block text-sm"
                                 :to="{name: 'users.show', params: {id: entity.tokenable_id}}">
-                                <i class="fa fa-user"/> {{ entity.tokenable_type }}
+                                <i class="fa fa-user"/>
+                                {{ entity.tokenable_type }} ({{entity.tokenable_id}})
                             </router-link>
                         </div>
-                        <div class="grid-item w-full sm:w-1/3">
+                        <div class="grid-item w-full sm:w-2/3">
                             <strong>Abilities</strong><br>
                             <i class="fa fa-lock-open text-blue-500"/>
-                            {{ entity.abilities.join(',') }}
+                            {{ entity.abilities.join(', ') }}
                         </div>
                     </div>
                     <div class="grid">

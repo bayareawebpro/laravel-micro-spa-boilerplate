@@ -19,8 +19,8 @@
     <div>
         <v-resource
             v-model="resource"
-            :loading="isLoading('users.index')"
-            :searchable="true">
+            :searchable="false"
+            :loading="isLoading('users.index')">
             <template v-slot:title>
                 <i class="fa fa-users"/> Users
             </template>
@@ -42,7 +42,7 @@
                                     tag="button"
                                     tabindex="0"
                                     dusk="entry-show"
-                                    class="block text-sm"
+                                    class="block text-sm font-bold"
                                     :to="{name: 'users.show', params: {id: entry.id}}">
                                     <i class="fa fa-user"/> {{ entry.name }}
                                 </router-link>
@@ -75,7 +75,6 @@
                 </div>
             </template>
         </v-resource>
-
         <v-modal v-model="destroying" dusk="modal-destroy">
             <template v-slot:title>
                 Destroy Entity?

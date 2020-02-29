@@ -21,13 +21,12 @@ Route::any('errors/422',function(){
 Route::group(['middleware' => 'auth:airlock'], function(){
     Route::get('dashboard/{section?}', 'DashboardController@show');
     Route::get('pages/{slug}', 'PageController@show');
-
     Route::resource('account','AccountController', [
         'only' => ['show', 'update','destroy']
     ]);
-    Route::resource('attachments','AttachmentController', [
-        'only' => ['store', 'destroy']
-    ]);
+//    Route::resource('attachments','AttachmentController', [
+//        'only' => ['store', 'destroy']
+//    ]);
     Route::resource('users','UserController');
     Route::resource('tokens','TokenController');
 });

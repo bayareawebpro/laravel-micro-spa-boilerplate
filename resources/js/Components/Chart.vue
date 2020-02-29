@@ -1,4 +1,8 @@
 <script>
+    /**
+     * Frappe Charts
+     * @docs https://frappe.io/charts/docs
+     */
     import {Chart} from "frappe-charts/dist/frappe-charts.min.esm"
     export default {
         name: "Chart",
@@ -8,31 +12,25 @@
         },
         watch: {
             value: {
+                deep:true,
                 handler(newVal) {
                     this.chart.update(newVal)
                 }
             }
         },
         mounted() {
-            /**
-             * Frappe Charts
-             * @docs https://frappe.io/charts/docs
-             */
-            // 'axis-mixed', bar, line, scatter, pie, percentage
-            this.$options.chart = new Chart(this.$refs.chart, {
-                title: "Chart",
-                type: 'axis-mixed',
-                data: this.value,
-                ...this.config,
+            this.$nextTick(()=>{
+                this.chart = new Chart(this.$refs.chart, {
+                    ...this.config,
+                    data: this.value,
+                })
             })
         },
         beforeDestroy() {
-            this.$options.chart.destroy()
+            this.chart.destroy()
         }
     }
 </script>
 <template>
-    <div>
-        <div ref="chart"></div>
-    </div>
+    <div ref="chart"></div>
 </template>

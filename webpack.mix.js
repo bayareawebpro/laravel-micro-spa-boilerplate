@@ -1,18 +1,18 @@
 const mix = require('laravel-mix');
-require('laravel-mix-purgecss');
 require('laravel-micro.js/src/mix');
+require('laravel-mix-purgecss');
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
 
 /**
  * Styles & Assets
  */
 
-mix.copy('node_modules/@fortawesome/fontawesome-free/webfonts', 'public/webfonts')
-mix.sass('resources/css/icons.sass', 'public/css')
 mix.postCss('resources/css/app.pcss', 'public/css', [
     require('tailwindcss'),
     require('autoprefixer'),
 ])
+mix.copy('node_modules/@fortawesome/fontawesome-free/webfonts', 'public/webfonts')
+mix.sass('resources/css/icons.sass', 'public/css')
 
 /**
  * Javascript
@@ -26,7 +26,6 @@ mix.babelConfig({
     ],
 })
 mix.webpackConfig({
-    devtool: 'cheap-source-map',
     output: {chunkFilename: 'js/[name].js'},
     resolve: {
         alias: {

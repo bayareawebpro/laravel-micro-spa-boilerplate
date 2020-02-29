@@ -6,6 +6,10 @@ export default class TokenResource extends Resource {
         super(App)
     }
 
+    /**
+     * Resource URI Key
+     * @return {String}
+     */
     get resourceKey(){
         return 'tokens'
     }
@@ -16,8 +20,20 @@ export default class TokenResource extends Resource {
      */
     get schema() {
         return {
-            resource: null,
             entity: null,
+            resource: null,
+            loading: undefined,
         }
+    }
+
+    /**
+     * User Roles
+     * @return {Object}
+     */
+    get grants(){
+        return Object.values(this.$config.get('permissions', {})).flat().map((grant)=>({
+            label: grant,
+            value: grant,
+        }))
     }
 }

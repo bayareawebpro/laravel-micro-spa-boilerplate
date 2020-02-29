@@ -46,7 +46,10 @@ export default class Auth extends Controller {
             await this.$http.get('/airlock/csrf-cookie').then(async () => {
                 const {data} = await this.$http.post('/login', form)
                 await this.$state.update(data)
-                await this.$router.push(this.$request.pull('to.query.redirect') || {name: 'dashboard'})
+                await this.$request.replace(
+                    this.$request.pull('to.query.redirect')
+                    || {name: 'dashboard'}
+                )
                 await this.$events.$emit('auth:login')
             })
         } catch (error) {
@@ -66,8 +69,8 @@ export default class Auth extends Controller {
             await this.$http.get('/airlock/csrf-cookie').then(async () => {
                 const {data} = await this.$http.post('/register', form)
                 await this.$state.update(data)
-                await this.$router.push({name: 'auth.account'})
                 await this.$state.forget('loading')
+                await this.$request.replace({name: 'auth.account'})
             })
         } catch (error) {
             this.$state.forget('loading')
@@ -87,13 +90,13 @@ export default class Auth extends Controller {
                 await this.$http.post('/logout').then(() => {
                     this.$state.set('entity', null)
                     this.$state.forget('loading')
-                    this.$router.push({name: 'auth.login'})
                     this.$events.$emit('auth:logout')
+                    this.$request.replace({name: 'auth.login'})
                 })
             })
         } catch (error) {
-            this.$state.forget('loading')
-            this.handleError(error)
+            await this.$state.forget('loading')
+            await this.handleError(error)
         }
     }
 

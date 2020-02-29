@@ -41,10 +41,6 @@ class TokenController extends Controller
     public function create(): Response
     {
         return response([
-            'abilities' => Collection::make(config('airlock.abilities',['*']))->map(fn($ability)=>[
-                'label' => $ability,
-                'value' => $ability,
-            ]),
             'entity' => [
                 'abilities' => [],
                 'name' => '',
@@ -72,10 +68,6 @@ class TokenController extends Controller
     public function edit(ApiToken $token): Response
     {
         return response([
-            'abilities' => Collection::make(config('airlock.abilities',['*']))->map(fn($ability)=>[
-                'label' => $ability,
-                'value' => $ability,
-            ]),
             'entity' => $token
         ]);
     }

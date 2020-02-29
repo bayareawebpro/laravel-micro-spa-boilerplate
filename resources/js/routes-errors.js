@@ -3,9 +3,6 @@
 import Route from "./Services/Router/VueRoute"
 
 export default [
-    /**
-     * Fallback / Errors
-     */
     Route
         .to('error', '/exception/:status(\\d+)')
         .view(()=>import(/*webpackChunkName:"base"*/ "@views/errors/Error"))
