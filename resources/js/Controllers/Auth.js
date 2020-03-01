@@ -21,6 +21,10 @@ export default class Auth extends Controller {
         return this.$state.get('entity')
     }
 
+    hasRole(...roles){
+        return roles.includes(this.$state.get('entity.role'))
+    }
+
     /**
      * Update the Authorized User
      * @return void

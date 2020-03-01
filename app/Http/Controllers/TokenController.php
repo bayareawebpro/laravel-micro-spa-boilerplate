@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\ApiToken;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Collection;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\Access\AuthorizationException;
 

@@ -36,9 +36,7 @@ class UserController extends Controller
     public function create()
     {
         return response([
-            'entity' => array_merge(with(new User)->toArray(), [
-                'attachments'=>[],
-            ]),
+            'entity' => with(new User)->toArray(),
         ]);
     }
 
@@ -51,17 +49,12 @@ class UserController extends Controller
     {
         $data = $request->validate(User::validationRules());
 
-        if (isset($data['password'])) {
-            $data['password'] = Hash::make($data['password']);
-        }
-
         $user = new User();
         $user->fill($data);
-        $user->save();
-
-        if ($request->user()->isRole('admin') && isset($data['role'])) {
+        if (isset($data['role']) && $request->user()->can('updateRole', [$user])) {
             $user->grantRole($data['role']);
         }
+        $user->save();
 
         return response([
             'message' => 'Entity Stored',

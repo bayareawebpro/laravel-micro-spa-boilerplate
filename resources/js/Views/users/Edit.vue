@@ -35,7 +35,13 @@
     <div class="lg:max-w-4xl mx-auto" v-if="entity">
         <div class="card">
             <div class="card-header">
-                {{ entity.name || 'New User' }}
+                <router-link v-if="entity.id" tabindex="1" dusk="entity-show"
+                    :to="$link('users.show').withParams({id: entity.id})">
+                    <i class="fa fa-user"/> {{ entity.name || 'New User' }}
+                </router-link>
+                <div v-else>
+                    <i class="fa fa-user"/> {{ entity.name || 'New User' }}
+                </div>
             </div>
             <form ref="form" @submit.prevent>
                 <div class="card-content">

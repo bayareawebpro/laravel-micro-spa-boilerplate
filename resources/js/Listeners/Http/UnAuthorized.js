@@ -25,5 +25,10 @@ export default class UnAuthorized {
         this.app.make('Events').$emit('toast:warn', {
             title: 'UnAuthorized.'
         })
+
+        const Request = this.app.make('Request')
+        if(Request.exists('from.path')){
+            Request.redirect(Request.previous())
+        }
     }
 }

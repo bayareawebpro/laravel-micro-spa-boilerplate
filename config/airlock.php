@@ -11,27 +11,13 @@ return [
     */
     'abilities' => [
         '*',
-        'users:viewAny',
+        //'users:viewAny',
+        //'users:create',
         'users:view',
-        'users:create',
         'users:update',
         'users:delete',
-        'users:restore',
-        'users:forceDelete',
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Default Abilities / Guards (fallback)
-    |--------------------------------------------------------------------------
-    | When no abilities are defined as part of a create token request,
-    | we will grant the following abilities.
-    |
-    | Users may destroy the entries they are owners of. See guards for
-    | implementation details. Models: User,ApiToken.
-    */
-    'default_abilities' => [
-        '*'
+        //'users:restore',
+        //'users:forceDelete',
     ],
 
     /*

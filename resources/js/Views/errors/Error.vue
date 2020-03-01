@@ -13,7 +13,13 @@
         },
         methods:{
             back(){
-                this.$router.push({name: 'dashboard'})
+                const Request = this.$app.make('Request')
+                if(Request.exists('from.name')){
+                    Request.replace(Request.previous())
+                }else{
+                    const Route = this.$app.make('Route')
+                    Request.replace(Route.link('dashboard'))
+                }
             }
         }
     }

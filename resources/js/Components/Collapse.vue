@@ -19,15 +19,14 @@
                 } else {
                     this.$emit('input', this.active)
                 }
+                setTimeout(()=>this.$scrollTo(this.$refs.title),100)
             },
         }
     }
 </script>
 <template>
     <div>
-        <div role="button"
-             @click.prevent="activate"
-             class="pointer-cursor" :class="classes">
+        <div role="button" @click.prevent="activate" class="pointer-cursor" :class="classes"  ref="title">
             <div class="flex flex-row">
                 <div class="flex-grow">
                     <slot name="title" :activate="activate">Toggle</slot>
