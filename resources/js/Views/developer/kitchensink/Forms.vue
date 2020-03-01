@@ -123,7 +123,6 @@
                     >This is a switch.
                     </v-input-switch>
                 </div>
-
                 <div class="grid-item w-full md:w-1/3">
                     <v-input-select
                         label="Select"

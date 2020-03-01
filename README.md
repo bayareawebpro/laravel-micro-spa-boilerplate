@@ -45,6 +45,7 @@
 #### Input Components
 - Input
 - InputFile
+- InputRadio
 - InputNumber
 - InputSelect
 - InputSwitch

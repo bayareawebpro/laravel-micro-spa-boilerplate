@@ -29,8 +29,9 @@
                    :disabled="disabled"
                    @input="$emit('input', !value)"
                    @change="$emit('change', !value)"
+                   class="hidden"
                />
-               <span tabindex="0" class="slider"
+               <span :tabindex="disabled ? -1 : 0" class="slider"
                      @keydown.enter.capture.prevent.stop="$refs.input.click()"
                      @keydown.space.capture.prevent.stop="$refs.input.click()"
                      @keydown.right.capture.prevent.stop="$refs.input.click()"
