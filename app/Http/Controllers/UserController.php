@@ -77,7 +77,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         return response([
-            'entity' => $user,
+            'entity' => $user->loadMissing(['tokens']),
         ]);
     }
 
@@ -89,7 +89,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         return response([
-            'entity' => $user,
+            'entity' => $user
         ]);
     }
 
@@ -103,19 +103,15 @@ class UserController extends Controller
     {
         $data = $request->validate(User::validationRules($user));
 
-        if (isset($data['password'])) {
-            $data['password'] = Hash::make($data['password']);
+        if (isset($data['role']) && $request->user()->can('updateRole', [$user])) {
+            $user->grantRole($data['role']);
         }
 
         $user->update($data);
 
-        if (!$user->is($request->user()) && $request->user()->isRole('admin') && isset($data['role'])) {
-            $user->grantRole($data['role']);
-        }
-
         return response([
             'message' => 'Entity Updated',
-            'entity'  => $user->refresh(),
+            'entity'  => $user
         ]);
     }
 

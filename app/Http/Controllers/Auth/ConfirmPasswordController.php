@@ -24,4 +24,13 @@ class ConfirmPasswordController extends Controller
     {
         $this->middleware('auth');
     }
+
+    /**
+     * Display the password confirmation view.
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function showConfirmForm()
+    {
+        return redirect("/auth/password/confirm");
+    }
 }

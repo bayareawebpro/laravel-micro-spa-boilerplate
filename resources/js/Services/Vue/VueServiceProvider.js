@@ -47,9 +47,10 @@ export default class VueServiceProvider extends ServiceProvider {
     registerBindings() {
         this.app.bind('Vue', () => Vue)
         this.app.bind('VueRoot', (Router) => {
-            VueRoot.router = Router
-            return new Vue(VueRoot)
-        }, false)
+            const root = new Vue({...VueRoot, router: Router})
+            root.$mount("#app")
+            return root
+        })
     }
 
     /**

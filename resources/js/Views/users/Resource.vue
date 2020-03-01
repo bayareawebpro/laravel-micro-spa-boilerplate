@@ -10,7 +10,6 @@
             this.$bind.mapGetters('UserResource', {
                 destroying: 'destroying',
                 resource: 'resource',
-                modal: 'modal',
             })
         },
     }
@@ -19,7 +18,7 @@
     <div>
         <v-resource
             v-model="resource"
-            :searchable="false"
+            :searchable="true"
             :loading="isLoading('users.index')">
             <template v-slot:title>
                 <i class="fa fa-users"/> Users

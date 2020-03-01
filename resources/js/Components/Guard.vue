@@ -11,7 +11,7 @@
         beforeCreate() {
             /** @property userRole */
             this.$bind.mapGetters('Auth', {
-                userRole: 'user.role',
+                userRole: 'entity.role',
             })
         }
     }

@@ -1,5 +1,4 @@
 <script>
-    /** @method $link */
     /** @property $errors */
     /** @property entity */
     /** @method update */
@@ -12,7 +11,6 @@
             })
             this.$bind.mapState('TokenResource', {
                 $errors: '$errors',
-                $link: '$link',
             })
         },
         created() {
@@ -70,7 +68,7 @@
                     <router-link
                         dusk="entry-show"
                         class="btn btn-blue"
-                        :to="{name: 'tokens.edit', params: {id: entity.id}}">
+                        :to="$link('tokens.edit').withParams({id: entity.id})">
                         <i class="fa fa-edit"/> Edit
                     </router-link>
                 </div>

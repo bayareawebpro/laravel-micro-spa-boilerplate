@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -29,17 +29,18 @@ class LoginController extends Controller
 
     /**
      * Show the application's login form.
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function showLoginForm()
     {
-        return redirect(route('app'));
+        return redirect("/auth/login");
     }
 
     /**
      * The user has been authenticated.
      * @param  \Illuminate\Http\Request  $request
      * @param  Authenticatable $user
-     * @return mixed
+     * @return \Illuminate\Http\Response
      */
     protected function authenticated(Request $request, $user)
     {

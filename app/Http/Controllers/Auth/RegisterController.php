@@ -30,6 +30,15 @@ class RegisterController extends Controller
     }
 
     /**
+     * Show the application registration form.
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function showRegistrationForm()
+    {
+        return redirect($this->redirectTo);
+    }
+
+    /**
      * Get a validator for an incoming registration request.
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
@@ -46,11 +55,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        return User::create($data);
     }
 
     /**

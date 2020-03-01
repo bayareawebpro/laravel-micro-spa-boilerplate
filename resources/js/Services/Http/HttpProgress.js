@@ -1,3 +1,3 @@
-const {loadProgressBar} = require('axios-progress-bar')
-require('axios-progress-bar/dist/nprogress.css')
+import {loadProgressBar} from 'axios-progress-bar'
+import 'axios-progress-bar/dist/nprogress.css'
 export default loadProgressBar

@@ -1,5 +1,4 @@
 import HttpService from "./HttpService"
-import WorkerService from "./WorkerService"
 import {ServiceProvider} from "laravel-micro.js"
 export default class HttpServiceProvider extends ServiceProvider{
 
@@ -9,7 +8,11 @@ export default class HttpServiceProvider extends ServiceProvider{
      */
     register() {
         this.app.bind('Http',HttpService)
-        this.app.bind('Worker',WorkerService)
+
+        this.app.bind('Worker',async ()=>{
+            const exported = await import(/*webpackChunkName:"http-worker"*/ './WorkerService')
+            return await this.app.bind('Worker', exported.default).rebound('Worker')
+        })
     }
 
     /**

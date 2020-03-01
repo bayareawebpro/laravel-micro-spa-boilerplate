@@ -26,7 +26,8 @@ export default class StoreServiceProvider extends ServiceProvider {
      * Boot any application services
      * @return void
      */
-    boot() {}
+    boot() {
+    }
 
     /**
      * Declare the aliases for the provided services

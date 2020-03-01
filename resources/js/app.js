@@ -18,22 +18,16 @@ App.register(AppServiceProvider)
 App.setInstance('AutoLoader', AutoLoader)
 App.loadProviders()
 App.bootProviders()
+App.make('VueRoot')
 
 /**
- * Boot Application
+ * Get Configuration
  */
-App.make('VueRoot')
-    .$mount("#app")
+const config = App.make('Config')
 
-if(['production'].includes(process.env.MIX_APP_ENV)){
-    /**
-     * Install Service Worker
-     */
-    App.make('Worker').install()
-}else{
-    /**
-     * Share Application with window.
-     * @example window.$app().make(...)
-     */
-    App.share('App').withOthers(window)
+/**
+ * Install Service Worker
+ */
+if(['production'].includes(config.get('environment'))){
+    App.make('Worker').then((worker) => worker.install())
 }

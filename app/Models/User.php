@@ -2,67 +2,45 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Arr;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Cache;
-
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
-use App\Models\Contracts\Validateable;
+use Illuminate\Support\Collection;
 
 use Laravel\Airlock\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class User extends Authenticatable implements Validateable
+class User extends Authenticatable
 {
     use Notifiable, HasApiTokens;
 
     protected $attributes = [
-        'role' => 'guest',
+        'role' => 'user',
     ];
 
     protected $fillable = [
-        'name', 'email', 'password', 'attachment', 'attachments'
+        'name', 'email', 'password',
     ];
 
     protected $hidden = [
         'password', 'remember_token',
     ];
 
-    protected $with = [
-        //'attachment',
-        'attachments',
-        'tokens',
-    ];
-
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
 
-    public function attachment(){
-        return $this->morphOne(Attachment::class, 'attachable');
-    }
-
-    public function attachments(){
-        return $this->morphMany(Attachment::class, 'attachable');
-    }
-
-    public function setAttachmentAttribute($value)
+    /**
+     * Fill the password attribute.
+     * @param string $value
+     * @return void
+     */
+    public function setPasswordAttribute(?string $value = null)
     {
-        if(isset($value['id'])){
-            $this->attachment()->save(Attachment::findOrFail($value['id']));
-        }
-    }
-
-    public function setAttachmentsAttribute($values)
-    {
-        if(is_array($values) && !empty($values)){
-            $this->attachment()->saveMany(
-                Attachment::whereIn('id', Arr::pluck($values, 'id'))->get()
-            );
+        if(!empty($value)){
+            $this->attributes['password'] = Hash::make($value);
         }
     }
 
@@ -79,12 +57,12 @@ class User extends Authenticatable implements Validateable
     /**
      * Grant the user a specific role.
      * @param string $role
-     * @return bool
+     * @return self
      */
-    public function grantRole($role): bool
+    public function grantRole($role): self
     {
         $this->setAttribute('role', $role);
-        return $this->save();
+        return $this;
     }
 
     /**
@@ -95,20 +73,8 @@ class User extends Authenticatable implements Validateable
     {
         return Collection::make([
             ['label' => 'Administrator', 'value' => 'admin'],
-            ['label' => 'Editor', 'value' => 'editor'],
-            ['label' => 'Guest', 'value' => 'guest'],
+            ['label' => 'User', 'value' => 'user'],
         ]);
-    }
-
-    /**
-     * Clear the relevant cached attributes.
-     * @return Collection
-     */
-    public static function boot(): void
-    {
-        parent::boot();
-        static::saved(fn() => Cache::forget('user:roles'));
-        static::deleted(fn() => Cache::forget('user:roles'));
     }
 
     /**
@@ -120,20 +86,19 @@ class User extends Authenticatable implements Validateable
     {
         return [
             'name'                  => ['required', 'string', 'max:255'],
-            'password'              => ['sometimes', 'nullable', 'string', 'min:8', 'confirmed'],
-            'password_confirmation' => ['sometimes', 'nullable', 'string', 'min:8'],
-            'role'                  => ['sometimes', 'required', 'string', Rule::in(static::allRoles()->pluck('value'))],
-
-            'attachment'            => ['sometimes', 'nullable', 'array'],
-            'attachment.id'         => ['numeric', 'exists:attachments,id'],
-
-            'attachments'            => ['sometimes', 'nullable', 'array'],
-            'attachments.*.id'       => ['numeric', 'exists:attachments,id'],
-
+            'password'              => ['sometimes', 'required', 'string', 'min:8', 'confirmed'],
+            'password_confirmation' => ['sometimes', 'required', 'string', 'min:8'],
+            'role'                  => ['sometimes', 'required', Rule::in(static::allRoles()->pluck('value')->toArray())],
             'email'                 => [
                 'required', 'string', 'email', 'max:255',
-                //Rule::unique('users')->ignore(optional($user)->id),
+                Rule::unique('users')->ignore(optional($user)->id),
             ],
         ];
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+        static::deleting(fn(User $user)=>$user->tokens()->delete());
     }
 }

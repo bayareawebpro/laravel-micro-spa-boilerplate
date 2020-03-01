@@ -12,6 +12,7 @@
     <div>
         <h1 class="page-title">Actions</h1>
 
+        <hr>
         <v-action class="btn-green">
             <i class="fa fa-check-circle"></i>
             Green

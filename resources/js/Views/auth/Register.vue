@@ -5,7 +5,12 @@
     export default {
         name: "Register",
         data: () => ({
-            entity: {}
+            entity: {
+                name: null,
+                email: null,
+                password: null,
+                password_confirmation: null,
+            }
         }),
         beforeCreate() {
             this.$bind.mapActions('Auth', {
@@ -14,7 +19,6 @@
             })
             this.$bind.mapState('Auth', {
                 $errors: '$errors',
-                $link: '$link',
             })
         },
         beforeDestroy() {
@@ -28,19 +32,20 @@
             <div class="card-header">
                 Register
             </div>
-            <form ref="form" @submit.prevent>
+            <form ref="form" @submit.prevent="submit(entity)">
                 <div class="card-content">
                     <v-form-message v-model="$errors.message"/>
                     <div class="grid">
                         <div class="grid-item w-full md:w-1/2">
                             <v-input
                                 type="text"
-                                label="Name"
                                 name="name"
+                                label="Name"
                                 v-model="entity.name"
                                 @change="$errors.forget('name')"
                                 :invalid="$errors.has('name')"
                                 :help="$errors.first('name', 'Enter your name.')"
+                                :required="true"
                             />
                         </div>
                         <div class="grid-item w-full md:w-1/2">
@@ -52,17 +57,19 @@
                                 @change="$errors.forget('email')"
                                 :invalid="$errors.has('email')"
                                 :help="$errors.first('email', 'Enter your email.')"
+                                :required="true"
                             />
                         </div>
                         <div class="grid-item w-full md:w-1/2">
                             <v-input
                                 type="password"
-                                label="Password"
                                 name="password"
+                                label="Password"
                                 v-model="entity.password"
                                 @change="$errors.forget('password')"
                                 :invalid="$errors.has('password')"
                                 :help="$errors.first('password', 'Enter your secure password.')"
+                                :required="true"
                             />
                         </div>
                         <div class="grid-item w-full md:w-1/2">
@@ -74,21 +81,22 @@
                                 @change="$errors.forget('password_confirmation')"
                                 :invalid="$errors.has('password_confirmation')"
                                 :help="$errors.first('password_confirmation', 'Confirm your secure password.')"
+                                :required="true"
                             />
                         </div>
                     </div>
                 </div>
                 <div class="card-actions flex">
                     <v-action
+                        type="submit"
                         dusk="action-register"
-                        @click="submit(entity)"
-                        :loading="isLoading('register')"
+                        :loading="isLoading('auth.register')"
                         class="btn btn-blue btn-lg">
                         Register
                     </v-action>
                     <div class="flex-grow"></div>
                     <router-link
-                        dusk="link-register"
+                        dusk="link-login"
                         :to="$link('auth.login')"
                         class="self-center text-sm">
                         Login

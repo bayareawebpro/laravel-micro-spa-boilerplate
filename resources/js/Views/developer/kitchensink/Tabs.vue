@@ -16,7 +16,7 @@
     }
 </script>
 <template>
-    <div class="layout p-4">
+    <div>
         <div>
             <h1 class="page-title">Tabs</h1>
             <hr>

@@ -13,7 +13,7 @@ export default class Dashboard extends Controller {
 
     async show(slug){
         try{
-            //if(this.$state.exists(slug)) return;
+            if(this.$state.exists(slug)) return;
             const {data} = await this.$http.get(`/api/pages/${slug}`)
             this.$state.update(data)
         }catch (e) {

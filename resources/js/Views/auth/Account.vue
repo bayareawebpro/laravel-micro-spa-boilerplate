@@ -24,7 +24,7 @@
             <div class="card-header">
                 Account Settings
             </div>
-            <form ref="form" @submit.prevent>
+            <form ref="form" @submit.prevent="update(entity)">
                 <div class="card-content">
                     <div class="grid">
                         <div class="grid-item w-full md:w-1/2">
@@ -32,6 +32,7 @@
                                 type="text"
                                 label="Name"
                                 name="name"
+                                :required="true"
                                 autocomplete="name"
                                 v-model="entity.name"
                                 @change="$errors.forget('name')"
@@ -44,8 +45,9 @@
                                 type="text"
                                 name="email"
                                 label="Email Address"
-                                v-model="entity.email"
+                                :required="true"
                                 autocomplete="email"
+                                v-model="entity.email"
                                 @change="$errors.forget('email')"
                                 :invalid="$errors.has('email')"
                                 :help="$errors.first('email', 'Enter your email.')">
@@ -79,10 +81,9 @@
                 </div>
                 <div class="card-actions">
                     <v-action
-                        dusk="submit"
-                        class="btn-lg btn-blue"
-                        :loading="isLoading('auth.update')"
-                        @click="update(entity)">
+                        type="submit"
+                        dusk="action-submit"
+                        :loading="isLoading('account.update')">
                         Update
                     </v-action>
                 </div>

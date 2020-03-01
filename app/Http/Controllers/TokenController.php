@@ -42,8 +42,8 @@ class TokenController extends Controller
     {
         return response([
             'entity' => [
-                'abilities' => [],
                 'name' => '',
+                'abilities' => [],
             ]
         ]);
     }

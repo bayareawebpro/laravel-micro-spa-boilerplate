@@ -12,13 +12,16 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(User::class)->create([
+        $user = factory(User::class)->create([
             'name' => config('development.user.name'),
             'email' =>  config('development.user.email'),
-            'password' =>  Hash::make(config('development.user.password')),
+            'password' =>  config('development.user.password'),
             'created_at' => now(),
             'updated_at' => now(),
-        ])->grantRole('admin');
-        factory(User::class, 50)->create();
+        ]);
+
+        $user->grantRole('admin');
+        $user->save();
+
     }
 }

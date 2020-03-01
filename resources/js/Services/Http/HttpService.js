@@ -89,6 +89,7 @@ export default class HttpService {
     }
 
     /**
+     * Get URI
      * @param config {Object}
      */
     getUri(config) {
@@ -96,6 +97,7 @@ export default class HttpService {
     }
 
     /**
+     * Generic Request
      * @param config {Object}
      * @return {Promise<*>}
      */
@@ -104,6 +106,7 @@ export default class HttpService {
     }
 
     /**
+     * Get Request
      * @param url {String}
      * @param config {Object}
      * @return {Promise<*>}
@@ -113,6 +116,7 @@ export default class HttpService {
     }
 
     /**
+     * Post Request
      * @param url {String}
      * @param data {Object}
      * @param config {Object}
@@ -123,6 +127,7 @@ export default class HttpService {
     }
 
     /**
+     * Upload Request
      * @param url {String}
      * @param data {Object}
      * @param config {Object}
@@ -142,6 +147,7 @@ export default class HttpService {
     }
 
     /**
+     * Put Request
      * @param url {String}
      * @param data {Object}
      * @param config {Object}
@@ -152,6 +158,7 @@ export default class HttpService {
     }
 
     /**
+     * Patch Request
      * @param url {String}
      * @param data {Object}
      * @param config {Object}
@@ -162,6 +169,7 @@ export default class HttpService {
     }
 
     /**
+     * Delete Request
      * @param url {String}
      * @param config {Object}
      * @return {Promise<*>}

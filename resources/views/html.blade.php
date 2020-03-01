@@ -24,8 +24,10 @@
     <link rel="preconnect" href="{{ config('app.url') }}">
     <link rel="preload" href="{{ asset(mix('js/app.js')) }}" as="script">
     <link rel="preload" href="{{ asset(mix('css/app.css')) }}" as="style">
-    <link href="{{ mix('css/icons.css') }}" rel="stylesheet">
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    <script>window.__APP_STATE__ = {!! $appState !!}</script>
+    @if(isset($user))<script>window.__APP_USER__ = {!! $user !!}</script>@endif
+    <script src="{{ mix('js/app.js') }}" async></script>
 </head>
 <body>
     @yield('layout')
@@ -33,7 +35,5 @@
         <h1>{{ $appState->get('title') }}</h1>
         <div class="alert alert-warn">This application requires Javascript to render.</div>
     </noscript>
-    <script>window.__APP_STATE__ = {!! $appState !!}</script>
-    <script src="{{ mix('js/app.js') }}" async></script>
 </body>
 </html>

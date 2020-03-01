@@ -24,6 +24,7 @@ export default class RouterServiceProvider extends ServiceProvider {
      */
     registerDependants() {
         Vue.use(VueRouter)
+        Vue.prototype.$link = Route.link
     }
 
     /**

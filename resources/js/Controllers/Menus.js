@@ -17,6 +17,7 @@ export default class Menus extends Controller {
                 items:[
                     {
                         name: 'Users',
+                        roles: ['admin'],
                         active: false,
                         items:[
                             {
@@ -31,6 +32,7 @@ export default class Menus extends Controller {
                     },
                     {
                         name: 'API TOKENS',
+                        roles: ['admin', 'user'],
                         active: false,
                         items:[
                             {
@@ -45,6 +47,7 @@ export default class Menus extends Controller {
                     },
                     {
                         name: 'Framework',
+                        roles: ['admin', 'user'],
                         active: false,
                         items:[
                             {
@@ -71,6 +74,7 @@ export default class Menus extends Controller {
                     },
                     {
                         name: 'KITCHEN SINK',
+                        roles: ['admin', 'user'],
                         active: false,
                         items:[
                             {
@@ -102,7 +106,7 @@ export default class Menus extends Controller {
                                 to: VueRoute.link('kitchensink.modals'),
                             },
                             {
-                                name: 'Charts', icon: 'fa-bar-chart',
+                                name: 'Charts', icon: 'fa-chart-bar',
                                 to: VueRoute.link('kitchensink.charts'),
                             },
                             {

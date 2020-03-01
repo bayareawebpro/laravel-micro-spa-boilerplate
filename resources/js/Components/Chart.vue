@@ -3,7 +3,6 @@
      * Frappe Charts
      * @docs https://frappe.io/charts/docs
      */
-    import {Chart} from "frappe-charts/dist/frappe-charts.min.esm"
     export default {
         name: "Chart",
         props: {
@@ -20,14 +19,18 @@
         },
         mounted() {
             this.$nextTick(()=>{
-                this.chart = new Chart(this.$refs.chart, {
-                    ...this.config,
-                    data: this.value,
+                import(/*webpackChunkName:"frappe-charts"*/"frappe-charts/dist/frappe-charts.min.esm").then(({Chart})=>{
+                    this.chart = new Chart(this.$refs.chart, {
+                        ...this.config,
+                        data: this.value,
+                    })
                 })
             })
         },
         beforeDestroy() {
-            this.chart.destroy()
+            if(this.chart){
+                this.chart.destroy()
+            }
         }
     }
 </script>

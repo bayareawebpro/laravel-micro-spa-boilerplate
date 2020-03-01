@@ -12,19 +12,7 @@ class CreateConstraints extends Migration
      */
     public function up()
     {
-        Schema::table('attachments', function (Blueprint $table) {
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('CASCADE');
-        });
 
-//        Schema::table('users', function (Blueprint $table) {
-//            $table->foreign('attachment_id')
-//                ->references('id')
-//                ->on('attachments')
-//                ->onDelete('SET NULL');
-//        });
     }
 
     /**
@@ -34,9 +22,6 @@ class CreateConstraints extends Migration
     public function down()
     {
         //Schema::disableForeignKeyConstraints();
-        Schema::table('attachments', function (Blueprint $table) {
-            $table->dropForeign(['user_id']);
-        });
         //Schema::enableForeignKeyConstraints();
     }
 }

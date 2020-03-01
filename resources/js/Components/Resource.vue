@@ -58,7 +58,7 @@
                 <slot name="title">Resource</slot>
             </div>
             <div class="flex-grow mr-3">
-                <div class="element">
+                <div class="element" v-if="searchable">
                     <label for="search" class="hidden" aria-labelledby="search">
                         Search
                     </label>

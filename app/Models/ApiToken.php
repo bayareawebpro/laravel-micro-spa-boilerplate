@@ -8,9 +8,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Laravel\Airlock\PersonalAccessToken;
 
-use App\Models\Contracts\Validateable;
-
-class ApiToken extends PersonalAccessToken implements Validateable
+class ApiToken extends PersonalAccessToken
 {
     public $table = 'personal_access_tokens';
 
@@ -28,15 +26,6 @@ class ApiToken extends PersonalAccessToken implements Validateable
     }
 
     public static function allAbilities(): Collection
-    {
-        return Cache::remember('airlock:abilities', 120, fn()=>static::query()
-            ->pluck('abilities')
-            ->flatten(1)
-            ->unique()
-            ->values());
-    }
-
-    public static function abilityOptions(): Collection
     {
         return Cache::remember('airlock:abilities', 120, fn()=>static::query()
             ->pluck('abilities')

@@ -23,17 +23,17 @@
         "laravel-mix-purgecss": "^5.0.0-rc.1",
         "laravel-mix-tailwind": "^0.1.0",
         "resolve-url-loader": "^2.3.2",
-        "sass": "^1.25.0",
+        "sass": "^1.26.2",
         "sass-loader": "^8.0.2",
         "tailwindcss": "^1.2.0",
         "vue": "^2.6.11",
-        "vue-router": "^3.1.5",
+        "vue-router": "^3.1.6",
         "vue-scrollto": "^2.17.1",
         "vue-template-compiler": "^2.6.11",
         "webpack-bundle-analyzer": "^3.6.0"
     },
     "dependencies": {
         "autoprefixer": "^9.7.4",
-        "vue-multiselect": "^2.1.6"
+        "postcss-import": "^12.0.1"
     }
 }

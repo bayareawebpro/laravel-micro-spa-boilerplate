@@ -18,7 +18,6 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         \App\Models\User::class => \App\Policies\UserPolicy::class,
         \App\Models\ApiToken::class => \App\Policies\ApiTokenPolicy::class,
-        \App\Models\Attachment::class => \App\Policies\AttachmentPolicy::class,
     ];
 
     /**

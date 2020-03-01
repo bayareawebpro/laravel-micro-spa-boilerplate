@@ -72,7 +72,7 @@
                         </div>
                         <div class="flex-shrink">
                             <button @click.prevent="toggle" class="btn-xs btn-rounded">
-                                <v-svg-close/>
+                                <i class="fa fa-times"/>
                             </button>
                         </div>
                     </div>

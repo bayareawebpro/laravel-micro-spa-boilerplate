@@ -24,6 +24,7 @@ export default class Authenticated {
     handle(payload) {
         this.app.make('Auth').initState()
         this.app.make('Menus').initState()
+        this.app.make('Pages').initState()
         this.app.make('TokenResource').initState()
         this.app.make('UserResource').initState()
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Hash;
 
 class AccountController extends Controller
 {
@@ -28,11 +29,13 @@ class AccountController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $request->validate(User::validationRules($user));
+        $data = $request->validate(User::validationRules($user));
 
-        $user->update(array_merge($request->except('password'), [
-            'password' => Hash::make($request->get('password')),
-        ]));
+        if (isset($data['password'])) {
+            $data['password'] = Hash::make($data['password']);
+        }
+
+        $user->update($data);
 
         return response([
             'message' => 'Account Updated',

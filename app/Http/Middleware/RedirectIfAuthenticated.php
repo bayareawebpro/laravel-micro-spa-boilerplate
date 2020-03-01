@@ -18,7 +18,7 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            if($request->wantsJson()){
+            if($request->isXmlHttpRequest() || $request->wantsJson()){
                 return response(['entity' => $request->user()]);
             }
             return redirect(RouteServiceProvider::HOME);

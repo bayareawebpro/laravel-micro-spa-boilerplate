@@ -13,7 +13,6 @@ export default [
             Route
                 .to('dashboard','/dashboard')
                 .view(()=>import(/*webpackChunkName:"dashboard"*/ "@views/dashboard/Main"))
-                .uses('Dashboard@show')
                 .middleware('auth'),
         ]),
     ...require('./routes-tokens').default,

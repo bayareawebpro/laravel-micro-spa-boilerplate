@@ -1,5 +1,6 @@
 "use strict";
 import Controller from "./Controller"
+
 export default class Resource extends Controller {
 
     constructor(App) {
@@ -10,7 +11,7 @@ export default class Resource extends Controller {
      * Resource URI Key
      * @return {String}
      */
-    get resourceKey(){
+    get resourceKey() {
         return 'test'
     }
 
@@ -20,8 +21,8 @@ export default class Resource extends Controller {
      */
     get schema() {
         return {
-            resource: null,
             entity: null,
+            resource: null,
             loading: undefined,
         }
     }
@@ -30,18 +31,21 @@ export default class Resource extends Controller {
      * Resource Index
      * Route Binding, Returns to caller
      * @param params {Object}
-     * @return {Promise<any>}
+     * @return {Promise<*>}
      */
     async index(params = {}) {
         try {
             await this.$errors.clear()
-            this.$state.set('loading', `${this.resourceKey}.index`)
+            await this.$state.set('loading', `${this.resourceKey}.index`)
+
             const {data} = await this.$http.get(`/api/${this.resourceKey}`, {params})
-            await this.$state.set('resource', data)
-            await this.$state.forget('loading')
+
+            await this.$state
+                .set('resource', data)
+                .forget('loading')
+
         } catch (error) {
-            await this.$state.forget('loading')
-            return Promise.reject(this.handleError(error)) //Return to caller.
+            return Promise.reject(this.handleError(error))  //Return errors.
         }
     }
 
@@ -49,18 +53,20 @@ export default class Resource extends Controller {
      * Create Entity
      * Route Binding, Returns to caller
      * @param params {Object}
-     * @return {Promise<any>}
+     * @return {Promise<*>}
      */
     async create(params = {}) {
         try {
             await this.$errors.clear()
-            this.$state.set('loading', `${this.resourceKey}.create`)
+            await this.$state.set('loading', `${this.resourceKey}.create`)
+
             const {data} = await this.$http.get(`/api/${this.resourceKey}/create`, {params})
-            await this.$state.update(data)
-            await this.$state.forget('loading')
+
+            await this.$state
+                .update(data)
+                .forget('loading')
         } catch (error) {
-            await this.$state.forget('loading')
-            return Promise.reject(this.handleError(error)) //Return to caller.
+            return Promise.reject(this.handleError(error))  //Return errors.
         }
     }
 
@@ -69,18 +75,21 @@ export default class Resource extends Controller {
      * Route Binding, Returns to caller
      * @param id {Number}
      * @param params {Object}
-     * @return {Promise<any>}
+     * @return {Promise<*>}
      */
     async show({id, ...params}) {
         try {
             await this.$errors.clear()
-            this.$state.set('loading', `${this.resourceKey}.show`)
+            await this.$state.set('loading', `${this.resourceKey}.show`)
+
             const {data} = await this.$http.get(`/api/${this.resourceKey}/${id}`, {params})
-            await this.$state.update(data)
-            await this.$state.forget('loading')
+
+            await this.$state
+                .update(data)
+                .forget('loading')
+
         } catch (error) {
-            await this.$state.forget('loading')
-            return Promise.reject(this.handleError(error)) //Return to caller.
+            return Promise.reject(this.handleError(error)) //Return errors.
         }
     }
 
@@ -89,47 +98,47 @@ export default class Resource extends Controller {
      * Route Binding, Returns to caller
      * @param id {Number}
      * @param params {Object}
-     * @return {Promise<any>}
+     * @return {Promise<*>}
      */
     async edit({id, ...params}) {
         try {
             await this.$errors.clear()
-            this.$state.set('loading', `${this.resourceKey}.edit`)
+            await this.$state.set('loading', `${this.resourceKey}.edit`)
+
             const {data} = await this.$http.get(`/api/${this.resourceKey}/${id}/edit`, {params})
-            await this.$state.update(data)
-            await this.$state.forget('editing')
-            await this.$state.forget('loading')
+
+            await this.$state
+                .update(data)
+                .forget('loading')
+                .forget('editing')
         } catch (error) {
-            await this.$state.forget('loading')
-            return Promise.reject(this.handleError(error)) //Return to caller.
+            return Promise.reject(this.handleError(error))  //Return errors.
         }
     }
 
     /**
-     * Save Entity Action
+     * Save Entity Action, Swallow Errors
      * @param params {Object}
      * @param redirect {Boolean}
-     * @return {Promise<any>}
+     * @return {Promise<*>}
      */
     async store(params, redirect = true) {
         try {
             await this.$errors.clear()
-            this.$state.set('loading', `${this.resourceKey}.store`)
+            await this.$state.set('loading', `${this.resourceKey}.store`)
 
             const {data} = await this.$http.post(`/api/${this.resourceKey}`, params)
-            await this.$state.update(data)
-            await this.$state.forget('editing')
-            await this.$state.forget('loading')
 
-            if (redirect) {
-                await this.$router.replace({
-                    name: `${this.resourceKey}.index`,
-                    query: {page: 1}
-                }, () => null, () => null)
-            }
+            await this.$state
+                .update(data)
+                .forget('loading')
+                .forget('editing')
+
+            await this.updateCollectionEntity(data.entity)
+            await this.reloadCollection(redirect)
+
         } catch (error) {
-            await this.$state.forget('loading')
-            this.handleError(error)
+            await this.handleError(error) //Swallow Errors
         }
     }
 
@@ -138,53 +147,89 @@ export default class Resource extends Controller {
      * @param id {Number}
      * @param params {Object}
      * @param redirect {Boolean}
-     * @return {Promise<any>}
+     * @return {Promise<*>}
      */
     async update({id, ...params}, redirect = true) {
         try {
             await this.$errors.clear()
-            this.$state.set('loading', `${this.resourceKey}.update`)
+            await this.$state.set('loading', `${this.resourceKey}.update`)
 
             const {data} = await this.$http.put(`/api/${this.resourceKey}/${id}`, params)
-            await this.$state.update(data)
-            await this.$state.forget('updating')
-            await this.$state.forget('loading')
 
-            if (redirect) {
-                await this.$router.go(-1, () => null, () => null)
-            }
+            await this.$state.update(data)
+                .forget('updating')
+                .forget('loading')
+
+            await this.updateCollectionEntity(data.entity)
+            await this.reloadCollection(redirect)
+
         } catch (error) {
-            await this.$state.forget('loading')
-            this.handleError(error)
+            await this.handleError(error) //Swallow Errors
         }
     }
 
     /**
-     * Destroy Entity Action
+     * Destroy Entity Action, Swallow Errors
      * @param entity {Object}
      * @param redirect {Boolean}
-     * @return {Promise<any>}
+     * @return {Promise<*>}
      */
     async destroy(entity, redirect = true) {
         try {
             await this.$errors.clear()
-            this.$state.set('loading', `${this.resourceKey}.destroy`)
+            await this.$state.set('loading', `${this.resourceKey}.destroy`)
 
             await this.$http.delete(`/api/${this.resourceKey}/${entity.id}`)
-            await this.$state.rejectWhere('resource.data', 'id', entity.id)
-            await this.$state.decrement('resource.pagination.total')
-            await this.$state.forget('destroying')
-            await this.$state.forget('loading')
 
-            if (redirect) {
-                await this.$router.replace({
-                    name: `${this.resourceKey}.index`,
-                    query: {page: 1}
-                }, () => {}, () => this.index())
-            }
+            await this.$state
+                .forget('destroying')
+                .forget('loading')
+
+            await this.removeCollectionEntity(entity)
+            await this.reloadCollection(redirect)
+
         } catch (error) {
-            await this.$state.forget('loading')
-            this.handleError(error)
+            await this.handleError(error) //Swallow Errors
+        }
+    }
+
+    /**
+     * Update Existing Entity in Collection
+     * @param entity {Object}
+     */
+    updateCollectionEntity(entity){
+        if(this.$state.hasEntries('resource.data')){
+            if(this.$state.firstWhere('resource.data', 'id', entity)) {
+                this.$state.mergeWhere('resource.data', 'id', entity)
+            }else{
+                this.$state.append('resource.data',entity)
+            }
+        }
+    }
+
+    /**
+     * Remove Existing Entity in Collection
+     * @param entity {Object}
+     */
+    removeCollectionEntity(entity){
+        if(this.$state.hasEntries('resource.data')){
+            if(this.$state.firstWhere('resource.data', 'id', entity)) {
+                this.$state
+                    .rejectWhere('resource.data', 'id', entity)
+                    .decrement('resource.pagination.total')
+            }
+        }
+    }
+
+    /**
+     * Reload Collection
+     * @param redirect {Boolean}
+     */
+    reloadCollection(redirect){
+        if (redirect) {
+            this.$request.replace(
+                this.$link(`${this.resourceKey}.index`).withQuery({page: 1}),
+                ()=>null, ()=>this.index())
         }
     }
 }

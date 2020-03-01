@@ -9,13 +9,12 @@
             }
         }),
         beforeCreate() {
-            this.$bind.mapState('Auth', {
-                $errors: '$errors',
-                $link: '$link',
-            })
             this.$bind.mapActions('Auth', {
                 isLoading: 'isLoading',
                 login: 'login',
+            })
+            this.$bind.mapState('Auth', {
+                $errors: '$errors',
             })
         },
         beforeDestroy() {
@@ -30,7 +29,6 @@
                 Login
             </div>
             <form ref="form" @submit.prevent="login(user)">
-                <!-- Five columns -->
                 <div class="card-content">
                     <v-form-message v-model="$errors.message" dusk="alert"/>
                     <div class="grid">
@@ -51,6 +49,7 @@
                                 name="password"
                                 type="password"
                                 label="Password"
+                                :required="true"
                                 v-model="user.password"
                                 @change="$errors.forget('password')"
                                 :invalid="$errors.has('password')"
@@ -70,16 +69,15 @@
                 </div>
                 <div class="card-actions flex">
                     <v-action
-                        dusk="submit"
                         type="submit"
-                        @click="login(user)"
+                        dusk="action-submit"
                         :loading="isLoading('login')"
                         class="btn-blue btn-lg">
                         <i class="fa fa-unlock"></i> Login
                     </v-action>
                     <div class="flex-grow"></div>
                     <router-link
-                        dusk="link-register"
+                        dusk="link-forgot"
                         :to="$link('auth.forgot')"
                         class="self-center text-sm mx-4">
                         Reset Password

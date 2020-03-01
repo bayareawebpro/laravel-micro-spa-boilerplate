@@ -39,7 +39,7 @@
             <div class="grid">
                 <div class="grid-item w-full md:w-1/2">
                     <v-input
-                        icon="fa-warning"
+                        icon="fa-exclamation-triangle"
                         label="Invalid"
                         help="I am invalid."
                         value="This is text."
@@ -83,7 +83,7 @@
                 </div>
                 <div class="grid-item w-full md:w-1/4">
                     <v-input
-                        icon="fa-send"
+                        icon="fa-paper-plane"
                         type="email"
                         label="Email"
                         help="Enter your email."

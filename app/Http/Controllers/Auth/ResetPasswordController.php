@@ -15,4 +15,16 @@ class ResetPasswordController extends Controller
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
+
+    /**
+     * Display the password reset view for the given token.
+     * If no token is present, display the link request form.
+     * @param  \Illuminate\Http\Request  $request
+     * @param  string|null  $token
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function showResetForm(Request $request, $token = null)
+    {
+        return redirect($this->redirectTo);
+    }
 }

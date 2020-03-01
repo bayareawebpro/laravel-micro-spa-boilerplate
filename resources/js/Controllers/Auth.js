@@ -1,8 +1,10 @@
 "use strict";
 import Controller from "../Services/Store/Controller"
 export default class Auth extends Controller {
+
     constructor(App) {
         super(App)
+        this.$state.set('entity', window.__APP_USER__ || null)
     }
 
     get schema() {
@@ -20,15 +22,42 @@ export default class Auth extends Controller {
     }
 
     /**
+     * Update the Authorized User
+     * @return void
+     */
+    async update({id, ...params}) {
+
+        try {
+            await this.$errors.clear()
+            await this.$state.put('loading', 'account.update')
+
+            const {data} = await this.$http.put(`/api/users/${id}`, params)
+
+            await this.$state
+                .update(data)
+                .forget('loading')
+
+        } catch (error) {
+            await this.$state.forget('loading')
+            await this.handleError(error)
+        }
+    }
+
+
+    /**
      * Authorize the Current Request
      * @return {Promise}
      */
     async authorize() {
         try {
-            await this.$state.put('loading', 'login')
+            await this.$state.put('loading', 'auth.authorize')
+
             const {data} = await this.$http.get('/api/account/show')
-            await this.$state.forget('loading')
-            await this.$state.update(data)
+
+            await this.$state
+                .update(data)
+                .forget('loading')
+
         } catch (error) {
             await this.$state.forget('loading')
             return Promise.reject(this.handleError(error))
@@ -42,19 +71,25 @@ export default class Auth extends Controller {
     async login(form) {
         try {
             await this.$errors.clear()
-            await this.$state.put('loading', 'login')
+            await this.$state.put('loading', 'auth.login')
+
             await this.$http.get('/airlock/csrf-cookie').then(async () => {
+
                 const {data} = await this.$http.post('/login', form)
-                await this.$state.update(data)
+
+                await this.$state
+                    .update(data)
+                    .forget('loading')
+
+                await this.$events.$emit('auth:login')
                 await this.$request.replace(
                     this.$request.pull('to.query.redirect')
-                    || {name: 'dashboard'}
+                    || this.$link('dashboard')
                 )
-                await this.$events.$emit('auth:login')
             })
         } catch (error) {
             await this.$state.forget('loading')
-            this.handleError(error)
+            await this.handleError(error)
         }
     }
 
@@ -65,16 +100,21 @@ export default class Auth extends Controller {
     async register(form) {
         try {
             await this.$errors.clear()
-            await this.$state.put('loading', 'login')
+            await this.$state.put('loading', 'auth.register')
+
             await this.$http.get('/airlock/csrf-cookie').then(async () => {
+
                 const {data} = await this.$http.post('/register', form)
-                await this.$state.update(data)
-                await this.$state.forget('loading')
-                await this.$request.replace({name: 'auth.account'})
+
+                await this.$state
+                    .update(data)
+                    .forget('loading')
+
+                await this.$request.replace(this.$link('auth.account'))
             })
         } catch (error) {
-            this.$state.forget('loading')
-            this.handleError(error)
+            await this.$state.forget('loading')
+            await this.handleError(error)
         }
     }
 
@@ -85,13 +125,18 @@ export default class Auth extends Controller {
     async logout() {
         try {
             await this.$errors.clear()
-            await this.$state.put('loading', 'logout')
+            await this.$state.put('loading', 'auth.logout')
+
             await this.$http.get('/airlock/csrf-cookie').then(async () => {
-                await this.$http.post('/logout').then(() => {
-                    this.$state.set('entity', null)
-                    this.$state.forget('loading')
-                    this.$events.$emit('auth:logout')
-                    this.$request.replace({name: 'auth.login'})
+
+                await this.$http.post('/logout').then(async () => {
+
+                    await this.$state
+                        .set('entity', null)
+                        .forget('loading')
+
+                    await this.$events.$emit('auth:logout')
+                    await this.$request.replace(this.$link('auth.login'))
                 })
             })
         } catch (error) {
@@ -107,9 +152,14 @@ export default class Auth extends Controller {
     async forgot(form) {
         try {
             await this.$errors.clear()
-            await this.$state.put('loading', 'forgot')
+            await this.$state.put('loading', 'auth.forgot')
+
             const {data} = await this.$http.post('/password/email', form)
-            await this.$state.update(data)
+
+            await this.$state
+                .update(data)
+                .forget('loading')
+
         } catch (error) {
             await this.$state.forget('loading')
             await this.handleError(error)
@@ -122,40 +172,17 @@ export default class Auth extends Controller {
      */
     async reset(form) {
         try {
-            await this.$state.put('loading', 'reset')
+            await this.$errors.clear()
+            await this.$state.put('loading', 'auth.reset')
+
             const {data} = await this.$http.post('/password/reset', form)
-            await this.$state.update(data)
-            await this.$router.push({name: 'auth.login'})
-        } catch (error) {
-            await this.$state.forget('loading')
-            await this.handleError(error)
-        }
-    }
 
-    /**
-     * Update the Authorized User
-     * @return void
-     */
-    async update({id, ...params}) {
-        await this.$state.put('loading', 'update')
-        try {
-            const {data} = await this.$http.put(`/api/users/${id}`, params)
-            await this.$state.update(data)
-        } catch (error) {
-            await this.$state.forget('loading')
-            await this.handleError(error)
-        }
-    }
+            await this.$state
+                .update(data)
+                .forget('loading')
 
-    /**
-     * Confirm Email Address
-     * @return void
-     */
-    async confirm(form) {
-        try {
-            const {data} = await this.$http.post('/password/confirm', form)
-            await this.$state.update(data)
             await this.$router.push({name: 'auth.login'})
+
         } catch (error) {
             await this.$state.forget('loading')
             await this.handleError(error)

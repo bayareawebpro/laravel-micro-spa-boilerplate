@@ -16,7 +16,7 @@ class UserPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->isRole('admin') || $user->tokenCan('users:viewAny');
+        return $user->isRole('admin');
     }
 
     /**
@@ -28,8 +28,7 @@ class UserPolicy
     public function view(User $user, User $model): bool
     {
         return $user->isRole('admin')
-            || $user->tokenCan('users:view')
-            || $user->is($model);
+            || $user->is($model) && $user->tokenCan('users:view');
     }
 
     /**
@@ -39,7 +38,18 @@ class UserPolicy
      */
     public function create(User $user): bool
     {
-        return $user->isRole('admin') || $user->tokenCan('users:create');
+        return $user->isRole('admin');
+    }
+
+    /**
+     * Determine whether the user can update other user roles.
+     * @param User $user
+     * @param User $model
+     * @return bool
+     */
+    public function updateRole(User $user, User $model): bool
+    {
+        return $user->isRole('admin') && $user->isNot($model);
     }
 
     /**
@@ -51,8 +61,7 @@ class UserPolicy
     public function update(User $user, User $model): bool
     {
         return $user->isRole('admin')
-            || $user->tokenCan('users:update')
-            || $user->is($model);
+            || $user->is($model) && $user->tokenCan('users:update');
     }
 
     /**
@@ -64,8 +73,7 @@ class UserPolicy
     public function delete(User $user, User $model): bool
     {
         return $user->isRole('admin')
-            || $user->tokenCan('users:delete')
-            || $user->is($model);
+            || $user->is($model) && $user->tokenCan('users:delete');
     }
 
     /**
@@ -77,8 +85,7 @@ class UserPolicy
     public function restore(User $user, User $model): bool
     {
         return $user->isRole('admin')
-            || $user->tokenCan('users:restore')
-            || $user->is($model);
+            || $user->is($model) && $user->tokenCan('users:restore');
     }
 
     /**
@@ -90,7 +97,6 @@ class UserPolicy
     public function forceDelete(User $user, User $model): bool
     {
         return $user->isRole('admin')
-            || $user->tokenCan('users:forceDelete')
-            || $user->is($model);
+            || $user->is($model) && $user->tokenCan('users:forceDelete');
     }
 }

@@ -21,6 +21,9 @@
         },
         methods:{
             onClick(e){
+                if(this.type === 'button'){
+                    e.preventDefault()
+                }
                 this.$emit('click', e)
             },
         },
@@ -36,7 +39,7 @@
         ref="button"
         :type="type"
         :disabled="disabled"
-        @click.prevent="onClick"
+        @click="onClick"
         class="btn overflow-hidden"
         :class="{disabled, loading}">
         <transition name="fadeInRight" mode="out-in">

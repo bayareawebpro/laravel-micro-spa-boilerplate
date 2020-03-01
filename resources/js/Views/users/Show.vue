@@ -1,14 +1,11 @@
 <script>
-    /** @method $link */
     export default {
         name: "UsersShow",
         beforeCreate() {
             this.$bind.mapGetters('UserResource', {
+                hasTokens: 'entity.tokens.length',
                 entity: 'entity',
                 modal: 'modal',
-            })
-            this.$bind.mapState('UserResource', {
-                $link: '$link',
             })
         },
     }
@@ -16,30 +13,26 @@
 <template>
     <div class="lg:max-w-4xl mx-auto" v-if="entity">
         <div class="card">
-            <div class="card-header">
-                {{ entity.name }} <div class="badge badge-red">{{ entity.role }}</div>
+            <div class="card-header flex">
+                <div>{{ entity.name }}</div>
+                <div class="badge badge-red ml-auto">{{ entity.role }}</div>
             </div>
             <div class="card-content">
                 {{ entity.email }}
                 {{ entity.role }}
             </div>
             <div class="card-actions">
-                <v-action
-                    dusk="modal-activate"
-                    @click="modal = entity" class="btn-green">
-                    <i class="fa fa-check-circle"/> Action
-                </v-action>
                 <router-link
                     tag="button"
                     dusk="entry-show"
-                    class="btn btn-yellow"
-                    :to="$link('users.edit').withParams({id: entity.id})">
+                    class="btn btn-blue"
+                    :to="$link('users.edit').withParams(entity)">
                     <i class="fa fa-edit"/> Edit
                 </router-link>
             </div>
         </div>
 
-        <div class="card mt-4" v-if="entity.tokens">
+        <div v-if="hasTokens" class="card mt-4">
             <div class="card-header">
                 Tokens
             </div>

@@ -20,10 +20,13 @@ html, body {
     @apply z-50;
 }
 #brand{
-    @apply block py-4 pl-4;
+    @apply block p-4;
 }
 #pushMenuAction{
-    @apply flex p-4 pr-0 self-center;
+    @apply flex p-4 self-center;
+}
+#pushMenuAction + #brand{
+    @apply block px-0;
 }
 #content {
     @apply flex flex-row flex-grow;

@@ -62,10 +62,11 @@ export default class Controller {
 
     /**
      * Route Instance
+     * @param name {String}
      * @return {Route}
      */
-    get $link(){
-        return this.$app.make('Route').link
+    $link(name){
+        return this.$app.make('Route').link(name)
     }
 
     /**
@@ -110,10 +111,13 @@ export default class Controller {
      * @return {Error}
      */
     handleError(error) {
+        this.$state.forget('loading')
         if(
             error.hasOwnProperty('response') &&
             error.response.hasOwnProperty('data')){
             this.$errors.sync(error.response.data)
+        }else{
+            console.error(error)
         }
         return error
     }
