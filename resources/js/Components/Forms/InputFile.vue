@@ -30,6 +30,18 @@
             autoOpen: {
                 type: Boolean,
                 default: () => false
+            },
+            uploadable: {
+                type: Boolean,
+                default: () => false
+            },
+            destroyable: {
+                type: Boolean,
+                default: () => false
+            },
+            endpoint: {
+                type: String,
+                default: () => '/api/attachments'
             }
         },
         data: () => ({
@@ -50,11 +62,11 @@
                 return (this.options.accept || []).join(',')
             },
             isImage() {
-                return (this.state && this.state.mime && this.state.mime.match('image/*'))
+                return (this.state && this.state.mime.includes('image'))
             },
             isVideo() {
-                return (this.state && this.state.mime && this.state.mime.match('video/*'))
-            }
+                return (this.state && this.state.mime.includes('video'))
+            },
         },
         methods: {
             ...focus,
@@ -75,13 +87,32 @@
                     this.error = error.response.data.errors.file[0]
                 }
             },
+            readFile(file){
+                if(file.type.includes('image')){
+                    const reader = new FileReader
+                    reader.onload = e => {
+                        this.state.url = e.target.result
+                        this.$emit('input', this.state)
+                        this.$emit('change', this.state)
+                    }
+                    reader.readAsDataURL(file)
+                }
+            },
             create(file) {
                 this.error = null
-                this.state = null
+                this.state = {
+                    name: file.name,
+                    mime: file.type,
+                    size: file.size,
+                    url: null,
+                }
+                if(!this.uploadable){
+                    return this.readFile(file)
+                }
                 this.loading = true
                 this.$app
                     .make('Http')
-                    .upload(`/api/attachments`, {file})
+                    .upload(`${this.endpoint}`, {file})
                     .then(({data}) => {
                         this.state = data.entity
                         this.$emit('input', this.state)
@@ -91,10 +122,13 @@
                     .finally(() => this.loading = false)
             },
             destroy() {
+                if(!this.destroyable){
+                    return this.state = null
+                }
                 this.loading = true
                 this.$app
                     .make('Http')
-                    .delete(`/api/attachments/${this.state.id}`)
+                    .delete(`${this.endpoint}/${this.state.id}`)
                     .then(this.reset)
                     .then(() => this.$emit('destroyed', null))
                     .catch(this.onError)
@@ -109,37 +143,48 @@
     }
 </script>
 <template>
-
-    <transition name="fadeInOut" mode="out-in">
-        <div v-if="state && state.id">
-            <div class="grid">
-                <div v-if="isImage" class="grid-item flex-shrink sm:w-1/4">
-                    <img :src="state.url"
-                         class="rounded shadow border-gray-900 w-full"
-                    />
-                </div>
-                <div v-else-if="isVideo"  class="grid-item flex-shrink sm:w-1/4 bg-black">
-                    <video width="320" height="240" controls class="w-full">
-                        <source :src="state.url" :type="state.mime">
-                    </video>
-                </div>
-                <div class="grid-item flex-grow text-sm">
-                    <div class="">
-                        {{ state.name }}
-                    </div>
-                    <div>{{ state.mime }}</div>
-                    <div>{{ state.size / 1000 }} Kb</div>
-                </div>
-                <div class="grid-item flex-shrink">
-                    <div>
-                        <v-action @click="destroy" class="btn-red btn-sm self-center">
-                            <div>
+    <transition name="zoomInOut" mode="out-in">
+        <div v-if="state">
+            <div v-if="isImage || isVideo">
+                <slot name="preview:media">
+                    <div class="card">
+                        <div class="card-header text-xs">
+                            {{ state.name }}
+                        </div>
+                        <div class="card-content rounded-t-none p-0">
+                            <img v-if="isImage" :src="state.url" class="w-auto max-w-full"/>
+                            <video v-else width="320" height="240" controls class="w-full">
+                                <source :src="state.url" :type="state.mime">
+                            </video>
+                        </div>
+                        <div class="card-actions flex">
+                            <div>{{ state.mime }} | {{ state.size | bytesForHumans }}</div>
+                            <v-action @click="destroy" class="btn-red btn-sm self-center ml-auto">
                                 <i class="fa fa-trash"></i>
-                                Destroy
-                            </div>
-                        </v-action>
+                                <div class="hidden md:inline">Remove</div>
+                            </v-action>
+                        </div>
                     </div>
-                </div>
+                </slot>
+            </div>
+            <div v-else>
+                <slot name="preview:files">
+                    <div class="grid">
+                        <div class="grid-item flex-grow text-sm">
+                            <div class="font-bold">{{ state.name }}</div>
+                            <div>{{ state.mime }}</div>
+                            <div>{{ state.size | bytesForHumans }} Kb</div>
+                        </div>
+                        <div class="grid-item flex-shrink">
+                            <div>
+                                <v-action @click="destroy" class="btn-red btn-sm self-center">
+                                    <i class="fa fa-trash"></i>
+                                    <div class="hidden md:inline">Remove</div>
+                                </v-action>
+                            </div>
+                        </div>
+                    </div>
+                </slot>
             </div>
         </div>
         <div v-else>
@@ -148,6 +193,9 @@
                 :label="label"
                 :invalid="invalid || error"
                 :help="error || `${help} ${fileTypes}`">
+                <template v-if="icon" v-slot:label:before>
+                    <i class="fa" :class="icon"/>
+                </template>
                 <input
                     ref="file"
                     type="file"

@@ -17,7 +17,7 @@
 <template>
     <div class="element">
         <label v-if="label" :for="name" class="label">
-            {{ label }}
+            <slot name="label:before"></slot> {{ label }}
         </label>
         <div class="relative">
             <slot></slot>

@@ -1,6 +1,4 @@
 <script>
-    import placeholder from './Props/Placeholder'
-    import autocomplete from "./Props/AutoComplete"
     import required from "./Props/Required"
     import disabled from './Props/Disabled'
     import invalid from './Props/Invalid'
@@ -12,8 +10,7 @@
     import name from './Props/Name'
     import icon from './Props/Icon'
     import focus from "./Methods/Focus"
-    import select from "./Methods/Select"
-    import clipboard from "./Methods/Clipboard"
+    import click from "./Methods/Click"
     export default {
         name: "InputRadio",
         data: ()=>({state: null}),
@@ -26,8 +23,6 @@
             }
         },
         props: {
-            autocomplete,
-            placeholder,
             disabled,
             required,
             invalid,
@@ -40,9 +35,8 @@
             icon,
         },
         methods: {
-            ...clipboard,
-            ...select,
             ...focus,
+            ...click,
         }
     }
 </script>
@@ -52,21 +46,21 @@
         :help="help"
         :label="label"
         :invalid="invalid">
+            <template v-if="icon" v-slot:label:before>
+                <i class="fa" :class="icon"/>
+            </template>
             <input
                 ref="input"
                 class="input"
                 :id="name"
                 :name="name"
                 type="radio"
-                v-model="state"
                 :disabled="disabled"
                 :required="required"
-                :placeholder="placeholder"
-                :autocomplete="autocomplete"
-                :class="{invalid, disabled,icon: icon}"
-                @input="$emit('input', state)"
-                @change="$emit('change', state)"
+                :class="{invalid, disabled}"
+                :checked="state === options.value"
+                @input="$emit('input', options.value)"
+                @change="$emit('change', options.value)"
             >
-            <i v-if="icon" class="fa" :class="icon"/>
     </v-form-control>
 </template>

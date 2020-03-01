@@ -112,6 +112,22 @@ select[multiple].input option:checked{
     box-shadow: none;
 }
 
+
+/**
+ * Radio
+ */
+input.input[type=radio]{
+    @apply inline-block rounded-full p-0 border-2 self-center;
+    @apply cursor-pointer;
+    width: 3em !important;
+    min-width: 3em !important;
+    min-height: 1.6em !important;
+    height: 1.6em !important;
+}
+input.input[type=radio]:checked{
+    @apply bg-blue-500 border-blue-700;
+}
+
 /**
  * Help & Invalid
  */

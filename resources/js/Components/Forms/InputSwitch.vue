@@ -1,6 +1,5 @@
 <script>
     import Input from "./Input"
-
     export default {
         name: "InputSwitch",
         extends: Input,
@@ -13,6 +12,9 @@
         :help="help"
         :label="label"
         :invalid="invalid">
+        <template v-if="icon" v-slot:label:before>
+            <i class="fa" :class="icon"/>
+        </template>
         <div
             class="switch"
             :class="{invalid, disabled}"
@@ -23,9 +25,8 @@
                    :id="name"
                    :name="name"
                    type="checkbox"
-                   :value="value"
+                   v-model="state"
                    :disabled="disabled"
-                   :required="required"
                    @input="$emit('input', !value)"
                    @change="$emit('change', !value)"
                />
