@@ -6,6 +6,9 @@
     export default {
         name: "UsersEdit",
         beforeCreate() {
+            this.$bind.mapGetters('Auth', {
+                userId: 'entity.id',
+            })
             this.$bind.mapGetters('UserResource', {
                 entity: 'entity',
             })
@@ -91,6 +94,7 @@
                         label="Role "
                         help="Select user role."
                         v-model="entity.role"
+                        v-if="userId !== entity.id"
                         :options="roles"
                     />
 
