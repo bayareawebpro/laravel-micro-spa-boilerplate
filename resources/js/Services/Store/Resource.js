@@ -1,5 +1,6 @@
 "use strict";
 import Controller from "./Controller"
+import Route from "../Router/Route"
 
 export default class Resource extends Controller {
 
@@ -24,6 +25,8 @@ export default class Resource extends Controller {
             entity: null,
             resource: null,
             loading: undefined,
+            editing: undefined,
+            destroying: undefined,
         }
     }
 
@@ -157,7 +160,7 @@ export default class Resource extends Controller {
             const {data} = await this.$http.put(`/api/${this.resourceKey}/${id}`, params)
 
             await this.$state.update(data)
-                .forget('updating')
+                .forget('editing')
                 .forget('loading')
 
             await this.updateCollectionEntity(data.entity)
@@ -197,12 +200,12 @@ export default class Resource extends Controller {
      * Update Existing Entity in Collection
      * @param entity {Object}
      */
-    updateCollectionEntity(entity){
-        if(this.$state.hasEntries('resource.data')){
-            if(this.$state.firstWhere('resource.data', 'id', entity)) {
+    updateCollectionEntity(entity) {
+        if (this.$state.hasEntries('resource.data')) {
+            if (this.$state.firstWhere('resource.data', 'id', entity)) {
                 this.$state.mergeWhere('resource.data', 'id', entity)
-            }else{
-                this.$state.append('resource.data',entity)
+            } else {
+                this.$state.append('resource.data', entity)
             }
         }
     }
@@ -211,9 +214,9 @@ export default class Resource extends Controller {
      * Remove Existing Entity in Collection
      * @param entity {Object}
      */
-    removeCollectionEntity(entity){
-        if(this.$state.hasEntries('resource.data')){
-            if(this.$state.firstWhere('resource.data', 'id', entity)) {
+    removeCollectionEntity(entity) {
+        if (this.$state.hasEntries('resource.data')) {
+            if (this.$state.firstWhere('resource.data', 'id', entity)) {
                 this.$state
                     .rejectWhere('resource.data', 'id', entity)
                     .decrement('resource.pagination.total')
@@ -225,11 +228,15 @@ export default class Resource extends Controller {
      * Reload Collection
      * @param redirect {Boolean}
      */
-    reloadCollection(redirect){
+    reloadCollection(redirect) {
         if (redirect) {
-            this.$request.replace(
-                this.$link(`${this.resourceKey}.index`).withQuery({page: 1}),
-                ()=>null, ()=>this.index())
+            if (redirect instanceof Route) {
+                this.$request.replace(redirect)
+            } else {
+                this.$request.replace(
+                    this.$link(`${this.resourceKey}.index`).withQuery({page: 1}),
+                    () => null, () => this.index())
+            }
         }
     }
 }

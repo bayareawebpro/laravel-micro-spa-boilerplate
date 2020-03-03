@@ -18,8 +18,8 @@
                 store: 'store',
             })
             this.$bind.mapState('UserResource', {
-                $errors: '$errors',
                 $request: '$request',
+                $errors: '$errors',
                 roles: 'roles',
             })
         },
@@ -131,30 +131,20 @@
                     <!--                    />-->
                 </div>
                 <div class="card-actions">
-                    <template
-                        v-if="entity.id">
-                        <v-action
-                            dusk="action-update"
-                            class="btn-lg btn-blue"
-                            :disabled="isLoading('users.update')"
-                            @click="update(entity)">
-                            Update
-                        </v-action>
-
-                        <v-action
-                            dusk="action-update"
-                            class="btn-lg btn-blue"
-                            :disabled="isLoading('users.update')"
-                            @click="update(entity, false)">
-                            Save
-                        </v-action>
-                    </template>
+                    <v-action
+                        v-if="entity.id"
+                        dusk="action-update"
+                        class="btn-lg btn-blue"
+                        :disabled="isLoading('users.update')"
+                        @click="update(entity, $link('users.show').withParams(entity))">
+                        Update
+                    </v-action>
                     <v-action
                         v-else
                         dusk="action-save"
                         class="btn-lg btn-blue"
                         :disabled="isLoading('users.store')"
-                        @click="store(entity)">
+                        @click="store(entity, $link('users.show').withParams(entity))">
                         Save
                     </v-action>
                 </div>

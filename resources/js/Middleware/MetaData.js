@@ -5,6 +5,10 @@ export default class MetaData {
         this.app = App
     }
 
+    static get global(){
+        return true
+    }
+
     /**
      * Handle Next.
      * @param request {Request}
@@ -12,7 +16,9 @@ export default class MetaData {
      * @return {*}
      */
     async handle(request, next) {
+        console.log(request.get('to.meta.title','Your Website'))
         document.title = request.get('to.meta.title','Your Website')
+
         return next(request)
     }
 

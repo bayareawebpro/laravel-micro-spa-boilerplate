@@ -67,16 +67,9 @@
 ### Packages
 - Searchable Resource
 - AirLock Auth
-
-
 - Axios Http Client
 - Axios Progress Bar
-
-
 - LaravelMicro.js
 - Vue.js
-
-
 - Tailwind CSS
 - Font Awesome
-- SVGs

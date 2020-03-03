@@ -83,7 +83,7 @@
             </template>
             <template v-slot:actions>
                 <v-action
-                    :focus="true"
+                    :focused="true"
                     dusk="destroy-confirm"
                     @click="destroy(destroying)" class="btn-green">
                     <i class="fa fa-check-circle"/> Destroy

@@ -31,10 +31,6 @@ class AccountController extends Controller
     {
         $data = $request->validate(User::validationRules($user));
 
-        if (isset($data['password'])) {
-            $data['password'] = Hash::make($data['password']);
-        }
-
         $user->update($data);
 
         return response([

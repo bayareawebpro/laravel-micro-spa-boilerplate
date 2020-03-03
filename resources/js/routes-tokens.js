@@ -4,17 +4,11 @@ import Route from "./Services/Router/VueRoute"
 
 export default [
     Route
-        .group('/tokens')
-        .withProps({
-            title: 'Tokens',
-            subtitle: 'Resource',
-        })
-        .view(() => import(/*webpackChunkName:"tokens"*/ "@views/tokens/Layout"))
-        .group([
+        .group('/tokens', ()=>import(/*webpackChunkName:"tokens"*/ "@views/tokens/Layout"), [
             Route
                 .to('tokens.index', '/tokens')
                 .view(() => import(/*webpackChunkName:"tokens"*/ "@views/tokens/Resource"))
-                .uses('TokenResource@index')
+                //.uses('TokenResource@index')
                 .middleware('auth'),
             Route
                 .to('tokens.create', '/tokens/create')
@@ -32,4 +26,8 @@ export default [
                 .uses('TokenResource@edit')
                 .middleware('auth'),
         ])
+        .withProps({
+            title: 'Tokens',
+            subtitle: 'Resource',
+        })
 ]

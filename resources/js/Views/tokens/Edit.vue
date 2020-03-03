@@ -3,11 +3,11 @@
         name: "TokenEdit",
         beforeCreate() {
             this.$bind.mapGetters('TokenResource', {
+                destroying: 'destroying',
                 abilities: 'abilities',
                 entity: 'entity',
             })
             this.$bind.mapActions('TokenResource', {
-                backToIndex: 'reloadCollection',
                 update: 'update',
                 create: 'create',
                 store: 'store',
@@ -18,16 +18,13 @@
             })
         },
         created() {
-            this.$errors.clear()
+            //this.$errors.clear()
             if(!this.entity.abilities.length){
                 this.entity.abilities.push({})
             }
-            if(this.$route.query.user_id){
-                this.entity.user_id = this.$route.query.user_id
-            }
         },
         beforeDestroy() {
-            this.$errors.clear()
+            //this.$errors.clear()
         },
     }
 </script>
@@ -101,13 +98,22 @@
                         class="btn-lg btn-green">
                         {{ entity.id ? 'Update' : 'Create' }}
                     </v-action>
+
+                    <v-action
+                        v-if="entity.id"
+                        type="button"
+                        dusk="action-destroy"
+                        class="btn-lg btn-red">
+                        Destroy
+                    </v-action>
                 </div>
             </div>
         </form>
+
         <v-modal
-            dusk="modal-destroy"
+            dusk="modal-token"
             v-model="entity.token"
-            @closed="$router.push($link('tokens.edit').withParams({id:entity.id}))">
+            @closed="$router.push($link('tokens.index').withQuery({page:1}))">
             <template v-slot:title>
                 Token Created
             </template>
@@ -123,7 +129,7 @@
                     :aria-readonly="true"
                 />
                 <v-action
-                    :focus="true"
+                    :focused="true"
                     class="btn-green btn-xl"
                     @click="$refs.token.clipboard()">
                     <i class="fa fa-clipboard"/> Copy
@@ -137,5 +143,6 @@
                 </v-action>
             </template>
         </v-modal>
+
     </div>
 </template>

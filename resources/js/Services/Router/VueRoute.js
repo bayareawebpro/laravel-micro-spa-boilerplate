@@ -30,10 +30,14 @@ export default class VueRoute extends Route{
     /**
      * Make new Route instance.
      * @param path {String}
+     * @param view {Function}
+     * @param children {Array}
      * @return {VueRoute}
      */
-    static group(path = null) {
+    static group(path = null, view = null, children = []) {
         return new VueRoute(null,path)
+            .group(children)
+            .view(view)
     }
 
     /**

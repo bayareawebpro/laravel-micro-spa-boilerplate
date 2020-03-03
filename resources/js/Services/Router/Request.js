@@ -84,7 +84,7 @@ export default class Request extends Repository {
         if (this.app.isBound('Middleware')) {
             return this.app
                 .make('Middleware')
-                .filter(([alias, abstract]) => this.hasMiddleware(alias.toLowerCase()))
+                .filter(([alias, abstract]) => abstract.global || this.hasMiddleware(alias.toLowerCase()))
                 .map(([alias, abstract]) => abstract)
         }
         return [];

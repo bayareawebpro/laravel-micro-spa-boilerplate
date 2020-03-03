@@ -52,8 +52,7 @@ export default class RouterServiceProvider extends ServiceProvider {
         this.app.bind('Middleware', () => this.app
             .make('AutoLoader')
             .context(require.context('@middleware', true, /\.js$/))
-            .toObjectEntries()
-        )
+            .toObjectEntries())
     }
 
     /**

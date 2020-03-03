@@ -43,7 +43,7 @@
                 </transition>
              </template>
             <template v-slot:actions>
-                <v-action :focus="true" @click="modal= null" class="btn-green mr-1">
+                <v-action :focused="true" @click="modal= null" class="btn-green mr-1">
                     <i class="fa fa-check-circle"/> Done
                 </v-action>
                 <button class="btn btn-xs ml-auto" @click="modal=true"><i class="fa fa-window-restore"></i> Responsive</button>

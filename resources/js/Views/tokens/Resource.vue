@@ -7,16 +7,18 @@
     export default {
         name: "UserResource",
         beforeCreate() {
-            this.$bind.mapActions('TokenResource', {
-                index: 'index',
-                destroy: 'destroy',
-            })
-            this.$bind.mapState('TokenResource', {
-                $errors: '$errors',
+            this.$bind.mapWatchers('TokenResource', {
+                '$route.query': {
+                    immediate: true,
+                    handler: 'index'
+                },
             })
             this.$bind.mapGetters('TokenResource', {
                 destroying: 'destroying',
                 resource: 'resource',
+            })
+            this.$bind.mapState('TokenResource', {
+                $errors: '$errors',
             })
         },
     }
@@ -47,7 +49,7 @@
                         <router-link
                             dusk="entry-show"
                             class="block"
-                            :to="{name: 'tokens.show', params: {id: entry.id}}">
+                            :to="$link('tokens.show').withParams({id: entry.id})">
                             <i class="fa fa-key text-blue-500"/> <strong>{{ entry.name }}</strong>
                         </router-link>
                         <v-action
@@ -86,28 +88,5 @@
             </template>
         </v-resource>
 
-        <v-modal v-model="destroying" dusk="modal-destroy">
-            <template v-slot:title>
-                Destroy Token?
-            </template>
-            <template v-slot:content>
-                <p><strong>Username:</strong> {{ destroying.tokenable.name }}</p>
-                <p><strong>Tokenable:</strong> {{ destroying.tokenable_type }} ({{ destroying.tokenable_id }})</p>
-                <p><strong>Abilities:</strong> {{ destroying.abilities.join(', ') }}</p>
-            </template>
-            <template v-slot:actions>
-                <v-action
-                    :focus="true"
-                    dusk="destroy-confirm"
-                    @click="destroy(destroying)" class="btn-green">
-                    <i class="fa fa-check-circle"/> Destroy
-                </v-action>
-                <v-action
-                    dusk="destroy-cancel"
-                    @click="destroying = null" class="btn-red ml-auto">
-                    <i class="fa fa-close"/> Cancel
-                </v-action>
-            </template>
-        </v-modal>
     </div>
 </template>

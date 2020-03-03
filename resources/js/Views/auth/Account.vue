@@ -83,8 +83,9 @@
                     <v-action
                         type="submit"
                         dusk="action-submit"
+                        class="btn-lg btn-green"
                         :loading="isLoading('account.update')">
-                        Update
+                        Save
                     </v-action>
                 </div>
             </form>

@@ -31,13 +31,33 @@ class AutoBinder {
     }
 
     /**
-     * Map Root State
-     * @param alias {String}
+     * Map Watchers
+     * @param binding {String}
      * @param propMap {Object}
      * @return this
      */
-    mapState(alias, propMap) {
-        const instance = this.$app.make(alias)
+    mapWatchers(binding, propMap){
+        const instance = this.$app.make(binding)
+        Object.entries(propMap).forEach(([alias, config]) => {
+            this.options.watch = this.options.watch || {}
+            if(typeof config === 'string'){
+                config = {handler: instance[config].bind(instance)}
+            }else{
+                config.handler = instance[config.handler].bind(instance)
+            }
+            this.options.watch[alias] = config
+        })
+        return this
+    }
+
+    /**
+     * Map Instance State
+     * @param binding {String}
+     * @param propMap {Object}
+     * @return this
+     */
+    mapState(binding, propMap) {
+        const instance = this.$app.make(binding)
         Object.entries(propMap).forEach(([alias, callbackOrProp]) => {
             this.options.computed = this.options.computed || {}
             this.options.computed[alias] = {
@@ -51,15 +71,15 @@ class AutoBinder {
 
     /**
      * Map Actions
-     * @param alias {String}
+     * @param binding {String}
      * @param actionMap {Object}
      * @return this
      */
-    mapActions(alias, actionMap) {
-        const instance = this.$app.make(alias)
+    mapActions(binding, actionMap) {
+        const instance = this.$app.make(binding)
         Object.entries(actionMap).forEach(([alias, method]) => {
             if (typeof instance[method] !== 'function') {
-                throw new Error(`mapAction ${alias} => ${method} not found.`)
+                throw new Error(`mapAction ${binding} => ${method} not found.`)
             }
             this.options.methods = this.options.methods || {}
             this.options.methods[alias] = (...args)=>{
@@ -71,16 +91,16 @@ class AutoBinder {
 
     /**
      * Map Getters
-     * @param alias {String}
+     * @param binding {String}
      * @param propMap {Object}
      * @return this
      */
-    mapGetters(alias, propMap) {
-        const instance = this.$app.make(alias)
+    mapGetters(binding, propMap) {
+        const instance = this.$app.make(binding)
         Object.entries(propMap).forEach(([alias, accessor]) => {
             this.options.computed = this.options.computed || {}
             if(typeof (instance.$state || instance).get !== 'function'){
-                throw new Error(`${alias} does not provide a get/set interface.`)
+                throw new Error(`${binding} does not have a $state property or provide a get/set interface.`)
             }
             this.options.computed[alias] = {
                 set: (val) => (instance.$state || instance).set(accessor, val),

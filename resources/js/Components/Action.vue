@@ -6,7 +6,7 @@
                 type: [Boolean, String, null],
                 default: ()=>false,
             },
-            focus: {
+            focused: {
                 type: [Boolean],
                 default: ()=>false,
             },
@@ -26,10 +26,13 @@
                 }
                 this.$emit('click', e)
             },
+            focus(){
+                this.$refs.button.focus()
+            }
         },
         created() {
-            if(this.focus){
-                this.$nextTick(()=>this.$refs.button.focus())
+            if(this.focused){
+                this.$nextTick(this.focus)
             }
         }
     }
@@ -38,8 +41,8 @@
     <button
         ref="button"
         :type="type"
-        :disabled="disabled"
         @click="onClick"
+        :disabled="disabled"
         class="btn overflow-hidden"
         :class="{disabled, loading}">
         <transition name="fadeInRight" mode="out-in">
