@@ -22,10 +22,15 @@ export default class Authenticated {
      * @param payload {Object}
      */
     handle(payload) {
-        this.app.make('Auth').initState()
-        this.app.make('Menus').initState()
-        this.app.make('Pages').initState()
-        this.app.make('TokenResource').initState()
-        this.app.make('UserResource').initState()
+        const bindings = [
+            'Auth', 'Menus', 'Pages',
+            'TokenResource',
+            'UserResource',
+        ]
+        bindings.forEach((alias)=>{
+            if(this.app.isResolved(alias)){
+                this.app.getInstance(alias).initState()
+            }
+        })
     }
 }

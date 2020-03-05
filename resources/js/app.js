@@ -7,8 +7,8 @@
 import Application from "./application"
 import AutoLoader from "./utilities/AutoLoader"
 import ErrorHandler from "./Utilities/ErrorHandler"
-import {AppServiceProvider} from "laravel-micro.js"
-
+import {AppServiceProvider, Repository} from "laravel-micro.js"
+import Route from "./Services/Router/VueRoute"
 /**
  * Boot Application
  */
@@ -18,16 +18,10 @@ App.register(AppServiceProvider)
 App.setInstance('AutoLoader', AutoLoader)
 App.loadProviders()
 App.bootProviders()
-App.make('VueRoot')
-
-/**
- * Get Configuration
- */
-const config = App.make('Config')
-
-/**
- * Install Service Worker
- */
-if(['production'].includes(config.get('environment'))){
-    App.make('Worker').then((worker) => worker.install())
-}
+App.make('VueRoot').$nextTick(()=>{
+    const config = App.make('Config')
+    if(['production'].includes(config.get('environment'))){
+        App.make('Worker').then((worker) => worker.install())
+    }
+    console.log('Loaded')
+})

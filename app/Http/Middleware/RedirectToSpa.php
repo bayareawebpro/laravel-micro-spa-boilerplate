@@ -16,9 +16,10 @@ class RedirectToSpa
      */
     public function handle($request, Closure $next)
     {
-        if($request->isXmlHttpRequest() || $request->wantsJson()){
-            return $next($request);
-        }
-        return redirect(RouteServiceProvider::HOME);
+        return $next($request);
+//        if($request->isXmlHttpRequest() || $request->wantsJson()){
+//            return $next($request);
+//        }
+//        return redirect(RouteServiceProvider::HOME);
     }
 }

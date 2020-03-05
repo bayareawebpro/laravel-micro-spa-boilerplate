@@ -31,7 +31,7 @@
                 Destroy Token?
             </template>
             <template v-slot:content>
-                <p><strong>Username:</strong> {{ destroying.tokenable.name }}</p>
+                <p v-if="destroying.tokenable"><strong>Username:</strong> {{ destroying.tokenable.name }}</p>
                 <p><strong>Tokenable:</strong> {{ destroying.tokenable_type }} ({{ destroying.tokenable_id }})</p>
                 <p><strong>Abilities:</strong> {{ destroying.abilities.join(', ') }}</p>
             </template>

@@ -16,9 +16,7 @@ export default class MetaData {
      * @return {*}
      */
     async handle(request, next) {
-        console.log(request.get('to.meta.title','Your Website'))
-        document.title = request.get('to.meta.title','Your Website')
-
+        document.title = request.get('to.meta.title') || this.app.make('Config').get('title')
         return next(request)
     }
 

@@ -1,23 +1,24 @@
 export default {
-    install(Vue, {app}) {
+    install(Vue, {app, alias}) {
+        const instance = new MicroVue(app)
         Object.defineProperty(Vue.prototype, '$bind', {
             configurable: true,
             get() {
                 this.$options.computed = this.$options.computed || {}
                 this.$options.methods = this.$options.methods || {}
-                return new AutoBinder(app).bindTo(this.$options)
+                return instance.bindTo(this.$options)
             }
         })
     },
 }
-class AutoBinder {
+class MicroVue {
 
     /**
      * AutoBinder Constructor
      * @param App {Container}
      */
     constructor(App) {
-        this.$app = App
+        this.app = App
     }
 
     /**
@@ -31,18 +32,31 @@ class AutoBinder {
     }
 
     /**
+     * Resolve Binding Signature
+     * @param signature {String}
+     * @return {Function|Object}
+     */
+    resolve(signature){
+        if(signature.includes('@')){
+            const [bind, method] = signature.split('@')
+            return this.app.make(bind)[method]
+        }
+        return this.app.make(signature)
+    }
+
+    /**
      * Map Watchers
-     * @param binding {String}
-     * @param propMap {Object}
+     * @param bind {String}
+     * @param map {Object}
      * @return this
      */
-    mapWatchers(binding, propMap){
-        const instance = this.$app.make(binding)
-        Object.entries(propMap).forEach(([alias, config]) => {
+    mapWatchers(bind, map){
+        const instance = this.resolve(bind)
+        Object.entries(map).forEach(([alias, config]) => {
             this.options.watch = this.options.watch || {}
             if(typeof config === 'string'){
                 config = {handler: instance[config].bind(instance)}
-            }else{
+            }else if(typeof instance[config.handler] === 'function'){
                 config.handler = instance[config.handler].bind(instance)
             }
             this.options.watch[alias] = config
@@ -52,38 +66,19 @@ class AutoBinder {
 
     /**
      * Map Instance State
-     * @param binding {String}
-     * @param propMap {Object}
+     * @param bind {String}
+     * @param map {Object}
+     * @param cache {Boolean}
      * @return this
      */
-    mapState(binding, propMap) {
-        const instance = this.$app.make(binding)
-        Object.entries(propMap).forEach(([alias, callbackOrProp]) => {
+    mapState(bind, map, cache = true) {
+        const instance = this.resolve(bind)
+        Object.entries(map).forEach(([alias, accessor]) => {
             this.options.computed = this.options.computed || {}
             this.options.computed[alias] = {
-                get: ()=> typeof callbackOrProp === 'function' ? callbackOrProp(instance) : instance[callbackOrProp],
-                set: (val)=> instance[callbackOrProp] = val,
-                cache: true,
-            }
-        })
-        return this
-    }
-
-    /**
-     * Map Actions
-     * @param binding {String}
-     * @param actionMap {Object}
-     * @return this
-     */
-    mapActions(binding, actionMap) {
-        const instance = this.$app.make(binding)
-        Object.entries(actionMap).forEach(([alias, method]) => {
-            if (typeof instance[method] !== 'function') {
-                throw new Error(`mapAction ${binding} => ${method} not found.`)
-            }
-            this.options.methods = this.options.methods || {}
-            this.options.methods[alias] = (...args)=>{
-                return instance[method].bind(instance)(...args)
+                get: ()=> typeof accessor === 'function' ? accessor(instance) : instance[accessor],
+                set: (val)=> instance[accessor] = val,
+                cache: cache
             }
         })
         return this
@@ -91,21 +86,42 @@ class AutoBinder {
 
     /**
      * Map Getters
-     * @param binding {String}
-     * @param propMap {Object}
+     * @param bind {String}
+     * @param map {Object}
+     * @param cache {Boolean}
      * @return this
      */
-    mapGetters(binding, propMap) {
-        const instance = this.$app.make(binding)
-        Object.entries(propMap).forEach(([alias, accessor]) => {
+    mapGetters(bind, map, cache = true) {
+        const instance = this.resolve(bind)
+        Object.entries(map).forEach(([alias, accessor]) => {
             this.options.computed = this.options.computed || {}
             if(typeof (instance.$state || instance).get !== 'function'){
-                throw new Error(`${binding} does not have a $state property or provide a get/set interface.`)
+                throw new Error(`${bind} does not have a $state property or provide a get/set interface.`)
             }
             this.options.computed[alias] = {
                 set: (val) => (instance.$state || instance).set(accessor, val),
                 get: () => (instance.$state || instance).get(accessor),
-                cache: true,
+                cache: cache,
+            }
+        })
+        return this
+    }
+
+    /**
+     * Map Actions
+     * @param bind {String}
+     * @param actionMap {Object}
+     * @return this
+     */
+    mapActions(bind, actionMap) {
+        const instance = this.resolve(bind)
+        Object.entries(actionMap).forEach(([alias, method]) => {
+            if (typeof instance[method] !== 'function') {
+                throw new Error(`mapAction ${bind} => ${method} not found.`)
+            }
+            this.options.methods = this.options.methods || {}
+            this.options.methods[alias] = (...args)=>{
+                return instance[method].bind(instance)(...args)
             }
         })
         return this

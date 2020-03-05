@@ -17,9 +17,6 @@
                 destroying: 'destroying',
                 resource: 'resource',
             })
-            this.$bind.mapState('TokenResource', {
-                $errors: '$errors',
-            })
         },
     }
 </script>
@@ -87,6 +84,5 @@
                 </div>
             </template>
         </v-resource>
-
     </div>
 </template>

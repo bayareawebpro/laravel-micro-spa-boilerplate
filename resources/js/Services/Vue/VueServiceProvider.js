@@ -1,8 +1,8 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
-import AutoBinder from './AutoBinder'
 import VueRoot from '@views/VueRoot'
+import AutoBinder from './AutoBinder'
 import VueScrollTo from 'vue-scrollto'
+import bytesForHumans from './Filters/bytesForHumans'
 import {ServiceProvider} from 'laravel-micro.js'
 export default class VueServiceProvider extends ServiceProvider {
 
@@ -21,15 +21,8 @@ export default class VueServiceProvider extends ServiceProvider {
      * @return void
      */
     registerDependants() {
-        Vue.use(VueRouter)
         Vue.use(AutoBinder, {
             app: this.app,
-        })
-        Vue.filter('bytesForHumans', (bytes)=>{
-            let sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB'];
-            if (bytes === 0) return '-';
-            let i = Math.floor(Math.log(bytes) / Math.log(1024));
-            return Math.round(bytes / Math.pow(1024, i)) + ' ' + sizes[i];
         })
         Vue.use(VueScrollTo, {
             container: "body",
@@ -79,6 +72,8 @@ export default class VueServiceProvider extends ServiceProvider {
             .make('AutoLoader')
             .context(require.context('@components', true, /\.vue$/))
             .components(Vue.component.bind(Vue))
+
+        Vue.filter('bytesForHumans', bytesForHumans)
     }
 
     /**

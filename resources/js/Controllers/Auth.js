@@ -86,10 +86,10 @@ export default class Auth extends Controller {
                     .forget('loading')
 
                 await this.$events.$emit('auth:login')
-                await this.$request.replace(
-                    this.$request.pull('to.query.redirect')
-                    || this.$link('dashboard')
-                )
+
+                const next = this.$request.pull('to.query.redirect') || this.$link('dashboard')
+
+                await this.$request.replace(next)
             })
         } catch (error) {
             await this.$state.forget('loading')
@@ -185,7 +185,7 @@ export default class Auth extends Controller {
                 .update(data)
                 .forget('loading')
 
-            await this.$router.push({name: 'auth.login'})
+            await this.$router.push(this.$link('dashboard'))
 
         } catch (error) {
             await this.$state.forget('loading')

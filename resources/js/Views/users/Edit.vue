@@ -136,7 +136,7 @@
                         dusk="action-update"
                         class="btn-lg btn-blue"
                         :disabled="isLoading('users.update')"
-                        @click="update(entity, $link('users.show').withParams(entity))">
+                        @click="update(entity, $link('users.show').withParams({id: entity.id}))">
                         Update
                     </v-action>
                     <v-action
@@ -144,7 +144,7 @@
                         dusk="action-save"
                         class="btn-lg btn-blue"
                         :disabled="isLoading('users.store')"
-                        @click="store(entity, $link('users.show').withParams(entity))">
+                        @click="store(entity, $link('users.show').withParams({id: entity.id}))">
                         Save
                     </v-action>
                 </div>

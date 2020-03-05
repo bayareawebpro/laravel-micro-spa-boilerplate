@@ -22,7 +22,10 @@ if(App::environment('local')){
     });
 }
 
+Route::any('screen/{method?}', 'Screens\SettingsScreen');
+
 Route::group(['middleware' => 'auth:airlock'], function(){
+
     Route::get('pages/{slug}', 'PageController@show');
     Route::resource('users','UserController');
     Route::resource('tokens','TokenController');

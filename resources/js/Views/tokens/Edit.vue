@@ -102,6 +102,7 @@
                     <v-action
                         v-if="entity.id"
                         type="button"
+                        @click="destroying = entity"
                         dusk="action-destroy"
                         class="btn-lg btn-red">
                         Destroy

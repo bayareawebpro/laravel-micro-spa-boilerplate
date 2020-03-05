@@ -2,6 +2,7 @@
     export default {
         name: "PasswordForgot",
         data: () => ({
+            sent: false,
             entity: {
                 email: null,
                 password: null,
@@ -17,6 +18,9 @@
                 $errors: '$errors',
             })
         },
+        created() {
+            this.$errors.clear()
+        },
         beforeDestroy() {
             this.$errors.clear()
         },
@@ -28,7 +32,7 @@
             <div class="card-header">
                 Forgot Password
             </div>
-            <form ref="form" @submit.prevent="submit(entity)">
+            <form v-if="!sent" ref="form" @submit.prevent="submit(entity).then(()=>sent=true)">
                 <div class="card-content">
                     <v-form-message v-model="$errors.message"/>
                     <v-input
@@ -59,6 +63,12 @@
                     </router-link>
                 </div>
             </form>
+            <div v-else class="card-content">
+                <div class="alert success font-bold">
+                    <i class="fa fa-check-circle mr-2"/> Sent Successfully.
+                </div>
+                <p class="text-sm">Please check your email for further instructions.</p>
+            </div>
         </div>
     </div>
 </template>

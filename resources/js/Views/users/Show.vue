@@ -26,7 +26,7 @@
                     tag="button"
                     dusk="entry-show"
                     class="btn btn-blue"
-                    :to="$link('users.edit').withParams(entity)">
+                    :to="$link('users.edit').withParams({id: entity.id})">
                     <i class="fa fa-edit"/> Edit
                 </router-link>
             </div>
