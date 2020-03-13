@@ -11,7 +11,7 @@ export default class HttpServiceProvider extends ServiceProvider{
 
         this.app.bind('Worker',async ()=>{
             const exported = await import(/*webpackChunkName:"http-worker"*/ './WorkerService')
-            return await this.app.bind('Worker', exported.default).rebound('Worker')
+            return this.app.bind('Worker', exported.default).rebound('Worker')
         })
     }
 
@@ -19,9 +19,8 @@ export default class HttpServiceProvider extends ServiceProvider{
      * Boot any application services
      * @return void
      */
-    async boot() {
-        const exported = await import(/*webpackChunkName:"http-progress"*/ './HttpProgress')
-        await this.app.make('Http').useProgressBar(exported.default)
+    boot() {
+
     }
 
     /**

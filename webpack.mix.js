@@ -88,4 +88,8 @@ if (mix.inProduction()) {
             })
         ],
     })
+} else {
+    mix.webpackConfig({
+        devtool: 'cheap-source-map'
+    });
 }

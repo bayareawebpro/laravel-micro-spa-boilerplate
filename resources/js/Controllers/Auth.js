@@ -131,20 +131,14 @@ export default class Auth extends Controller {
             await this.$errors.clear()
             await this.$state.put('loading', 'auth.logout')
 
-            await this.$http.get('/airlock/csrf-cookie').then(async () => {
+            const response = await this.$http.get('/airlock/csrf-cookie')
+            const {data} = await this.$http.post('/logout')
 
-                await this.$http.post('/logout').then(async () => {
+            await this.$state.set('entity', null).forget('loading')
 
-                    await this.$state
-                        .set('entity', null)
-                        .forget('loading')
-
-                    await this.$events.$emit('auth:logout')
-                    await this.$request.replace(this.$link('auth.login'))
-                })
-            })
+            await this.$events.$emit('auth:logout')
+            await this.$request.replace(this.$link('auth.login'))
         } catch (error) {
-            await this.$state.forget('loading')
             await this.handleError(error)
         }
     }

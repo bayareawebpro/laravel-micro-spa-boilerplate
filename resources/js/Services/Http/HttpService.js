@@ -1,11 +1,13 @@
 import Axios from 'axios'
+import {loadProgressBar} from 'axios-progress-bar'
+require('axios-progress-bar/dist/nprogress.css')
 export default class HttpService {
 
     constructor(Events) {
         this.$events = Events
         this.$client = Axios
+        this.$client.defaults.withCredentials = true
         this.$client.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
-        this.$client.defaults.withCredentials = true;
         this.$client.interceptors.response.use(
             this.onResponse.bind(this),
             this.onError.bind(this)
@@ -14,18 +16,8 @@ export default class HttpService {
             this.onRequest.bind(this),
             this.onError.bind(this)
         )
-    }
-
-    /**
-     * Use a progress bar package.
-     * @param loadProgressBar {Function}
-     * @return {HttpService}
-     */
-    useProgressBar(loadProgressBar){
         loadProgressBar(this.$client)
-        return this
     }
-
     /**
      * Response Handler
      * @param request {Object}

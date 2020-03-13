@@ -1,17 +1,16 @@
 {
-    "/js/app.js": "/js/app.js?id=e65e7f44814380fe1abb",
+    "/js/app.js": "/js/app.js?id=51005101e276f39d1b4f",
     "/css/app.css": "/css/app.css?id=ecf99824bbfb028bb086",
     "/js/auth.js": "/js/auth.js?id=a90fdfc42039a5a5368d",
     "/js/base.js": "/js/base.js?id=626899c2fe9728746e9d",
     "/js/dashboard.js": "/js/dashboard.js?id=057560458df7657ff9f6",
     "/js/developer.js": "/js/developer.js?id=3b3ed82cdf6709150ca6",
     "/js/home.js": "/js/home.js?id=2f3fd16a7242277948bd",
-    "/js/http-progress.js": "/js/http-progress.js?id=af71b72dad942e1742a9",
-    "/js/http-worker.js": "/js/http-worker.js?id=12cc39d274d124a0efbe",
-    "/js/tokens.js": "/js/tokens.js?id=eda16b6b8bf3f50f2cb9",
-    "/js/users.js": "/js/users.js?id=8b329b6961624f4d63ff",
-    "/js/vendors~dashboard.js": "/js/vendors~dashboard.js?id=6189e7e9c47e4dc9931b",
-    "/js/vendors~frappe-charts.js": "/js/vendors~frappe-charts.js?id=c1d33fa5ea01fd847119",
+    "/js/http-worker.js": "/js/http-worker.js?id=9c2cd9a411945d997dea",
+    "/js/tokens.js": "/js/tokens.js?id=03cdc7757e45e1c39e2b",
+    "/js/users.js": "/js/users.js?id=8c80a7c754428e662f13",
+    "/js/vendors~dashboard.js": "/js/vendors~dashboard.js?id=ad19c9a2170548a785bf",
+    "/js/vendors~frappe-charts.js": "/js/vendors~frappe-charts.js?id=b1b35ef6e9b13b0849d4",
     "/worker.js": "/worker.js?id=c4f3d7bb1399c89f5b57",
     "/manifest.json": "/manifest.json?id=8e7b26ebeea4f54b5895"
 }

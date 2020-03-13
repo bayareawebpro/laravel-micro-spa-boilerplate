@@ -1,0 +1,1 @@
+{"version":3,"file":"js/http-progress.js","sources":["webpack:///./resources/js/Services/Http/HttpProgress.js"],"sourcesContent":["import { loadProgressBar } from 'axios-progress-bar';\nimport 'axios-progress-bar/dist/nprogress.css';\nexport default loadProgressBar;"],"mappings":";;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AACA;AACA;;;;A","sourceRoot":""}
