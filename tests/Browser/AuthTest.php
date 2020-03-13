@@ -12,8 +12,8 @@ class AuthTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
 
-            $browser->visit('/auth/register');
-            $browser->assertPathIs('/auth/register');
+            $browser->visit('/register');
+            $browser->assertPathIs('/register');
             $browser->waitForText('Register');
 
             $browser->assertSee('Name');
@@ -31,7 +31,7 @@ class AuthTest extends DuskTestCase
             $browser->type('email', 'test@test.test');
             $browser->type('password', 'password');
             $browser->type('password_confirmation', 'password');
-            $browser->click('@submit');
+            $browser->click('@action-register');
 
             $browser->waitForLocation('/account/edit');
             $browser->assertPathIs('/account/edit');
@@ -48,8 +48,8 @@ class AuthTest extends DuskTestCase
 
         $this->browse(function (Browser $browser) use ($user) {
 
-            $browser->visit('/auth/login');
-            $browser->assertPathIs('/auth/login');
+            $browser->visit('/login');
+            $browser->assertPathIs('/login');
             $browser->waitForText('Login');
 
             $browser->click('@submit');

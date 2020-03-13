@@ -166,8 +166,7 @@ return [
     |
     */
 
-    'secure' => env('SESSION_SECURE_COOKIE', false),
-
+    'secure' => env('SESSION_SECURE_COOKIE', null),
     /*
     |--------------------------------------------------------------------------
     | HTTP Access Only
@@ -193,7 +192,5 @@ return [
     | Supported: "lax", "strict", "none"
     |
     */
-
-    'same_site' => null,
-
+    'same_site' => 'lax',
 ];
