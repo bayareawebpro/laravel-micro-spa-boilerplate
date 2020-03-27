@@ -7,7 +7,7 @@
 import Application from "./application"
 import AutoLoader from "./utilities/AutoLoader"
 import ErrorHandler from "./Utilities/ErrorHandler"
-import {AppServiceProvider, Repository} from "laravel-micro.js"
+import {AppServiceProvider} from "laravel-micro.js"
 /**
  * Boot Application
  */

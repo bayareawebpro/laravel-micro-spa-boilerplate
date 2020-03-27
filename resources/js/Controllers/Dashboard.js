@@ -8,7 +8,7 @@ export default class Dashboard extends Controller {
 
     get schema() {
         return {
-            //
+            collection: [],
         }
     }
 

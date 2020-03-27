@@ -17,6 +17,8 @@ export default class Controller {
      */
     constructor(App) {
         this.$app = App
+        this.$errors = Vue.observable(new Validator)
+        this.$state = Vue.observable(new Repository(this.schema))
         this.initState()
     }
 
@@ -85,8 +87,8 @@ export default class Controller {
      */
     initState() {
         console.log(`${this.$app.getName(this)}::initState`)
-        this.$state = this.$state ? this.$state.sync(this.schema) : Vue.observable(new Repository(this.schema))
-        this.$errors = this.$errors ? this.$errors.setErrors() : Vue.observable(new Validator)
+        this.$state.sync(this.schema)
+        this.$errors.clear()
     }
 
     /**

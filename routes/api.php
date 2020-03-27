@@ -24,7 +24,7 @@ if(App::environment('local')){
 
 Route::any('screen/{method?}', 'Screens\SettingsScreen');
 
-Route::group(['middleware' => 'auth:airlock'], function(){
+Route::group(['middleware' => 'auth:sanctum'], function(){
 
     Route::get('pages/{slug}', 'PageController@show');
     Route::resource('users','UserController');

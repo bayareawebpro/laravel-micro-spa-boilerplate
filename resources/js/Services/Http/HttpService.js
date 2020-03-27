@@ -1,11 +1,11 @@
-import Axios from 'axios'
+import axios from 'axios'
 import {loadProgressBar} from 'axios-progress-bar'
 require('axios-progress-bar/dist/nprogress.css')
 export default class HttpService {
 
     constructor(Events) {
         this.$events = Events
-        this.$client = Axios
+        this.$client = axios
         this.$client.defaults.withCredentials = true
         this.$client.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
         this.$client.interceptors.response.use(
@@ -16,7 +16,7 @@ export default class HttpService {
             this.onRequest.bind(this),
             this.onError.bind(this)
         )
-        loadProgressBar(this.$client)
+        loadProgressBar()
     }
     /**
      * Response Handler
@@ -119,23 +119,54 @@ export default class HttpService {
     }
 
     /**
-     * Upload Request
+     * Post Upload Request
      * @param url {String}
      * @param data {Object}
      * @param config {Object}
      * @return {Promise<*>}
      */
-    async upload(url, data, config = {}) {
-        const formData = new FormData;
-        Object.entries(data).forEach(([key, value])=>{
-            formData.append(key, value);
-        })
+    async postUpload(url, data, config = {}) {
+        const formData = this.makeFormData(data)
+        formData.append('_method', 'post');
         return await this.$client.post(url, formData, {
             ...config,
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
         })
+    }
+
+    /**
+     * Put Upload Request
+     * @param url {String}
+     * @param data {Object}
+     * @param config {Object}
+     * @return {Promise<*>}
+     */
+    async putUpload(url, data, config = {}) {
+        const formData = this.makeFormData(data)
+        formData.append('_method', 'put');
+        return await this.$client.post(url, formData, {
+            ...config,
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+    }
+
+    /**
+     * To Form Data
+     * @param data {Object}
+     * @return {FormData}
+     */
+    makeFormData(data){
+        const formData = new FormData;
+        for (const prop in data) {
+            if(data.hasOwnProperty(prop)){
+                formData.append(prop, data[prop]);
+            }
+        }
+        return formData
     }
 
     /**

@@ -12,8 +12,8 @@
         "ext-json": "*",
         "bayareawebpro/searchable-resource": "@dev",
         "fideloper/proxy": "^4.2",
-        "laravel/airlock": "^1.0.1",
         "laravel/framework": "^7.0",
+        "laravel/sanctum": "^2.1",
         "laravel/telescope": "^3.1",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0"

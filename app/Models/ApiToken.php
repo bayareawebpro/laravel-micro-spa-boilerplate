@@ -6,7 +6,7 @@ use App\Services\AppPermissions;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
-use Laravel\Airlock\PersonalAccessToken;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class ApiToken extends PersonalAccessToken
 {

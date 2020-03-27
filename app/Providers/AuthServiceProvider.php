@@ -2,11 +2,10 @@
 
 namespace App\Providers;
 
-use App\Models\ApiToken;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
-use Laravel\Airlock\Airlock;
+use Laravel\Sanctum\Sanctum;
+use App\Models\ApiToken;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -26,7 +25,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Airlock::usePersonalAccessTokenModel(ApiToken::class);
+        Sanctum::usePersonalAccessTokenModel(ApiToken::class);
         $this->registerPolicies();
     }
 }

@@ -14,13 +14,17 @@ export default class Auth extends Controller {
     }
 
     /**
-     * Is the local state authorized?
+     * User Authorized?
      * @return {boolean}
      */
     get user() {
         return this.$state.get('entity')
     }
 
+    /**
+     * User Has Role?
+     * @return {boolean}
+     */
     hasRole(...roles){
         return roles.includes(this.$state.get('entity.role'))
     }
@@ -77,7 +81,7 @@ export default class Auth extends Controller {
             await this.$errors.clear()
             await this.$state.put('loading', 'auth.login')
 
-            await this.$http.get('/airlock/csrf-cookie').then(async () => {
+            await this.$http.get('/sanctum/csrf-cookie').then(async () => {
 
                 const {data} = await this.$http.post('/login', form)
 
@@ -106,7 +110,7 @@ export default class Auth extends Controller {
             await this.$errors.clear()
             await this.$state.put('loading', 'auth.register')
 
-            await this.$http.get('/airlock/csrf-cookie').then(async () => {
+            await this.$http.get('/sanctum/csrf-cookie').then(async () => {
 
                 const {data} = await this.$http.post('/register', form)
 
@@ -128,16 +132,13 @@ export default class Auth extends Controller {
      */
     async logout() {
         try {
-            await this.$errors.clear()
-            await this.$state.put('loading', 'auth.logout')
-
-            const response = await this.$http.get('/airlock/csrf-cookie')
-            const {data} = await this.$http.post('/logout')
-
-            await this.$state.set('entity', null).forget('loading')
-
-            await this.$events.$emit('auth:logout')
-            await this.$request.replace(this.$link('auth.login'))
+            await this.$http.get('/sanctum/csrf-cookie').then(async () => {
+                const {data} = await this.$http.post('/logout')
+                await this.$state.set('entity', null)
+                await this.$state.forget('loading')
+                await this.$events.$emit('auth:logout')
+                await this.$request.replace(this.$link('auth.login'))
+            })
         } catch (error) {
             await this.handleError(error)
         }
@@ -152,11 +153,12 @@ export default class Auth extends Controller {
             await this.$errors.clear()
             await this.$state.put('loading', 'auth.forgot')
 
-            const {data} = await this.$http.post('/password/email', form)
-
-            await this.$state
-                .update(data)
-                .forget('loading')
+            this.$http.get('/sanctum/csrf-cookie').then(async () => {
+                const {data} = await this.$http.post('/password/email', form)
+                await this.$state
+                    .update(data)
+                    .forget('loading')
+            })
 
         } catch (error) {
             await this.$state.forget('loading')
