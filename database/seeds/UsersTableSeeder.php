@@ -19,9 +19,7 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-
         $user->grantRole('admin');
         $user->save();
-
     }
 }
