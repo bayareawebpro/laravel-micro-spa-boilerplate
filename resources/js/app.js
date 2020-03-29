@@ -5,7 +5,7 @@
  * @copyright © 2020 All Rights Reserved.
  */
 import Application from "./application"
-import AutoLoader from "./utilities/AutoLoader"
+import AutoLoader from "./Utilities/AutoLoader"
 import ErrorHandler from "./Utilities/ErrorHandler"
 import {AppServiceProvider} from "laravel-micro.js"
 /**
