@@ -71,6 +71,6 @@ self.addEventListener("fetch", event => {
         caches
         .match(event.request)
         .then(response => response || fetch(event.request))
-        .catch(() => caches.match('offline'))
+        .catch(() => fetch(event.request))
     )
 });
