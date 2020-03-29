@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
@@ -118,8 +117,8 @@ class UserController extends Controller
      */
     public function destroy(Request $request, User $user)
     {
-        throw new AuthorizationException("Demo Mode.");
-        $user->delete();
+        //$this->authorize('disabled:permission');
+        //$user->delete();
         return response([
             'message' => 'Entity Destroyed',
             'entity'  => $user->only('id'),
