@@ -5,8 +5,11 @@ use Illuminate\Http\Request;
 
 class SettingsScreen extends Screen {
 
-    public $settings = ['key' => 'value'];
+    public array $settings = ['key' => 'value'];
 
+    /**
+     * @param Request $request
+     */
     public function test(Request $request)
     {
 

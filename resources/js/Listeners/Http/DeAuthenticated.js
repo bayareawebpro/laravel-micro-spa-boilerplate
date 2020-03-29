@@ -22,10 +22,6 @@ export default class DeAuthenticated {
      * @param payload {Object}
      */
     handle(payload) {
-        this.app.make('Events')
-            .$emit('state:init')
-            .$emit('toast:success', {
-                title: 'DeAuthenticated.'
-            })
+        this.app.make('Events').$emit('state:init')
     }
 }

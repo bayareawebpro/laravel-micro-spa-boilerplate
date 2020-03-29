@@ -45,6 +45,7 @@ class LoginController extends Controller
     protected function loggedOut(Request $request)
     {
         return response([
+            'message' => 'Session Destroyed',
             'entity' => null
         ]);
     }
@@ -58,6 +59,7 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         return response([
+            'message' => 'Session Initialized',
             'entity' => $user
         ]);
     }

@@ -22,8 +22,8 @@ export default class Authenticated {
      * @param payload {Object}
      */
     handle(payload) {
-        this.app.make('Events').$emit('toast:success', {
-            title: 'Authenticated Successfully.'
-        })
+        // this.app.make('Events').$emit('toast:success', {
+        //     title: 'Authenticated Successfully.'
+        // })
     }
 }
