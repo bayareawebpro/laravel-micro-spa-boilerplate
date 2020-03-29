@@ -1,5 +1,12 @@
 # LaravelMicro.js SPA Boilerplate (Dark UI)
 
+
+![Alt](https://github.com/bayareawebpro/laravel-micro-spa-boilerplate/raw/master/screens-charts.png)
+![Alt](https://github.com/bayareawebpro/laravel-micro-spa-boilerplate/raw/master/screens-forms.png)
+![Alt](https://github.com/bayareawebpro/laravel-micro-spa-boilerplate/raw/master/screens-home.png)
+![Alt](https://github.com/bayareawebpro/laravel-micro-spa-boilerplate/raw/master/screens-performance.png)
+![Alt](https://github.com/bayareawebpro/laravel-micro-spa-boilerplate/raw/master/screens-resource.png)
+
 #### Resources
 - TokenResource, TokenForm, TokenShow
 - UserResource, UserForm, UserShow
