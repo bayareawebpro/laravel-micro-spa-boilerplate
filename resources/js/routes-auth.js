@@ -10,15 +10,15 @@ export default [
         .middleware('auth'),
 
     Route
-        .to('auth.login','/login')
+        .to('auth.login','/auth/login')
         .view(()=>import(/*webpackChunkName:"auth"*/ "@views/auth/Login"))
         .middleware('guest'),
     Route
-        .to('auth.register','/register')
+        .to('auth.register','/auth/register')
         .view(()=>import(/*webpackChunkName:"auth"*/ "@views/auth/Register"))
         .middleware('guest'),
     Route
-        .to('auth.reset','/password/reset/:token')
+        .to('auth.reset','/auth/reset')
         .view(()=>import(/*webpackChunkName:"auth"*/ "@views/auth/PasswordReset"))
         .middleware('guest'),
     Route

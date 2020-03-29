@@ -17,6 +17,9 @@
             this.$bind.mapState('Auth', {
                 $errors: '$errors',
             })
+            this.$bind.mapGetters('Auth', {
+                sent: 'sent',
+            })
         },
         created() {
             this.$errors.clear()
@@ -32,7 +35,7 @@
             <div class="card-header">
                 Forgot Password
             </div>
-            <form v-if="!sent" ref="form" @submit.prevent="submit(entity).then(()=>sent=true)">
+            <form v-if="!sent" ref="form" @submit.prevent="submit(entity)">
                 <div class="card-content">
                     <v-form-message v-model="$errors.message"/>
                     <v-input

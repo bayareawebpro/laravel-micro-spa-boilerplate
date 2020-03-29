@@ -80,21 +80,18 @@ export default class Auth extends Controller {
         try {
             await this.$errors.clear()
             await this.$state.put('loading', 'auth.login')
+            await this.$http.get('/sanctum/csrf-cookie')
 
-            await this.$http.get('/sanctum/csrf-cookie').then(async () => {
+            const {data} = await this.$http.post('/login', form)
+            await this.$state
+                .update(data)
+                .forget('loading')
 
-                const {data} = await this.$http.post('/login', form)
+            await this.$events.$emit('auth:login')
+            await this.$request.replace(
+                this.$request.pull('to.query.redirect') || this.$link('dashboard')
+            )
 
-                await this.$state
-                    .update(data)
-                    .forget('loading')
-
-                await this.$events.$emit('auth:login')
-
-                const next = this.$request.pull('to.query.redirect') || this.$link('dashboard')
-
-                await this.$request.replace(next)
-            })
         } catch (error) {
             await this.$state.forget('loading')
             await this.handleError(error)
@@ -109,17 +106,15 @@ export default class Auth extends Controller {
         try {
             await this.$errors.clear()
             await this.$state.put('loading', 'auth.register')
+            await this.$http.get('/sanctum/csrf-cookie')
 
-            await this.$http.get('/sanctum/csrf-cookie').then(async () => {
+            const {data} = await this.$http.post('/register', form)
+            await this.$state
+                .update(data)
+                .forget('loading')
 
-                const {data} = await this.$http.post('/register', form)
+            await this.$request.replace(this.$link('auth.account'))
 
-                await this.$state
-                    .update(data)
-                    .forget('loading')
-
-                await this.$request.replace(this.$link('auth.account'))
-            })
         } catch (error) {
             await this.$state.forget('loading')
             await this.handleError(error)
@@ -132,13 +127,12 @@ export default class Auth extends Controller {
      */
     async logout() {
         try {
-            await this.$http.get('/sanctum/csrf-cookie').then(async () => {
-                const {data} = await this.$http.post('/logout')
-                await this.$state.set('entity', null)
-                await this.$state.forget('loading')
-                await this.$events.$emit('auth:logout')
-                await this.$request.replace(this.$link('auth.login'))
-            })
+            await this.$http.get('/sanctum/csrf-cookie')
+            const {data} = await this.$http.post('/logout')
+            await this.$state.update(data).forget('loading')
+
+            await this.$events.$emit('auth:logout')
+            await this.$request.replace(this.$link('auth.login'))
         } catch (error) {
             await this.handleError(error)
         }
@@ -152,16 +146,11 @@ export default class Auth extends Controller {
         try {
             await this.$errors.clear()
             await this.$state.put('loading', 'auth.forgot')
+            await this.$http.get('/sanctum/csrf-cookie')
 
-            this.$http.get('/sanctum/csrf-cookie').then(async () => {
-                const {data} = await this.$http.post('/password/email', form)
-                await this.$state
-                    .update(data)
-                    .forget('loading')
-            })
-
+            const {data} = await this.$http.post('/password/email', form)
+            await this.$state.update(data).forget('loading')
         } catch (error) {
-            await this.$state.forget('loading')
             await this.handleError(error)
         }
     }
@@ -176,13 +165,9 @@ export default class Auth extends Controller {
             await this.$state.put('loading', 'auth.reset')
 
             const {data} = await this.$http.post('/password/reset', form)
-
-            await this.$state
-                .update(data)
-                .forget('loading')
+            await this.$state.update(data).forget('loading')
 
             await this.$router.push(this.$link('dashboard'))
-
         } catch (error) {
             await this.$state.forget('loading')
             await this.handleError(error)

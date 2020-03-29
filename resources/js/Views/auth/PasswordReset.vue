@@ -18,11 +18,13 @@
         },
         created() {
             this.entity.email = this.$route.query.email || null
-            this.entity.token = this.$route.params.token || null
+            this.entity.token = this.$route.query.token || null
         },
         beforeRouteEnter(to, from, next){
             next(vm=>{
-                next(vm.$route.params.token || {name:'auth.forgot'})
+                if(!vm.$route.query.token){
+                    next(this.$link('auth.forgot'))
+                }
             })
         }
     }
