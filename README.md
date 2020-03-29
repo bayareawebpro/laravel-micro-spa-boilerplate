@@ -6,11 +6,10 @@
 ![Alt](https://github.com/bayareawebpro/laravel-micro-spa-boilerplate/raw/master/screens-resource.png)
 ![Alt](https://github.com/bayareawebpro/laravel-micro-spa-boilerplate/raw/master/screens-performance.png)
 
-> Framework Docs: https://bayareawebpro.github.io/laravel-micro.js
-
+> LaravelMicro Framework: https://bayareawebpro.github.io/laravel-micro.js
+> Resource Builder: https://github.com/bayareawebpro/searchable-resource
 
 #### Resources
-> https://github.com/bayareawebpro/searchable-resource
 - TokenResource, TokenForm, TokenShow
 - UserResource, UserForm, UserShow
 
@@ -39,6 +38,7 @@
 - Tabs
 
 #### Focus Components
+- Animated
 - Loading
 - Alerts
 - Toasts
