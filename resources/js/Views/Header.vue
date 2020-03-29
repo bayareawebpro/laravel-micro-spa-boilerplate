@@ -35,9 +35,10 @@
                 @click.prevent="sidebar.active = !sidebar.active">
             <i class="fa fa-bars"/>
         </button>
-        <a id="brand" href="/">
-            <span>Laravel</span><span>Micro</span>
+        <a class="brand" href="/">
+            <span>Laravel</span><em>Micro</em><small>.js</small>
         </a>
+
         <ul class="flex flex-grow justify-end pr-4">
             <li class="block relative self-center">
                 <button

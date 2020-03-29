@@ -3,9 +3,9 @@
         name: "Login",
         data: () => ({
             user: {
-                email: null,
-                password: null,
-                remember_me: null,
+                email: 'test@devdashboard.app',
+                password: 'testDev2020',
+                remember_me: true,
             }
         }),
         beforeCreate() {

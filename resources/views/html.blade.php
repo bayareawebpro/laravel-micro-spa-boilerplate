@@ -29,9 +29,6 @@
 
     <!-- Application State -->
     <script>window.__APP_STATE__ = {!! $appState !!}</script>
-    @if(isset($user))
-        <script>window.__APP_USER__ = {!! $user !!}</script>
-    @endif
 
     <!-- Asset URLs -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">

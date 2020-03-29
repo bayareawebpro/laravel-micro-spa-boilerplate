@@ -22,6 +22,15 @@ class UsersTableSeeder extends Seeder
         $user->grantRole('admin');
         $user->save();
 
+        $user = factory(User::class)->create([
+            'name' => 'Test Developer',
+            'email' =>  'test@devdashboard.app',
+            'password' =>  'testDev2020',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        $user->grantRole('admin');
+        $user->save();
 
         factory(User::class, 60)->create();
     }
