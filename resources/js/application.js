@@ -1,6 +1,5 @@
 "use strict";
 import LaravelMicro from 'laravel-micro.js'
-import AutoLoader from "./utilities/AutoLoader"
 export default class Application extends LaravelMicro {
 
     /**
