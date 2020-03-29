@@ -55,7 +55,7 @@
                             <i class="fa fa-trash"/> Destroy
                         </v-action>
                     </div>
-                    <div class="card-content">
+                    <div class="card-content hidden sm:block">
                         <div class="grid mb-4">
                             <div class="grid-item w-1/2 sm:w-1/3">
                                 <strong>Tokenable</strong><br>
@@ -65,7 +65,7 @@
                             <div class="grid-item w-1/2  sm:w-1/3">
                                 <strong>Abilities</strong><br>
                                 <i class="fa fa-lock-open text-blue-500"/>
-                                {{ entry.abilities.join(',') }}
+                                {{ entry.abilities.join(', ') }}
                             </div>
                         </div>
                         <div class="grid">

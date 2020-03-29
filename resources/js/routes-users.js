@@ -4,13 +4,7 @@ import Route from "./Services/Router/VueRoute"
 
 export default [
     Route
-        .group('/users')
-        .withProps({
-            title: 'Users',
-            subtitle: 'Resource',
-        })
-        .view(()=>import(/*webpackChunkName:"users"*/ "@views/users/Layout"))
-        .group([
+        .group('/users', ()=>import(/*webpackChunkName:"users"*/ "@views/users/Layout"), [
             Route
                 .to('users.index','/users')
                 .view(()=>import(/*webpackChunkName:"users"*/ "@views/users/Resource"))
@@ -32,4 +26,8 @@ export default [
                 .uses('UserResource@edit')
                 .middleware('auth'),
         ])
+        .withProps({
+            title: 'Users',
+            subtitle: 'Resource',
+        })
 ]

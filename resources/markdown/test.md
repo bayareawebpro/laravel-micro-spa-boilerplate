@@ -1,16 +1,3 @@
-# Test Page 1
+### Laravel Micro VueJS Dark Theme
+- Calls UserResource@index every time the route is entered.
 
-### Section
-
-**Sub Header**
-
-* Item 1
-* Item 2
-
----
-
-#### Tables are a pain.
-
-| 1 | 2 | 3 | 4 | 5 |
-|:-:|:-:|:-:|:-:|:-:|
-| 1 | 2 | 3 | 4 | 4 |

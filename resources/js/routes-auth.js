@@ -9,7 +9,6 @@ export default [
         .view(()=>import(/*webpackChunkName:"auth"*/ "@views/auth/Account"))
         .uses('Auth@authorize')
         .middleware('auth'),
-
     Route
         .to('auth.login','/auth/login')
         .view(()=>import(/*webpackChunkName:"auth"*/ "@views/auth/Login"))

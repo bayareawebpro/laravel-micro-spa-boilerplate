@@ -18,10 +18,7 @@ App.setInstance('AutoLoader', AutoLoader)
 App.loadProviders()
 App.bootProviders()
 App.make('VueRoot')
-// App.make('VueRoot').$nextTick(()=>{
-//     const config = App.make('Config')
-//     if(['production'].includes(config.get('environment'))){
-//         App.make('Worker').then((worker) => worker.install())
-//     }
-//     console.log('Loaded')
-// })
+
+App.make('VueRoot').$nextTick(()=>{
+    App.make('Worker').then((worker) => worker.install())
+})
