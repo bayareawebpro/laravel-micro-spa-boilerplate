@@ -1,8 +1,4 @@
 <script>
-    /** @property $errors */
-    /** @property entity */
-    /** @method update */
-    /** @method store */
     export default {
         name: "UsersEdit",
         beforeCreate() {

@@ -19,7 +19,6 @@ App.loadProviders()
 App.bootProviders()
 App.make('VueRoot')
 
-App.make('VueRoot')
-    // .$nextTick(()=>{
-    //     App.make('Worker').then((worker) => worker.install())
-    // })
+App.make('VueRoot').$nextTick(()=>{
+    App.make('Worker').then((worker) => worker.install())
+})

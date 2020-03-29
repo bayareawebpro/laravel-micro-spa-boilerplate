@@ -38,6 +38,7 @@
             <form v-if="!sent" ref="form" @submit.prevent="submit(entity)">
                 <div class="card-content">
                     <v-form-message v-model="$errors.message"/>
+
                     <v-input
                         type="text"
                         name="email"
@@ -48,6 +49,7 @@
                         :invalid="$errors.has('email')"
                         :help="$errors.first('email', 'Enter your email.')"
                     />
+
                 </div>
                 <div class="card-actions flex">
                     <v-action

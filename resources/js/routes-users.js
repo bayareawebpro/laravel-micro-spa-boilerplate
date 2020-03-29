@@ -3,8 +3,8 @@
 import Route from "./Services/Router/VueRoute"
 
 export default [
-    Route
-        .group('/users', ()=>import(/*webpackChunkName:"users"*/ "@views/users/Layout"), [
+    Route.group('/users', ()=>import(/*webpackChunkName:"users"*/ "@views/users/Layout"), [
+
             Route
                 .to('users.index','/users')
                 .view(()=>import(/*webpackChunkName:"users"*/ "@views/users/Resource"))

@@ -1,5 +1,4 @@
 "use strict";
-import VueRoute from "../Services/Router/VueRoute"
 import Controller from "../Services/Store/Controller"
 
 export default class Menus extends Controller {
@@ -22,11 +21,11 @@ export default class Menus extends Controller {
                         items:[
                             {
                                 name: 'Browse', icon: 'fa-users',
-                                to: VueRoute.link('users.index'),
+                                to: this.$link('users.index'),
                             },
                             {
                                 name: 'Create', icon: 'fa-user-plus',
-                                to: VueRoute.link('users.create'),
+                                to: this.$link('users.create'),
                             }
                         ],
                     },
@@ -37,11 +36,11 @@ export default class Menus extends Controller {
                         items:[
                             {
                                 name: 'Browse', icon: 'fa-unlock',
-                                to: VueRoute.link('tokens.index'),
+                                to: this.$link('tokens.index'),
                             },
                             {
                                 name: 'Create', icon: 'fa-key',
-                                to: VueRoute.link('tokens.create'),
+                                to: this.$link('tokens.create'),
                             }
                         ],
                     },
@@ -52,23 +51,23 @@ export default class Menus extends Controller {
                         items:[
                             {
                                 name: 'Permissions', icon: 'fa-cubes',
-                                to: VueRoute.link('framework.permissions'),
+                                to: this.$link('framework.permissions'),
                             },
                             {
                                 name: 'Bindings', icon: 'fa-cubes',
-                                to: VueRoute.link('framework.bindings'),
+                                to: this.$link('framework.bindings'),
                             },
                             {
                                 name: 'Providers', icon: 'fa-cubes',
-                                to: VueRoute.link('framework.providers'),
+                                to: this.$link('framework.providers'),
                             },
                             {
                                 name: 'Sharing', icon: 'fa-share',
-                                to: VueRoute.link('framework.sharing'),
+                                to: this.$link('framework.sharing'),
                             },
                             {
                                 name: 'Logs', icon: 'fa-server',
-                                to: VueRoute.link('framework.logs'),
+                                to: this.$link('framework.logs'),
                             },
                         ],
                     },
@@ -79,39 +78,39 @@ export default class Menus extends Controller {
                         items:[
                             {
                                 name: 'Tabs', icon: 'fa-window-restore',
-                                to: VueRoute.link('kitchensink.tabs'),
+                                to: this.$link('kitchensink.tabs'),
                             },
                             {
                                 name: 'Badges', icon: 'fa-certificate',
-                                to: VueRoute.link('kitchensink.badges'),
+                                to: this.$link('kitchensink.badges'),
                             },
                             {
                                 name: 'Cards', icon: 'fa-address-card',
-                                to: VueRoute.link('kitchensink.cards'),
+                                to: this.$link('kitchensink.cards'),
                             },
                             {
                                 name: 'Actions', icon: 'fa-address-card',
-                                to: VueRoute.link('kitchensink.actions'),
+                                to: this.$link('kitchensink.actions'),
                             },
                             {
                                 name: 'Collapse', icon: 'fa-plus',
-                                to: VueRoute.link('kitchensink.collapse'),
+                                to: this.$link('kitchensink.collapse'),
                             },
                             {
                                 name: 'Typography', icon: 'fa-font',
-                                to: VueRoute.link('kitchensink.typography'),
+                                to: this.$link('kitchensink.typography'),
                             },
                             {
                                 name: 'Modals', icon: 'fa-window-maximize',
-                                to: VueRoute.link('kitchensink.modals'),
+                                to: this.$link('kitchensink.modals'),
                             },
                             {
                                 name: 'Charts', icon: 'fa-chart-bar',
-                                to: VueRoute.link('kitchensink.charts'),
+                                to: this.$link('kitchensink.charts'),
                             },
                             {
                                 name: 'Forms', icon: 'fa-keyboard',
-                                to: VueRoute.link('kitchensink.forms'),
+                                to: this.$link('kitchensink.forms'),
                             },
                         ],
                     }

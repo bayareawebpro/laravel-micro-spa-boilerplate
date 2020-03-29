@@ -9,7 +9,9 @@ use Illuminate\Database\Eloquent\Builder;
 use BayAreaWebPro\SearchableResource\AbstractQuery;
 use BayAreaWebPro\SearchableResource\Contracts\{ConditionalQuery, ProvidesOptions, ValidatableQuery};
 
-class TokenAbility extends AbstractQuery implements ConditionalQuery, ValidatableQuery, ProvidesOptions
+class TokenAbility
+    extends AbstractQuery
+    implements ConditionalQuery, ValidatableQuery, ProvidesOptions
 {
     protected string $field = 'abilities';
     protected string $attribute = 'abilities';
