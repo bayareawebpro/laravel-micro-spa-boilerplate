@@ -21,10 +21,13 @@
         },
         methods:{
             onClick(e){
-                if(this.type === 'button'){
+                const disabled = (this.loading || this.disabled)
+                if(this.type === 'button' || disabled){
                     e.preventDefault()
                 }
-                this.$emit('click', e)
+                if(!disabled){
+                    this.$emit('click', e)
+                }
             },
             focus(){
                 this.$refs.button.focus()

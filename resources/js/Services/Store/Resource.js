@@ -202,7 +202,7 @@ export default class Resource extends Controller {
      */
     updateCollectionEntity(entity) {
         if (this.$state.hasEntries('resource.data')) {
-            if (this.$state.firstWhere('resource.data', 'id', entity)) {
+            if (this.$state.firstWhere('resource.data', 'id', entity.id)) {
                 this.$state.mergeWhere('resource.data', 'id', entity)
             } else {
                 this.$state.append('resource.data', entity)
@@ -216,7 +216,7 @@ export default class Resource extends Controller {
      */
     removeCollectionEntity(entity) {
         if (this.$state.hasEntries('resource.data')) {
-            if (this.$state.firstWhere('resource.data', 'id', entity)) {
+            if (this.$state.firstWhere('resource.data', 'id', entity.id)) {
                 this.$state
                     .rejectWhere('resource.data', 'id', entity)
                     .decrement('resource.pagination.total')
