@@ -49,35 +49,35 @@ export default class HttpService {
      * @return {Promise<*>}
      */
     onError(error) {
-        if (!error.hasOwnProperty('response') || !error.response.hasOwnProperty('data')) {
-            this.$events.$emit('error:network', error);
-            return Promise.reject(error)
-        }
-        if (error.response.data) {
-            switch (error.response.status) {
-                case 401:
-                    this.$events.$emit('error:401', error.response);
-                    break;
-                case 403:
-                    this.$events.$emit('error:403', error.response);
-                    break;
-                case 404:
-                    this.$events.$emit('error:404', error.response);
-                    break;
-                case 419:
-                    this.$events.$emit('error:419', error.response);
-                    break;
-                case 422:
-                    this.$events.$emit('error:422', error.response);
-                    break;
-                case 503:
-                    this.$events.$emit('error:503', error.response);
-                    break;
-                default:
-                    this.$events.$emit('error:500', error.response)
-                    break;
+        if (error.hasOwnProperty('response') && error.response.hasOwnProperty('data')) {
+            if (error.response.data) {
+                switch (error.response.status) {
+                    case 401:
+                        this.$events.$emit('error:401', error.response);
+                        break;
+                    case 403:
+                        this.$events.$emit('error:403', error.response);
+                        break;
+                    case 404:
+                        this.$events.$emit('error:404', error.response);
+                        break;
+                    case 419:
+                        this.$events.$emit('error:419', error.response);
+                        break;
+                    case 422:
+                        this.$events.$emit('error:422', error.response);
+                        break;
+                    case 503:
+                        this.$events.$emit('error:503', error.response);
+                        break;
+                    default:
+                        this.$events.$emit('error:500', error.response)
+                        break;
+                }
+                return Promise.reject(error)
             }
         }
+        this.$events.$emit('error:network', error);
         return Promise.reject(error)
     }
 
