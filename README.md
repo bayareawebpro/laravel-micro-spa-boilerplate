@@ -1,16 +1,16 @@
 # LaravelMicro.js SPA Boilerplate (Dark UI)
 
-> Framework Docs: https://bayareawebpro.github.io/laravel-micro.js
-
-> Resource Builder: https://github.com/bayareawebpro/searchable-resource
-
 ![Alt](https://github.com/bayareawebpro/laravel-micro-spa-boilerplate/raw/master/screens-home.png)
 ![Alt](https://github.com/bayareawebpro/laravel-micro-spa-boilerplate/raw/master/screens-forms.png)
 ![Alt](https://github.com/bayareawebpro/laravel-micro-spa-boilerplate/raw/master/screens-charts.png)
 ![Alt](https://github.com/bayareawebpro/laravel-micro-spa-boilerplate/raw/master/screens-resource.png)
 ![Alt](https://github.com/bayareawebpro/laravel-micro-spa-boilerplate/raw/master/screens-performance.png)
 
+> Framework Docs: https://bayareawebpro.github.io/laravel-micro.js
+
+
 #### Resources
+> https://github.com/bayareawebpro/searchable-resource
 - TokenResource, TokenForm, TokenShow
 - UserResource, UserForm, UserShow
 
