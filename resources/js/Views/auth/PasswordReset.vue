@@ -33,7 +33,7 @@
     <div class="layout-centered md:max-w-xl">
         <div class="card">
             <div class="card-header">
-                Register
+                Reset Password
             </div>
             <form ref="form" @submit.prevent>
                 <div class="card-content">
