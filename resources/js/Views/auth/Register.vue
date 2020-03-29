@@ -45,6 +45,7 @@
                                 @change="$errors.forget('name')"
                                 :invalid="$errors.has('name')"
                                 :help="$errors.first('name', 'Enter your name.')"
+                                autocomplete="name"
                                 :required="true"
                             />
                         </div>
@@ -57,6 +58,7 @@
                                 @change="$errors.forget('email')"
                                 :invalid="$errors.has('email')"
                                 :help="$errors.first('email', 'Enter your email.')"
+                                autocomplete="email-address"
                                 :required="true"
                             />
                         </div>
@@ -69,6 +71,7 @@
                                 @change="$errors.forget('password')"
                                 :invalid="$errors.has('password')"
                                 :help="$errors.first('password', 'Enter your secure password.')"
+                                autocomplete="new-password"
                                 :required="true"
                             />
                         </div>
@@ -81,6 +84,7 @@
                                 @change="$errors.forget('password_confirmation')"
                                 :invalid="$errors.has('password_confirmation')"
                                 :help="$errors.first('password_confirmation', 'Confirm your secure password.')"
+                                autocomplete="new-password"
                                 :required="true"
                             />
                         </div>

@@ -7,27 +7,34 @@
 
     <!-- SEO -->
     <title>{{ $appState->get('title') }}</title>
-    <meta name="application-name" content="{{ $appState->get('title') }}">
-    <meta name="apple-mobile-web-app-title" content="{{ $appState->get('title') }}">
     <meta name="description" content="{{ $appState->get('description') }}">
 
-    <!-- WebApp -->
+    <!-- WebApp Compatible -->
     <link rel="manifest" href="{{ asset('manifest.json') }}">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="{{ $appState->get('title') }}">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="{{ $appState->get('title') }}">
 
+    <!-- WebApp Theme -->
     <meta name="theme-color" content="#F85443">
     <meta name="msapplication-TileColor" content="#F85443">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="apple-touch-icon" href="/images/icon-196x196.png">
 
-    <!-- Assets -->
+    <!-- DNS PreConnect / PreLoad -->
     <link rel="preconnect" href="{{ config('app.url') }}">
     <link rel="preload" href="{{ asset(mix('js/app.js')) }}" as="script">
     <link rel="preload" href="{{ asset(mix('css/app.css')) }}" as="style">
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+
+    <!-- Application State -->
     <script>window.__APP_STATE__ = {!! $appState !!}</script>
-    <script>window.__APP_USER__ = {!! $user ?? null !!}</script>
+    @if(isset($user))
+        <script>window.__APP_USER__ = {!! $user !!}</script>
+    @endif
+
+    <!-- Asset URLs -->
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <script src="{{ mix('js/app.js') }}" async></script>
 </head>
 <body>

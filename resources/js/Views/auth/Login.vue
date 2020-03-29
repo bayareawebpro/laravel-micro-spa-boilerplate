@@ -41,6 +41,7 @@
                                 label="Email Address"
                                 v-model="user.email"
                                 :required="true"
+                                autocomplete="email-address"
                                 @change="$errors.forget('email')"
                                 :invalid="$errors.has('email')"
                                 :help="$errors.first('email', 'Enter your email.')">
@@ -53,10 +54,12 @@
                                 label="Password"
                                 :required="true"
                                 v-model="user.password"
+                                autocomplete="current-password"
                                 @change="$errors.forget('password')"
                                 :invalid="$errors.has('password')"
                                 :help="$errors.first('password', 'Enter your secure password.')">
                             </v-input>
+
                         </div>
                     </div>
                     <v-input-switch

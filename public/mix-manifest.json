@@ -1,7 +1,7 @@
 {
     "/js/app.js": "/js/app.js?id=f37fc5d80d2754c91d5d",
     "/css/app.css": "/css/app.css?id=09e7245b5c81fa7e67ce",
-    "/js/auth.js": "/js/auth.js?id=30d76b3cb983743d408f",
+    "/js/auth.js": "/js/auth.js?id=3a0db74a7117c6bcf78d",
     "/js/base.js": "/js/base.js?id=7448be21859135e8f187",
     "/js/dashboard.js": "/js/dashboard.js?id=891706295b940f5849ee",
     "/js/developer.js": "/js/developer.js?id=3b3ed82cdf6709150ca6",
@@ -20,5 +20,5 @@
     "/images/icon-32x32.png": "/images/icon-32x32.png?id=3cf16b86a227b87cddc9",
     "/images/logo.svg": "/images/logo.svg?id=6c88caed3a4725b80d44",
     "/worker.js": "/worker.js?id=aea9c643303bbf404cbf",
-    "/manifest.json": "/manifest.json?id=2a2b2f4d3bd427deae8a"
+    "/manifest.json": "/manifest.json?id=c9bc7e140c043384cd20"
 }
