@@ -59,7 +59,6 @@
                                 :invalid="$errors.has('password')"
                                 :help="$errors.first('password', 'Enter your secure password.')">
                             </v-input>
-
                         </div>
                     </div>
                     <v-input-switch
