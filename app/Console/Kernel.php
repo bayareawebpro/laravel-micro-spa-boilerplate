@@ -23,6 +23,9 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule
+            ->command('telescope:clear')
+            ->everyFifteenMinutes();
+        $schedule
             ->command('migrate:fresh', ['--force' => true])
             ->everyFifteenMinutes();
         $schedule
