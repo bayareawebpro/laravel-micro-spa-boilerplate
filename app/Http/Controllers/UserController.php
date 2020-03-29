@@ -96,11 +96,11 @@ class UserController extends Controller
     {
         $data = $request->validate(User::validationRules($user));
 
-        if (isset($data['role']) && $request->user()->can('updateRole', [$user])) {
-            $user->grantRole($data['role']);
-        }
-
-        $user->update($data);
+//        if (isset($data['role']) && $request->user()->can('updateRole', [$user])) {
+//            $user->grantRole($data['role']);
+//        }
+//
+//        $user->update($data);
 
         return response([
             'message' => 'Entity Updated',
