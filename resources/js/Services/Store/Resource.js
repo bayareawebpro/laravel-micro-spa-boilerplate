@@ -234,7 +234,8 @@ export default class Resource extends Controller {
                 this.$request.replace(redirect)
             } else {
                 this.$request.replace(
-                    this.$link(`${this.resourceKey}.index`).withQuery({page: 1}),
+                    this.$link(`${this.resourceKey}.index`)
+                        .withQuery({page: 1}),
                     () => null, () => this.index())
             }
         }

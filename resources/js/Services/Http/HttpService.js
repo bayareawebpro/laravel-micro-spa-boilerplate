@@ -18,6 +18,7 @@ export default class HttpService {
         )
         loadProgressBar()
     }
+
     /**
      * Response Handler
      * @param request {Object}

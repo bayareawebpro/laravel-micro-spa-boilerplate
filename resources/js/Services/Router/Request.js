@@ -164,6 +164,8 @@ export default class Request extends Repository {
                 from: this.get('to'),
                 next: ()=>next(route)
             })
+        }else{
+            this.replace(route)
         }
         return this
     }

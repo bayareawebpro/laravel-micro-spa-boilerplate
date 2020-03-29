@@ -3,6 +3,7 @@
 import Route from "./Services/Router/VueRoute"
 
 export default [
+
     Route
         .to('auth.account','/account/edit')
         .view(()=>import(/*webpackChunkName:"auth"*/ "@views/auth/Account"))

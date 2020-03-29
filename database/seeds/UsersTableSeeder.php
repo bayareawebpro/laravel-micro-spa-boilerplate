@@ -21,5 +21,8 @@ class UsersTableSeeder extends Seeder
         ]);
         $user->grantRole('admin');
         $user->save();
+
+
+        factory(User::class, 60)->create();
     }
 }

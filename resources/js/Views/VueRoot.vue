@@ -8,11 +8,14 @@
             'v-sidebar-left': Sidebar,
         },
         beforeCreate() {
-            this.$bind.mapState('Config', {
-                Config: (context)=>context.all(),
-            })
             this.$bind.mapState('Auth', {
                 Auth: ({$state})=>$state.all(),
+            })
+            this.$bind.mapGetters('Auth', {
+                loggedIn: 'entity.id',
+            })
+            this.$bind.mapState('Config', {
+                Config: (context)=>context.all(),
             })
             this.$bind.mapState('Menus', {
                 Menus: ({$state})=>$state.all(),
@@ -31,7 +34,7 @@
         <v-toasts/>
         <v-header/>
         <section id="content">
-            <v-sidebar-left/>
+            <v-sidebar-left v-if="loggedIn"/>
             <main id="main">
                 <router-view :key="$route.name"/>
             </main>

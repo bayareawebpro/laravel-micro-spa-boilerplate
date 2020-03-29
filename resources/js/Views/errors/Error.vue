@@ -15,7 +15,7 @@
             back(){
                 const Request = this.$app.make('Request')
                 if(Request.exists('from.name')){
-                    Request.replace(Request.previous())
+                    Request.previous()
                 }else{
                     const Route = this.$app.make('Route')
                     Request.replace(Route.link('dashboard'))

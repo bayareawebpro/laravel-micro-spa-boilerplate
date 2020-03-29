@@ -35,7 +35,10 @@
     <div class="lg:max-w-4xl mx-auto" v-if="entity">
         <div class="card">
             <div class="card-header">
-                <router-link v-if="entity.id" tabindex="1" dusk="entity-show"
+                <router-link
+                    tabindex="1"
+                    v-if="entity.id"
+                    dusk="entity-show"
                     :to="$link('users.show').withParams({id: entity.id})">
                     <i class="fa fa-user"/> {{ entity.name || 'New User' }}
                 </router-link>
@@ -104,31 +107,6 @@
                         :options="roles"
                     />
 
-<!--                    <v-action @click="entity.attachments.push({})">Add</v-action>-->
-<!--                    <div class="list-group">-->
-<!--                        <div v-for="(attachment, index) in entity.attachments" class="list-group-item">-->
-<!--                            <v-input-file-->
-<!--                                label="Image"-->
-<!--                                :auto-open="true"-->
-<!--                                v-model="entity.attachments[index]"-->
-<!--                                placeholder="Select File"-->
-<!--                                :options="{accept: ['*']}"-->
-<!--                                :help="$errors.first(`attachments.${index}.id`,'Choose an image.')"-->
-<!--                                @change="$errors.forget(`attachments.${index}.id`)"-->
-<!--                                :invalid="$errors.has(`attachments.${index}.id`)"-->
-<!--                                @destroyed="entity.attachments.splice(index,1)"-->
-<!--                            />-->
-<!--                        </div>-->
-<!--                    </div>-->
-                    <!--                    <v-input-file-->
-                    <!--                        label="Image"-->
-                    <!--                        v-model="entity.attachment"-->
-                    <!--                        help="Choose an image."-->
-                    <!--                        placeholder="Select Avatar"-->
-                    <!--                        @change="$errors.forget('attachment')"-->
-                    <!--                        :invalid="$errors.has('attachment')"-->
-                    <!--                        :options="{accept: ['image/*']}"-->
-                    <!--                    />-->
                 </div>
                 <div class="card-actions">
                     <v-action
@@ -144,7 +122,7 @@
                         dusk="action-save"
                         class="btn-lg btn-blue"
                         :disabled="isLoading('users.store')"
-                        @click="store(entity, $link('users.show').withParams({id: entity.id}))">
+                        @click="store(entity)">
                         Save
                     </v-action>
                 </div>

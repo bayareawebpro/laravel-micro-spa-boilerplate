@@ -1,8 +1,5 @@
 # LaravelMicro.js SPA Boilerplate (Dark UI)
 
-- Javascript: ~126 KB GZipped
-- Stylesheet: ~6 KB GZipped
-
 #### Resources
 - TokenResource, TokenForm, TokenShow
 - UserResource, UserForm, UserShow

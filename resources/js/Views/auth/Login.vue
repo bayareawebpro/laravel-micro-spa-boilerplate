@@ -9,6 +9,7 @@
             }
         }),
         beforeCreate() {
+
             this.$bind.mapActions('Auth', {
                 isLoading: 'isLoading',
                 login: 'login',
@@ -16,6 +17,7 @@
             this.$bind.mapState('Auth', {
                 $errors: '$errors',
             })
+
         },
         beforeDestroy() {
             this.$errors.clear()
