@@ -1,5 +1,5 @@
 {
-    "/js/app.js": "/js/app.js?id=fc24dd7b905efa62ab1e",
+    "/js/app.js": "/js/app.js?id=f37fc5d80d2754c91d5d",
     "/css/app.css": "/css/app.css?id=09e7245b5c81fa7e67ce",
     "/js/auth.js": "/js/auth.js?id=30d76b3cb983743d408f",
     "/js/base.js": "/js/base.js?id=7448be21859135e8f187",
@@ -11,6 +11,14 @@
     "/js/users.js": "/js/users.js?id=e309603dcf95725c0003",
     "/js/vendors~dashboard.js": "/js/vendors~dashboard.js?id=a2333d543eb2ee699ddc",
     "/js/vendors~frappe-charts.js": "/js/vendors~frappe-charts.js?id=b1b35ef6e9b13b0849d4",
+    "/images/icon-128x128.png": "/images/icon-128x128.png?id=8cce7d107c6a96d6f43d",
+    "/images/icon-152x152.png": "/images/icon-152x152.png?id=dd393a586d6cc5e888bc",
+    "/images/icon-167x167.png": "/images/icon-167x167.png?id=75a4034503fb95a0421c",
+    "/images/icon-180x180.png": "/images/icon-180x180.png?id=90aece25b563955d7938",
+    "/images/icon-192x192.png": "/images/icon-192x192.png?id=a08504cafce359f4a2b7",
+    "/images/icon-196x196.png": "/images/icon-196x196.png?id=eb66c4df73e52b05b35b",
+    "/images/icon-32x32.png": "/images/icon-32x32.png?id=3cf16b86a227b87cddc9",
+    "/images/logo.svg": "/images/logo.svg?id=6c88caed3a4725b80d44",
     "/worker.js": "/worker.js?id=aea9c643303bbf404cbf",
-    "/manifest.json": "/manifest.json?id=8e7b26ebeea4f54b5895"
+    "/manifest.json": "/manifest.json?id=2a2b2f4d3bd427deae8a"
 }

@@ -10,6 +10,7 @@ require('laravel-micro.js/src/mix');
 mix.tailwind('./tailwind.config.js')
 mix.postCss('resources/css/app.pcss', 'public/css')
 mix.copy('node_modules/@fortawesome/fontawesome-free/webfonts', 'public/webfonts')
+mix.copy('resources/images/*', 'public/images')
 mix.purgeCss()
 
 /**

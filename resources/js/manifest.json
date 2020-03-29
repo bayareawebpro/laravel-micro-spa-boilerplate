@@ -1,51 +1,46 @@
 {
     "name": "LaravelMicro",
     "short_name": "LaravelMicro",
-    "background_color": "#000",
-    "theme_color": "#000",
+    "background_color": "#111b27",
+    "theme_color": "#F85443",
     "scope": "/",
     "start_url": "/",
     "splash_pages": null,
     "display": "fullscreen",
     "icons": [
         {
-            "src": "/storage/assets/icon-72x72.png",
-            "sizes": "72x72",
+            "src": "/images/icon-32x32.png",
+            "sizes": "32x32",
             "type": "image/png"
         },
         {
-            "src": "/storage/assets/icon-96x96.png",
-            "sizes": "96x96",
-            "type": "image/png"
-        },
-        {
-            "src": "/storage/assets/icon-128x128.png",
+            "src": "/images/icon-128x128.png",
             "sizes": "128x128",
             "type": "image/png"
         },
         {
-            "src": "/storage/assets/icon-144x144.png",
-            "sizes": "144x144",
-            "type": "image/png"
-        },
-        {
-            "src": "/storage/assets/icon-152x152.png",
+            "src": "/images/icon-152x152.png",
             "sizes": "152x152",
             "type": "image/png"
         },
         {
-            "src": "/storage/assets/icon-192x192.png",
+            "src": "/images/icon-167x167.png",
+            "sizes": "167x167",
+            "type": "image/png"
+        },
+        {
+            "src": "/images/icon-180x180.png",
+            "sizes": "180x180",
+            "type": "image/png"
+        },
+        {
+            "src": "/images/icon-192x192.png",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "/storage/assets/icon-384x384.png",
-            "sizes": "384x384",
-            "type": "image/png"
-        },
-        {
-            "src": "/storage/assets/icon-512x512.png",
-            "sizes": "512x512",
+            "src": "/images/icon-196x196.png",
+            "sizes": "196x196",
             "type": "image/png"
         }
     ]

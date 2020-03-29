@@ -7,18 +7,19 @@
 
     <!-- SEO -->
     <title>{{ $appState->get('title') }}</title>
+    <meta name="application-name" content="{{ $appState->get('title') }}">
+    <meta name="apple-mobile-web-app-title" content="{{ $appState->get('title') }}">
     <meta name="description" content="{{ $appState->get('description') }}">
 
     <!-- WebApp -->
     <link rel="manifest" href="{{ asset('manifest.json') }}">
-    <meta name="theme-color" content="#000000">
-    <meta name="msapplication-TileColor" content="#000000">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <meta name="theme-color" content="#F85443">
+    <meta name="msapplication-TileColor" content="#F85443">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-title" content="PWA">
-    <meta name="application-name" content="PWA">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon" href="/images/icon-196x196.png">
 
     <!-- Assets -->
     <link rel="preconnect" href="{{ config('app.url') }}">
@@ -26,7 +27,7 @@
     <link rel="preload" href="{{ asset(mix('css/app.css')) }}" as="style">
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <script>window.__APP_STATE__ = {!! $appState !!}</script>
-    @if(isset($user))<script>window.__APP_USER__ = {!! $user !!}</script>@endif
+    <script>window.__APP_USER__ = {!! $user ?? null !!}</script>
     <script src="{{ mix('js/app.js') }}" async></script>
 </head>
 <body>
