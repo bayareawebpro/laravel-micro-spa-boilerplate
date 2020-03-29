@@ -7,10 +7,6 @@
 </script>
 <template>
     <div>
-
-        <widget-layout/>
-
-        <hr>
         <h3>Markdown Pages</h3>
         <p>Lazy Loaded Once</p>
         <v-tabs
