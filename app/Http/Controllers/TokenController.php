@@ -105,7 +105,7 @@ class TokenController extends Controller
     {
         $request->validate(ApiToken::validationRules());
 
-        sleep(2);
+        //sleep(2);
 
         return response([
             'message' => 'Entity Updated',
