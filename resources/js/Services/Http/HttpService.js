@@ -49,7 +49,7 @@ export default class HttpService {
      * @return {Promise<*>}
      */
     onError(error) {
-        if (!error.hasOwnProperty('response')) {
+        if (!error.hasOwnProperty('response') || !error.response.hasOwnProperty('data')) {
             this.$events.$emit('error:network', error);
             return Promise.reject(error)
         }
