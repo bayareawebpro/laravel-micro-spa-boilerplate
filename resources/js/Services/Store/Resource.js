@@ -1,7 +1,6 @@
 "use strict";
 import Controller from "./Controller"
 import Route from "../Router/Route"
-
 export default class Resource extends Controller {
 
     constructor(App) {
@@ -146,7 +145,7 @@ export default class Resource extends Controller {
     }
 
     /**
-     * Update Entity Action
+     * Update Entity Action, Swallow Errors
      * @param id {Number}
      * @param params {Object}
      * @param redirect {Boolean}

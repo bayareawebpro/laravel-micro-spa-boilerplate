@@ -1,6 +1,7 @@
 "use strict";
 import Controller from "../Services/Store/Controller"
 export default class Dashboard extends Controller {
+
     constructor(App) {
         super(App)
     }
@@ -21,6 +22,3 @@ export default class Dashboard extends Controller {
         }
     }
 }
-
-
-

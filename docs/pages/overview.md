@@ -1,0 +1,1 @@
+![Home](../img/MicroApp.svg)

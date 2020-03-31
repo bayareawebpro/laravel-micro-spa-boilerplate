@@ -5,3 +5,4 @@ An "advanced" Laravel SPA Boilerplate featuring a dark themed UI that's integrat
 
 ![Home](https://github.com/bayareawebpro/laravel-micro-spa-boilerplate/raw/master/docs/img/screens-home.png)
 
+
