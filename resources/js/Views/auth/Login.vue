@@ -32,7 +32,7 @@
             </div>
             <form ref="form" @submit.prevent="login(user)">
                 <div class="card-content">
-                    <div class="alert warn mb-4">Demo Mode Enabled!</div>
+                    <div class="alert info mb-4">Demo Mode Enabled!</div>
                     <v-form-message v-model="$errors.message" dusk="alert"/>
                     <div class="grid">
                         <div class="grid-item w-full">
@@ -45,8 +45,8 @@
                                 autocomplete="email-address"
                                 @change="$errors.forget('email')"
                                 :invalid="$errors.has('email')"
-                                :help="$errors.first('email', 'Enter your email.')">
-                            </v-input>
+                                :help="$errors.first('email', 'Enter your email.')"
+                            />
                         </div>
                         <div class="grid-item w-full">
                             <v-input
@@ -58,8 +58,8 @@
                                 autocomplete="current-password"
                                 @change="$errors.forget('password')"
                                 :invalid="$errors.has('password')"
-                                :help="$errors.first('password', 'Enter your secure password.')">
-                            </v-input>
+                                :help="$errors.first('password', 'Enter your secure password.')"
+                            />
                         </div>
                     </div>
                     <v-input-switch
