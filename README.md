@@ -7,6 +7,8 @@ An "advanced" Laravel SPA Boilerplate featuring a dark themed UI that's integrat
 ![Alt](https://github.com/bayareawebpro/laravel-micro-spa-boilerplate/raw/master/screens-forms.png)
 ![Alt](https://github.com/bayareawebpro/laravel-micro-spa-boilerplate/raw/master/screens-charts.png)
 
+---
+
 #### LaravelMicro.js Framework
 
 > https://bayareawebpro.github.io/laravel-micro.js
