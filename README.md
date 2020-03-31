@@ -1,4 +1,5 @@
-# LaravelMicro.js SPA Boilerplate (Dark UI)
+# Advanced (Dark UI)
+LaravelMicro.js SPA Boilerplate 
 
 #### LaravelMicro.js Framework
 
