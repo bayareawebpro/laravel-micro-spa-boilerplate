@@ -1,5 +1,6 @@
 # Advanced (Dark UI)
-LaravelMicro.js SPA Boilerplate 
+
+Laravel SPA Boilerplate built using my own personal packages.
 
 #### LaravelMicro.js Framework
 
