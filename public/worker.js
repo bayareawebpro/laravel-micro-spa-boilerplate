@@ -35,11 +35,14 @@ self.addEventListener("install", event => {
                             .then(response => response.json())
                             .then(data => {
                                 cache.addAll(Object.entries(data)
-                                    .filter(([key, value])=>(
-                                        !key.endsWith('.map')
-                                        && !key.endsWith('worker.js')
-                                        && !key.endsWith('hot-update.js')
-                                    ))
+                                    .filter(([key, value])=>{
+                                        console.log({key, value})
+                                        return (
+                                            !key.endsWith('.map')
+                                            && !key.endsWith('worker.js')
+                                            && !key.endsWith('hot-update.js')
+                                        )
+                                    })
                                     .map(([key, value])=>value))
                             })
                             .catch((error)=>{
