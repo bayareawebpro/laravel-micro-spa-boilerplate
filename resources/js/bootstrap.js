@@ -4,7 +4,7 @@
  * @author Dan Alvidrez mailto:dan@bayareawebpro.com
  * @copyright © 2020 All Rights Reserved.
  */
-import Application from "./application"
+import Application from "./Application"
 import AutoLoader from "./Utilities/AutoLoader"
 import ErrorHandler from "./Utilities/ErrorHandler"
 import {AppServiceProvider} from "laravel-micro.js"

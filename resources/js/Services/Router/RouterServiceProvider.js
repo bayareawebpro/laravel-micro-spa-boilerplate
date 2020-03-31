@@ -2,11 +2,10 @@
 import Vue from 'vue'
 import Route from './Route'
 import Request from './Request'
-import Routes from '../../routes'
+import Routes from '../../Routes'
 import VueRouter from 'vue-router'
 import scrollBehavior from './ScrollBehavior'
 import {ServiceProvider} from 'laravel-micro.js'
-
 export default class RouterServiceProvider extends ServiceProvider {
 
     /**

@@ -16,7 +16,7 @@ mix.purgeCss()
 /**
  * Javascript
  */
-mix.js('resources/js/app.js', 'public/js')
+mix.js('resources/js/bootstrap.js', 'public/js/app.js')
 mix.copy('resources/js/worker.js', 'public/worker.js')
 mix.copy('resources/js/manifest.json', 'public/manifest.json')
 mix.webpackConfig({
