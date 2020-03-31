@@ -30,5 +30,5 @@ class AppComposer
             'config'      => Config::get('spa'),
             'roles'       => User::allRoles(),
         ]));
-}
+    }
 }

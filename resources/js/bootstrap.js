@@ -11,14 +11,14 @@ import {AppServiceProvider} from "laravel-micro.js"
 /**
  * Boot Application
  */
-const App = new Application
-App.errorHandler(ErrorHandler)
-App.register(AppServiceProvider)
-App.setInstance('AutoLoader', AutoLoader)
-App.loadProviders()
-App.bootProviders()
-App.make('VueRoot')
+const Bootstrap = new Application
+Bootstrap.errorHandler(ErrorHandler)
+Bootstrap.register(AppServiceProvider)
+Bootstrap.setInstance('AutoLoader', AutoLoader)
+Bootstrap.loadProviders()
+Bootstrap.bootProviders()
+Bootstrap.make('VueRoot')
 
-App.make('VueRoot').$nextTick(()=>{
-    App.make('Worker').then((worker) => worker.install())
+Bootstrap.make('VueRoot').$nextTick(()=>{
+    Bootstrap.make('Worker').then((worker) => worker.install())
 })

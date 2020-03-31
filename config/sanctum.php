@@ -4,24 +4,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Available Abilities / Guards
-    |--------------------------------------------------------------------------
-    | User defined guards used throughout the application and for validation
-    | when adding rules via the SPA UI.  These guards are user selectable.
-    */
-    'abilities' => [
-        '*',
-        //'users:viewAny',
-        //'users:create',
-        'users:view',
-        'users:update',
-        'users:delete',
-        //'users:restore',
-        //'users:forceDelete',
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
     | Stateful Domains
     |--------------------------------------------------------------------------
     | Requests from the following domains / hosts will receive stateful API
@@ -31,7 +13,6 @@ return [
     */
     'stateful' => [
         'localhost',
-        'laravel-boilerplate.test',
         env('AIRLOCK_DOMAIN', 'localhost'),
     ],
 
