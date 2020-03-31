@@ -2,7 +2,6 @@
     import invalid from './Props/Invalid'
     import label from './Props/Label'
     import help from './Props/Help'
-    import icon from './Props/Icon'
     import name from './Props/Name'
     export default {
         name: "FormControl",
