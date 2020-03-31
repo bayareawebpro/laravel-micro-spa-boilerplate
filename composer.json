@@ -12,11 +12,12 @@
         "ext-json": "*",
         "bayareawebpro/searchable-resource": "@dev",
         "fideloper/proxy": "^4.2",
+        "fzaninotto/faker": "^1.9.1",
+        "guzzlehttp/guzzle": "^6.5",
         "laravel/framework": "^7.0",
         "laravel/sanctum": "^2.1",
         "laravel/telescope": "^3.1",
         "laravel/tinker": "^2.0",
-        "fzaninotto/faker": "^1.9.1",
         "laravel/ui": "^2.0"
     },
     "require-dev": {
@@ -24,6 +25,7 @@
         "laravel/dusk": "^6.0",
         "mockery/mockery": "^1.3.1",
         "nunomaduro/collision": "^4.1",
+        "nunomaduro/larastan": "^0.5.5",
         "phpunit/phpunit": "^8.5"
     },
     "config": {
@@ -53,6 +55,21 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
+        "lint": [
+            "@php ./vendor/bin/phpstan analyse --memory-limit=1G"
+        ],
+        "test-unit": [
+            "@php ./vendor/bin/phpunit"
+        ],
+        "test-feature": [
+            "@php artisan dusk"
+        ],
+        "post-update-cmd": [
+            "@php artisan dusk:chrome-driver"
+        ],
+        "post-install-cmd": [
+            "@php artisan dusk:chrome-driver"
+        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"

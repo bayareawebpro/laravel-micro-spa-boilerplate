@@ -86,9 +86,9 @@ class User extends Authenticatable
     {
         return [
             'name'                  => ['required', 'string', 'max:255'],
-            'password'              => ['sometimes', 'required', 'string', 'min:8', 'confirmed'],
-            'password_confirmation' => ['sometimes', 'required', 'string', 'min:8'],
-            'role'                  => ['sometimes', 'required', Rule::in(static::allRoles()->pluck('value')->toArray())],
+            'password'              => [Rule::requiredIf(fn()=>is_null($user)), 'string', 'min:8', 'confirmed'],
+            'password_confirmation' => [Rule::requiredIf(fn()=>is_null($user)), 'string', 'min:8'],
+            'role'                  => ['sometimes', 'string', Rule::in(static::allRoles()->pluck('value')->toArray())],
             'email'                 => [
                 'required', 'string', 'email', 'max:255',
                 Rule::unique('users')->ignore(optional($user)->id),

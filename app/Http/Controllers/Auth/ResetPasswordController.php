@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Contracts\Auth\CanResetPassword;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -33,13 +35,13 @@ class ResetPasswordController extends Controller
 
     /**
      * Set the user's password.
-     * @param  \Illuminate\Contracts\Auth\CanResetPassword  $user
+     * @param  CanResetPassword  $user
      * @param  string  $password
      * @return void
      */
-    protected function setUserPassword($user, $password)
+    protected function setUserPassword(CanResetPassword $user, $password)
     {
-        $user->password = $password; //Hashed in model.
+        $user->setAttribute('password', $password); //Hashed in model.
     }
 
     /**
