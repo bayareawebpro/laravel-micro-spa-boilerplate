@@ -20,7 +20,7 @@ mix.js('resources/js/bootstrap.js', 'public/js/app.js')
 mix.copy('resources/js/worker.js', 'public/worker.js')
 mix.copy('resources/js/manifest.json', 'public/manifest.json')
 mix.webpackConfig({
-    output: {chunkFilename: 'js/[name].js'},
+    output: { chunkFilename: '[name].js?id=[chunkhash]'},
     resolve: {
         alias: {
             '@controllers': path.resolve(__dirname, 'resources/js/Controllers'),
