@@ -8,17 +8,21 @@ import Application from "./application"
 import AutoLoader from "./Utilities/AutoLoader"
 import ErrorHandler from "./Utilities/ErrorHandler"
 import {AppServiceProvider} from "laravel-micro.js"
+
 /**
  * Boot Application
  */
-const Bootstrap = new Application
-Bootstrap.errorHandler(ErrorHandler)
-Bootstrap.register(AppServiceProvider)
-Bootstrap.setInstance('AutoLoader', AutoLoader)
-Bootstrap.loadProviders()
-Bootstrap.bootProviders()
-Bootstrap.make('VueRoot')
+const App = new Application
+App.errorHandler(ErrorHandler)
+App.register(AppServiceProvider)
+App.setInstance('AutoLoader', AutoLoader)
+App.loadProviders()
+App.bootProviders()
+App.make('VueRoot')
 
-Bootstrap.make('VueRoot').$nextTick(()=>{
-    Bootstrap.make('Worker').then((worker) => worker.install())
+/**
+ * Register Service Worker
+ */
+App.make('VueRoot').$nextTick(()=>{
+    App.make('Worker').then((worker) => worker.install())
 })

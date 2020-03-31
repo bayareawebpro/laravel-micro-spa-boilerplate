@@ -3,8 +3,12 @@
 return [
     /*
     |--------------------------------------------------------------------------
-    | SPA
+    | SPA SEO Config
     |--------------------------------------------------------------------------
+    | These values are injected into the frontend application.
     */
-    'page_title' => env('APP_NAME')
+    'seo' => [
+        'title' => env('APP_NAME'),
+        'description' => 'Advanced Dark UI LaravelMicro.js SPA',
+    ]
 ];
