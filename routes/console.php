@@ -20,6 +20,11 @@ Artisan::command('reset', function () {
     $this->call('clear:all');
 })->describe('Reset the Application Entirely?!');
 
+Artisan::command('make:test-db', function () {
+    $path = database_path('testing.db');
+    exec("sqlite3 $path \"VACUUM;\"");
+})->describe('Reset the Application Entirely?!');
+
 Artisan::command('clear:all', function () {
     $this->alert("Flushing Application Caches & Storage...");
     //$this->call('telescope:clear');

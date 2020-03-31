@@ -75,7 +75,7 @@
                 <div class="card-actions flex">
                     <v-action
                         type="submit"
-                        dusk="action-submit"
+                        dusk="action-login"
                         :loading="isLoading('login')"
                         class="btn-blue btn-lg">
                         <i class="fa fa-unlock"></i> Login
