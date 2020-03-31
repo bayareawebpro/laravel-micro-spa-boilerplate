@@ -1,9 +1,6 @@
 <?php
 use Illuminate\Support\Facades\{Route, Auth};
 
-//Auth::routes();
-//
-//
 //// Authentication Routes...
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');

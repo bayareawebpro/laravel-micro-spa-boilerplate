@@ -11,6 +11,31 @@ class AuthTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
+    public function test_can_use_menu()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/');
+            $browser->click('@account-menu');
+            $browser->click('@link-login');
+            $browser->waitForText('Login');
+            $browser->assertPathIs('/auth/login');
+            $browser->pause(200);
+
+            $browser->click('@account-menu');
+            $browser->click('@link-register');
+            $browser->waitForText('Register');
+            $browser->assertPathIs('/auth/register');
+            $browser->pause(200);
+
+            $browser->click('@account-menu');
+            $browser->click('@link-forgot');
+            $browser->waitForText('Forgot Password');
+            $browser->assertPathIs('/auth/forgot');
+            $browser->pause(200);
+        });
+    }
+
+
     public function test_can_register()
     {
         $this->browse(function (Browser $browser) {
