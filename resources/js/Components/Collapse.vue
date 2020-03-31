@@ -34,7 +34,7 @@
                 <div class="flex-shrink ml-auto">
                     <i
                         class="fa text-xs text-gray-500"
-                        :class="isActive ? 'fa-plus' : 'fa-minus'"
+                        :class="isActive ? 'fa-minus' : 'fa-plus'"
                     />
                 </div>
             </div>
