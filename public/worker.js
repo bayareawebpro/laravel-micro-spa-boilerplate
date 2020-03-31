@@ -27,21 +27,22 @@ self.addEventListener("install", event => {
             caches
                 .open(appVersion)
                 .then(async cache => {
-                    await cache.addAll(staticRoutes);
-                    await fetch('/mix-manifest.json')
-                        .then(response => response.json())
-                        .then(data => {
-                            cache.addAll(Object.entries(data)
-                                .filter(([key, value])=>(
-                                    !key.endsWith('.map')
-                                    && !key.endsWith('worker.js')
-                                    && !key.endsWith('hot-update.js')
-                                ))
-                                .map(([key, value])=>value))
-                        })
-                        .catch((error)=>{
-                            console.error(error)
-                        })
+                    cache.addAll(staticRoutes).then(()=>{
+                        fetch('/mix-manifest.json')
+                            .then(response => response.json())
+                            .then(data => {
+                                cache.addAll(Object.entries(data)
+                                    .filter(([key, value])=>(
+                                        !key.endsWith('.map')
+                                        && !key.endsWith('worker.js')
+                                        && !key.endsWith('hot-update.js')
+                                    ))
+                                    .map(([key, value])=>value))
+                            })
+                            .catch((error)=>{
+                                console.error(error)
+                            })
+                    })
                 })
         )
     });
@@ -70,6 +71,6 @@ self.addEventListener("fetch", event => {
     event.respondWith(
         caches
         .match(event.request)
-        .then(response => response || fetch(event.request))
+        .then(response => response || fetch(event.request).catch((error)=>error))
     )
 });

@@ -22,7 +22,20 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="apple-touch-icon" href="/images/icon-196x196.png">
 
-    @include('partials.assets')
+    <!-- PreConnect-->
+    <link rel="preconnect" href="{{ config('app.url') }}">
+
+    <!-- PreLoad -->
+    <link rel="preload" href="{{ mix('js/app.js') }}" as="script">
+    <link rel="preload" href="{{ mix('css/app.css') }}" as="style">
+
+    <!-- Application State -->
+    <script>window.__APP_STATE__ = {!! $appState !!}</script>
+
+    <!-- Asset URLs -->
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    <script src="{{ mix('js/app.js') }}" defer></script>
+
 </head>
 <body>
     @yield('layout')

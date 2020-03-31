@@ -49,7 +49,7 @@ export default class HttpService {
      * @return {Promise<*>}
      */
     onError(error) {
-        if (error.hasOwnProperty('response') && error.response.hasOwnProperty('data')) {
+        if (error && error.response) {
             if (error.response.data) {
                 switch (error.response.status) {
                     case 401:
@@ -78,6 +78,7 @@ export default class HttpService {
             }
         }
         this.$events.$emit('error:network', error);
+        error.response = error.response || {}
         return Promise.reject(error)
     }
 
