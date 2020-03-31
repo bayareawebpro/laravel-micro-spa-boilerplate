@@ -1,13 +1,17 @@
 # LaravelMicro.js SPA Boilerplate (Dark UI)
 
+#### LaravelMicro.js Framework
+> https://bayareawebpro.github.io/laravel-micro.js
+
+#### Searchable Resource Builder
+This package is designed to make building searching, sorting & filtering resource indexes easily by extracting resusable queries and using a method chained builder class for composition.  Frontend JS Controllers & Vue.js components are provided that interface with these responses.
+> https://github.com/bayareawebpro/searchable-resource
+
 ![Alt](https://github.com/bayareawebpro/laravel-micro-spa-boilerplate/raw/master/screens-home.png)
 ![Alt](https://github.com/bayareawebpro/laravel-micro-spa-boilerplate/raw/master/screens-forms.png)
 ![Alt](https://github.com/bayareawebpro/laravel-micro-spa-boilerplate/raw/master/screens-charts.png)
 ![Alt](https://github.com/bayareawebpro/laravel-micro-spa-boilerplate/raw/master/screens-resource.png)
 ![Alt](https://github.com/bayareawebpro/laravel-micro-spa-boilerplate/raw/master/screens-performance.png)
-
-> LaravelMicro Framework: https://bayareawebpro.github.io/laravel-micro.js
-> Resource Builder: https://github.com/bayareawebpro/searchable-resource
 
 #### Resources
 - TokenResource, TokenForm, TokenShow
