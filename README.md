@@ -1,6 +1,6 @@
 # Advanced (Dark UI)
 
-Laravel SPA Boilerplate with Custom UI
+An "advanced" Laravel SPA Boilerplate featuring a dark themed UI that's integrated with LaravelMicro.js.
 
 #### Resources
 - TokenResource, TokenForm, TokenShow
