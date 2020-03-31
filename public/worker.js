@@ -8,6 +8,9 @@ var appVersion = "app-version-" + new Date().getTime();
  */
 var staticRoutes = [
     '/',
+    '/auth/login',
+    '/auth/register',
+    '/auth/forgot',
 ];
 
 /**

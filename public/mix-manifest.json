@@ -1,7 +1,7 @@
 {
     "/js/app.js": "/js/app.js?id=8f76f370a24f124cea2c",
     "/css/app.css": "/css/app.css?id=16ac5973f62d21048701",
-    "/js/auth.js": "/js/auth.js?id=91c8c4c734e3b7a85803",
+    "/js/auth.js": "/js/auth.js?id=e6d6c8d12248cc45b95d",
     "/js/base.js": "/js/base.js?id=7448be21859135e8f187",
     "/js/dashboard.js": "/js/dashboard.js?id=891706295b940f5849ee",
     "/js/developer.js": "/js/developer.js?id=3b3ed82cdf6709150ca6",
@@ -26,6 +26,6 @@
     "/images/process.svg": "/images/process.svg?id=3fb81655d75bf79c31da",
     "/images/request.svg": "/images/request.svg?id=a714e9cf83ac2780e3b0",
     "/images/script.svg": "/images/script.svg?id=4504eee835c8cc587f85",
-    "/worker.js": "/worker.js?id=08e43d20d15f30ee5756",
+    "/worker.js": "/worker.js?id=c5db912aa13c30e0a7a9",
     "/manifest.json": "/manifest.json?id=c9bc7e140c043384cd20"
 }
