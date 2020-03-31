@@ -1,6 +1,6 @@
 "use strict";
 
-import Route from "../Services/Router/VueRoute"
+import Route from "./Services/Router/VueRoute"
 
 export default [
     Route
