@@ -1,30 +1,6 @@
 # Advanced (Dark UI)
 
-Laravel SPA Boilerplate built using my own personal packages.
-
-#### LaravelMicro.js Framework
-
-> https://bayareawebpro.github.io/laravel-micro.js
-
-LaravelMicro.js is an IOC Container, Service Locator and Middleware Pipeline that is integrated with Vue.js. It includes a DotSyntax Object Repository and Validator Service making it easy to work with data provided by Laravel Responses.
-
-![Alt](https://github.com/bayareawebpro/laravel-micro-spa-boilerplate/raw/master/screens-home.png)
-
----
-
-#### Searchable Resource Builder
-
-> https://github.com/bayareawebpro/searchable-resource
-
-This package is designed to make building searchable, sortable & filterable resource indexes by extracting resusable queries and using a method chained builder class for composition.  Requests are validated and responses are JsonResource classes. Frontend JS Controllers & Vue.js components are provided that interface with these responses.
-
-![Alt](https://github.com/bayareawebpro/laravel-micro-spa-boilerplate/raw/master/screens-resource.png)
-
-
----
-
-![Alt](https://github.com/bayareawebpro/laravel-micro-spa-boilerplate/raw/master/screens-forms.png)
-![Alt](https://github.com/bayareawebpro/laravel-micro-spa-boilerplate/raw/master/screens-charts.png)
+Laravel SPA Boilerplate with Custom UI
 
 #### Resources
 - TokenResource, TokenForm, TokenShow
@@ -97,6 +73,30 @@ This package is designed to make building searchable, sortable & filterable reso
 - Vue.js
 - Tailwind CSS
 - Font Awesome
+
+
+#### LaravelMicro.js Framework
+
+> https://bayareawebpro.github.io/laravel-micro.js
+
+LaravelMicro.js is an IOC Container, Service Locator and Middleware Pipeline that is integrated with Vue.js. It includes a DotSyntax Object Repository and Validator Service making it easy to work with data provided by Laravel Responses.
+
+![Alt](https://github.com/bayareawebpro/laravel-micro-spa-boilerplate/raw/master/screens-home.png)
+
+---
+
+#### Searchable Resource Builder
+
+> https://github.com/bayareawebpro/searchable-resource
+
+This package is designed to make building searchable, sortable & filterable resource indexes by extracting resusable queries and using a method chained builder class for composition.  Requests are validated and responses are JsonResource classes. Frontend JS Controllers & Vue.js components are provided that interface with these responses.
+
+![Alt](https://github.com/bayareawebpro/laravel-micro-spa-boilerplate/raw/master/screens-resource.png)
+
+---
+
+![Alt](https://github.com/bayareawebpro/laravel-micro-spa-boilerplate/raw/master/screens-forms.png)
+![Alt](https://github.com/bayareawebpro/laravel-micro-spa-boilerplate/raw/master/screens-charts.png)
 
 ---
 
