@@ -1,10 +1,12 @@
 # LaravelMicro.js SPA Boilerplate (Dark UI)
 
 #### LaravelMicro.js Framework
+LaravelMicro.js is an IOC Container, Service Locator and Middleware Pipeline that is integrated with Vue.js. It includes a DotSyntax Object Repository and Validator Service making it easy to work with data provided by Laravel Responses.
 > https://bayareawebpro.github.io/laravel-micro.js
 
 #### Searchable Resource Builder
-This package is designed to make building searching, sorting & filtering resource indexes easily by extracting resusable queries and using a method chained builder class for composition.  Frontend JS Controllers & Vue.js components are provided that interface with these responses.
+This package is designed to make building searchable, sortable & filterable resource indexes by extracting resusable queries and using a method chained builder class for composition.  Requests are validated and responses are JsonResource classes. Frontend JS Controllers & Vue.js components are provided that interface with these responses.
+
 > https://github.com/bayareawebpro/searchable-resource
 
 ![Alt](https://github.com/bayareawebpro/laravel-micro-spa-boilerplate/raw/master/screens-home.png)
