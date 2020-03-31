@@ -23,6 +23,7 @@ App.make('VueRoot')
 /**
  * Register Service Worker
  */
-App.make('VueRoot').$nextTick(()=>{
-    App.make('Worker').then((worker) => worker.install())
-})
+App.make('VueRoot')
+// .$nextTick(()=>{
+//     App.make('Worker').then((worker) => worker.install())
+// })
