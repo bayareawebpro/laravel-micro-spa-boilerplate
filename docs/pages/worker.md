@@ -5,6 +5,8 @@
 The Service Worker service is designed to 
 allow the client to dispatch data to be processes by the Service Worker.
 
+The Worker will parse the mix-manifest and cache all assets when installed.
+
 > Worker is a WIP, please contribute. 
 
 ## Installing the Worker
@@ -15,7 +17,7 @@ allow the client to dispatch data to be processes by the Service Worker.
 VueRoot.$nextTick(()=>{
     App.make('Worker').then((worker) => {
         worker.install().then(()=>{
-           //Dispatch
+           // Dispatch Task
         })
     })
 })
