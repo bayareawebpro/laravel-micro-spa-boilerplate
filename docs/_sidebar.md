@@ -7,6 +7,7 @@
 * [Routes](pages/routes.md)
 * [Links](pages/links.md)
 * [Http](pages/http.md)
+* [Worker](pages/worker.md)
 
 * [Resources](pages/resources.md)
 * [Forms](pages/forms.md)
