@@ -39,7 +39,10 @@ Routes that use a `Controller@method` **will not** be entered _or_ updated until
 the controller is resolved. Updating the VueRouter query or params will call the controller action again.
 
 If an error is returned from the rejected promise VueRouter will redirect to the the error page.
-If a validation error is returned the error will be ignored and syncronized with the `$errors` Validator instance.
+If a validation error is returned the error will be ignored.
+
+You can synchronize the error with the `$errors` Validator 
+instance within the called controller if desired.
 
 ```javascript
 Route.uses('Auth@authorize')
