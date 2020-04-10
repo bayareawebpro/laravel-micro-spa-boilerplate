@@ -20,7 +20,8 @@ Vue.js Framework.  It's 100% custom written.
 - Dusk Browser Tests
 - Accessibility Issues
 - i18n Internationalization
+- Dashboard Widget Components
+- Laravel Echo Components
+- Screen Controllers
 
 ![Preview](https://github.com/bayareawebpro/laravel-micro-spa-boilerplate/raw/master/docs/img/screens-home.png)
-
-
