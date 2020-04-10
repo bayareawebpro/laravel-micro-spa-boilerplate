@@ -12,7 +12,13 @@ allow the client to dispatch data to be processes by the Service Worker.
 > /resources/js/bootstrap.js
 
 ```javascript
-App.make('Worker').then((worker) => worker.install())
+VueRoot.$nextTick(()=>{
+    App.make('Worker').then((worker) => {
+        worker.install().then(()=>{
+           //Dispatch
+        })
+    })
+})
 ```
 
 ## Dispatch to Worker
@@ -20,17 +26,11 @@ App.make('Worker').then((worker) => worker.install())
 Once the worker is installed you can dispatch a task to the worker.
 
 ```javascript
-VueRoot.$nextTick(()=>{
-    App.make('Worker').then((worker) => {
-        worker.install().then(()=>{
-            worker.dispatch({command: 'commandA', data: {
-                test:123
-            }})
-            .then((data)=>{
-                console.log('WorkerResult', data)
-            })
-        })
-    })
+App.make('Worker').dispatch({command: 'commandA', data: {
+    test:123
+}})
+.then((data)=>{
+    console.log('WorkerResult', data)
 })
 ```
 
