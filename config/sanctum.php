@@ -13,6 +13,7 @@ return [
     */
     'stateful' => [
         'localhost',
+        '10.0.1.11',
         env('AIRLOCK_DOMAIN', 'localhost'),
     ],
 

@@ -2,12 +2,14 @@ import VueScrollTo from "vue-scrollto"
 
 export default (to, from, last) => {
     return new Promise((resolve) => {
-        VueScrollTo.scrollTo("#header", 300, {
-            offset: 0,
-            container: 'body',
+        VueScrollTo.scrollTo(window.document.body, 120, {
+            onDone: resolve({y: 0}),
+            container: 'html',
             easing: "ease",
-            onDone: resolve,
             force: false,
+            offset: 0,
+            x: false,
+            y: true
         })
     })
 }
