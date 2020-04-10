@@ -39,7 +39,7 @@ beforeCreate() {
 ### Map Getters
 
 > Controller Instance must have a `$store` / `Repository` root instance. Or implement `get` / `set` methods,
-> see Controllers from more details.
+> see Controllers for more details.
 
 ```javascript
 beforeCreate(){
