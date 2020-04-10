@@ -2,9 +2,9 @@
 
 > /resources/js/Controllers
 
-Controllers are where the core logic of the application should reside.
-
-Just like our Laravel PHP backend, we can extend the base `Controller` to have helper methods available.  (Recommended)
+Controllers are auto-loaded into the container and are where the core logic of the 
+application should reside. Just like our Laravel PHP backend, we can extend the 
+base `Controller` to have helper methods available.  (Recommended)
 
 ```javascript
 //Global Vue Component Scope:
