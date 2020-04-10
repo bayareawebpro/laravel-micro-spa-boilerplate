@@ -2,13 +2,12 @@
 
 > An "advanced" Laravel SPA Boilerplate featuring a dark themed UI.
 
-This boilerplate is an on-going work in progress to build 
-out a solid starter project that can quickly scaffold UIs and doesn't depend on any specific 
-Vue.js Framework.  It's 100% custom written.
+This project is an on-going work in progress to build out a solid starter project that can quickly scaffold UIs 
+and doesn't depend on any specific Vue.js Framework. It's 100% custom written to retain control over the implementation.
 
-- It uses Laravel Sanctum Authentication and the methodology is API-Driven Development.  All SPA routes are accessible via the API.
-- It depends on two packages I wrote: One for the Back-end Resource Indexes, and the other for Front-end Dependency Injection.
-- If you're not intermediate to advanced with ES6 / Vue & Laravel, you might struggle to understand it the how to use it. 
+- It uses Laravel Sanctum Authentication and the methodology is API-Driven Development.
+- It depends on two packages I wrote: One for the Back-end Searchable Resources, and the other for Front-end Dependency Injection, and AutoLoading of Javascript.  
+- If you're not intermediate to "advanced" with ES6 / Vue & Laravel, you might struggle to understand how to use it. 
 - Feel free to join the discord server and make any recommendations or suggestions, contributions welcome.
 
 # Links
