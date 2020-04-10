@@ -39,6 +39,8 @@ App.make('Worker').dispatch({command: 'commandA', data: {
 
 ## Worker Route Caching
 
+> /resources/js/worker.js
+
 ```javascript
 var staticRoutes = [
     '/',
