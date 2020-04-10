@@ -2,13 +2,11 @@
 
 namespace App\Composers;
 
-use App\Models\User;
-use App\Services\AppPermissions;
+use App\Services\{UserRoles, AppPermissions};
 
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Collection;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
+use Illuminate\Support\{Facades\Config, Collection};
 
 class AppComposer
 {
@@ -26,7 +24,7 @@ class AppComposer
         $view->with('appState', Collection::make(Config::get('spa'))->merge([
             'environment' => config('app.env'),
             'permissions' => AppPermissions::all(),
-            'roles'       => User::allRoles(),
+            'roles'       => UserRoles::all(),
             'version'     => $this->version(),
         ]));
     }

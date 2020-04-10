@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\UserRequest;
 
 use App\Http\Resources\Searchable\UserSearchable;
 use BayAreaWebPro\SearchableResource\SearchableResource;
@@ -22,10 +22,9 @@ class UserController extends Controller
 
     /**
      * Display a listing of the resource.
-     * @param Request $request
      * @return SearchableResource
      */
-    public function index(Request $request)
+    public function index()
     {
         return SearchableResource::make(User::query())->tap(new UserSearchable);
     }
@@ -42,18 +41,19 @@ class UserController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * @param Request $request
+     * @param UserRequest $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        $data = $request->validate(User::validationRules());
+        $data = $request->validated();
 
-        $user = new User();
-        $user->fill($data);
+        $user = new User($data);
+
         if (isset($data['role']) && $request->user()->can('updateRole', [$user])) {
             $user->grantRole($data['role']);
         }
+
         $user->save();
 
         return response([
@@ -88,18 +88,17 @@ class UserController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * @param Request $request
+     * @param UserRequest $request
      * @param User $user
      * @return Response
      */
-    public function update(Request $request, User $user)
+    public function update(UserRequest $request, User $user)
     {
-        $data = $request->validate(User::validationRules($user));
+        $data = $request->validated();
 
 //        if (isset($data['role']) && $request->user()->can('updateRole', [$user])) {
 //            $user->grantRole($data['role']);
 //        }
-//
 //        $user->update($data);
 
         return response([

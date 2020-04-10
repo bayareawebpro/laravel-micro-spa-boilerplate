@@ -14,8 +14,10 @@ abstract class Screen extends Controller implements Arrayable, Responsable
 {
     protected Request $request;
 
-    public function __invoke($method = null)
+    public function __invoke(Request $request, $method = null)
     {
+        $this->authorize(static::class);
+
         if(method_exists($this,$method)){
             app()->call(static::class.'@'.$method);
         }

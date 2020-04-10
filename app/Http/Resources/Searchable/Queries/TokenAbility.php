@@ -5,23 +5,23 @@ namespace App\Http\Resources\Searchable\Queries;
 use App\Models\ApiToken;
 use Illuminate\Validation\Rule;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Cache;
 
 use BayAreaWebPro\SearchableResource\AbstractQuery;
 use BayAreaWebPro\SearchableResource\Contracts\{ConditionalQuery, ProvidesOptions, ValidatableQuery};
 
-class TokenAbility
-    extends AbstractQuery
-    implements ConditionalQuery, ValidatableQuery, ProvidesOptions
-{
+class TokenAbility extends AbstractQuery implements ConditionalQuery, ValidatableQuery, ProvidesOptions{
+
     protected string $field = 'abilities';
     protected string $attribute = 'abilities';
 
     /**
      * Invokable Query
+     * @param Builder $builder
      */
     public function __invoke(Builder $builder): void
     {
-        $builder->where($this->attribute, 'like', "%\"{$this->getValue()}\"%");
+        $builder->where($this->attribute, 'like', "%{$this->getValue()}%");
     }
 
     /**
@@ -29,7 +29,9 @@ class TokenAbility
      */
     protected function getValues(): array
     {
-        return ApiToken::allAbilities()->toArray();
+        return Cache::remember('airlock:abilities', 120,
+            fn()=>ApiToken::allAbilities()->toArray()
+        );
     }
 
     /**

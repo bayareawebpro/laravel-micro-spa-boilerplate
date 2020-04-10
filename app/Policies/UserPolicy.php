@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Policies;
 
@@ -27,8 +27,10 @@ class UserPolicy
      */
     public function view(User $user, User $model): bool
     {
-        return $user->isRole('admin')
-            || $user->is($model) && $user->tokenCan('users:view');
+        return $user->isRole('admin') || (
+            $user->is($model) &&
+            $user->tokenCan('users:view')
+        );
     }
 
     /**
@@ -60,8 +62,10 @@ class UserPolicy
      */
     public function update(User $user, User $model): bool
     {
-        return $user->isRole('admin')
-            || $user->is($model) && $user->tokenCan('users:update');
+        return $user->isRole('admin') || (
+            $user->is($model) &&
+            $user->tokenCan('users:update')
+        );
     }
 
     /**
@@ -72,8 +76,10 @@ class UserPolicy
      */
     public function delete(User $user, User $model): bool
     {
-        return $user->isRole('admin')
-            || $user->is($model) && $user->tokenCan('users:delete');
+        return $user->isRole('admin') || (
+            $user->is($model) &&
+            $user->tokenCan('users:delete')
+        );
     }
 
     /**
@@ -84,8 +90,10 @@ class UserPolicy
      */
     public function restore(User $user, User $model): bool
     {
-        return $user->isRole('admin')
-            || $user->is($model) && $user->tokenCan('users:restore');
+        return $user->isRole('admin') || (
+            $user->is($model) &&
+            $user->tokenCan('users:restore')
+        );
     }
 
     /**
@@ -96,7 +104,9 @@ class UserPolicy
      */
     public function forceDelete(User $user, User $model): bool
     {
-        return $user->isRole('admin')
-            || $user->is($model) && $user->tokenCan('users:forceDelete');
+        return $user->isRole('admin') || (
+            $user->is($model) &&
+            $user->tokenCan('users:forceDelete')
+        );
     }
 }

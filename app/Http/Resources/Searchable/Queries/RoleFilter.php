@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Searchable\Queries;
 
 use App\Models\User;
+use App\Services\UserRoles;
 use Illuminate\Validation\Rule;
 use BayAreaWebPro\SearchableResource\AbstractQuery;
 use BayAreaWebPro\SearchableResource\Contracts\{ConditionalQuery, ProvidesOptions, ValidatableQuery};
@@ -17,7 +18,7 @@ class RoleFilter extends AbstractQuery implements ConditionalQuery, ValidatableQ
      */
     protected function values(): array
     {
-        return User::allRoles()->pluck('value')->toArray();
+        return UserRoles::values()->toArray();
     }
 
     /**

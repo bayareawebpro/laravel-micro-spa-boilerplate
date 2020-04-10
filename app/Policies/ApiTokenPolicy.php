@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Policies;
 
@@ -29,8 +29,10 @@ class ApiTokenPolicy
      */
     public function view(User $user, ApiToken $token): bool
     {
-        return $user->isRole('admin')
-            || ($user->is($token->tokenable) && $user->tokenCan('tokens:view'));
+        return $user->isRole('admin') || (
+            $user->is($token->tokenable) &&
+            $user->tokenCan('tokens:view')
+        );
     }
 
     /**
@@ -52,8 +54,10 @@ class ApiTokenPolicy
      */
     public function update(User $user, ApiToken $token): bool
     {
-        return $user->isRole('admin')
-            || ($user->is($token->tokenable) && $user->tokenCan('tokens:update'));
+        return $user->isRole('admin') || (
+            $user->is($token->tokenable) &&
+            $user->tokenCan('tokens:update')
+        );
     }
 
     /**
@@ -64,8 +68,10 @@ class ApiTokenPolicy
      */
     public function delete(User $user, ApiToken $token): bool
     {
-        return $user->isRole('admin')
-            || ($user->is($token->tokenable) && $user->tokenCan('tokens:delete'));
+        return $user->isRole('admin') || (
+            $user->is($token->tokenable) &&
+            $user->tokenCan('tokens:delete')
+        );
     }
 
     /**
@@ -76,8 +82,10 @@ class ApiTokenPolicy
      */
     public function restore(User $user, ApiToken $token): bool
     {
-        return $user->isRole('admin')
-            || ($user->is($token->tokenable) && $user->tokenCan('tokens:restore'));
+        return $user->isRole('admin') || (
+            $user->is($token->tokenable) &&
+            $user->tokenCan('tokens:restore')
+        );
     }
 
     /**
@@ -88,7 +96,9 @@ class ApiTokenPolicy
      */
     public function forceDelete(User $user, ApiToken $token): bool
     {
-        return $user->isRole('admin')
-            || ($user->is($token->tokenable) && $user->tokenCan('tokens:forceDelete'));
+        return $user->isRole('admin') || (
+            $user->is($token->tokenable) &&
+            $user->tokenCan('tokens:forceDelete')
+        );
     }
 }

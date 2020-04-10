@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Facades\Hash;
+use App\Services\UserRoles;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Hash;
 
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
@@ -39,7 +39,7 @@ class User extends Authenticatable
      */
     public function setPasswordAttribute(?string $value = null)
     {
-        if(!empty($value)){
+        if (!empty($value)) {
             $this->attributes['password'] = Hash::make($value);
         }
     }
@@ -59,46 +59,9 @@ class User extends Authenticatable
      * @param string $role
      * @return self
      */
-    public function grantRole($role): self
+    public function grantRole(string $role): self
     {
-        $this->setAttribute('role', $role);
+        $this->attributes['role'] = $role;
         return $this;
-    }
-
-    /**
-     * Get all the user roles in use.
-     * @return Collection
-     */
-    public static function allRoles(): Collection
-    {
-        return Collection::make([
-            ['label' => 'Administrator', 'value' => 'admin'],
-            ['label' => 'User', 'value' => 'user'],
-        ]);
-    }
-
-    /**
-     * The validation rules for an entity.
-     * @param User|null $user
-     * @return array
-     */
-    public static function validationRules(?User $user = null): array
-    {
-        return [
-            'name'                  => ['required', 'string', 'max:255'],
-            'password'              => [Rule::requiredIf(fn()=>is_null($user)), 'string', 'min:8', 'confirmed'],
-            'password_confirmation' => [Rule::requiredIf(fn()=>is_null($user)), 'string', 'min:8'],
-            'role'                  => ['sometimes', 'string', Rule::in(static::allRoles()->pluck('value')->toArray())],
-            'email'                 => [
-                'required', 'string', 'email', 'max:255',
-                Rule::unique('users')->ignore(optional($user)->id),
-            ],
-        ];
-    }
-
-    public static function boot()
-    {
-        parent::boot();
-        static::deleting(fn(User $user)=>$user->tokens()->delete());
     }
 }

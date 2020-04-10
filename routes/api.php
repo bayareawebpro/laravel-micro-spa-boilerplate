@@ -5,10 +5,16 @@ use Illuminate\Validation\ValidationException;
 
 /*
 |--------------------------------------------------------------------------
-| API Routes
+| API Routes: Public
 |--------------------------------------------------------------------------
 */
 
+
+/*
+|--------------------------------------------------------------------------
+| API Routes: Local Error Testing
+|--------------------------------------------------------------------------
+*/
 if(App::environment('local')){
     Route::any('errors/500',fn()=>abort(500, 'Server Error'));
     Route::any('errors/401',fn()=>abort(401, 'UnAuthenticated'));
@@ -22,11 +28,33 @@ if(App::environment('local')){
     });
 }
 
-Route::any('screen/{method?}', 'Screens\SettingsScreen');
 
+/*
+|--------------------------------------------------------------------------
+| API Routes: Authorized
+|--------------------------------------------------------------------------
+*/
 Route::group(['middleware' => 'auth:sanctum'], function(){
 
+    /*
+    |--------------------------------------------------------------------------
+    | WIP Abstract Screen Controller
+    |--------------------------------------------------------------------------
+    */
+    Route::any('screens/demo/{method?}', 'Screens\DemoScreen');
+
+    /*
+    |--------------------------------------------------------------------------
+    | Markdown Pages
+    |--------------------------------------------------------------------------
+    */
     Route::get('pages/{slug}', 'PageController@show');
+
+    /*
+    |--------------------------------------------------------------------------
+    | Model Resources
+    |--------------------------------------------------------------------------
+    */
     Route::resource('users','UserController');
     Route::resource('tokens','TokenController');
     Route::resource('account','AccountController', [

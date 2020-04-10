@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ApiTokenRequest;
 use App\Models\ApiToken;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -25,11 +26,9 @@ class TokenController extends Controller
      */
     public function index(Request $request)
     {
-        $query = !$request->user()->isRole('admin')
-            ? $request->user()->tokens()->getQuery()
-            : ApiToken::query();
+        $query = ApiToken::forUser($request->user())->with('tokenable');
 
-        return SearchableResource::make($query->with('tokenable'))->tap(new TokenSearchable);
+        return SearchableResource::make($query)->tap(new TokenSearchable);
     }
 
     /**
@@ -72,16 +71,11 @@ class TokenController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * @param Request $request
+     * @param ApiTokenRequest $request
      * @return Response
-     * @throws AuthorizationException|ValidationException
      */
-    public function store(Request $request): Response
+    public function store(ApiTokenRequest $request): Response
     {
-        $this->authorize('create', [ApiToken::class]);
-
-        $request->validate(ApiToken::validationRules());
-
         $newAccessToken = $request->user()->createToken(
             $request->get('name'),
             $request->get('abilities')
@@ -97,16 +91,12 @@ class TokenController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * @param Request $request
+     * @param ApiTokenRequest $request
      * @param ApiToken $token
      * @return Response
      */
-    public function update(Request $request, ApiToken $token): Response
+    public function update(ApiTokenRequest $request, ApiToken $token): Response
     {
-        $request->validate(ApiToken::validationRules());
-
-        //sleep(2);
-
         return response([
             'message' => 'Entity Updated',
             'entity' => tap($token)->update($request->only(['name', 'abilities']))
