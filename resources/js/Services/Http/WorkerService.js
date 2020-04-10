@@ -12,16 +12,16 @@ export default class WorkerService {
         return (navigator.serviceWorker.controller)
     }
 
-    install() {
+    async install() {
         if (this.isSupported) {
-            navigator.serviceWorker
+            return await navigator.serviceWorker
                 .register('/worker.js', {scope: '.'})
                 .then(()=>navigator.serviceWorker.ready)
                 .then(this.onInstalled.bind(this), this.onFailed.bind(this))
         }else{
             console.warn('ServiceWorker UnAvailable')
         }
-        return this
+        return Promise.reject(new Error('ServiceWorker UnAvailable'))
     }
 
     /**
@@ -29,14 +29,7 @@ export default class WorkerService {
      * @param registration {ServiceWorkerRegistration}
      */
     onInstalled(registration) {
-        setTimeout(() => {
-            this.$events.$emit('worker:registered')
-            this.dispatch({
-                test:123
-            }).then((result)=>{
-                console.log(`WorkerResult`, result)
-            })
-        }, 1000)
+        this.$events.$emit('worker:registered', registration)
     }
 
     /**
@@ -44,9 +37,7 @@ export default class WorkerService {
      * @param error {Error}
      */
     onFailed(error) {
-        setTimeout(() => {
-            this.$events.$emit('worker:failed', error)
-        }, 1000)
+        this.$events.$emit('worker:failed', error)
     }
 
     /**

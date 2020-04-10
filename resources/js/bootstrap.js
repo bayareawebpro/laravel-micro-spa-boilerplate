@@ -23,12 +23,32 @@ App.bootProviders()
 App.make('VueRoot')
 
 /**
- * Register Service Worker
+ * Register TestUtils
  */
-App.make('VueRoot')
 App.share('DuskTestUtils').withOthers(window)
 App.share('App').withOthers(window)
 
-// .$nextTick(()=>{
-//     App.make('Worker').then((worker) => worker.install())
+
+/**
+ * Mount Vue Root
+ */
+const VueRoot = App.make('VueRoot')
+
+/**
+ * Install Worker
+ */
+// VueRoot.$nextTick(()=>{
+//     App.make('Worker').then((worker) => {
+//         worker.install().then(()=>{
+//             worker.dispatch({
+//                 command: 'commandA',
+//                 data: {
+//                     test:123
+//                 }
+//             })
+//             .then((data)=>{
+//                 console.log('WorkerResult', data)
+//             })
+//         })
+//     })
 // })

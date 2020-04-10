@@ -17,9 +17,26 @@ var staticRoutes = [
  * Command Handler
  */
 self.addEventListener('message', (event) => {
-    console.log('WorkerMessage',event.data)
-    event.ports[0].postMessage(event.data);
+    // Handle Job Command
+    const {command, data} = event.data
+
+    console.log('WorkerJob',{command, data})
+
+    // switch (command) {
+    //     case 'commandA':
+    //         // Call some command function.
+    //     break;
+    //     case 'commandB':
+    //         // Call some command function.
+    //     break;
+    //     default:
+    //         // Call some default function.
+    //     break;
+    // }
+    // Send Data to Dispatching Caller
+    event.ports[0].postMessage(data);
 });
+
 
 /**
  * Installation / Prime Caches
@@ -34,7 +51,6 @@ self.addEventListener("install", event => {
                     .then(data => {
                         cache.addAll(Object.entries(data)
                             .filter(([key, value])=>{
-                                console.log({key, value})
                                 return (
                                     !key.endsWith('.map')
                                     && !key.endsWith('worker.js')
@@ -45,7 +61,7 @@ self.addEventListener("install", event => {
                     })
                     .then(() => cache.addAll(staticRoutes))
                     .catch((error)=>{
-                        console.error(error)
+                        console.error(error || 'Worker Cache Error')
                     })
                 )
         )
@@ -67,6 +83,7 @@ self.addEventListener('activate', event => {
         })
     );
 });
+
 
 /**
  * Serve from Cache

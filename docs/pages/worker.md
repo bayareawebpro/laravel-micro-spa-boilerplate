@@ -2,7 +2,10 @@
 
 > /resources/js/worker.js
 
-The Service Worker service is designed to allow background browser processes to communicate with the front-end client.
+The Service Worker service is designed to 
+allow the client to dispatch data to be processes by the Service Worker.
+
+> Worker is a WIP, please contribute. 
 
 ## Installing the Worker
 
@@ -10,4 +13,35 @@ The Service Worker service is designed to allow background browser processes to 
 
 ```javascript
 App.make('Worker').then((worker) => worker.install())
+```
+
+## Dispatch to Worker
+
+Once the worker is installed you can dispatch a task to the worker.
+
+```javascript
+VueRoot.$nextTick(()=>{
+    App.make('Worker').then((worker) => {
+        worker.install().then(()=>{
+            worker.dispatch({command: 'commandA', data: {
+                test:123
+            }})
+            .then((data)=>{
+                console.log('WorkerResult', data)
+            })
+        })
+    })
+})
+```
+
+
+## Worker Route Caching
+
+```javascript
+var staticRoutes = [
+    '/',
+    '/auth/login',
+    '/auth/register',
+    '/auth/forgot',
+];
 ```
