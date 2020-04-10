@@ -18,13 +18,12 @@
             })
         },
         created() {
-            //this.$errors.clear()
             if(!this.entity.abilities.length){
                 this.entity.abilities.push({})
             }
         },
         beforeDestroy() {
-            //this.$errors.clear()
+            this.$errors.clear()
         },
     }
 </script>

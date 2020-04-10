@@ -7,7 +7,7 @@ export default class Bind {
 
     /**
      * Handle Next.
-     * @param request {Object}
+     * @param request {Request}
      * @param next function
      * @return {*}
      */
@@ -28,11 +28,11 @@ export default class Bind {
 
     /**
      * Terminate Next.
-     * @param response {Object}
+     * @param request {Request}
      * @param next function
      * @return {*}
      */
-    terminate(response, next) {
-        return next(response)
+    terminate(request, next) {
+        return next(request)
     }
 }

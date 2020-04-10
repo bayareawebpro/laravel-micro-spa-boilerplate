@@ -1,10 +1,17 @@
 * [Home](/)
 * [Overview](pages/overview.md)
-* [Resources](pages/resources.md)
-* [Binding Methods](pages/binding-methods.md)
-* [Authentication](pages/authentication.md)
+* [Vue Bindings](pages/binding.md)
+* [Controllers](pages/controllers.md)
+* [Listeners](pages/listeners.md)
+* [Middleware](pages/middleware.md)
+* [Routes](pages/routes.md)
+* [Links](pages/links.md)
+* [Http](pages/http.md)
 
+* [Resources](pages/resources.md)
 * [Forms](pages/forms.md)
+
+* Components
     - Action
     - Input
     - InputFile
@@ -15,8 +22,7 @@
     - InputTextarea
     - FormControl
     - FormMessage
-
-* Components
+    
     - Collapse
     - Panels
     - Tabs

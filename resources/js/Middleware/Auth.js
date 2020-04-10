@@ -11,7 +11,7 @@ export default class Auth {
 
     /**
      * Handle Next.
-     * @param request {Object}
+     * @param request {Request}
      * @param next {Function}
      * @return {*}
      */
@@ -21,9 +21,8 @@ export default class Auth {
                 await this.app.make('Auth').authorize()
             } catch (e) {
                 if(!request.routeIs('auth.login')){
-                    const route = this.app.make('Route')
                     return next(request.redirect(
-                        route.link('auth.login').withQuery({
+                        this.app.make('Route').link('auth.login').withQuery({
                             redirect: request.get('to.fullPath')
                         })
                     ))
@@ -35,11 +34,11 @@ export default class Auth {
 
     /**
      * Terminate Next.
-     * @param response {Object}
+     * @param request {Request}
      * @param next {Function}
      * @return {*}
      */
-    terminate(response, next) {
-        return next(response)
+    terminate(request, next) {
+        return next(request)
     }
 }

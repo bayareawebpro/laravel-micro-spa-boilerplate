@@ -1,10 +1,18 @@
 "use strict";
 export default class MetaData {
 
+    /**
+     * MetaData Middleware
+     * @param App
+     */
     constructor(App) {
         this.app = App
     }
 
+    /**
+     * Global Pipe
+     * @return {boolean}
+     */
     static get global(){
         return true
     }
@@ -15,7 +23,7 @@ export default class MetaData {
      * @param next {function}
      * @return {*}
      */
-    async handle(request, next) {
+    handle(request, next) {
         document.title = request.get('to.meta.title') || this.app.make('Config').get('seo.title')
         return next(request)
     }
