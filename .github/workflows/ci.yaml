@@ -25,5 +25,5 @@ jobs:
       - name: Feature Tests
         run: |
           nohup bash -c './vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &'
-          nohup bash -c 'php artisan serve --host=laravel-micro-spa.test --port=8000 > /dev/null 2>&1 &'
+          nohup bash -c 'php artisan serve > /dev/null 2>&1 &'
           composer test-feature
