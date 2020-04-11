@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Http\Requests\UserRequest;
+
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Hash;
 
 class AccountController extends Controller
 {
@@ -23,15 +24,13 @@ class AccountController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * @param Request $request
+     * @param UserRequest $request
      * @param User $user
      * @return Response
      */
-    public function update(Request $request, User $user)
+    public function update(UserRequest $request, User $user)
     {
-        $data = $request->validate(User::validationRules($user));
-
-        $user->update($data);
+        $user->update($request->validated());
 
         return response([
             'message' => 'Account Updated',
