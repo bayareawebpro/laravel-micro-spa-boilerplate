@@ -1,12 +1,10 @@
 name: ci
 on:
     push:
-        branches:
-            - master
-            - dev
         paths-ignore:
             - 'README.md'
             - 'LICENSE.md'
+            - 'docs'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -16,7 +14,13 @@ jobs:
           fetch-depth: 1
       - name: Composer Dependencies
         run: composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
-      - name: Lint
+      - name: Analysis
         run: composer lint
       - name: Unit Tests
-        run: composer test-coverage
+        run: composer test-unit
+      - name: Feature Tests
+        run: |
+          nohup bash -c './vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &'
+          nohup bash -c 'php artisan serve --host=laravel-micro-spa.test --port=8000 > /dev/null 2>&1 &'
+          php artisan make:sqlite
+          composer test-feature

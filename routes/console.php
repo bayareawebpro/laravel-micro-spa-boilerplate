@@ -4,32 +4,28 @@ use Illuminate\Foundation\Inspiring;
 
 /*
 |--------------------------------------------------------------------------
-| Console Routes
+| Reset Application State
 |--------------------------------------------------------------------------
-|
-| This file is where you may define all of your Closure based console
-| commands. Each Closure is bound to a command instance allowing a
-| simple approach to interacting with each command's IO methods.
-|
+| This command will reset the application to an ideal development state.
 */
-
 Artisan::command('reset', function () {
     $this->alert("Resetting Application...");
-    $this->call('migrate:fresh');
-    $this->call('db:seed');
-    $this->call('clear:all');
-})->describe('Reset the Application Entirely?!');
-
-Artisan::command('make:test-db', function () {
-    $path = database_path('testing.db');
-    exec("sqlite3 $path \"VACUUM;\"");
-})->describe('Reset the Application Entirely?!');
-
-Artisan::command('clear:all', function () {
-    $this->alert("Flushing Application Caches & Storage...");
-    //$this->call('telescope:clear');
     $this->call('cache:clear');
     $this->call('route:clear');
     $this->call('view:clear');
     $this->call('clear-compiled');
-})->describe('Clear the Application Caches...');
+    $this->call('migrate:fresh');
+    $this->call('db:seed');
+})->describe('Reset the Application!');
+
+/*
+|--------------------------------------------------------------------------
+| Make Sqlite Database
+|--------------------------------------------------------------------------
+| This command will write or VACUUM an existing database using the
+| configured connection settings.
+*/
+Artisan::command('make:sqlite', function () {
+    $path = config('database.connections.sqlite_testing.database');
+    exec("sqlite3 $path \"VACUUM;\"");
+})->describe('Make or VACUUM the Sqlite Database');
