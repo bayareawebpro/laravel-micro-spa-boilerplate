@@ -27,5 +27,5 @@ Artisan::command('reset', function () {
 */
 Artisan::command('make:sqlite', function () {
     $path = config('database.connections.sqlite_testing.database');
-    exec("sqlite3 $path \"VACUUM;\"");
+    exec("touch $path");
 })->describe('Make or VACUUM the Sqlite Database');
