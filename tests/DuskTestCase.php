@@ -5,6 +5,7 @@ namespace Tests;
 use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
+use Illuminate\Support\Facades\File;
 use Laravel\Dusk\TestCase as BaseTestCase;
 
 abstract class DuskTestCase extends BaseTestCase
@@ -27,11 +28,17 @@ abstract class DuskTestCase extends BaseTestCase
      */
     protected function driver()
     {
-        $options = (new ChromeOptions)->addArguments([
+        $args = [
             '--disable-gpu',
-            //'--headless',
             '--window-size=1920,1080',
-        ]);
+        ];
+
+        /** Enable Headless during CI  */
+        if(File::exists(base_path('vendor/laravel/dusk/bin/chromedriver-linux'))){
+            $args[]= '--headless';
+        }
+
+        $options = (new ChromeOptions)->addArguments($args);
 
         return RemoteWebDriver::create(
             'http://localhost:9515', DesiredCapabilities::chrome()->setCapability(
