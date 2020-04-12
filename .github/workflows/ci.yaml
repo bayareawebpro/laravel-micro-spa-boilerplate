@@ -12,17 +12,27 @@ jobs:
       - uses: actions/checkout@v1
         with:
           fetch-depth: 1
+
       - name: Composer Dependencies
         run: composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+
       - name: Configure Environment
         run: cp .env.example .env && php artisan key:generate
+
       - name: Run Code Analysis
         run: composer lint
+
       - name: Run Unit Tests
         run: composer test-unit
+
+      - name: Install Chromium
+        run: sudo apt-get update && sudo apt-get install -y google-chrome-stable
+
       - name: Start Chrome Driver
         run: ./vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &
+
       - name: Serve Application
         run: php artisan serve > /dev/null 2>&1 &
+
       - name: Run Feature Tests
-        run: php artisan dusk
+        run: composer test-feature

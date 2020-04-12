@@ -36,6 +36,7 @@ abstract class DuskTestCase extends BaseTestCase
         /** Enable Headless during CI  */
         if(File::exists(base_path('vendor/laravel/dusk/bin/chromedriver-linux'))){
             $args[]= '--headless';
+            $args[]= '--no-sandbox';
         }
 
         $options = (new ChromeOptions)->addArguments($args);
