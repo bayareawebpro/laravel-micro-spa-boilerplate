@@ -16,13 +16,13 @@ jobs:
       - name: Composer Dependencies
         run: composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
 
-      - name: Run Code Analysis
-        run: composer lint
-
       - name: Configure Environment
         run: cp .env.example .env && php artisan key:generate
 
-      - name: Create Database
+      - name: Run Code Analysis
+        run: composer lint
+
+      - name: Create Sqlite Database
         run: artisan make:sqlite
 
       - name: Run Unit Tests
