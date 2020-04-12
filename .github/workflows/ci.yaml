@@ -16,17 +16,20 @@ jobs:
       - name: Composer Dependencies
         run: composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
 
+      - name: Run Code Analysis
+        run: composer lint
+
       - name: Configure Environment
         run: cp .env.example .env && php artisan key:generate
 
-      - name: Run Code Analysis
-        run: composer lint
+      - name: Create Database
+        run: artisan make:sqlite
 
       - name: Run Unit Tests
         run: composer test-unit
 
       - name: Install Chromium
-        run: sudo apt-get update && sudo apt-get install -y google-chrome-stable
+        run: sudo apt-get install -y google-chrome-stable
 
       - name: Start Chrome Driver
         run: ./vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &
