@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+      - uses: nanasess/setup-chromedriver@master
         with:
           fetch-depth: 1
 
@@ -41,7 +42,7 @@ jobs:
 #        run: npm run production
 
       - name: Install Chrome Driver
-        run: php artisan dusk:chrome-driver
+        run: php artisan dusk:chrome-driver 80
 
       - name: Start Chrome Driver
         run: ./vendor/laravel/dusk/bin/chromedriver-linux &
