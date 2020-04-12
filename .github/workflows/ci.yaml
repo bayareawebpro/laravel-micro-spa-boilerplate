@@ -16,7 +16,6 @@ jobs:
       - name: Configure Environment
         run: |
           cp .env.ci .env
-          sudo apt-get install chromium-browser
 
       - name: Composer Dependencies
         run: |
@@ -42,7 +41,9 @@ jobs:
 #        run: npm run production
 
       - name: Install Chrome Driver
-        run: php artisan dusk:chrome-driver
+        run:  |
+          php artisan dusk:chrome-driver
+          chmod -R 0755 vendor/laravel/dusk/bin/.
 
       - name: Start Chrome Driver
         run: ./vendor/laravel/dusk/bin/chromedriver-linux &
