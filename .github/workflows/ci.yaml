@@ -30,10 +30,11 @@ jobs:
         run: composer test-unit
 
       - name: Install Chromium
-        run: sudo apt-get install -y google-chrome-stable
+        run: sudo apt-get install -y chromium-browser
 
       - name: Start Chrome Driver
-        run: ./vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &
+        run: |
+          ./vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &
 
       - name: Serve Application
         run: php artisan serve > /dev/null 2>&1 &
