@@ -7,7 +7,6 @@ and doesn't depend on any specific Vue.js Framework. It's 100% custom written to
 
 - It uses Laravel Sanctum Authentication and the methodology is API-Driven Development.
 - It depends on two packages I wrote: One for the Back-end Searchable Resources, and the other for Front-end Dependency Injection, and AutoLoading of Javascript.  
-- If you're not intermediate to "advanced" with ES6 / Vue & Laravel, you might struggle to understand how to use it. 
 - Feel free to join the discord server and make any recommendations or suggestions, contributions welcome.
 
 # Links

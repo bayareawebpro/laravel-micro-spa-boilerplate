@@ -10,5 +10,5 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('passw
 Route::view('auth/reset', 'app-spa')->name('password.reset');
 
 Route::view('{slug?}', 'app-spa')
-    ->where('slug', '^(?!api).*?$')
+    ->where('slug', '^(?!api|session).*?$')
     ->name('spa');

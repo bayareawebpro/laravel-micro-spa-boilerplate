@@ -29,9 +29,9 @@ abstract class DuskTestCase extends BaseTestCase
     {
 
         $options = (new ChromeOptions)->addArguments([
-            '--no-sandbox',
             '--headless',
             '--disable-gpu',
+            '--no-sandbox',
             '--window-size=1920,1080',
         ]);
 
