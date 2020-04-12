@@ -23,7 +23,7 @@ jobs:
         run: composer lint
 
       - name: Create Sqlite Database
-        run: artisan make:sqlite
+        run: php artisan make:sqlite
 
       - name: Run Unit Tests
         run: composer test-unit
