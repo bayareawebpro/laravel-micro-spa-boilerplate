@@ -43,10 +43,10 @@ jobs:
       - name: Install Chrome Driver
         run:  |
           php artisan dusk:chrome-driver
-          chmod -R 0755 vendor/laravel/dusk/bin/.
+          chmod -R 0755 ./vendor/laravel/dusk/bin/.
 
-      - name: Start Chrome Driver
-        run: ./vendor/laravel/dusk/bin/chromedriver-linux &
+#      - name: Start Chrome Driver
+#        run: ./vendor/laravel/dusk/bin/chromedriver-linux &
 
       - name: Serve Application
         run: php artisan serve &
