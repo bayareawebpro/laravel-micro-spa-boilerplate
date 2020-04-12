@@ -12,12 +12,13 @@ jobs:
       - uses: actions/checkout@v1
         with:
           fetch-depth: 1
+      - name: Configure Environment
+        run: cp .env.example .env
 
       - name: Composer Dependencies
-        run: composer install --no-ansi --no-interaction --no-suggest --no-progress --prefer-dist --optimize-autoloader
-
-      - name: Configure Environment
-        run: cp .env.example .env && php artisan key:generate
+        run: |
+          composer install --no-ansi --no-interaction --no-suggest --no-progress --prefer-dist --optimize-autoloader
+          php artisan key:generate
 
       - name: Run Code Analysis
         run: composer lint
