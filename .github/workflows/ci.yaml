@@ -17,7 +17,6 @@ jobs:
         run: |
           cp .env.ci .env
           cp .env.ci .env.dusk.local
-          /usr/bin/google-chrome --version
 
       - name: Composer Dependencies
         run: |
@@ -43,7 +42,10 @@ jobs:
 #        run: npm run production
 
       - name: Start Chrome Driver
-        run: ./vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &
+        run: |
+          /usr/bin/google-chrome --version
+          artisan dusk:chrome-driver 80
+          ./vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &
 
       - name: Serve Application
         run: php artisan serve > /dev/null 2>&1 &
