@@ -1,10 +1,10 @@
 name: ci
 on:
-    push:
-        paths-ignore:
-            - 'README.md'
-            - 'LICENSE.md'
-            - 'docs'
+  push:
+    paths-ignore:
+      - 'README.md'
+      - 'LICENSE.md'
+      - 'docs'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -13,18 +13,16 @@ jobs:
         with:
           fetch-depth: 1
       - name: Composer Dependencies
-        run: |
-          sudo apt-get install -y google-chrome-stable
-          composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
-          cp .env.example .env
-          php artisan key:generate
-          php artisan make:sqlite
-      - name: Analysis
+        run: composer install --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+      - name: Configure Environment
+        run: cp .env.example .env && php artisan key:generate
+      - name: Run Code Analysis
         run: composer lint
-      - name: Unit Tests
+      - name: Run Unit Tests
         run: composer test-unit
-      - name: Feature Tests
-        run: |
-          nohup bash -c './vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &'
-          nohup bash -c 'php artisan serve > /dev/null 2>&1 &'
-          composer test-feature
+      - name: Start Chrome Driver
+        run: ./vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &
+      - name: Serve Application
+        run: php artisan serve > /dev/null 2>&1 &
+      - name: Run Feature Tests
+        run: php artisan dusk
