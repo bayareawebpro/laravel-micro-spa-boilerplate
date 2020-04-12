@@ -8,6 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container: docker://zaherg/laravel-dusk:7.4
     steps:
       - uses: actions/checkout@v1
         with:
@@ -41,10 +42,7 @@ jobs:
 #        run: npm run production
 
       - name: Install Chrome Driver
-        run: |
-          sudo apt-get update -y google-chrome
-          /usr/bin/google-chrome --version
-          php artisan dusk:chrome-driver 80.0.3987.106
+        run: php artisan dusk:chrome-driver
 
       - name: Start Chrome Driver
         run: ./vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &
