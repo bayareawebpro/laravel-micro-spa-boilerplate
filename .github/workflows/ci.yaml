@@ -25,23 +25,25 @@ jobs:
       #      - name: Run Code Analysis
       #        run: composer lint
 
+      - name: Install Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+
+      - name: Install Assets
+        run: npm install
+
+      - name: Compile Assets
+        run: npm run production
+
       - name: Create Sqlite Database
         run: php artisan make:sqlite
 
       - name: Run Unit Tests
         run: composer test-unit
 
-      - name: Install Node
-        uses: actions/setup-node@v1
-        with:
-          node-version: 12.x
-      - name: Install Assets
-        run: npm install
-      - name: Compile Assets
-        run: npm run production
-
       - name: Install Chrome Driver
-        run: php artisan dusk:chrome-driver 80.0.3987.163
+        run: php artisan dusk:chrome-driver
 
       - name: Start Chrome Driver
         run: ./vendor/laravel/dusk/bin/chromedriver-linux &
