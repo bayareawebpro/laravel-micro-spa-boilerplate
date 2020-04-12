@@ -16,6 +16,7 @@ jobs:
       - name: Configure Environment
         run: |
           cp .env.ci .env
+          sudo apt-get install chromium-browser
 
       - name: Composer Dependencies
         run: |
