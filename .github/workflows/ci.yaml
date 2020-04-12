@@ -42,7 +42,7 @@ jobs:
 #        run: npm run production
 
       - name: Install Chrome Driver
-        run: php artisan dusk:chrome-driver
+        run: php artisan dusk:chrome-driver 80.0.3987.106
 
       - name: Start Chrome Driver
         run: ./vendor/laravel/dusk/bin/chromedriver-linux &
