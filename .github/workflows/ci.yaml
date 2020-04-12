@@ -44,7 +44,7 @@ jobs:
       - name: Start Chrome Driver
         run: |
           /usr/bin/google-chrome --version
-          artisan dusk:chrome-driver 80
+          php artisan dusk:chrome-driver 80
           ./vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &
 
       - name: Serve Application
