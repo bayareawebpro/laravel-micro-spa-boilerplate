@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+      - run: sudo apt-fast install -y google-chrome
       - uses: nanasess/setup-chromedriver@master
         with:
           fetch-depth: 1
@@ -23,29 +24,29 @@ jobs:
           composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader
           php artisan key:generate
 
-#      - name: Run Code Analysis
-#        run: composer lint
+      #      - name: Run Code Analysis
+      #        run: composer lint
 
       - name: Create Sqlite Database
         run: php artisan make:sqlite
 
-#      - name: Run Unit Tests
-#        run: composer test-unit
+      #      - name: Run Unit Tests
+      #        run: composer test-unit
 
-#      - name: Install Node
-#        uses: actions/setup-node@v1
-#        with:
-#          node-version: 12.x
-#      - name: Install Assets
-#        run: npm install
-#      - name: Compile Assets
-#        run: npm run production
+      #      - name: Install Node
+      #        uses: actions/setup-node@v1
+      #        with:
+      #          node-version: 12.x
+      #      - name: Install Assets
+      #        run: npm install
+      #      - name: Compile Assets
+      #        run: npm run production
 
       - name: Install Chrome Driver
         run: php artisan dusk:chrome-driver 80.0.3987.106
 
-#      - name: Start Chrome Driver
-#        run: ./vendor/laravel/dusk/bin/chromedriver-linux &
+      #      - name: Start Chrome Driver
+      #        run: ./vendor/laravel/dusk/bin/chromedriver-linux &
 
       - name: Serve Application
         run: php artisan serve &
