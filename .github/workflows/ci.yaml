@@ -8,14 +8,16 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: docker://zaherg/laravel-dusk:latest
     steps:
       - uses: actions/checkout@v1
         with:
           fetch-depth: 1
 
       - name: Composer Dependencies
-        run: composer install --no-ansi --no-interaction --no-suggest --no-progress --prefer-dist
+        run: composer install --no-ansi --no-interaction --no-suggest --no-progress --prefer-dist --optimize-autoloader
+
+      - name: Configure Environment
+        run: cp .env.example .env && php artisan key:generate
 
       - name: Run Code Analysis
         run: composer lint
@@ -36,4 +38,4 @@ jobs:
         run: php artisan serve > /dev/null 2>&1 &
 
       - name: Run Feature Tests
-        run: composer test-feature
+        run: php artisan dusk

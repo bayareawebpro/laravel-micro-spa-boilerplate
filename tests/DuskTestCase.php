@@ -28,18 +28,12 @@ abstract class DuskTestCase extends BaseTestCase
      */
     protected function driver()
     {
-        $args = [
-            '--disable-gpu',
+        $options = (new ChromeOptions)->addArguments([
             '--window-size=1920,1080',
-        ];
-
-        /** Enable Headless during CI  */
-        if(File::exists(base_path('vendor/laravel/dusk/bin/chromedriver-linux'))){
-            $args[]= '--headless';
-            $args[]= '--no-sandbox';
-        }
-
-        $options = (new ChromeOptions)->addArguments($args);
+            '--disable-gpu',
+            '--headless',
+            '--no-sandbox',
+        ]);
 
         return RemoteWebDriver::create(
             'http://localhost:9515', DesiredCapabilities::chrome()->setCapability(
