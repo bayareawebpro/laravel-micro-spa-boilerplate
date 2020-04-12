@@ -28,10 +28,9 @@ abstract class DuskTestCase extends BaseTestCase
     protected function driver()
     {
         $options = (new ChromeOptions)->addArguments([
-            '--disable-gpu',
+            '--no-sandbox',
             '--headless',
-            //'--no-sandbox',
-            //'--disable-dev-shm-usage',
+            '--disable-gpu',
             '--window-size=1280,1024',
         ]);
 
