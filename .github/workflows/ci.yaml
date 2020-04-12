@@ -40,9 +40,9 @@ jobs:
 #        run: npm install
 #      - name: Compile Assets
 #        run: npm run production
-
-      - name: Install Chromium
-        run: sudo apt-get install -y chromium-browser
+#
+#      - name: Install Chromium
+#        run: sudo apt-get install -y chromium-browser
 
       - name: Start Chrome Driver
         run: ./vendor/laravel/dusk/bin/chromedriver-linux &
