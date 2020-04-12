@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - run: sudo apt-fast install -y google-chrome
+      - run: sudo apt-fast install -y google-chrome-stable
       - uses: nanasess/setup-chromedriver@master
         with:
           fetch-depth: 1
