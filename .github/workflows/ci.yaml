@@ -21,7 +21,6 @@ jobs:
       - name: Composer Dependencies
         run: |
           composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader
-          php artisan key:generate
 
 #      - name: Run Code Analysis
 #        run: composer lint
@@ -45,10 +44,10 @@ jobs:
         run: |
           /usr/bin/google-chrome --version
           php artisan dusk:chrome-driver 80 --all
-          ./vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &
+          ./vendor/laravel/dusk/bin/chromedriver-linux &
 
       - name: Serve Application
-        run: php artisan serve > /dev/null 2>&1 &
+        run: php artisan serve &
 
       - name: Run Feature Tests
         run: php artisan dusk
