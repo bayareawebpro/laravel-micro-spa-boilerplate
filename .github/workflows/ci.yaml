@@ -17,6 +17,7 @@ jobs:
         run: |
           cp .env.ci .env
           cp .env.ci .env.dusk.local
+          /usr/bin/google-chrome --version
 
       - name: Composer Dependencies
         run: |
