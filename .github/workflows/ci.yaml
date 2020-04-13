@@ -30,6 +30,9 @@ jobs:
       - name: Run PHP Analysis
         run: composer lint
 
+      - name: Create Sqlite Database
+        run: php artisan make:sqlite
+
       - name: Run PHP Tests
         run: composer test-unit
 
@@ -50,9 +53,6 @@ jobs:
 
       #- name: Compile Assets
       #  run: npm run production
-
-      #- name: Create Sqlite Database
-      #  run: php artisan make:sqlite
 
       #- name: Install Chrome Driver
       #  run: |
