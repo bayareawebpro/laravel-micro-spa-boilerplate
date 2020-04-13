@@ -27,11 +27,11 @@ jobs:
           composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader
           php artisan key:generate
 
-      - name: Run PHP Analysis
-        run: composer lint
-
       - name: Create Sqlite Database
         run: php artisan make:sqlite
+
+      - name: Run PHP Analysis
+        run: composer lint
 
       - name: Run PHP Tests
         run: composer test-unit
