@@ -31,7 +31,7 @@ jobs:
           node-version: 12.x
 
       - name: Install Assets
-        run: npm install
+        run: npm install --no-optional --prefer-offline --no-audit
 
       - name: Compile Assets
         run: npm run production
