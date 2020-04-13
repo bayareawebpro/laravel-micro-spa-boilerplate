@@ -13,6 +13,18 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Cache PHP dependencies
+        uses: actions/cache@v1
+        with:
+          path: vendor
+          key: ${{ runner.OS }}-build-${{ hashFiles('**/composer.lock') }}
+
+      - name: Cache JS dependencies
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
+
       - name: Configure Environment
         run: |
           cp .env.ci .env
@@ -43,7 +55,9 @@ jobs:
         run: composer test-unit
 
       - name: Install Chrome Driver
-        run: php artisan dusk:chrome-driver
+        run: |
+          php artisan dusk:chrome-driver
+          chmod +x ./vendor/laravel/dusk/bin/chromedriver-linux
 
       - name: Start Chrome Driver
         run: ./vendor/laravel/dusk/bin/chromedriver-linux &
