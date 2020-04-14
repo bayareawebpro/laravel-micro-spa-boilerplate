@@ -70,10 +70,7 @@ export default class Request extends Repository {
      * @returns {boolean}
      */
     hasMiddleware(alias) {
-        if (this.exists('to.meta.middleware')) {
-            return this.get('to.meta.middleware', []).includes(alias)
-        }
-        return false
+        return this.get('to.meta.middleware', []).includes(alias)
     }
 
     /**
