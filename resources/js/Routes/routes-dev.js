@@ -62,16 +62,16 @@ export default [
                     .view(()=>import(/*webpackChunkName:"developer"*/ "@views/developer/kitchensink/Forms"))
                     .middleware('auth'),
                 Route
-                    .to('kitchensink.files','/developer/kitchensink/files')
-                    .view(()=>import(/*webpackChunkName:"developer"*/ "@views/developer/kitchensink/Files"))
+                    .to('kitchensink.pages','/developer/kitchensink/pages')
+                    .view(()=>import(/*webpackChunkName:"developer"*/ "@views/developer/kitchensink/Pages"))
+                    .middleware('auth'),
+                Route
+                    .to('kitchensink.media','/developer/kitchensink/media')
+                    .view(()=>import(/*webpackChunkName:"developer"*/ "@views/developer/kitchensink/Media"))
                     .middleware('auth'),
                 Route
                     .to('kitchensink.modals','/developer/kitchensink/modals')
                     .view(()=>import(/*webpackChunkName:"developer"*/ "@views/developer/kitchensink/Modals"))
-                    .middleware('auth'),
-                Route
-                    .to('kitchensink.charts','/developer/kitchensink/charts')
-                    .view(()=>import(/*webpackChunkName:"developer"*/ "@views/developer/kitchensink/Charts"))
                     .middleware('auth'),
                 Route
                     .to('kitchensink.charts','/developer/kitchensink/charts')

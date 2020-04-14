@@ -2,10 +2,10 @@
     export default {
         name: "Collapse",
         props: {
-            value: {default: false},
-            active: {default: true},
-            transition: {default: 'fadeInLeft'},
-            classes: {default: 'btn btn-block'},
+            value: {type: [Boolean, String], default: false},
+            active: {type: [Boolean, String], default: true},
+            transition: {type: String, default: 'fadeInLeft'},
+            classes: {type: String, default: 'btn btn-block'},
         },
         computed: {
             isActive() {
@@ -19,14 +19,14 @@
                 } else {
                     this.$emit('input', this.active)
                 }
-                setTimeout(()=>this.$scrollTo(this.$refs.title),100)
+                setTimeout(()=>this.$scrollTo(this.$refs.title),160)
             },
         }
     }
 </script>
 <template>
     <div>
-        <div role="button" @click.prevent="activate" class="pointer-cursor" :class="classes"  ref="title">
+        <div role="button" @click.prevent="activate" class="pointer-cursor" :class="classes" ref="title">
             <div class="flex flex-row">
                 <div class="flex-grow">
                     <slot name="title" :activate="activate">Toggle</slot>

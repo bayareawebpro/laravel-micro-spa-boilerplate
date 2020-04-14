@@ -33,21 +33,18 @@
 <template>
     <figure style="cursor: pointer" @click.prevent="revealed = !revealed">
         <div class="iframe-container bg-black" :style="styles">
-            <iframe
-                v-if="revealed"
-                :src="`https://www.youtube.com/embed/${id}?autoplay=1`"
-                class="embed-responsive-item" allowfullscreen>
-            </iframe>
-            <div v-else>
-                <div class="h-full flex flex-col content-center justify-center text-center text-white">
-                    <strong>{{ title }}</strong>
-                    <svg
-                        class="mx-auto h-full"
-                        style="width: 20%; height: 20%"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 511.626 511.627">
-                        <g>
-                            <path class="text-blue-500" fill="currentColor" d="M511.339,212.987c-0.186-10.277-1-23.271-2.423-38.97c-1.431-15.708-3.478-29.746-6.14-42.115
+            <transition name="fadeInOut" mode="out-in">
+                <iframe v-if="revealed" :src="`https://www.youtube.com/embed/${id}?autoplay=1`" allowfullscreen/>
+                <div v-else>
+                    <div class="h-full flex flex-col content-center justify-center text-center text-white">
+                        <strong>{{ title }}</strong>
+                        <svg
+                            class="mx-auto h-full"
+                            style="width: 20%; height: 20%"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 511.626 511.627">
+                            <g>
+                                <path class="text-blue-500" fill="currentColor" d="M511.339,212.987c-0.186-10.277-1-23.271-2.423-38.97c-1.431-15.708-3.478-29.746-6.14-42.115
                         c-3.046-13.893-9.661-25.6-19.842-35.117c-10.181-9.519-22.031-15.037-35.549-16.562c-42.258-4.755-106.115-7.135-191.573-7.135
                         c-85.459,0-149.317,2.38-191.572,7.135c-13.516,1.524-25.319,7.043-35.404,16.562c-10.089,9.514-16.656,21.221-19.702,35.117
                         c-2.852,12.373-4.996,26.41-6.423,42.115c-1.425,15.699-2.235,28.688-2.424,38.97C0.094,223.265,0,237.539,0,255.813
@@ -59,12 +56,13 @@
                         c-2.853,0-5.803-0.764-8.848-2.286c-6.28-3.422-9.419-8.754-9.419-15.985V164.454c0-7.229,3.14-12.561,9.419-15.986
                         c6.473-3.431,12.657-3.239,18.558,0.571l146.178,91.36c5.708,3.23,8.562,8.372,8.562,15.415
                         C365.446,262.854,362.591,267.998,356.883,271.231z"
-                            />
-                        </g>
-                    </svg>
-                    <small>{{ subtitle }}</small>
+                                />
+                            </g>
+                        </svg>
+                        <small>{{ subtitle }}</small>
+                    </div>
                 </div>
-            </div>
+            </transition>
         </div>
     </figure>
 </template>

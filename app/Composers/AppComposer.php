@@ -22,10 +22,10 @@ class AppComposer
         $view->with('user', $this->request->user());
 
         $view->with('appState', Collection::make(Config::get('spa'))->merge([
-            'environment' => config('app.env'),
-            'permissions' => AppPermissions::all(),
-            'roles'       => UserRoles::all(),
             'version'     => $this->version(),
+            'environment' => config('app.env'),
+            'roles'       => UserRoles::all(),
+            'permissions' => AppPermissions::without(['viewTelescope']),
         ]));
     }
 

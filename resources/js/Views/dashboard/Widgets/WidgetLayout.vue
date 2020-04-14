@@ -4,7 +4,7 @@
     import {GridLayout, GridItem} from 'vue-grid-layout'
     export default {
         name: "widget-layout",
-        components: {GridLayout, GridItem,Widget},
+        components: {GridLayout, GridItem, Widget},
         data: () => ({
             loading: false,
             selected: 'widget',
@@ -35,24 +35,18 @@
                     .finally(() => this.loading = false)
             },
             add() {
-                const widget = this.options.find((entry)=>entry.value === this.selected)
-                if(widget){
-                    this.layout.unshift({
-                        i: this.layout.length,
-                        x: 0, y: 0, w: 1, h: 1,
-                        component: widget.value,
-                        settings: widget.settings
-                    })
-                }
+                const {value, settings} = this.options.find(({value}) => value === this.selected)
+                this.layout.unshift({
+                    i: Math.random() * Math.random(),
+                    x: 0, y: 0, w: 1, h: 1,
+                    component: value,
+                    settings: settings
+                })
             },
             remove(id) {
-                this.layout.splice(this.layout.findIndex((item)=>item.i === id), 1)
+                const index = this.layout.findIndex(({i}) => i === id)
+                this.layout.splice(index, 1)
             }
-        },
-        created() {
-            //this.fetch()
-            //Example: Add Widgets
-            //this.addWidget('widget-slug')
         }
     }
 </script>

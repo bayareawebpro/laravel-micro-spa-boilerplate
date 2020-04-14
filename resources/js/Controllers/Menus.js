@@ -101,6 +101,14 @@ export default class Menus extends Controller {
                                 to: this.$link('kitchensink.typography'),
                             },
                             {
+                                name: 'Pages', icon: 'fa-edit',
+                                to: this.$link('kitchensink.pages'),
+                            },
+                            {
+                                name: 'Media', icon: 'fa-video',
+                                to: this.$link('kitchensink.media'),
+                            },
+                            {
                                 name: 'Modals', icon: 'fa-window-maximize',
                                 to: this.$link('kitchensink.modals'),
                             },

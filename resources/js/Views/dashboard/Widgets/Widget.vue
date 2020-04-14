@@ -2,7 +2,10 @@
     export default {
         name: "Widget",
         props: {
-            value: {type: Object, required: true},
+            value: {
+                type: Object,
+                required: true
+            },
         }
     }
 </script>

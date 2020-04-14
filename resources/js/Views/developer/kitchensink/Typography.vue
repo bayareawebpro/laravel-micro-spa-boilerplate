@@ -33,12 +33,5 @@
             United States
         </address>
         <hr>
-        <v-video
-            id="_z9nzEUgro4"
-            title="CodersTape"
-            subtitle="Laravel Series"
-            :image="false"
-            :preview="true"
-        />
     </div>
 </template>

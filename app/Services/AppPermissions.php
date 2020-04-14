@@ -8,6 +8,13 @@ use Illuminate\Support\Facades\Gate;
 
 class AppPermissions
 {
+    public static function without(array $grants = ["viewTelescope"]){
+        return static::all()
+            ->map(function(Collection $value) use ($grants){
+                return $value->reject(fn($value)=>in_array($value, $grants));
+            });
+    }
+
     public static function all(): Collection
     {
         return Collection::make(Gate::policies())

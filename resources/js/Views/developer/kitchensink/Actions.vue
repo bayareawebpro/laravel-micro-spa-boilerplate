@@ -13,13 +13,9 @@
         <h1 class="page-title">Actions</h1>
 
         <hr>
-        <v-action class="btn-green">
-            <i class="fa fa-check-circle"></i>
-            Green
-        </v-action>
+        <v-action class="btn-green"><i class="fa fa-check-circle"></i>Green</v-action>
 
         <hr>
-
 
         <div class="my-4">
             <v-action class="btn-green">Green</v-action>
