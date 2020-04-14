@@ -35,7 +35,7 @@ aside.sidebar {
     @apply flex flex-col z-40;
 }
 #main {
-    @apply flex flex-col flex-grow;
+    @apply flex flex-col flex-grow w-full min-w-full;
 }
 #footer {
     @apply border-t border-gray-800;
@@ -52,8 +52,8 @@ aside.sidebar {
 .layout-centered{
     @apply layout justify-center content-center w-full max-w-4xl mx-auto p-4;
 }
-@media only screen and (max-width: 768px) {
+@screen md {
     #main {
-        @apply w-full min-w-full !important;
+        @apply w-auto min-w-0 !important;
     }
 }

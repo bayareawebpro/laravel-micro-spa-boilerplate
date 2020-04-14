@@ -94,7 +94,7 @@ export default class VueRoute extends Route{
      * @return this
      */
     middleware(aliases) {
-        aliases = Array.isArray(aliases) || Object.values(arguments)
+        aliases = Array.isArray(aliases) ? aliases : Object.values(arguments)
         this.meta.middleware = this.meta.middleware.concat(aliases)
         return this
     }
