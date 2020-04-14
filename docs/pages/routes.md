@@ -64,3 +64,19 @@ Routes will typically specify a view component to load from `@views` directory a
 ```javascript
 Route.view(()=>import(/*webpackChunkName:"auth"*/ "@views/auth/Account"))
 ```
+
+## Route.withProps
+
+Append props to the route schema.
+
+```javascript
+Route.withProps({subView: 'v-sub-view'})
+```
+
+## Route.withMeta
+
+Append meta data to the route schema.
+
+```javascript
+Route.withMeta({title: 'About Us'})
+```
