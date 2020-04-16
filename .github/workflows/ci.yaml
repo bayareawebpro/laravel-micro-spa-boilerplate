@@ -32,7 +32,7 @@ jobs:
 
       - name: Composer Dependencies
         run: |
-          composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist --optimize-autoloader
+          composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader
           php artisan key:generate
 
       - name: Create Sqlite Database

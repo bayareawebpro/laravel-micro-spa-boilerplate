@@ -13,33 +13,31 @@ abstract class DuskTestCase extends BaseTestCase
 
     /**
      * Prepare for Dusk test execution.
+     *
      * @beforeClass
      * @return void
      */
     public static function prepare()
     {
-        //static::startChromeDriver();
+        static::startChromeDriver();
     }
 
     /**
      * Create the RemoteWebDriver instance.
+     *
      * @return \Facebook\WebDriver\Remote\RemoteWebDriver
      */
     protected function driver()
     {
-
         $options = (new ChromeOptions)->addArguments([
-            '--headless',
-            '--no-sandbox',
             '--disable-gpu',
-            '--detach=true',
-            '--disable-dev-shm-usage',
-            '--window-size=1600,1200',
+            '--headless',
+            '--window-size=1920,1080',
         ]);
 
         return RemoteWebDriver::create(
             'http://localhost:9515', DesiredCapabilities::chrome()->setCapability(
-                ChromeOptions::CAPABILITY_W3C, $options
+                ChromeOptions::CAPABILITY, $options
             )
         );
     }
