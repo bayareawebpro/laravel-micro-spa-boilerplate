@@ -5,6 +5,13 @@ on:
       - 'README.md'
       - 'LICENSE.md'
       - 'docs'
+  pull_request:
+    paths-ignore:
+      - 'README.md'
+      - 'LICENSE.md'
+      - 'docs'
+    branches:
+      - master
 jobs:
   build:
     runs-on: ubuntu-latest
