@@ -35,9 +35,6 @@ jobs:
           composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist --optimize-autoloader
           php artisan key:generate
 
-      - name: Set Directory Permissions
-        run: chmod -R 777 storage bootstrap/cache
-
       - name: Create Sqlite Database
         run: php artisan make:sqlite
 
@@ -72,7 +69,7 @@ jobs:
 
       - name: Start Chrome Driver
         #run: ./vendor/laravel/dusk/bin/chromedriver-linux --headless --disable-gpu --remote-debugging-port=9515 > /dev/null 2>&1 &
-        run: ./vendor/laravel/dusk/bin/chromedriver-linux --headless --disable-gpu --remote-debugging-port=9515 > /dev/null 2>&1 &
+        run: ./vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &
 
       - name: Serve Application
         run: php artisan serve > /dev/null 2>&1 &
