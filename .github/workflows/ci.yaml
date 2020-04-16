@@ -68,16 +68,18 @@ jobs:
       - name: Install Chrome Driver
         run: |
           php artisan dusk:chrome-driver 80.0.3987.106
-          google-chrome --version
+          google-chrome-stable --version
 
       - name: Start Chrome Driver
+        #run: ./vendor/laravel/dusk/bin/chromedriver-linux --headless --disable-gpu --remote-debugging-port=9515 > /dev/null 2>&1 &
         run: ./vendor/laravel/dusk/bin/chromedriver-linux --headless --disable-gpu --remote-debugging-port=9515 > /dev/null 2>&1 &
 
       - name: Serve Application
         run: php artisan serve > /dev/null 2>&1 &
 
       - name: Run Feature Tests
-        run: php artisan dusk --stop-on-failure
+        run: ./vendor/bin/phpunit
+        #run: php artisan dusk --stop-on-failure
 
       - name: Store Log Artifacts
         uses: actions/upload-artifact@v1
