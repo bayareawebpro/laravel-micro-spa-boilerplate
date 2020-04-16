@@ -14,7 +14,7 @@ class AuthTest extends DuskTestCase
     public function test_can_use_menu()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/');
+            $browser->visit(url('/'));
             $browser->click('@account-menu');
             $browser->click('@link-login');
             $browser->waitForText('Login');
