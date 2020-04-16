@@ -28,7 +28,7 @@ jobs:
           php artisan key:generate
 
       - name: Set Directory Permissions
-          run: chmod -R 777 storage bootstrap/cache
+        run: chmod -R 777 storage bootstrap/cache
 
       - name: Create Sqlite Database
         run: php artisan make:sqlite
