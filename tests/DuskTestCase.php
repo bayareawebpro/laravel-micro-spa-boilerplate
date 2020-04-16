@@ -40,6 +40,7 @@ abstract class DuskTestCase extends BaseTestCase
             '--headless',
             '--detach=true',
             '--window-size=1920,1080',
+            '--remote-debugging-port=9515',
         ]);
 
         return RemoteWebDriver::create(
