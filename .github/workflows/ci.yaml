@@ -64,16 +64,14 @@ jobs:
 
       - name: Install Chrome Driver
         run: |
-          php artisan dusk:chrome-driver 80.0.3987.106
-          chmod +x ./vendor/laravel/dusk/bin/chromedriver-linux
-          google-chrome-stable --version
+          php artisan dusk:chrome-driver `/opt/google/chrome/chrome --version | cut -d " " -f3 | cut -d "." -f1`
 
       - name: Start Chrome Driver
         run: |
-          ./vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &
+          ./vendor/laravel/dusk/bin/chromedriver-linux &
 
       - name: Serve Application
-        run: php artisan serve > /dev/null 2>&1 &
+        run: php artisan serve &
 
       - name: Run Feature Tests
         run: php artisan dusk --stop-on-failure
