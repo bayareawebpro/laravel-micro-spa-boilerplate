@@ -24,8 +24,11 @@ jobs:
 
       - name: Composer Dependencies
         run: |
-          composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader
+          composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
           php artisan key:generate
+
+      - name: Set Directory Permissions
+          run: chmod -R 777 storage bootstrap/cache
 
       - name: Create Sqlite Database
         run: php artisan make:sqlite
@@ -54,16 +57,30 @@ jobs:
       #- name: Compile Assets
       #  run: npm run production
 
-      #- name: Install Chrome Driver
-      #  run: |
-      #    php artisan dusk:chrome-driver
-      #    chmod +x ./vendor/laravel/dusk/bin/chromedriver-linux
+      - name: Install Chrome Driver
+        run: |
+          php artisan dusk:chrome-driver
+          chmod +x ./vendor/laravel/dusk/bin/chromedriver-linux
 
-      #- name: Start Chrome Driver
-      #  run: ./vendor/laravel/dusk/bin/chromedriver-linux &
+      - name: Start Chrome Driver
+        run: ./vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &
 
-      #- name: Serve Application
-      #  run: php artisan serve &
+      - name: Serve Application
+        run: php artisan serve > /dev/null 2>&1 &
 
-      #- name: Run Feature Tests
-      #  run: php artisan dusk
+      - name: Run Feature Tests
+        run: php artisan dusk  --stop-on-failure
+
+      - name: Store Log Artifacts
+        uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: Logs
+          path: ./storage/logs
+
+      - name: Store Screenshot Artifacts
+        uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: Screenshots
+          path: ./tests/Browser/screenshots

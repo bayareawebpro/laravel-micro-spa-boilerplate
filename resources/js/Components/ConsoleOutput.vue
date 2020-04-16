@@ -29,7 +29,7 @@
     <div
         ref="console"
         :style="{maxHeight: `${height}px`}"
-        class="bg-black p-4 text-green-400 text-xs font-mono shadow overflow-x-scroll leading-snug" style="scroll-behavior: smooth">
+        class="console">
         <pre v-for="line in value"><code>{{ line }}</code></pre>
         <div class="mt-1"></div>
     </div>
