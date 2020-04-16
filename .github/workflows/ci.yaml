@@ -66,7 +66,10 @@ jobs:
       #  run: npm run production
 
       - name: Install Chrome Driver
-        run: php artisan dusk:chrome-driver
+        run: |
+          php artisan dusk:chrome-driver
+          chromium-browser --version
+          vendor/laravel/dusk/bin/chromedriver-linux --v
 
       - name: Start Chrome Driver
         run: ./vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &
