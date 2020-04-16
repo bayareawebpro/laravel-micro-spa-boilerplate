@@ -41,11 +41,11 @@ jobs:
       - name: Create Sqlite Database
         run: php artisan make:sqlite
 
-      - name: Run PHP Analysis
-        run: composer lint
+      #- name: Run PHP Analysis
+      #  run: composer lint
 
-      - name: Run PHP Tests
-        run: composer test-unit
+      #- name: Run PHP Tests
+      #  run: composer test-unit
 
       # Cant get Laravel Dusk to Work :(
       #- name: Cache NPM
@@ -67,10 +67,8 @@ jobs:
 
       - name: Install Chrome Driver
         run: |
-          php artisan dusk:chrome-driver 80
+          php artisan dusk:chrome-driver 78
           google-chrome --version
-          which google-chrome
-
 
       - name: Start Chrome Driver
         #run: ./vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &
