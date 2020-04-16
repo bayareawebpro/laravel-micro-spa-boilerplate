@@ -67,7 +67,7 @@ jobs:
 
       - name: Install Chrome Driver
         run: |
-          php artisan dusk:chrome-driver 78
+          php artisan dusk:chrome-driver 80.0.3987.106
           google-chrome --version
 
       - name: Start Chrome Driver
