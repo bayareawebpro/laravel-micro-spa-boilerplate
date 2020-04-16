@@ -71,13 +71,15 @@ jobs:
           google-chrome --version
 
       - name: Start Chrome Driver
-        run: ./vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &
+        #run: ./vendor/laravel/dusk/bin/chromedriver-linux > /dev/null 2>&1 &
+        run: ./vendor/laravel/dusk/bin/chromedriver-linux &
 
       - name: Serve Application
-        run: php artisan serve > /dev/null 2>&1 &
+        #run: php artisan serve > /dev/null 2>&1 &
+        run: php artisan serve &
 
       - name: Run Feature Tests
-        run: php artisan dusk  --stop-on-failure
+        run: php artisan dusk --stop-on-failure
 
       - name: Store Log Artifacts
         uses: actions/upload-artifact@v1
