@@ -58,18 +58,16 @@ jobs:
           node-version: 12.x
 
       - name: Install Assets
-        run: npm install --quiet --no-optional --prefer-offline --no-audit
+        run: npm install --silent --no-optional --prefer-offline --no-audit
 
       - name: Compile Assets
         run: npm run production
 
       - name: Install Chrome Driver
-        run: |
-          php artisan dusk:chrome-driver `/opt/google/chrome/chrome --version | cut -d " " -f3 | cut -d "." -f1`
+        run: php artisan dusk:chrome-driver `/opt/google/chrome/chrome --version | cut -d " " -f3 | cut -d "." -f1`
 
       - name: Start Chrome Driver
-        run: |
-          ./vendor/laravel/dusk/bin/chromedriver-linux &
+        run: ./vendor/laravel/dusk/bin/chromedriver-linux &
 
       - name: Serve Application
         run: php artisan serve &
