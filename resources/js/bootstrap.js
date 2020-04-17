@@ -20,6 +20,10 @@ App.setInstance('AutoLoader', AutoLoader)
 App.bind('DuskTestUtils', DuskTestUtils)
 App.loadProviders()
 App.bootProviders()
+
+/**
+ * Mount Vue Root
+ */
 App.make('VueRoot')
 
 /**
@@ -27,12 +31,6 @@ App.make('VueRoot')
  */
 App.share('DuskTestUtils').withOthers(window)
 App.share('App').withOthers(window)
-
-
-/**
- * Mount Vue Root
- */
-const VueRoot = App.make('VueRoot')
 
 /**
  * Install Worker
