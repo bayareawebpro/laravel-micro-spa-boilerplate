@@ -13,7 +13,6 @@ abstract class DuskTestCase extends BaseTestCase
 
     /**
      * Prepare for Dusk test execution.
-     *
      * @beforeClass
      * @return void
      */
@@ -24,13 +23,12 @@ abstract class DuskTestCase extends BaseTestCase
 
     /**
      * Create the RemoteWebDriver instance.
-     *
      * @return \Facebook\WebDriver\Remote\RemoteWebDriver
      */
     protected function driver()
     {
         $options = (new ChromeOptions)->addArguments([
-            //'--disable-gpu',
+            //'--disable-gpu', // Chrome doesn't load the SPA.
             '--headless',
             '--window-size=1920,1080',
         ]);

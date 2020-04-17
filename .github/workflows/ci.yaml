@@ -38,29 +38,29 @@ jobs:
       - name: Create Sqlite Database
         run: php artisan make:sqlite
 
-      #- name: Run PHP Analysis
-      #  run: composer lint
+      - name: Run PHP Analysis
+        run: composer lint
 
-      #- name: Run PHP Tests
-      #  run: composer test-unit
+      - name: Run PHP Tests
+        run: composer test-unit
 
-      # Cant get Laravel Dusk to Work :(
-      #- name: Cache NPM
-      #  uses: actions/cache@v1
-      #  with:
-      #    path: node_modules
-      #    key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
+       Cant get Laravel Dusk to Work :(
+      - name: Cache NPM
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
 
-      #- name: Install Node
-      #  uses: actions/setup-node@v1
-      #  with:
-      #    node-version: 12.x
+      - name: Install Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
 
-      #- name: Install Assets
-      #  run: npm install --quiet --no-optional --prefer-offline --no-audit
+      - name: Install Assets
+        run: npm install --quiet --no-optional --prefer-offline --no-audit
 
-      #- name: Compile Assets
-      #  run: npm run production
+      - name: Compile Assets
+        run: npm run production
 
       - name: Install Chrome Driver
         run: |
