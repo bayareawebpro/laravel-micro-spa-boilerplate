@@ -15,6 +15,8 @@ class AuthTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/');
+            $browser->waitForText('Laravel');
+
             $browser->click('@account-menu');
             $browser->click('@link-login');
             $browser->waitForText('Login');
