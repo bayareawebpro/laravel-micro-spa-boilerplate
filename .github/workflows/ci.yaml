@@ -44,7 +44,6 @@ jobs:
       - name: Run PHP Tests
         run: composer test-unit
 
-       Cant get Laravel Dusk to Work :(
       - name: Cache NPM
         uses: actions/cache@v1
         with:
