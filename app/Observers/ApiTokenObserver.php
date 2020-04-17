@@ -14,7 +14,7 @@ class ApiTokenObserver
      */
     public function created(ApiToken $apiToken): void
     {
-        //
+        Cache::forget('sanctum:abilities');
     }
 
     /**
@@ -24,7 +24,7 @@ class ApiTokenObserver
      */
     public function updated(ApiToken $apiToken): void
     {
-        Cache::forget('airlock:abilities');
+        Cache::forget('sanctum:abilities');
     }
 
     /**
@@ -34,7 +34,7 @@ class ApiTokenObserver
      */
     public function deleted(ApiToken $apiToken): void
     {
-        Cache::forget('airlock:abilities');
+        Cache::forget('sanctum:abilities');
     }
 
     /**
@@ -44,7 +44,7 @@ class ApiTokenObserver
      */
     public function restored(ApiToken $apiToken): void
     {
-        //
+        Cache::forget('sanctum:abilities');
     }
 
     /**
@@ -54,6 +54,6 @@ class ApiTokenObserver
      */
     public function forceDeleted(ApiToken $apiToken): void
     {
-        //
+        Cache::forget('sanctum:abilities');
     }
 }

@@ -10,9 +10,22 @@ use BayAreaWebPro\SearchableResource\Contracts\{
 
 class EmailQuery extends AbstractQuery implements ConditionalQuery, ValidatableQuery
 {
+    /**
+     * Request Input Field Name.
+     * @return array
+     */
     protected string $field = 'email';
+
+    /**
+     * Database / Model Attribute Name.
+     * @return array
+     */
     protected string $attribute = 'email';
 
+    /**
+     * Request Validation Rules
+     * @return array
+     */
     public function getRules(): array
     {
         return [

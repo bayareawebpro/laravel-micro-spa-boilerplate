@@ -12,7 +12,13 @@ use BayAreaWebPro\SearchableResource\Contracts\{ConditionalQuery, ProvidesOption
 
 class TokenAbility extends AbstractQuery implements ConditionalQuery, ValidatableQuery, ProvidesOptions{
 
+    /**
+     * Request Input Field Name.
+     * @return array
+     */
     protected string $field = 'abilities';
+
+
     protected string $attribute = 'abilities';
 
     /**
@@ -25,17 +31,19 @@ class TokenAbility extends AbstractQuery implements ConditionalQuery, Validatabl
     }
 
     /**
-     * Get unique list of AirLock token abilities from all tokens created.
+     * Get unique list of abilities from all tokens in use.
+     * @return array
      */
     protected function getValues(): array
     {
-        return Cache::remember('airlock:abilities', 120,
+        return Cache::remember('sanctum:abilities', 120,
             fn()=>ApiToken::allAbilities()->toArray()
         );
     }
 
     /**
      * Provides Options
+     * @return array
      */
     public function getOptions(): array
     {
@@ -45,13 +53,17 @@ class TokenAbility extends AbstractQuery implements ConditionalQuery, Validatabl
     }
 
     /**
-     * Validatable Query
+     * Request Validation Rules
+     * @return array
      */
     public function getRules(): array
     {
         return [
             $this->field => [
-                'sometimes', 'nullable', 'string', Rule::in($this->getValues())
+                'sometimes',
+                'nullable',
+                'string',
+                Rule::in($this->getValues())
             ],
         ];
     }

@@ -20,5 +20,5 @@ class Authenticate extends Middleware
             throw new AuthenticationException("UnAuthorized.");
         }
         return RouteServiceProvider::HOME;
-    }
+}
 }

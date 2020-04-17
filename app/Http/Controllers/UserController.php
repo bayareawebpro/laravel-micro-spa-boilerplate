@@ -96,10 +96,10 @@ class UserController extends Controller
     {
         $data = $request->validated();
 
-//        if (isset($data['role']) && $request->user()->can('updateRole', [$user])) {
-//            $user->grantRole($data['role']);
-//        }
-//        $user->update($data);
+        if (isset($data['role']) && $request->user()->can('updateRole', [$user])) {
+            $user->grantRole($data['role']);
+        }
+        $user->update($data);
 
         return response([
             'message' => 'Entity Updated',
@@ -116,8 +116,8 @@ class UserController extends Controller
      */
     public function destroy(Request $request, User $user)
     {
-        //$this->authorize('disabled:permission');
-        //$user->delete();
+        $this->authorize('disabled:permission');
+        $user->delete();
         return response([
             'message' => 'Entity Destroyed',
             'entity'  => $user->only('id'),

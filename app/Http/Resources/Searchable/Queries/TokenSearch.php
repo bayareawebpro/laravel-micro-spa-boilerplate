@@ -10,9 +10,23 @@ use BayAreaWebPro\SearchableResource\Contracts\{ConditionalQuery, ProvidesOption
 
 class TokenSearch extends AbstractQuery implements ConditionalQuery, ValidatableQuery
 {
+    /**
+     * Request Input Field Name.
+     * @return array
+     */
     protected string $field = 'search';
+
+    /**
+     * Database / Model Attribute Name.
+     * @return array
+     */
     protected string $attribute = 'search';
 
+    /**
+     * Apply Query to Builder
+     * @param Builder $builder
+     * @return void
+     */
     public function __invoke(Builder $builder): void
     {
         $value = $this->getValue();
@@ -27,6 +41,10 @@ class TokenSearch extends AbstractQuery implements ConditionalQuery, Validatable
             );
     }
 
+    /**
+     * Request Validation Rules
+     * @return array
+     */
     public function getRules(): array
     {
         return [
