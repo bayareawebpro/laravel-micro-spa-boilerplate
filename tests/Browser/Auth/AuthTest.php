@@ -3,6 +3,7 @@
 namespace Tests\Browser\Auth;
 
 use App\Models\User;
+use Illuminate\Support\Facades\App;
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -14,8 +15,9 @@ class AuthTest extends DuskTestCase
     public function test_can_use_menu()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/');
-            $browser->waitForText('Laravel');
+            $browser->visit(route('spa'));
+            $browser->pause(10000);
+            $browser->storeConsoleLog('console.log');
 
             $browser->click('@account-menu');
             $browser->click('@link-login');
