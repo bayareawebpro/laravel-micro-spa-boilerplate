@@ -9,12 +9,12 @@ return [
     | Requests from the following domains / hosts will receive stateful API
     | authentication cookies. Typically, these should include your local
     | and production domains which access your API via a frontend SPA.
-    | @docs https://github.com/laravel/airlock
+    | @docs https://github.com/laravel/sanctum
     */
     'stateful' => [
         'localhost',
         '10.0.1.11',
-        env('AIRLOCK_DOMAIN', 'localhost'),
+        env('SANCTUM_DOMAIN', 'localhost'),
     ],
 
     /*
