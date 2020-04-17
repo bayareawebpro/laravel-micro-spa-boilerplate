@@ -3,8 +3,8 @@
         name: "Login",
         data: () => ({
             user: {
-                email: 'test@devdashboard.app',
-                password: 'testDev2020',
+                email: '',
+                password: '',
                 remember_me: true,
             }
         }),

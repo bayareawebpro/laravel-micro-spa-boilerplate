@@ -5,6 +5,8 @@ namespace Tests;
 use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\App;
 use Laravel\Dusk\TestCase as BaseTestCase;
 
 abstract class DuskTestCase extends BaseTestCase
@@ -27,9 +29,10 @@ abstract class DuskTestCase extends BaseTestCase
      */
     protected function driver()
     {
+
         $options = (new ChromeOptions)->addArguments([
             //'--disable-gpu', // Chrome doesn't load the SPA.
-            '--headless',
+            //'--headless',
             '--window-size=1920,1080',
         ]);
 

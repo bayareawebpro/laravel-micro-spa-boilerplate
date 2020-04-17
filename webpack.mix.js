@@ -69,11 +69,11 @@ mix.micro([
     'UnAuthenticated',
     'UnAuthorized',
 ])
-mix.browserSync({
-    proxy: 'laravel-micro-spa.test',
-    host: 'localhost',
-    open: 'external'
-})
+// mix.browserSync({
+//     proxy: 'laravel-micro-spa.test',
+//     host: 'localhost',
+//     open: 'external'
+// })
 // mix.options({
 //     hmrOptions: {
 //         host: 'laravel-micro-spa.test',
