@@ -31,8 +31,8 @@ abstract class DuskTestCase extends BaseTestCase
     {
 
         $options = (new ChromeOptions)->addArguments([
-            //'--disable-gpu', // Chrome doesn't load the SPA.
-            //'--headless',
+            //'--disable-gpu', // Chrome doesn't load?
+            '--headless',
             '--window-size=1920,1080',
         ]);
 
