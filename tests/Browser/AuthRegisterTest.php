@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Browser\Auth;
+namespace Tests\Browser;
 
 use App\Models\User;
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class AuthLoginTest extends DuskTestCase
+class AuthRegisterTest extends DuskTestCase
 {
     use DatabaseMigrations;
 

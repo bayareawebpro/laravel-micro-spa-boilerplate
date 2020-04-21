@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tests\Browser\Auth;
+namespace Tests\Browser;
 
 use App\Models\User;
 use Tests\DuskTestCase;
@@ -10,7 +10,6 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 class AuthLoginTest extends DuskTestCase
 {
     use DatabaseMigrations;
-
 
     public function test_can_login()
     {
