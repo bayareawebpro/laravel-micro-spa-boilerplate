@@ -2,8 +2,8 @@
 @section('layout')
     <div id="wrapper">
         <header id="header">
-            <a id="brand" href="/"  class="inline-flex">
-                <i class="fa fa-server"></i> <span>Provisioner</span><span>Pro</span>
+            <a id="brand" href="/">
+                <i class="fa fa-server"></i> <span>Provisioner</span><em>Pro</em>
             </a>
             <div class="">
                 <a href="#" class="btn ml-1 inline-flex">
@@ -20,7 +20,7 @@
                 </a>
             </div>
         </header>
-        <section id="content" class="bg-blue-900">
+        <section id="content">
             <main id="main">
                 <div class="layout-centered text-center py-12">
                     <h1 class="page-title">LaravelMicro.js</h1>
