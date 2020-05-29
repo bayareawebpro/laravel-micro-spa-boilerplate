@@ -2,13 +2,13 @@
  * @license MIT */
 
 /*!
-  * vue-router v3.1.6
+  * vue-router v3.3.1
   * (c) 2020 Evan You
   * @license MIT
   */
 
 /*!
-  * vue-scrollto v2.18.0
+  * vue-scrollto v2.18.1
   * (c) 2019 Randjelovic Igor
   * @license MIT
   */
