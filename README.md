@@ -1,7 +1,5 @@
 # Advanced (Dark UI)
 
-An "Advanced" SPA Boilerplate featuring a dark themed UI that's integrated with LaravelMicro.js, Vue.js & Laravel.
-
 ![CI](https://github.com/bayareawebpro/laravel-micro-spa-boilerplate/workflows/ci/badge.svg)
 ![License](https://img.shields.io/badge/License-MIT-brightgreen.svg)
 ![Dependencies](https://img.shields.io/badge/Dependencies-none-brightgreen.svg)
