@@ -9,7 +9,7 @@
 
 - [Repository Docs](https://bayareawebpro.github.io/laravel-micro-spa-boilerplate)
 - [Framework Docs](https://bayareawebpro.github.io/laravel-micro.js/)
-- [Slack Channel](https://discord.gg/ScYhenF)
+- [Discord Channel](https://discord.gg/ScYhenF)
 
 <img src="https://github.com/bayareawebpro/laravel-micro-spa-boilerplate/raw/master/docs/img/screens-home.png">
 
