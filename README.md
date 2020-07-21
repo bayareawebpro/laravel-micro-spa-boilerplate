@@ -2,7 +2,6 @@
 
 ![CI](https://github.com/bayareawebpro/laravel-micro-spa-boilerplate/workflows/ci/badge.svg)
 ![License](https://img.shields.io/badge/License-MIT-brightgreen.svg)
-![Dependencies](https://img.shields.io/badge/Dependencies-none-brightgreen.svg)
 ![DevDependencies](https://img.shields.io/badge/DevDependencies-latest-brightgreen.svg)
 
 ---
