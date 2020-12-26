@@ -1,9 +1,6 @@
-<?php
-
-namespace Database\Seeders;
+<?php namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
 class UsersTableSeeder extends Seeder
 {
@@ -13,7 +10,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'name' => config('development.user.name'),
             'email' =>  config('development.user.email'),
             'password' =>  config('development.user.password'),
@@ -23,7 +20,7 @@ class UsersTableSeeder extends Seeder
         $user->grantRole('admin');
         $user->save();
 
-        $user = factory(User::class)->create([
+        $user = User::factory()->create([
             'name' => 'Test Developer',
             'email' =>  'test@devdashboard.app',
             'password' =>  'testDev2020',
@@ -33,6 +30,6 @@ class UsersTableSeeder extends Seeder
         $user->grantRole('admin');
         $user->save();
 
-        factory(User::class, 60)->create();
+        User::factory()->times(60)->create();
     }
 }
