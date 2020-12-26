@@ -1,17 +1,17 @@
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
 const mix = require('laravel-mix');
-require('laravel-mix-tailwind');
-require('laravel-mix-purgecss');
+const path = require('path');
 require('laravel-micro.js/src/mix');
 
 /**
  * Styles & Assets
  */
-mix.tailwind('./tailwind.config.js')
-mix.postCss('resources/css/app.pcss', 'public/css')
+mix.postCss('resources/css/app.pcss', 'public/css',[
+    require('tailwindcss'),
+    require('autoprefixer'),
+])
 mix.copy('node_modules/@fortawesome/fontawesome-free/webfonts', 'public/webfonts')
 mix.copy('resources/images/*', 'public/images')
-mix.purgeCss()
 
 /**
  * Javascript
@@ -19,7 +19,17 @@ mix.purgeCss()
 mix.js('resources/js/bootstrap.js', 'public/js/app.js')
 mix.copy('resources/js/worker.js', 'public/worker.js')
 mix.copy('resources/js/manifest.json', 'public/manifest.json')
-mix.webpackConfig({
+.vue({
+    version: 2,
+    extractStyles: false,
+    globalStyles: false
+})
+.webpackConfig({
+    optimization: {
+        providedExports: false,
+        sideEffects: false,
+        usedExports: false
+    },
     output: { chunkFilename: 'js/[name].js?id=[chunkhash]'},
     resolve: {
         alias: {
@@ -31,15 +41,11 @@ mix.webpackConfig({
         }
     },
 })
-mix.babelConfig({
-    plugins: [
-        '@babel/plugin-syntax-dynamic-import',
-    ],
-})
-
+.extract()
+.version()
 /**
  * LaravelMicro.js
- * @docs https://bayareawebpro.github.io/laravel-micro.js/#/
+ * @docs https://bayareawebpro.github.io/laravel-micro.js/
  */
 mix.micro([
     'App',
@@ -68,7 +74,7 @@ mix.micro([
     'SessionExpired',
     'UnAuthenticated',
     'UnAuthorized',
-])
+], true)
 // mix.browserSync({
 //     proxy: 'laravel-micro-spa.test',
 //     host: 'localhost',
@@ -81,7 +87,6 @@ mix.micro([
 //     }
 // })
 if (mix.inProduction()) {
-    mix.version()
     mix.webpackConfig({
         plugins: [
             new BundleAnalyzerPlugin({

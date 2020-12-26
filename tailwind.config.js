@@ -1,4 +1,10 @@
 module.exports = {
+    darkMode: false, // or 'media' or 'class'
+    purge: [
+        './resources/**/*.blade.php',
+        './resources/**/*.vue',
+        './resources/**/*.jsx',
+    ],
     theme: {
         screens: {
             sm: '640px',

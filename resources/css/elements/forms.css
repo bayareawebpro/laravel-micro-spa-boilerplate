@@ -25,7 +25,7 @@ label {
     min-width: 90px;
 }
 .input:focus {
-    @apply outline-none shadow-outline border-blue-600;
+    @apply outline-none outline-black border-blue-600;
 }
 .input:disabled{
     @apply bg-gray-1000 border-gray-800 text-gray-600;
@@ -98,7 +98,7 @@ select[multiple].input option:checked{
     left: 4px;
 }
 .slider:focus{
-    @apply outline-none shadow-outline border border-blue-500;
+    @apply outline-none outline-black border border-blue-500;
 }
 .switch input:checked + .slider {
     @apply bg-blue-500 border-blue-700;

@@ -43,7 +43,7 @@
     @apply shadow;
 }
 .btn:focus{
-    @apply outline-none shadow-outline !important;
+    @apply outline-none outline-black !important;
 }
 .btn:hover,
 .btn.active,
