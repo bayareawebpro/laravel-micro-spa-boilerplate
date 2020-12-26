@@ -1,20 +1,14 @@
-<?php
+<?php namespace App\Models;
 
-namespace App\Models;
-
-use App\Services\UserRoles;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
-
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasApiTokens;
+    use Notifiable, HasApiTokens, HasFactory;
 
     /**
      * Default Attributes
@@ -50,7 +44,7 @@ class User extends Authenticatable
 
     /**
      * Fill the password attribute.
-     * @param string $value
+     * @param string|null $value
      * @return void
      */
     public function setPasswordAttribute(?string $value = null)

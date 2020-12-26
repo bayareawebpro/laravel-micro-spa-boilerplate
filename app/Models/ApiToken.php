@@ -11,6 +11,11 @@ class ApiToken extends PersonalAccessToken
 {
     public $table = 'personal_access_tokens';
 
+    /**
+     * Static Scope for specific User
+     * @param Authenticatable $entity
+     * @return Builder
+     */
     public static function forUser(Authenticatable $entity): Builder
     {
         if($entity->isRole('admin')){
@@ -19,6 +24,10 @@ class ApiToken extends PersonalAccessToken
         return $entity->tokens()->getQuery();
     }
 
+    /**
+     * Get list of all abilities in use.
+     * @return Collection
+     */
     public static function allAbilities(): Collection
     {
         return static::query()

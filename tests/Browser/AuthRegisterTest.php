@@ -34,7 +34,7 @@ class AuthRegisterTest extends DuskTestCase
             $browser->assertSee('The email field is required.');
             $browser->assertSee('The password field is required.');
 
-            $user = factory(User::class)->make([
+            $user = User::factory()->make([
                 'password' => 'password',
             ]);
             $browser->type('name', $user->name);

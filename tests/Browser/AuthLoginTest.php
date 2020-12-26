@@ -16,7 +16,7 @@ class AuthLoginTest extends DuskTestCase
 
         $this->browse(function (Browser $browser){
 
-            $user = factory(User::class)->create([
+            $user = User::factory()->create([
                 'password' => 'password',
             ]);
             $browser->visit('/auth/login');
