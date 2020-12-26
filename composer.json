@@ -8,7 +8,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.4",
+        "php": "^7.4|^8.0",
         "ext-json": "*",
         "bayareawebpro/searchable-resource": "@dev",
         "fideloper/proxy": "^4.2",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f767cf33c54834af8e532c49b41cccae",
+    "content-hash": "63837324b12faf7d2fc6beaed0e500d7",
     "packages": [
         {
             "name": "bayareawebpro/searchable-resource",
@@ -8400,7 +8400,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.4",
+        "php": "^7.4|8.0",
         "ext-json": "*"
     },
     "platform-dev": [],
