@@ -40,6 +40,9 @@ jobs:
       - name: Create Sqlite Database
         run: php artisan make:sqlite
 
+      - name: Serve Application
+        run: php artisan migrate
+
       - name: Run PHP Analysis
         run: composer lint
 
