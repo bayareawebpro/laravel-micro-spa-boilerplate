@@ -10,7 +10,7 @@
     "require": {
         "php": "^7.4|^8.0",
         "ext-json": "*",
-        "bayareawebpro/searchable-resource": "@dev",
+        "bayareawebpro/searchable-resource": "^v1.0.12",
         "fideloper/proxy": "^4.2",
         "fzaninotto/faker": "^1.9.1",
         "guzzlehttp/guzzle": "^7.0.1",

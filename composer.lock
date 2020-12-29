@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "63837324b12faf7d2fc6beaed0e500d7",
+    "content-hash": "ed1107560d0518d9d7d0a474758eeb36",
     "packages": [
         {
             "name": "bayareawebpro/searchable-resource",
-            "version": "dev-master",
+            "version": "v1.0.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bayareawebpro/searchable-resource.git",
-                "reference": "5f85d85a8320b44fc560c62cd3c8d91e6483440d"
+                "reference": "43a830492ec5551505b3d8ed2e06e6a4a5bbf039"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bayareawebpro/searchable-resource/zipball/5f85d85a8320b44fc560c62cd3c8d91e6483440d",
-                "reference": "5f85d85a8320b44fc560c62cd3c8d91e6483440d",
+                "url": "https://api.github.com/repos/bayareawebpro/searchable-resource/zipball/43a830492ec5551505b3d8ed2e06e6a4a5bbf039",
+                "reference": "43a830492ec5551505b3d8ed2e06e6a4a5bbf039",
                 "shasum": ""
             },
             "require": {
@@ -26,14 +26,14 @@
                 "illuminate/pagination": "^6.0|^7.0|^8.0",
                 "illuminate/support": "^6.0|^7.0|^8.0",
                 "illuminate/validation": "^6.0|^7.0|^8.0",
-                "php": "^7.4"
+                "php": "^7.4|^8.0"
             },
             "require-dev": {
-                "nunomaduro/larastan": "^0.5.2",
-                "orchestra/testbench": "^4.0|^5.0",
-                "phpunit/phpunit": "^8.0|^8.5"
+                "laravel/legacy-factories": "^1.1",
+                "nunomaduro/larastan": "^0.5|^0.6",
+                "orchestra/testbench": "^4.0|^5.0|^6.0",
+                "phpunit/phpunit": "^8.0|^9.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -71,9 +71,9 @@
             ],
             "support": {
                 "issues": "https://github.com/bayareawebpro/searchable-resource/issues",
-                "source": "https://github.com/bayareawebpro/searchable-resource/tree/master"
+                "source": "https://github.com/bayareawebpro/searchable-resource/tree/v1.0.11"
             },
-            "time": "2020-06-05T20:32:21+00:00"
+            "time": "2020-12-28T23:58:41+00:00"
         },
         {
             "name": "brick/math",
@@ -532,26 +532,27 @@
         },
         {
             "name": "fzaninotto/faker",
-            "version": "v1.9.2",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "848d8125239d7dbf8ab25cb7f054f1a630e68c2e"
+                "reference": "5ffe7db6c80f441f150fc88008d64e64af66634b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/848d8125239d7dbf8ab25cb7f054f1a630e68c2e",
-                "reference": "848d8125239d7dbf8ab25cb7f054f1a630e68c2e",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/5ffe7db6c80f441f150fc88008d64e64af66634b",
+                "reference": "5ffe7db6c80f441f150fc88008d64e64af66634b",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.3.3 || ^7.0"
+                "php": "^5.3.3 || ^7.0 || ^8.0"
             },
             "require-dev": {
                 "ext-intl": "*",
                 "phpunit/phpunit": "^4.8.35 || ^5.7",
                 "squizlabs/php_codesniffer": "^2.9.2"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -580,10 +581,10 @@
             ],
             "support": {
                 "issues": "https://github.com/fzaninotto/Faker/issues",
-                "source": "https://github.com/fzaninotto/Faker/tree/v1.9.2"
+                "source": "https://github.com/fzaninotto/Faker/tree/master"
             },
             "abandoned": true,
-            "time": "2020-12-11T09:56:16+00:00"
+            "time": "2020-12-11T09:59:14+00:00"
         },
         {
             "name": "graham-campbell/result-type",
@@ -5565,16 +5566,16 @@
         },
         {
             "name": "facade/ignition",
-            "version": "2.5.3",
+            "version": "2.5.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/facade/ignition.git",
-                "reference": "d8dc4f90ed469f9f9313b976fb078c20585d5c99"
+                "reference": "2b6fd8b7b630e5c6a04440f7ed358e8753229509"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facade/ignition/zipball/d8dc4f90ed469f9f9313b976fb078c20585d5c99",
-                "reference": "d8dc4f90ed469f9f9313b976fb078c20585d5c99",
+                "url": "https://api.github.com/repos/facade/ignition/zipball/2b6fd8b7b630e5c6a04440f7ed358e8753229509",
+                "reference": "2b6fd8b7b630e5c6a04440f7ed358e8753229509",
                 "shasum": ""
             },
             "require": {
@@ -5638,7 +5639,7 @@
                 "issues": "https://github.com/facade/ignition/issues",
                 "source": "https://github.com/facade/ignition"
             },
-            "time": "2020-12-09T20:25:45+00:00"
+            "time": "2020-12-28T23:56:45+00:00"
         },
         {
             "name": "facade/ignition-contracts",
@@ -8394,13 +8395,11 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "bayareawebpro/searchable-resource": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.4|8.0",
+        "php": "^7.4|^8.0",
         "ext-json": "*"
     },
     "platform-dev": [],
