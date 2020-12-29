@@ -13,21 +13,18 @@ class AuthRegisterTest extends DuskTestCase
 
     public function test_can_register()
     {
-
         $this->browse(function (Browser $browser) {
 
             $browser->visit('/auth/register');
             $browser->waitForLocation('/auth/register');
             $browser->assertPathIs('/auth/register');
             $browser->assertSee('Register');
-
             $browser->assertSee('Name');
             $browser->assertSee('Email Address');
             $browser->assertSee('Password');
             $browser->assertSee('Password Confirmation');
 
             $browser->script(['window.$duskTestUtils().disableInputValidation()']);
-
             $browser->click('@action-register');
             $browser->waitForText('The given data was invalid.');
             $browser->assertSee('The name field is required.');
@@ -41,14 +38,13 @@ class AuthRegisterTest extends DuskTestCase
             $browser->type('email', $user->email);
             $browser->type('password', 'password');
             $browser->type('password_confirmation', 'password');
-
             $browser->click('@action-register');
-
+            $browser->waitUntilMissing('#nprogress');
             $browser->waitForLocation('/account/edit');
             $browser->assertPathIs('/account/edit');
+            $browser->waitForText('Account Settings');
             $browser->assertAuthenticated();
             $browser->logout();
         });
     }
-
 }
